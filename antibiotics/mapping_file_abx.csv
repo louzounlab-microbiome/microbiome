@@ -1,0 +1,72 @@
+#SampleID,Treatment,SampleMonth,Treat,ModeOfBirth
+15.1M,Abx_full,1,Abx_Treatment,vaginal
+20.1M,No_Abx,1,Control,vaginal
+21.1M,No_Abx,1,Control,vaginal
+87.1M,No_Abx,1,Control,vaginal
+104.1M,No_Abx,1,Control,vaginal
+135.1M,No_Abx,1,Control,vaginal
+139.1M,No_Abx,1,Control,vaginal
+157.1M,Abx_full,1,Abx_Treatment,vaginal
+166.1M,Abx_72hours,1,Abx_Treatment,vaginal
+182.1M,Abx_full,1,Abx_Treatment,C section
+183.1M,Abx_72hours,1,Abx_Treatment,C section
+184.1M,No_Abx,1,Control,vaginal
+258.1M,Abx_full,1,Abx_Treatment,vaginal
+285.1M,Abx_72hours,1,Abx_Treatment,vaginal
+13.6M,No_Abx,6,Control,vaginal
+15.6M,Abx_full,6,Abx_Treatment,vaginal
+20.6M,No_Abx,6,Control,vaginal
+21.6M,No_Abx,6,Control,vaginal
+68.6M,No_Abx,6,Control,vaginal
+84.6M,Abx_full,6,Abx_Treatment,vaginal
+126.6M,No_Abx,6,Control,vaginal
+72.6M,Abx_full,6,Abx_Treatment,vaginal
+151.6M,Abx_full,6,Abx_Treatment,vaginal
+165.6M,Abx_72hours,6,Abx_Treatment,vaginal
+166.6M,Abx_72hours,6,Abx_Treatment,vaginal
+179.6M,No_Abx,6,Control,C section
+182.6M,Abx_full,6,Abx_Treatment,C section
+184.6M,No_Abx,6,Control,vaginal
+193.6M,Abx_full,6,Abx_Treatment,vaginal
+159.12M,No_Abx,12,Control,C section
+15.12M,Abx_full,12,Abx_Treatment,vaginal
+20.12M,No_Abx,12,Control,vaginal
+84.12M,Abx_full,12,Abx_Treatment,vaginal
+86.12M,Abx_72hours,12,Abx_Treatment,vaginal
+92.12M,No_Abx,12,Control,vaginal
+122.12M,No_Abx,12,Control,vaginal
+128.12M,No_Abx,12,Control,vaginal
+138.12M,No_Abx,12,Control,vaginal
+142.12M,No_Abx,12,Control,vaginal
+144.12M,No_Abx,12,Control,vaginal
+148.12M,No_Abx,12,Control,vaginal
+149.12M,NA,12,NA,NA
+151.12M,Abx_full,12,Abx_Treatment,vaginal
+166.12M,Abx_72hours,12,Abx_Treatment,vaginal
+200.12M,Abx_72hours,12,Abx_Treatment,vaginal
+8.24M,No_Abx,24,Control,vaginal
+9.24M,No_Abx,24,Control,vaginal
+10.24M,No_Abx,24,Control,vaginal
+13.24M,No_Abx,24,Control,vaginal
+15.24M,Abx_full,24,Abx_Treatment,vaginal
+20.24M,No_Abx,24,Control,vaginal
+21.24M,No_Abx,24,Control,vaginal
+28.24M,No_Abx,24,Control,vaginal
+32.24M,Abx_72hours,24,Abx_Treatment,vaginal
+62.24M,No_Abx,24,Control,vaginal
+72.24M,Abx_full,24,Abx_Treatment,vaginal
+92.24M,No_Abx,24,Control,vaginal
+104.24M,No_Abx,24,Control,vaginal
+122.24M,No_Abx,24,Control,vaginal
+128.24M,No_Abx,24,Control,vaginal
+135.24M,No_Abx,24,Control,vaginal
+139.24M,No_Abx,24,Control,vaginal
+142.24M,No_Abx,24,Control,vaginal
+148.24M,No_Abx,24,Control,vaginal
+165.24M,Abx_72hours,24,Abx_Treatment,vaginal
+166.24M,Abx_72hours,24,Abx_Treatment,vaginal
+179.24M,No_Abx,24,Control,C section
+182.24M,Abx_full,24,Abx_Treatment,C section
+184.24M,No_Abx,24,Control,vaginal
+193.24M,Abx_full,24,Abx_Treatment,vaginal
+200.24M,Abx_72hours,24,Abx_Treatment,vaginal
