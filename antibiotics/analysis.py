@@ -57,7 +57,8 @@ def visualize_all_data(data, explained_var, min_var_explained=0.05, draw_outlier
             plt.show()
 
 
-def preprocessData(data, eps=0.01, visualize_data=True):
+def preprocessData(data, sampleMonth, eps=0.01, visualize_data=True):
+    as_data_frame = pd.DataFrame(data).astype(float)
     indexes_of_non_zeros = data.flatten() != 0
 
     # data_before_preprocess = data.sum(axis=0)
@@ -66,12 +67,15 @@ def preprocessData(data, eps=0.01, visualize_data=True):
         result = data.flatten()[indexes_of_non_zeros]
         visualize_preproccess(result, 'Before without zeros')
 
-    data = data.astype(float)
-    data += eps
-    data = np.log(data)
-    data = preprocessing.scale(data)
+    as_data_frame += eps
+    as_data_frame = np.log(as_data_frame)
+    as_data_frame['sampleMonth'] = sampleMonth
+    mean_by_sample = as_data_frame.groupby(['sampleMonth']).mean().mean(axis=1)
+    for sample in mean_by_sample.index:
+        as_data_frame.loc[as_data_frame['sampleMonth'] == sample] = as_data_frame.loc[as_data_frame['sampleMonth'] == sample] - mean_by_sample[sample]
+    as_data_frame.drop(['sampleMonth'], axis=1, inplace=True)
+    data = as_data_frame.values
 
-    # data_after_preprocess = data.sum(axis=0)
     if visualize_data:
         visualize_preproccess(data, 'After')
         result = data.flatten()[indexes_of_non_zeros]
@@ -98,6 +102,8 @@ if __name__ == "__main__":
     merged_data = get_data_by_sample_month(merged_data, months_to_test)
     headers = merged_data.columns.values.tolist()
     original_names = merged_data[:].index.astype(str)
+    classes = merged_data['treatment_class'].values[:]
+    sampleMonth = merged_data['SampleMonth'].values[:]
 
     # drop last row for PCA
     data_for_pca = merged_data.ix[:, :otu_file.shape[1]]
@@ -105,14 +111,13 @@ if __name__ == "__main__":
 
 
     # preprocess the data
-    data_for_pca = preprocessData(data_for_pca, visualize_data=False)
+    data_for_pca = preprocessData(data_for_pca, sampleMonth, visualize_data=False)
     merged_data_after_preproccess = merged_data.copy()
     merged_data_after_preproccess.ix[:, :otu_file.shape[1]] = data_for_pca
 
     # PCA
     pca_obj, pca_data = apply_pca(data_for_pca)
-    classes = merged_data['treatment_class'].values[:]
-    sampleMonth = merged_data['SampleMonth'].values[:]
+
 
     pca_data['class'] = classes
     pca_data['sampleMonth'] = sampleMonth
@@ -124,7 +129,7 @@ if __name__ == "__main__":
     # visualize_pca(pca_data, 0, 1)
     # visualize_all_data(pca_data, pca_obj.explained_variance_ratio_, min_var_explained=0.04, draw_outliers = False)
 
-    # visualize_all_data(pca_data, pca_obj.explained_variance_ratio_, min_var_explained=0.0, draw_outliers = True)
+    visualize_all_data(pca_data, pca_obj.explained_variance_ratio_, min_var_explained=0.0, draw_outliers = True)
 
     inliers, outliers = remove_outliers(pca_data.drop(['class'], axis=1), filter_sample_vectors=None, min_samples=2)
 
