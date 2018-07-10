@@ -1,4 +1,5 @@
 from sklearn.cluster import DBSCAN
+import numpy as np
 
 
 def remove_outliers(data, filter_sample_vectors = None, eps=None, min_samples=5):
