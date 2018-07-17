@@ -1,2 +1,4 @@
 thesis/
 antibiotics/אנטיביוטיקה .docx
+*.pyc
+.idea/
