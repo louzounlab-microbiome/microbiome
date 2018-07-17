@@ -16,18 +16,18 @@ class OtuMfHandler:
         skip_rows = 0
         if self.from_QIIME:
             skip_rows = 1
-        otu_file = pd.read_csv(self.otu_file_path, skiprows=skip_rows).set_index('#OTU ID')
+        otu_file = pd.read_csv(self.otu_file_path, skiprows=skip_rows).set_index('#OTU ID').T
         return mapping_file, otu_file
 
     def _merge_otu_mf(self):
-        merged_data = self.otu_file.T.join(self.mapping_file)
+        merged_data = self.otu_file.join(self.mapping_file).T
         return merged_data
 
     def get_otu_file_wo_taxonomy(self):
         """
         :return: otu file without the taxonomy
         """
-        tmp_copy = self.otu_file.copy()
+        tmp_copy = self.otu_file.T.copy()
         return tmp_copy.drop(['taxonomy'], axis=1).T
 
     def merge_mf_with_new_otu_data(self, new_otu_data):
