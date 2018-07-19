@@ -25,7 +25,7 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
         as_data_frame = as_data_frame.T
     else:
         try:
-            as_data_frame = as_data_frame.drop('taxonomy', axis=1)
+            as_data_frame = as_data_frame.drop('taxonomy', axis=1).T
         except:
             pass
 
