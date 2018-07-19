@@ -39,7 +39,7 @@ def predict_get_spearman_value(test_set, regressor):
 
 if __name__ == "__main__":
     OtuMf = OtuMfHandler('aging_otu_table.csv', 'mf.csv', from_QIIME=True)
-    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=5)
+    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=True, taxnomy_level=5)
     otu_after_pca_wo_taxonomy, _ = apply_pca(preproccessed_data, n_components=80)
     # otu_after_pca = OtuMf.add_taxonomy_col_to_new_otu_data(otu_after_pca_wo_taxonomy)
     # merged_data_after_pca = OtuMf.merge_mf_with_new_otu_data(otu_after_pca_wo_taxonomy)
@@ -52,6 +52,10 @@ if __name__ == "__main__":
     train_set = merged_data_with_age.iloc[0:train_size]
     test_set = merged_data_with_age.iloc[train_size+1:]
 
+    train_x_data = train_set.loc[:, train_set.columns != 'age_in_days']
+    train_y_values = train_set['age_in_days']
+    test_x_data = test_set.loc[:, test_set.columns != 'age_in_days']
+    test_y_values = test_set['age_in_days']
     # SVR
     # c_values = [1, 10, 100, 1e3, 1e4, 1e5]
     # gamma_values = ['auto',0.1 , 0.5, 1, 10, 100]
@@ -80,7 +84,7 @@ if __name__ == "__main__":
                 count += 1
             for t, min_samples_leaf in enumerate(min_samples_leaf_list):
                 current_params = {'n_estimators': n_estimators, 'max_features': max_features, 'min_samples_leaf': min_samples_leaf}
-                regressor = fit_random_forest(train_set.loc[:, train_set.columns != 'age_in_days'], train_set['age_in_days'], **current_params)
+                regressor = fit_random_forest(train_x_data, train_y_values, **current_params)
                 train_predicted_df, spearman_value = predict_get_spearman_value(train_set, regressor)
 
                 mse = mean_squared_error(train_predicted_df['age_in_days'], train_predicted_df['predicted'])
@@ -93,6 +97,7 @@ if __name__ == "__main__":
                     best_params['spearman_rho']['spearman_rho'] = spearman_value['rho']
                     best_params['spearman_rho']['params'] = current_params
                     best_params['spearman_rho']['mse'] = mse
+
                 spearman_train_values.append({'params': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
                 test_predicted_df, spearman_value = predict_get_spearman_value(test_set, regressor)
                 mse = mean_squared_error(test_predicted_df['age_in_days'], test_predicted_df['predicted'])
