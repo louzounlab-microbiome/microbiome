@@ -8,6 +8,7 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
     as_data_frame = pd.DataFrame(data.T).apply(pd.to_numeric, errors='ignore').copy()
 
     if visualize_data:
+        plt.figure('Preprocess')
         data_frame_for_vis = as_data_frame.copy()
         try:
             data_frame_for_vis = data_frame_for_vis.drop('taxonomy', axis=1)
@@ -33,15 +34,25 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
         data_frame_flatten = as_data_frame.values.flatten()
         indexes_of_non_zeros = data_frame_flatten != 0
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - Before', [323, 324])
+        samples_density = as_data_frame.apply(np.sum, axis=1)
+        plt.figure('Density of samples')
+        samples_density.hist(bins=100)
 
     if preform_log:
         as_data_frame += eps_for_zeros
         as_data_frame = np.log10(as_data_frame)
 
+    if visualize_data:
+        samples_variance = as_data_frame.apply(np.var, axis=1)
+        plt.figure('Variance of samples')
+        samples_variance.hist(bins=100)
+        plt.title(f'Samples variance before z-scoring\nmean={samples_variance.values.mean()}, std={samples_variance.values.std()}')
+
     if preform_z_scoring:
         as_data_frame[:] = preprocessing.scale(as_data_frame)
 
     if visualize_data:
+        plt.figure('Preprocess')
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - After', [325, 326])
         plt.subplots_adjust(hspace=0.5, wspace =0.5)
         plt.show()
