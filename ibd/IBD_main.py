@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split, RepeatedStratifiedKFold,Le
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics, svm
 from xgboost import XGBClassifier
+from plot_clustergram import *
 
 otu = 'C:/Users/Anna/Documents/otu_IBD3.csv'
 mapping = 'C:/Users/Anna/Documents/mapping_IBD3.csv'
@@ -24,16 +25,29 @@ new_set2=preproccessed_data.groupby(['preg_trimester']).mean()
 for i in range(0,len(preproccessed_data)):
     month = preproccessed_data['preg_trimester'][i]
     preproccessed_data.iloc[i:i+1,3:preproccessed_data.shape[1]] =  (preproccessed_data.iloc[i:i+1,3:preproccessed_data.shape[1]].values - new_set2.loc[month:month,:].values)
-otu_after_pca, pca_components = apply_pca(preproccessed_data.drop(['CD_or_UC', 'preg_trimester', 'P-ID'], axis=1), n_components=50)
+otu_after_pca, pca_components = apply_pca(preproccessed_data.drop(['CD_or_UC', 'preg_trimester', 'P-ID'], axis=1), n_components=5)
 merged_data = otu_after_pca.join(preproccessed_data[['CD_or_UC', 'preg_trimester']], how ='inner')
 #merged_data = preproccessed_data.drop(['P-ID'], axis=1)
 merged_data.fillna(0)
 #print(merged_data.head())
-
+merged_data = merged_data.loc[(merged_data['CD_or_UC'] != 'control')]
+# merged_data= merged_data.reset_index()
+# try:
+#     merged_data=merged_data.drop('index',axis=1)
+# except:
+#     pass
+#merged_data = merged_data.loc[merged_data['preg_trimester'] == 't_2']
+merged_data= merged_data.join(OtuMf.mapping_file['flare'], how ='inner')
+print(merged_data.tail())
+plot_clustergram(merged_data, ['CD_or_UC'])
 #plot mean and std per time point
 mapping_disease_for_labels = {'Control':0,'CD':1,'UC':1}
-mapping_disease = {'control':0,'CD':1,'UC':1}
-merged_data['CD_or_UC'] = merged_data['CD_or_UC'].map(mapping_disease)
+#mapping_disease = {'control':1,'CD':-1,'UC':1}
+#mapping_disease = {'CD':-1,'UC':1}
+mapping_flare = {'yes':-1,'no':1}
+merged_data['flare'] = merged_data['flare'].map(mapping_flare)
+
+#merged_data['CD_or_UC'] = merged_data['CD_or_UC'].map(mapping_disease)
 
 # new_test=merged_data.groupby(['CD_or_UC', 'preg_trimester']).agg([ np.mean, np.std, 'count' ]).reset_index('preg_trimester')
 #
@@ -77,11 +91,15 @@ merged_data['CD_or_UC'] = merged_data['CD_or_UC'].map(mapping_disease)
 # #plt.title('mean reduced')
 # plt.legend( loc=1,ncol=1)
 # plt.show()
+merged_data= merged_data.reset_index()
+try:
+    merged_data=merged_data.drop('index',axis=1)
+except:
+    pass
 
+X = merged_data.drop(['CD_or_UC', 'preg_trimester', 'flare'], axis=1)
 
-X = merged_data.drop(['CD_or_UC', 'preg_trimester'], axis=1)
-
-y = merged_data['CD_or_UC']
+y = merged_data['flare']
 
 loo = LeaveOneOut()
 
@@ -138,15 +156,21 @@ for train_index, test_index in loo.split(X):
     y_pred1.append(y_pred)
     y_test1.append(y_test.values[0])
 W = clf.coef_[0]
-df = pd.DataFrame(
-    {'Taxonome': preproccessed_data.columns[3:],
-     'Coefficients': np.dot(clf.coef_[0],pca_components)
-    })
+try:
+    df = pd.DataFrame(
+        {'Taxonome': preproccessed_data.columns[3:],
+        'Coefficients': np.dot(clf.coef_[0],pca_components)
+        })
+except:
+    df = pd.DataFrame(
+        {'Taxonome': preproccessed_data.columns[3:],
+         'Coefficients':clf.coef_[0]
+         })
 df1 = df.round({'Coefficients': 4})
-df1.to_csv('C:/Users/Anna/Documents/bacteria_results.csv')
+df1.to_csv('C:/Users/Anna/Documents/bacteria_results_sick_t3.csv')
     #
     #decision_boundary =  sum (W[i]*x[i])+ intercept_[0] = 0
-print (W)
+#print (W)
 #print(I)
 y_pred1 = np.array(y_pred1)
 y_test1 = np.array(y_test1)
