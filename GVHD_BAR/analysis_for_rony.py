@@ -33,6 +33,7 @@ from GVHD_BAR.cluster_time_events import cluster_based_on_time
 import os
 from infra_functions import tf_analaysis
 from tensorflow.python.keras import regularizers
+import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
@@ -106,10 +107,12 @@ n_components = 10
 
 use_recorded = False
 
+script_dir = sys.path[0]
+
 if not use_recorded:
 
-    OtuMf = OtuMfHandler(os.path.join(SCRIPT_DIR, r'C:\Users\Bar\Downloads\data from yoram for muco analysis\saliva_samples_231018.csv'),
-                         os.path.join(SCRIPT_DIR, r'C:\Users\Bar\Downloads\data from yoram for muco analysis\saliva_samples_mapping_file_231018.csv'), from_QIIME=True)
+    OtuMf = OtuMfHandler(os.path.join(SCRIPT_DIR, 'ronies_Data','saliva_samples_231018.csv'),
+                         os.path.join(SCRIPT_DIR, 'ronies_Data','saliva_samples_mapping_file_231018.csv'), from_QIIME=True)
     preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=6)
     otu_after_pca_wo_taxonomy, _ = apply_pca(preproccessed_data, n_components=n_components, visualize=False)
     # otu_after_pca = OtuMf.add_taxonomy_col_to_new_otu_data(otu_after_pca_wo_taxonomy)
@@ -133,7 +136,7 @@ if not use_recorded:
         mapping_file_last_day_before_transplant = mapping_file_last_day_before_transplant.append(subject_data.iloc[0])
 
 # get the other columns that rony asked for
-ronies_file_path = r'C:\Users\Bar\Downloads\data from yoram for muco analysis\muc_model_louzon_090119nam.xlsx'
+ronies_file_path = os.path.join(SCRIPT_DIR, 'ronies_Data','muc_model_louzon_090119nam.xlsx')
 ronies_file = pd.read_excel(ronies_file_path).set_index('subject_id')
 
 interesting_cols = [
