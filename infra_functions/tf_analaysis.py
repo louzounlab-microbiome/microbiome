@@ -3,9 +3,11 @@ import tensorflow as tf
 from tensorflow import keras
 
 
+
 class nn_model:
     def __init__(self, hidden_layer_structure=None):
         self.model = None
+        self.history = None
         self._hiddel_layer_structure = hidden_layer_structure
 
     def build_nn_model(self, hidden_layer_structure = None):
@@ -23,6 +25,8 @@ class nn_model:
                 model.add(keras.layers.Dense(**layer_structure[0]))
             elif type_of_layer == 'flatten':
                 model.add(keras.layers.Flatten(**layer_structure[0]))
+            elif type_of_layer == 'dropout':
+                model.add(keras.layers.Dropout(**layer_structure[0]))
 
         self.model = model
 
@@ -31,8 +35,9 @@ class nn_model:
         metrics = ['mae', 'mse'] if metrics is None else metrics
         self.model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
-    def train_model(self, train_inputs, train_outputs, epochs=5):
-        self.model.fit(train_inputs, train_outputs, epochs=epochs)
+    def train_model(self, train_inputs, train_outputs, epochs=5, callbacks_for_fit=None, validation_split=0, verbose=1, class_weight=None):
+        history = self.model.fit(train_inputs, train_outputs, epochs=epochs, batch_size=1,validation_split=validation_split, callbacks=callbacks_for_fit, verbose=verbose,class_weight=class_weight )
+        return history
 
     def predict(self, inputs):
         return self.model.predict(inputs)
@@ -42,7 +47,7 @@ class nn_model:
 
         # losses
         losses = self.model.loss
-        if type(losses) is str:
+        if type(losses) is str or str(type(losses)) == "<class 'function'>":
             number_of_losses = 1
             losses = [losses]
         else:

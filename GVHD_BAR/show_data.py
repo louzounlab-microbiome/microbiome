@@ -4,6 +4,7 @@ import os
 import matplotlib.pyplot as plt
 import math
 import sys
+from sklearn.metrics import mean_squared_error
 
 def calc_results(y_train_dict, y_test_dict, algo_name, n_rows=3, n_cols=3, visualize=False):
     train_res = {}
@@ -85,31 +86,47 @@ def calc_results(y_train_dict, y_test_dict, algo_name, n_rows=3, n_cols=3, visua
 
 def calc_results_and_plot(y_train_values, y_train_predicted_values, y_test_values, y_test_predicted_values , algo_name, visualize=False, title=None, show=True):
 
-    train_res = {'spearman': use_spearmanr(y_train_values, y_train_predicted_values), 'pearson': use_pearsonr(y_train_values, y_train_predicted_values)}
-    test_res = {'spearman': use_spearmanr(y_test_values, y_test_predicted_values), 'pearson': use_pearsonr(y_test_values, y_test_predicted_values)}
+    train_res = {'spearman': use_spearmanr(y_train_values, y_train_predicted_values), 'pearson': use_pearsonr(y_train_values, y_train_predicted_values), 'mse': mean_squared_error(y_train_values, y_train_predicted_values) }
+    test_res = {'spearman': use_spearmanr(y_test_values, y_test_predicted_values), 'pearson': use_pearsonr(y_test_values, y_test_predicted_values), 'mse': mean_squared_error(y_test_values, y_test_predicted_values) }
     spearman_train_data = train_res['spearman']
     pearson_train_data = train_res['pearson']
+    mse_train_data = train_res['mse']
+
     spearman_test_data = test_res['spearman']
     pearson_test_data = test_res['pearson']
+    mse_test_data = test_res['mse']
+
     train_label = 'Train\nSpearman - rho: ' + str(round(spearman_train_data['rho'], 2)) + ' pval: ' + str(
         round(spearman_train_data['pvalue'], 10)) + '\nPearson  - rho: ' + str(
         round(pearson_train_data['rho'], 2)) + ' pval: ' + str(
-        round(pearson_train_data['pvalue'], 10))
+        round(pearson_train_data['pvalue'], 10)) + '\nmse: ' + str(round(mse_train_data,2))
     test_label = 'Test\nSpearman - rho: ' + str(round(spearman_test_data['rho'], 2)) + ' pval: ' + str(
         round(spearman_test_data['pvalue'], 10)) + '\nPearson  - rho: ' + str(
         round(pearson_test_data['rho'], 2)) + ' pval: ' + str(
-        round(pearson_test_data['pvalue'], 10))
+        round(pearson_test_data['pvalue'], 10)) + '\nmse: ' + str(round(mse_test_data,2))
 
     if visualize:
-        plt.scatter(y_train_values, y_train_predicted_values, label=train_label)
+        fig = plt.figure()
+        ax = plt.subplot(111)
+        ax.scatter(y_train_values, y_train_predicted_values, label=train_label)
 
-        plt.scatter(y_test_values,y_test_predicted_values, label=test_label)
+        ax.scatter(y_test_values,y_test_predicted_values, label=test_label)
         plt.xlabel('Real Values')
         plt.ylabel('Predicted Values')
         title = '' if title is None else title
         plt.title(algo_name + '\n' + title)
-        plt.legend(loc='lower center')
-        plt.axis('equal')
+        # ax.axis('equal')
+
+        # Shrink current axis's height by 10% on the bottom
+        box = ax.get_position()
+        ax.set_position([box.x0, box.y0 + box.height * 0.1,
+                         box.width, box.height * 0.9])
+
+        # Put a legend below current axis
+        ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+                  fancybox=True, shadow=True, ncol=5)
+
+
         if show:
             plt.show()
 

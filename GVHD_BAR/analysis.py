@@ -1,28 +1,20 @@
 from infra_functions.load_merge_otu_mf import OtuMfHandler
 from infra_functions.preprocess import preprocess_data
-from infra_functions.generate_N_colors import getDistinctColors, rgb2hex
-from infra_functions.general import apply_pca, use_spearmanr, use_pearsonr, sigmoid
-from infra_functions.fit import fit_SVR, fit_random_forest
+from infra_functions.general import apply_pca, use_spearmanr, use_pearsonr
 import pandas as pd
-import math
 import matplotlib.pyplot as plt
-from sklearn.metrics import auc, roc_curve
-from scipy.stats import pearsonr
+
 import numpy as np
 import pickle
-from sklearn import svm
-# from sklearn.svm import SV
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.metrics import mean_squared_error
 
-from sklearn.linear_model import LogisticRegression
-from sklearn import metrics
-from sklearn.cross_validation import train_test_split
+from GVHD_BAR.show_data import calc_results_and_plot
+
 import xgboost as xgb
 import datetime
-from gvhd.show_data import calc_results
-from gvhd.calculate_distances import calculate_distance
-from gvhd.cluster_time_events import cluster_based_on_time
+from GVHD_BAR.show_data import calc_results
+from GVHD_BAR.calculate_distances import calculate_distance
+from GVHD_BAR.cluster_time_events import cluster_based_on_time
 import os
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = False
@@ -30,7 +22,7 @@ RECORD = False
 USE_SIMILARITY = True
 USE_CLUSTER = False
 USE_CLOSEST_NEIGHBOR = False
-USE_CERTAINTY = True
+USE_CERTAINTY = False
 
 def predict_get_spearman_value(X, y, regressor):
     predicted_y = regressor.predict(X)
@@ -541,6 +533,11 @@ for beta in betas:
         pickle.dump(y_test_dict, open(algo_name + "_test_data.p", "wb"))
     betas_values[beta] = calc_results(y_train_dict, y_test_dict, algo_name, visualize=False)
 
+y_train_predicted_values = y_train_dict['alpha=0.01|n_estimators=20|min_child_weight=20|reg_lambda=20|max_depth=5']['y_train_predicted_values']
+y_train_values = y_train_dict['alpha=0.01|n_estimators=20|min_child_weight=20|reg_lambda=20|max_depth=5']['y_train_values']
+y_test_values = y_test_dict['alpha=0.01|n_estimators=20|min_child_weight=20|reg_lambda=20|max_depth=5']['y_test_values']
+y_test_predicted_values = y_test_dict['alpha=0.01|n_estimators=20|min_child_weight=20|reg_lambda=20|max_depth=5']['y_test_predicted_values']
+calc_results_and_plot(y_train_values, y_train_predicted_values, y_test_values, y_test_predicted_values,'NewAlg\n alpha=0.01|n_estimators=20|min_child_weight=20|reg_lambda=20|max_depth=5', visualize=True, title='NewAlg')
 print('**************\n')
 print(betas_values)
 print(removed_rows)

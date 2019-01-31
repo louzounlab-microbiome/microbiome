@@ -3,6 +3,7 @@ import pandas as pd
 from scipy.stats import spearmanr, pearsonr
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.metrics import auc, roc_curve
 
 # from sc
 
@@ -32,3 +33,16 @@ def use_spearmanr(x,y, axis=None):
 def use_pearsonr(x,y):
     rho, pvalue = pearsonr(x, y)
     return {'rho': rho, 'pvalue': pvalue}
+
+
+def roc_auc(y_test, y_score, visualize=False, graph_title='ROC Curve'):
+    fpr, tpr, thresholds = roc_curve(y_test, y_score)
+    roc_auc = auc(fpr, tpr)
+    if visualize:
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        ax.plot(fpr, tpr)
+        plt.title(f'{graph_title}\nroc={roc_auc}')
+        plt.xlabel('fpr')
+        plt.ylabel('tpr')
+    return fpr, tpr, thresholds, roc_auc

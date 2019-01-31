@@ -20,9 +20,9 @@ from sklearn import metrics
 from sklearn.cross_validation import train_test_split
 import xgboost as xgb
 import datetime
-from gvhd.show_data import calc_results
-from gvhd.calculate_distances import calculate_distance
-from gvhd.cluster_time_events import cluster_based_on_time
+from GVHD_BAR.show_data import calc_results
+from GVHD_BAR.calculate_distances import calculate_distance
+from GVHD_BAR.cluster_time_events import cluster_based_on_time
 RECORD = False
 
 USE_SIMILARITY = True
