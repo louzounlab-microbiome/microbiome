@@ -8,7 +8,7 @@ from tensorflow.python.keras import optimizers, regularizers, callbacks
 from infra_functions import tf_analaysis
 from tensorflow.python.keras.losses import mean_squared_error
 # from infra_functions.generate_N_colors import getDistinctColors, rgb2hex
-from infra_functions.general import apply_pca, use_spearmanr, use_pearsonr, roc_auc  # sigmoid
+from infra_functions.general import apply_pca, use_spearmanr, use_pearsonr, roc_auc, convert_pca_back_orig, draw_horizontal_bar_chart  # sigmoid
 from infra_functions.fit import fit_SVR, fit_random_forest
 import pandas as pd
 import math
@@ -22,7 +22,7 @@ from sklearn.utils import class_weight
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV, LeaveOneOut
 from xgboost import XGBClassifier
 
 import xgboost as xgb
@@ -103,8 +103,10 @@ def get_days(days_datetime):
     return days_datetime.days
 
 
-n_components = 10
-
+n_components = 20
+taxnomy_level = 3
+n=5
+file_name = f'report_n_comps_{n_components}_taxonomy_level_{taxnomy_level}_using_ronies_and_{n}_pca'
 use_recorded = False
 
 script_dir = sys.path[0]
@@ -113,8 +115,19 @@ if not use_recorded:
 
     OtuMf = OtuMfHandler(os.path.join(SCRIPT_DIR, 'ronies_Data','saliva_samples_231018.csv'),
                          os.path.join(SCRIPT_DIR, 'ronies_Data','saliva_samples_mapping_file_231018.csv'), from_QIIME=True)
-    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=6)
-    otu_after_pca_wo_taxonomy, _ = apply_pca(preproccessed_data, n_components=n_components, visualize=False)
+    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=taxnomy_level)
+    otu_after_pca_wo_taxonomy, pca_obj , pca_str = apply_pca(preproccessed_data, n_components=n_components, visualize=True)
+    with open(f'{file_name}.txt', 'w') as f:
+        f.write('-------------- REPORT --------------\n')
+        f.write(f'Using taxonomy level of {taxnomy_level} \n')
+        f.write(f'Using {n_components} PCA components \n')
+        f.write(f'{pca_str}\n\n')
+
+    with open(f'{file_name}_with_grid_results.txt', 'a') as f:
+        f.write('-------------- REPORT --------------\n')
+        f.write(f'Using taxonomy level of {taxnomy_level} \n')
+        f.write(f'Using {n_components} PCA components \n')
+        f.write(f'{pca_str}\n\n')
     # otu_after_pca = OtuMf.add_taxonomy_col_to_new_otu_data(otu_after_pca_wo_taxonomy)
     # merged_data_after_pca = OtuMf.merge_mf_with_new_otu_data(otu_after_pca_wo_taxonomy)
     # merged_data_with_age = otu_after_pca_wo_taxonomy.join(OtuMf.mapping_file['age_in_days'])
@@ -174,15 +187,31 @@ types_of_input = ['microbiome', 'ronies_features', 'both']
 types_of_prediction = ['0_1_or_2_4', '0_2_or_3_4']
 types_of_subject_to_analyze = ['methotrexate' , 'all']
 
+
+
+types_of_input = [f'ronies_and_only_{n}_pca']
+types_of_prediction = ['0_1_or_2_4']
+types_of_subject_to_analyze = ['methotrexate']
+
+types_of_input = ['both']
+types_of_prediction = ['0_1_or_2_4']
+types_of_subject_to_analyze = ['all']
+
 starting_col = np.argwhere(Original_X.columns == 0).tolist()[0][0]
+
+
+
 
 for type_of_input in types_of_input:
     if type_of_input == 'microbiome':
         X_based_on_type_of_input = Original_X.iloc[:, starting_col:starting_col + n_components]
-    elif types_of_input =='ronies_features':
+    elif type_of_input =='ronies_features':
         X_based_on_type_of_input = Original_X.iloc[:, 0:starting_col]
-    elif types_of_input == 'both':
+    elif type_of_input == 'both':
         X_based_on_type_of_input = Original_X
+    elif type_of_input == f'ronies_and_only_{n}_pca':
+        X_based_on_type_of_input = Original_X.iloc[:, 0:starting_col + n]
+
 
     for type_of_prediction in types_of_prediction:
         if type_of_prediction == '0_1_or_2_4':
@@ -199,7 +228,7 @@ for type_of_input in types_of_input:
                methotrexate_indicator = Original_X['prophylaxis_bin'].astype(bool)
                X = X_based_on_type_of_input.loc[methotrexate_indicator]
                y = y_based_on_type_of_prediction.loc[methotrexate_indicator]
-            elif type_of_prediction == 'all':
+            elif type_of_subject_to_analyze == 'all':
                 X = X_based_on_type_of_input
                 y = y_based_on_type_of_prediction
 
@@ -219,40 +248,138 @@ for type_of_input in types_of_input:
 
             xg_y_test_from_all_iter = None
 
+            my_cv = LeaveOneOut()
+
+            # Split the dataset in two equal parts
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=0.2, random_state=0)
+
+            # SVM
+            # {'C': 10, 'kernel': 'linear'}
+            # Set the parameters by cross-validation
+            tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
+                                 'C': [1, 10, 100, 1000]},
+                                {'kernel': ['linear'], 'C': [1, 10, 100, 1000]}]
+            tuned_parameters = [{'kernel': ['linear'], 'C': [10]}]
+
+            svm_clf = GridSearchCV(svm.SVC(class_weight='balanced'), tuned_parameters, cv=5,
+                                   scoring='roc_auc', return_train_score=True)
+
+            svm_clf.fit(X, y)
+            print(svm_clf.best_params_)
+            print(svm_clf.best_score_)
+
+            means_test = svm_clf.cv_results_['mean_test_score']
+            stds_test = svm_clf.cv_results_['std_test_score']
+            means_train = svm_clf.cv_results_['mean_train_score']
+            stds_train = svm_clf.cv_results_['std_train_score']
+
+
+            svm_conf_stats = ''
+            for train_mean, train_std, test_mean, test_std, params in zip(means_train, stds_train, means_test, stds_test, svm_clf.cv_results_['params']):
+                svm_conf_stats += ("Train: %0.3f (+/-%0.03f) , Test: %0.3f (+/-%0.03f) for %r \n" % (train_mean, train_std * 2, test_mean, test_std * 2, params))
+
+            entire_W = svm_clf.best_estimator_.coef_[0]
+            W_pca = entire_W[starting_col:starting_col + n_components]
+            bacteria_coeff = convert_pca_back_orig(pca_obj.components_, W_pca, original_names=preproccessed_data.columns[:], visualize=True)
+            draw_horizontal_bar_chart(entire_W[0:starting_col], interesting_cols,  title='Feature Coeff', ylabel='Feature', xlabel='Coeff Value', left_padding=0.3)
+            # y_true, y_pred = y_test, svm_clf.predict(X_test)
+            # # svm_class_report = classification_report(y_true, y_pred)
+            # _, _, _, svm_roc_auc = roc_auc(y_true, y_pred, verbose=True, visualize=False,
+            #         graph_title='SVM\n' + permutation_str)
+
+            # xgboost
+            # Set the parameters by cross-validation
+            tuned_parameters = [{'alpha': [0, 0.001, 0.01, 0.1, 1], 'n_estimators': [3, 5, 10],
+                                 'reg_lambda': [0, 10, 20], 'max_depth': [3, 5 ,10], 'min_child_weight': [0.1, 1, 10, 20]}]
+
+            xgboost_clf = GridSearchCV(XGBClassifier(class_weight='balanced'), tuned_parameters, cv=5,
+                                   scoring='roc_auc', return_train_score=True)
+
+            xgboost_clf.fit(X_train, y_train)
+            print(xgboost_clf.best_params_)
+            print(xgboost_clf.best_score_)
+
+            means_test = xgboost_clf.cv_results_['mean_test_score']
+            stds_test = xgboost_clf.cv_results_['std_test_score']
+            means_train = xgboost_clf.cv_results_['mean_train_score']
+            stds_train = xgboost_clf.cv_results_['std_train_score']
+
+            xgboost_conf_stats = ''
+            for train_mean, train_std, test_mean, test_std, params in zip(means_train, stds_train, means_test,
+                                                                          stds_test, xgboost_clf.cv_results_['params']):
+                xgboost_conf_stats += ("Train: %0.3f (+/-%0.03f) , Test: %0.3f (+/-%0.03f) for %r \n" % (
+                train_mean, train_std * 2, test_mean, test_std * 2, params))
+
+            # y_true, y_pred = y_test, xgboost_clf.predict(X_test)
+            # xgboost_class_report = classification_report(y_true, y_pred)
+            # _, _, _, xgboost_roc_auc = roc_auc(y_true, y_pred, verbose=True, visualize=False,
+            #                                graph_title='SVM\n' + permutation_str)
+
+
+            with open(f'{file_name}.txt', 'a') as f:
+                f.write(f'\n------------------- {permutation_str} -------------------\n')
+                f.write('\n----------- SVM -----------\n')
+                f.write(f'Best prams - {svm_clf.best_params_} \n')
+                f.write(f'Best score - {svm_clf.best_score_} \n')
+                # f.write(f'\nGrid Search \n')
+                # f.write(svm_conf_stats)
+
+                f.write('\n----------- xgboost -----------\n')
+                f.write(f'Best prams - {xgboost_clf.best_params_} \n')
+                f.write(f'Best score - {xgboost_clf.best_score_} \n')
+                # f.write(f'\nGrid Search \n')
+                # f.write(xgboost_conf_stats)
+
+            with open(f'{file_name}_with_grid_results.txt', 'a') as f:
+                f.write(f'\n\------------------- {permutation_str} -------------------\n')
+                f.write('\n----------- SVM -----------\n')
+                f.write(f'Best prams - {svm_clf.best_params_} \n')
+                f.write(f'Best score - {svm_clf.best_score_} \n')
+                f.write(f'\nGrid Search \n')
+                f.write(svm_conf_stats)
+
+                f.write('\n----------- xgboost -----------\n')
+                f.write(f'Best prams - {xgboost_clf.best_params_} \n')
+                f.write(f'Best score - {xgboost_clf.best_score_} \n')
+                f.write(f'\nGrid Search \n')
+                f.write(xgboost_conf_stats)
+
+
             # for iter_num in range(Cross_validation):
             #     # print(f'\n\n------------------------------\nIteration number {iter_num}')
             #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1/Cross_validation, random_state=iter_num)
 
-            for idx in range(len(y)):
-                # print(f'\n\n------------------------------\nIteration number {iter_num}')
-                X_test = X.iloc[idx].to_frame().transpose()
-                y_test = pd.Series(y.iloc[idx], [y.index[idx]])
-                X_train = X.drop(X.index[idx])
-                y_train = y.drop(y.index[idx])
-
-                # shuffle
-                idx = np.random.permutation(X_train.index)
-                X_train = X_train.reindex(idx)
-                y_train = y_train.reindex(idx)
-
-                class_weights = class_weight.compute_class_weight('balanced',
-                                                                  np.unique(y_train),
-                                                                  y_train)
-                # SVM
-                clf = svm.SVC(kernel='linear', class_weight='balanced')
-                clf.fit(X_train, y_train)
-                y_score = clf.decision_function(X_test)
-                y_pred = clf.predict(X_test)
-
-                # save the y_test and y_score
-                if svm_y_test_from_all_iter is None:
-                    svm_y_test_from_all_iter = y_test.values
-                    svm_y_score_from_all_iter = y_score
-                    svm_y_pred_from_all_iter = y_pred
-                else:
-                    svm_y_test_from_all_iter = np.append(svm_y_test_from_all_iter, y_test.values)
-                    svm_y_score_from_all_iter = np.append(svm_y_score_from_all_iter, y_score)
-                    svm_y_pred_from_all_iter = np.append(svm_y_pred_from_all_iter, y_pred)
+            # for idx in range(len(y)):
+            #     # print(f'\n\n------------------------------\nIteration number {iter_num}')
+            #     X_test = X.iloc[idx].to_frame().transpose()
+            #     y_test = pd.Series(y.iloc[idx], [y.index[idx]])
+            #     X_train = X.drop(X.index[idx])
+            #     y_train = y.drop(y.index[idx])
+            #
+            #     # shuffle
+            #     idx = np.random.permutation(X_train.index)
+            #     X_train = X_train.reindex(idx)
+            #     y_train = y_train.reindex(idx)
+            #
+            #     class_weights = class_weight.compute_class_weight('balanced',
+            #                                                       np.unique(y_train),
+            #                                                       y_train)
+            #     # SVM
+            #     clf = svm.SVC(kernel='linear', class_weight='balanced')
+            #     clf.fit(X_train, y_train)
+            #     y_score = clf.decision_function(X_test)
+            #     y_pred = clf.predict(X_test)
+            #
+            #     # save the y_test and y_score
+            #     if svm_y_test_from_all_iter is None:
+            #         svm_y_test_from_all_iter = y_test.values
+            #         svm_y_score_from_all_iter = y_score
+            #         svm_y_pred_from_all_iter = y_pred
+            #     else:
+            #         svm_y_test_from_all_iter = np.append(svm_y_test_from_all_iter, y_test.values)
+            #         svm_y_score_from_all_iter = np.append(svm_y_score_from_all_iter, y_score)
+            #         svm_y_pred_from_all_iter = np.append(svm_y_pred_from_all_iter, y_pred)
 
 
                 # NN
@@ -290,50 +417,50 @@ for type_of_input in types_of_input:
                 #     nn_y_pred_from_all_iter = np.append(nn_y_pred_from_all_iter, y_pred)
 
                 # xgboost
-                xgboost_clf = XGBClassifier(class_weight='balanced')
-                xgboost_clf.fit(X_train, y_train)
-                y_score = xgboost_clf.predict_proba(X_test)
-                y_score = [x[1] for x in y_score]
-                y_pred = xgboost_clf.predict(X_test)
-                print(y_score)
-                print(y_pred)
-                print(y_test.values)
-
-                # save the y_test and y_score
-                if xg_y_test_from_all_iter is None:
-                    xg_y_test_from_all_iter = y_test.values
-                    xg_y_score_from_all_iter = y_score
-                    xg_y_pred_from_all_iter = y_pred
-                else:
-                    xg_y_test_from_all_iter = np.append(xg_y_test_from_all_iter, y_test.values)
-                    xg_y_score_from_all_iter = np.append(xg_y_score_from_all_iter, y_score)
-                    xg_y_pred_from_all_iter = np.append(xg_y_pred_from_all_iter, y_pred)
+                # xgboost_clf = XGBClassifier(class_weight='balanced')
+                # xgboost_clf.fit(X_train, y_train)
+                # y_score = xgboost_clf.predict_proba(X_test)
+                # y_score = [x[1] for x in y_score]
+                # y_pred = xgboost_clf.predict(X_test)
+                # print(y_score)
+                # print(y_pred)
+                # print(y_test.values)
+                #
+                # # save the y_test and y_score
+                # if xg_y_test_from_all_iter is None:
+                #     xg_y_test_from_all_iter = y_test.values
+                #     xg_y_score_from_all_iter = y_score
+                #     xg_y_pred_from_all_iter = y_pred
+                # else:
+                #     xg_y_test_from_all_iter = np.append(xg_y_test_from_all_iter, y_test.values)
+                #     xg_y_score_from_all_iter = np.append(xg_y_score_from_all_iter, y_score)
+                #     xg_y_pred_from_all_iter = np.append(xg_y_pred_from_all_iter, y_pred)
 
                 # roc_auc(y_test.values, y_score, visualize=True,
                 #         graph_title='XGBoost\n' + permutation_str)
                 # plt.show()
             # Compute ROC curve and ROC area for each class
-            print('*** SVM **** \n')
-            print(confusion_matrix(svm_y_test_from_all_iter, svm_y_pred_from_all_iter))
-            print(classification_report(svm_y_test_from_all_iter, svm_y_pred_from_all_iter))
-            fpr, tpr, thresholds, svm_roc_auc = roc_auc(svm_y_test_from_all_iter, svm_y_score_from_all_iter, visualize=True, graph_title='SVM\n'+ permutation_str)
-            print('******************* \n')
-            # plt.savefig('SVM'+permutation_str+'png')
-
-            # print('\n *** NN **** \n')
-            # print(confusion_matrix(nn_y_test_from_all_iter, nn_y_pred_from_all_iter))
-            # print(classification_report(nn_y_test_from_all_iter, nn_y_pred_from_all_iter))
-            # fpr, tpr, thresholds, nn_roc_auc = roc_auc(nn_y_test_from_all_iter, nn_y_score_from_all_iter, visualize=True, graph_title='NN\n' + permutation_str)
+            # print('*** SVM **** \n')
+            # print(confusion_matrix(svm_y_test_from_all_iter, svm_y_pred_from_all_iter))
+            # print(classification_report(svm_y_test_from_all_iter, svm_y_pred_from_all_iter))
+            # fpr, tpr, thresholds, svm_roc_auc = roc_auc(svm_y_test_from_all_iter, svm_y_score_from_all_iter, visualize=True, graph_title='SVM\n'+ permutation_str)
+            # print('******************* \n')
+            # # plt.savefig('SVM'+permutation_str+'png')
+            #
+            # # print('\n *** NN **** \n')
+            # # print(confusion_matrix(nn_y_test_from_all_iter, nn_y_pred_from_all_iter))
+            # # print(classification_report(nn_y_test_from_all_iter, nn_y_pred_from_all_iter))
+            # # fpr, tpr, thresholds, nn_roc_auc = roc_auc(nn_y_test_from_all_iter, nn_y_score_from_all_iter, visualize=True, graph_title='NN\n' + permutation_str)
+            # # plt.show()
+            # # print('******************* \n')
+            #
+            # print('\n *** XGboost **** \n')
+            # print(confusion_matrix(xg_y_test_from_all_iter, xg_y_pred_from_all_iter))
+            # print(classification_report(xg_y_test_from_all_iter, xg_y_pred_from_all_iter))
+            # fpr, tpr, thresholds, nn_roc_auc = roc_auc(xg_y_test_from_all_iter, xg_y_score_from_all_iter, visualize=True, graph_title='XGboost\n' + permutation_str)
             # plt.show()
             # print('******************* \n')
-
-            print('\n *** XGboost **** \n')
-            print(confusion_matrix(xg_y_test_from_all_iter, xg_y_pred_from_all_iter))
-            print(classification_report(xg_y_test_from_all_iter, xg_y_pred_from_all_iter))
-            fpr, tpr, thresholds, nn_roc_auc = roc_auc(xg_y_test_from_all_iter, xg_y_score_from_all_iter, visualize=True, graph_title='XGboost\n' + permutation_str)
-            plt.show()
-            print('******************* \n')
-            # plt.savefig('xgboost'+permutation_str+'png')
+            # # plt.savefig('xgboost'+permutation_str+'png')
 
 
 
