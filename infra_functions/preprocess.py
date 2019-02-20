@@ -4,14 +4,14 @@ import numpy as np
 from sklearn import preprocessing
 
 
-def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxnomy_group=True, taxnomy_level=3, eps_for_zeros=0.01, visualize_data=True):
+def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxnomy_group=True, taxnomy_level=3, eps_for_zeros=0.01, visualize_data=True, taxonomy_col='taxonomy'):
     as_data_frame = pd.DataFrame(data.T).apply(pd.to_numeric, errors='ignore').copy()
 
     if visualize_data:
         plt.figure('Preprocess')
         data_frame_for_vis = as_data_frame.copy()
         try:
-            data_frame_for_vis = data_frame_for_vis.drop('taxonomy', axis=1)
+            data_frame_for_vis = data_frame_for_vis.drop(taxonomy_col, axis=1)
         except:
             pass
         data_frame_flatten = data_frame_for_vis.values.flatten()
@@ -19,14 +19,14 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
         visualize_preproccess(data_frame_for_vis, indexes_of_non_zeros, 'Before Taxonomy group', [321, 322])
 
     if preform_taxnomy_group:
-        taxonomy_reduced = as_data_frame['taxonomy'].map(lambda x: x.split(';'))
+        taxonomy_reduced = as_data_frame[taxonomy_col].map(lambda x: x.split(';'))
         taxonomy_reduced = taxonomy_reduced.map(lambda x: ';'.join(x[:taxnomy_level]))
-        as_data_frame['taxonomy'] = taxonomy_reduced
-        as_data_frame = as_data_frame.groupby(as_data_frame['taxonomy']).mean()
+        as_data_frame[taxonomy_col] = taxonomy_reduced
+        as_data_frame = as_data_frame.groupby(as_data_frame[taxonomy_col]).mean()
         as_data_frame = as_data_frame.T
     else:
         try:
-            as_data_frame = as_data_frame.drop('taxonomy', axis=1).T
+            as_data_frame = as_data_frame.drop(taxonomy_col, axis=1).T
         except:
             pass
 

@@ -2,7 +2,9 @@ import pandas as pd
 
 
 class OtuMfHandler:
-    def __init__(self, otu_csv_file_path, mapping_csv_file_path, from_QIIME=False):
+    def __init__(self, otu_csv_file_path, mapping_csv_file_path, from_QIIME=False, id_col='#OTU ID', taxonomy_col='taxonomy'):
+        self.id_col = id_col
+        self.taxonomy_col = taxonomy_col
         self.from_QIIME = from_QIIME
         self.mapping_file_path = mapping_csv_file_path
         self.otu_file_path = otu_csv_file_path
@@ -16,7 +18,7 @@ class OtuMfHandler:
         skip_rows = 0
         if self.from_QIIME:
             skip_rows = 1
-        otu_file = pd.read_csv(self.otu_file_path, skiprows=skip_rows).set_index('#OTU ID').T
+        otu_file = pd.read_csv(self.otu_file_path, skiprows=skip_rows).set_index(self.id_col).T
         return mapping_file, otu_file
 
     def _merge_otu_mf(self):
@@ -28,7 +30,7 @@ class OtuMfHandler:
         :return: otu file without the taxonomy
         """
         tmp_copy = self.otu_file.T.copy()
-        return tmp_copy.drop(['taxonomy'], axis=1).T
+        return tmp_copy.drop([self.taxonomy_col], axis=1).T
 
     def merge_mf_with_new_otu_data(self, new_otu_data):
         """
@@ -45,5 +47,5 @@ class OtuMfHandler:
         :return: returns the new otu_data with the taxonomy col from the original otu file
         """
         tmp_copy = new_otu_data.T.copy().astype(object)
-        tmp_copy['taxonomy'] = self.otu_file['taxonomy']
+        tmp_copy[self.taxonomy_col] = self.otu_file[self.taxonomy_col]
         return tmp_copy
