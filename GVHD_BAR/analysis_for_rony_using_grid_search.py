@@ -23,7 +23,7 @@ from sklearn.utils import class_weight
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split, GridSearchCV, LeaveOneOut
-from xgboost import XGBClassifier
+from xgboost import XGBClassifier, XGBRegressor
 
 import xgboost as xgb
 import datetime
@@ -103,9 +103,9 @@ def get_days(days_datetime):
     return days_datetime.days
 
 
-n_components = 20
+n_components = 3
 taxnomy_level = 3
-n=5
+n=3
 file_name = f'report_n_comps_{n_components}_taxonomy_level_{taxnomy_level}_using_ronies_and_{n}_pca'
 use_recorded = False
 
@@ -193,9 +193,9 @@ types_of_input = [f'ronies_and_only_{n}_pca']
 types_of_prediction = ['0_1_or_2_4']
 types_of_subject_to_analyze = ['methotrexate']
 
-types_of_input = ['both']
-types_of_prediction = ['0_1_or_2_4']
-types_of_subject_to_analyze = ['all']
+# types_of_input = ['both']
+# types_of_prediction = ['0_1_or_2_4']
+# types_of_subject_to_analyze = ['all']
 
 starting_col = np.argwhere(Original_X.columns == 0).tolist()[0][0]
 
