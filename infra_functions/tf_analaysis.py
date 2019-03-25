@@ -27,6 +27,8 @@ class nn_model:
                 model.add(keras.layers.Flatten(**layer_structure[0]))
             elif type_of_layer == 'dropout':
                 model.add(keras.layers.Dropout(**layer_structure[0]))
+            elif type_of_layer == 'lstm':
+                model.add(keras.layers.LSTM(**layer_structure[0]))
 
         self.model = model
 
