@@ -10,6 +10,7 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
 USE_SIMILARITY = True
+REMOVE_OUTLIERS = True
 record_inputs = False
 use_recorded = True
 n_components = 20
@@ -77,6 +78,19 @@ def main(use_similarity=USE_SIMILARITY, grid_results_folder='grid_search_xgboost
         y_train_censored = y_for_deep_censored['delta_time']
         number_samples_censored = y_train_censored.shape[0]
         print(f'Number of censored subjects: {number_samples_censored}')
+
+        if REMOVE_OUTLIERS:
+            # remove outliers
+            before_removal = y.shape[0]
+            std = y.values.std()
+            th = std * 5
+
+            outlier_mask = y < th
+            y = y.loc[outlier_mask]
+            X = X.loc[outlier_mask]
+
+            after_removal = y.shape[0]
+            print(f'{before_removal - after_removal} outlier/s were removed')
 
 
         alpha_list = [0.01, 20, 50, 100]
