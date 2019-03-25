@@ -58,6 +58,20 @@ def my_loss(y_true, y_pred):
 
     return y_true[:, 4] * tsls + y_true[:, 3] * mse_loss
 
+
+def my_loss_batch(y_true, y_pred):
+    batch_size = y_pred.shape[0]
+    steps_size = y_pred.shape[1]
+
+    total_loss = 0
+    for batch_idx in range(batch_size):
+        single_y_true = y_true[batch_idx, :, :]
+        single_y_pred = y_pred[batch_idx, :, :]
+        total_loss += sum(my_loss(single_y_true, single_y_pred))
+
+    return total_loss / (batch_size*steps_size).value
+
+
 def my_mse_loss(y_true, y_pred):
     mse_loss = tf.reduce_mean(tf.square(y_true[:, 1] - y_pred[:, 1]))
 
@@ -117,9 +131,9 @@ def time_series_using_xgboost(X, y,
                         for i in range(number_iterations):
 
                             # sleep for random time to avoid collisions :O
-                            if use_random_time:
-                                random_time_to_wait = random.random()
-                                time.sleep(random_time_to_wait)
+                            # if use_random_time:
+                            #     random_time_to_wait = random.random()
+                            #     time.sleep(random_time_to_wait)
 
                             print('\nIteration number: ', str(i + 1))
                             if USE_CROSS_VAL:
@@ -370,6 +384,199 @@ def time_series_analysis_tf(X, y,
                             y_train_predicted_values = [i[1] for i in tmp]
 
                             y_test_values = [item for sublist in y_test_values for item in sublist]
+                            y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
+
+                            current_train_res, current_test_res = calc_results_and_plot(y_train_values, y_train_predicted_values,
+                                                                                        y_test_values,
+                                                                                        y_test_predicted_values, algo_name='NeuralNetwork',
+                                                                                        visualize=PLOT,
+                                                                                        title=f'Epochs: {epochs}, Validation iterations: {number_iterations}',
+                                                                                        show=False)
+
+                            # print(current_train_res)
+                            # print(current_test_res)
+                            if record:
+                                record_results(grid_search_dir,
+                                               current_configuration_str,
+                                               y_train_values,
+                                               y_train_predicted_values,
+                                               y_test_values,
+                                               y_test_predicted_values,
+                                               stats_of_input,
+                                               current_train_res,
+                                               current_test_res,
+                                               hist.history)
+
+                            train_res.update({current_configuration_str: current_train_res})
+                            test_res.update({current_configuration_str: current_test_res})
+
+    return train_res, test_res
+
+
+def time_series_analysis_rnn(X, y,
+                            input_size,
+                            l2_lambda_list,
+                            dropout_list,
+                            mse_factor_list,
+                            number_layers_list,
+                            number_neurons_per_layer_list,
+                            epochs_list,
+                            cross_val_number=5,
+                            X_train_censored=None,
+                            y_train_censored=None,
+                            record=RECORD,
+                            grid_search_dir='grid_search_rnn',
+                            beta_for_similarity=None,
+                            censored_mse_fraction_factor=None):
+
+    print(f'\nUsing lstm analysis\n')
+    stats_of_input = stats_input(y, y_train_censored, verbose=True)
+    train_res, test_res = {}, {}
+    for l2_lambda in l2_lambda_list:
+        for dropout in dropout_list:
+            for factor in mse_factor_list:
+                for number_layers in number_layers_list:
+                    for number_neurons_per_layer in number_neurons_per_layer_list:
+                        for epochs in epochs_list:
+
+                            y_train_values = []
+                            y_train_predicted_values = []
+
+                            y_test_values = []
+                            y_test_predicted_values = []
+
+                            USE_CROSS_VAL = True
+                            USE_LLO = False
+
+                            if USE_CROSS_VAL:
+                                number_iterations = cross_val_number
+                            elif USE_LLO:
+                                number_iterations = int(len(X))
+
+                            current_configuration = {'l2': l2_lambda, 'dropout': dropout, 'factor': factor, 'epochs': epochs,
+                                                     'number_iterations': number_iterations, 'number_layers': number_layers, 'neurons_per_layer': number_neurons_per_layer}
+
+                            if censored_mse_fraction_factor is not None:
+                                # use mse factor of censored_mse_fraction_factor of the uncensored for the censored samples
+                                y_train_censored['mse_coeff'].loc[y_train_censored[
+                                                                      'mse_coeff'] == 'last_censored'] = factor / censored_mse_fraction_factor
+                                current_configuration.update({'censored_mse_factor': factor / censored_mse_fraction_factor})
+
+                            if beta_for_similarity is not None:
+                                current_configuration.update({'beta_for_similarity': beta_for_similarity})
+
+                            current_configuration_str = '^'.join(
+                                [str(key) + '=' + str(value) for key, value in current_configuration.items()])
+                            print(f'Current config: {current_configuration}')
+
+                            for i in range(number_iterations):
+                                print('\nIteration number: ', str(i + 1))
+                                if USE_CROSS_VAL:
+                                    y['mse_coeff'] = y['mse_coeff'].astype(float)
+                                    y['mse_coeff'] = factor
+
+
+                                    # split the data such that a sample is only in one group, or the train or the test
+                                    data_grouped = X.groupby('groupby')
+
+                                    groups = list(data_grouped.groups.keys())
+
+                                    shuffled_idx = list(np.random.permutation(len(groups)))
+                                    X_train = pd.DataFrame()
+                                    min_x_train_len = np.ceil(0.8 * len(X))
+                                    for idx in shuffled_idx:
+                                        group_name_to_take = groups[idx]
+                                        shuffled_idx.pop()
+                                        group_to_take = data_grouped.get_group(group_name_to_take)
+                                        X_train = X_train.append(group_to_take)
+                                        if len(X_train) > min_x_train_len:
+                                            break
+                                    y_train = y.loc[X_train.index]
+
+                                    X_test = pd.DataFrame()
+                                    for idx in shuffled_idx:
+                                        group_name_to_take = groups[idx]
+                                        shuffled_idx.pop()
+                                        group_to_take = data_grouped.get_group(group_name_to_take)
+                                        X_test = X_test.append(group_to_take)
+                                    y_test = y.loc[X_test.index]
+
+                                # add censored
+                                X_train = X_train.append(X_train_censored)
+                                y_train = y_train.append(y_train_censored)
+
+
+
+                                algo_name = 'LSTM Network'
+
+                                test_model = tf_analaysis.nn_model()
+                                regularizer = regularizers.l2(l2_lambda)
+
+                                model_structure = [({'units': 2*input_size, 'input_shape': (None, input_size), 'return_sequences': True}, 'LSTM')]
+                                for layer_idx in range(number_layers):
+                                    model_structure.append({'units': number_neurons_per_layer, 'activation': tf.nn.relu, 'kernel_regularizer': regularizer})
+                                    model_structure.append(({'rate': dropout}, 'dropout'))
+
+
+                                model_structure.append({'units': 4, 'kernel_regularizer': regularizer})
+                                test_model.build_nn_model(hidden_layer_structure=model_structure)
+
+                                test_model.compile_nn_model(loss=my_loss_batch, metrics=[my_loss_batch])
+
+                                def sample_generator(inputs, targets):
+                                    data_grouped = inputs.groupby('groupby')
+                                    for subject_id, subject_data in data_grouped:
+                                        # print(subject_data)
+                                        x_time_step = subject_data.drop('groupby', axis=1)
+                                        sample_targets = targets.loc[x_time_step.index]
+                                        input_shape = x_time_step.values.shape
+                                        target_shape = sample_targets.shape
+
+                                        x_time_step = x_time_step.values.reshape(1, input_shape[0], input_shape[1])
+                                        target = sample_targets.values.reshape(1, target_shape[0], target_shape[1]).astype(
+                                            np.float)
+                                        yield x_time_step, target
+
+                                train_samples = sample_generator(X_train, y_train)
+                                for input_sample, target_sample in train_samples:
+                                    hist = test_model.train_model(input_sample, target_sample, epochs=epochs, verbose=False)
+
+                                # plt.plot(hist.history['loss'])
+
+                                # # test the model
+                                # test_samples = sample_generator(X_test, y_test)
+                                # for input_sample, target_sample in test_samples:
+                                #     test_model.evaluate_model(input_sample, target_sample)
+
+                                y_train_values.append(y_train.values[:, 1])
+
+                                # y_train_predicted_values.append(test_model.predict(X_train.values)[:, 1])
+                                train_samples = sample_generator(X_train, y_train)
+                                for input_sample, target_sample in train_samples:
+                                    predicted_val = test_model.predict(input_sample)
+                                    y_train_predicted_values.append(predicted_val[:,:,1])
+
+                                y_test_values.append(y_test.values[:, 1])
+
+                                # y_test_predicted_values.append(test_model.predict(X_test.values)[:, 1])
+                                # test the model
+                                test_samples = sample_generator(X_test, y_test)
+                                for input_sample, target_sample in test_samples:
+                                    predicted_val = test_model.predict(input_sample)
+                                    y_test_predicted_values.append(predicted_val[:,:,1])
+
+                            #### END OF CONFIGURATION OPTION  ####
+                            y_train_values = [item for sublist in y_train_values for item in sublist]
+                            y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
+                            y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
+
+                            # remove the -1 values (the ones that are censored)
+                            tmp = [i for i in zip(y_train_values, y_train_predicted_values) if int(i[0]) != -1]
+                            y_train_values = [i[0] for i in tmp]
+                            y_train_predicted_values = [i[1] for i in tmp]
+
+                            y_test_values = [item for sublist in y_test_values for item in sublist]
+                            y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
                             y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
 
                             current_train_res, current_test_res = calc_results_and_plot(y_train_values, y_train_predicted_values,
