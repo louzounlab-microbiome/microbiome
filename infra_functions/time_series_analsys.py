@@ -2,6 +2,8 @@
 import tensorflow as tf
 import random
 import time
+from tensorflow.python.keras import backend as K
+
 tf.enable_eager_execution()
 from tensorflow.python.keras import optimizers, regularizers, callbacks
 from infra_functions import tf_analaysis
@@ -307,6 +309,8 @@ def time_series_analysis_tf(X, y,
                 for number_layers in number_layers_list:
                     for number_neurons_per_layer in number_neurons_per_layer_list:
                         for epochs in epochs_list:
+                            # clear the model
+                            K.clear_session()
 
                             y_train_values = []
                             y_train_predicted_values = []
@@ -448,6 +452,8 @@ def time_series_analysis_rnn(X, y,
                 for number_layers in number_layers_list:
                     for number_neurons_per_layer in number_neurons_per_layer_list:
                         for epochs in epochs_list:
+                            # clear the model
+                            K.clear_session()
 
                             y_train_values = []
                             y_train_predicted_values = []
