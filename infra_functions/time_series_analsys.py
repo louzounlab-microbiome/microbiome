@@ -23,6 +23,9 @@ PLOT = False
 USE_SIMILARITY = False
 PLOT_INPUT_TO_NN_STATS = False
 
+
+PADDED_VALUE = -999
+
 def print_recursive(object_to_print, count=0):
     replace_char_list = ['_', ' ']
     spaces = count * ' '
@@ -67,6 +70,13 @@ def my_loss_batch(y_true, y_pred):
     for batch_idx in range(batch_size):
         single_y_true = y_true[batch_idx, :, :]
         single_y_pred = y_pred[batch_idx, :, :]
+        tmp = np.array(single_y_true)
+        mask = np.all(tmp!=PADDED_VALUE, axis=1)
+        single_y_true = tmp[mask,:].reshape(-1, tmp.shape[1])
+
+        tmp = np.array(single_y_pred)
+        single_y_pred = tmp[mask,:].reshape(-1, tmp.shape[1])
+
         total_loss += sum(my_loss(single_y_true, single_y_pred))
 
     return total_loss / (batch_size*steps_size).value
@@ -523,23 +533,57 @@ def time_series_analysis_rnn(X, y,
 
                                 test_model.compile_nn_model(loss=my_loss_batch, metrics=[my_loss_batch])
 
-                                def sample_generator(inputs, targets):
+                                def sample_generator(inputs, targets, batch_size=1):
                                     data_grouped = inputs.groupby('groupby')
-                                    for subject_id, subject_data in data_grouped:
-                                        # print(subject_data)
-                                        x_time_step = subject_data.drop('groupby', axis=1)
-                                        sample_targets = targets.loc[x_time_step.index]
-                                        input_shape = x_time_step.values.shape
-                                        target_shape = sample_targets.shape
 
-                                        x_time_step = x_time_step.values.reshape(1, input_shape[0], input_shape[1])
-                                        target = sample_targets.values.reshape(1, target_shape[0], target_shape[1]).astype(
-                                            np.float)
-                                        yield x_time_step, target
+                                    keys, values = [], []
+                                    for key, value in data_grouped.groups.items():
+                                        keys.append(key)
+                                        values.append(value)
 
-                                train_samples = sample_generator(X_train, y_train)
+                                    timestep_in_group = [len(x) for x in list(values)]
+                                    max_timestep_in_group = [np.max(x) for x in np.array_split(timestep_in_group, np.ceil(len(timestep_in_group)/batch_size))]
+                                    batches = np.array_split(keys, np.ceil(len(keys)/batch_size))
+
+                                    subject_data = data_grouped.get_group(keys[0])
+                                    x_time_step = subject_data.drop('groupby', axis=1)
+                                    sample_targets = targets.loc[x_time_step.index].values
+
+                                    for batch, max in zip(batches, max_timestep_in_group):
+                                        x_batch_to_return = np.ndarray((batch_size, max, x_time_step.shape[1]))
+                                        target_batch_to_return = np.ndarray((batch_size, max, sample_targets.shape[1]))
+                                        for idx, group_in_batch  in enumerate(batch):
+                                            subject_data = data_grouped.get_group(group_in_batch)
+                                            x_time_step = subject_data.drop('groupby', axis=1)
+                                            sample_targets = targets.loc[x_time_step.index].values
+                                            x_time_step=x_time_step.values
+                                            number_of_zero_rows = max - len(x_time_step)
+                                            rows_to_add = np.zeros((number_of_zero_rows, x_time_step.shape[1]))
+                                            x_time_step = np.vstack([x_time_step, rows_to_add])
+                                            x_batch_to_return[idx, :, :] = x_time_step
+
+
+                                            rows_to_add = PADDED_VALUE * np.ones((number_of_zero_rows, sample_targets.shape[1]))
+                                            sample_targets = np.vstack([sample_targets, rows_to_add])
+                                            target_batch_to_return[idx, :, :] = sample_targets.astype(np.float)
+
+                                        yield x_batch_to_return, target_batch_to_return
+
+                                    # for subject_id, subject_data in data_grouped:
+                                    #     # print(subject_data)
+                                    #     x_time_step = subject_data.drop('groupby', axis=1)
+                                    #     sample_targets = targets.loc[x_time_step.index]
+                                    #     input_shape = x_time_step.values.shape
+                                    #     target_shape = sample_targets.shape
+                                    #
+                                    #     x_time_step = x_time_step.values.reshape(1, input_shape[0], input_shape[1])
+                                    #     target = sample_targets.values.reshape(1, target_shape[0], target_shape[1]).astype(
+                                    #         np.float)
+                                    # yield x_time_step, target
+
+                                train_samples = sample_generator(X_train, y_train, batch_size=3)
                                 for input_sample, target_sample in train_samples:
-                                    hist = test_model.train_model(input_sample, target_sample, epochs=epochs, verbose=False)
+                                    hist = test_model.train_model(input_sample, target_sample, epochs=epochs, verbose=False, batch_size=3)
 
                                 # plt.plot(hist.history['loss'])
 

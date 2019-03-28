@@ -37,8 +37,8 @@ class nn_model:
         metrics = ['mae', 'mse'] if metrics is None else metrics
         self.model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
-    def train_model(self, train_inputs, train_outputs, epochs=5, callbacks_for_fit=None, validation_split=0, verbose=1, class_weight=None):
-        history = self.model.fit(train_inputs, train_outputs, epochs=epochs, batch_size=1,validation_split=validation_split, callbacks=callbacks_for_fit, verbose=verbose,class_weight=class_weight )
+    def train_model(self, train_inputs, train_outputs, epochs=5, callbacks_for_fit=None, validation_split=0, verbose=1, class_weight=None, batch_size=1):
+        history = self.model.fit(train_inputs, train_outputs, epochs=epochs, batch_size=batch_size,validation_split=validation_split, callbacks=callbacks_for_fit, verbose=verbose,class_weight=class_weight )
         return history
 
     def predict(self, inputs):
