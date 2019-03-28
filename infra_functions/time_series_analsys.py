@@ -1,6 +1,5 @@
 
 import tensorflow as tf
-import random
 import time
 from tensorflow.python.keras import backend as K
 
@@ -18,6 +17,9 @@ from sklearn.model_selection import train_test_split, GridSearchCV, LeaveOneOut
 from GVHD_BAR.show_data import calc_results_and_plot
 from GVHD_BAR.calculate_distances import calculate_distance
 import os
+
+
+pd.options.mode.chained_assignment = None
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
@@ -303,6 +305,15 @@ def time_series_analysis_tf(X, y,
     print(f'\nUsing tf analysis\n')
     stats_of_input = stats_input(y, y_train_censored, verbose=True)
     train_res, test_res = {}, {}
+
+    total_num_conf = len(l2_lambda_list)\
+                     * len(dropout_list)\
+                     * len(mse_factor_list)\
+                     * len(number_layers_list)\
+                     * len(number_neurons_per_layer_list)\
+                     * len(number_neurons_per_layer_list)
+    config_count = 0
+    time_stats = []
     for l2_lambda in l2_lambda_list:
         for dropout in dropout_list:
             for factor in mse_factor_list:
@@ -342,8 +353,12 @@ def time_series_analysis_tf(X, y,
                                 [str(key) + '=' + str(value) for key, value in current_configuration.items()])
                             print(f'Current config: {current_configuration}')
 
+                            config_count += 1
+                            if config_count % 10 == 1:
+                                start = time.clock()
+                            print(f'\nConfiguration progress: {str(config_count)}/{total_num_conf} ({round(config_count / (total_num_conf), 3)}%)')
                             for i in range(number_iterations):
-                                print('\nIteration number: ', str(i + 1))
+                                print(f'CV Iteration number: {str(i + 1)}/{number_iterations}')
                                 if USE_CROSS_VAL:
                                     y['mse_coeff'] = y['mse_coeff'].astype(float)
                                     y['mse_coeff'] = factor
@@ -378,16 +393,22 @@ def time_series_analysis_tf(X, y,
                                 test_model.build_nn_model(hidden_layer_structure=model_structure)
 
                                 test_model.compile_nn_model(loss=my_loss, metrics=[my_loss])
-                                hist = test_model.train_model(X_train.values, y_train.values.astype(np.float), epochs=epochs, verbose=False)
+                                hist = test_model.train_model(X_train.values, y_train.values.astype(np.float), epochs=epochs, verbose=False, batch_size=10)
                                 # plt.plot(hist.history['loss'])
-                                test_model.evaluate_model(X_test.values, y_test.values.astype(np.float))
+                                # test_model.evaluate_model(X_test.values, y_test.values.astype(np.float))
 
                                 y_train_values.append(y_train.values[:, 1])
                                 y_train_predicted_values.append(test_model.predict(X_train.values)[:, 1])
 
                                 y_test_values.append(y_test.values[:, 1])
                                 y_test_predicted_values.append(test_model.predict(X_test.values)[:, 1])
-
+                                # display time stats every 10 configs
+                            if config_count % 10 == 1 or True:
+                                elapsed = time.clock()
+                                elapsed = elapsed - start
+                                print(f'Last Configuration took {elapsed} seconds')
+                                time_stats.append(elapsed)
+                                print(f'\nMean time for measured configurations {sum(time_stats) / len(time_stats)} seconds')
                             #### END OF CONFIGURATION OPTION  ####
                             y_train_values = [item for sublist in y_train_values for item in sublist]
                             y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
@@ -446,6 +467,15 @@ def time_series_analysis_rnn(X, y,
     print(f'\nUsing lstm analysis\n')
     stats_of_input = stats_input(y, y_train_censored, verbose=True)
     train_res, test_res = {}, {}
+
+    total_num_conf = len(l2_lambda_list)\
+                     * len(dropout_list)\
+                     * len(mse_factor_list)\
+                     * len(number_layers_list)\
+                     * len(number_neurons_per_layer_list)\
+                     * len(number_neurons_per_layer_list)
+    config_count=0
+    time_stats = []
     for l2_lambda in l2_lambda_list:
         for dropout in dropout_list:
             for factor in mse_factor_list:
@@ -485,10 +515,16 @@ def time_series_analysis_rnn(X, y,
                                 [str(key) + '=' + str(value) for key, value in current_configuration.items()])
                             print(f'Current config: {current_configuration}')
 
+
+                            config_count += 1
+                            if config_count % 10 == 1:
+                                start = time.clock()
+                            print(f'\nConfiguration progress: {str(config_count)}/{total_num_conf} ({round(config_count / (total_num_conf), 3)}%)')
                             for i in range(number_iterations):
-                                print('\nIteration number: ', str(i + 1))
+                                print(f'CV Iteration number: {str(i + 1)}/{number_iterations}')
                                 if USE_CROSS_VAL:
-                                    y['mse_coeff'] = y['mse_coeff'].astype(float)
+                                    # to supress the warning about copy...
+                                    y.loc[:, 'mse_coeff'] = y['mse_coeff'].astype(float)
                                     y['mse_coeff'] = factor
 
 
@@ -615,6 +651,13 @@ def time_series_analysis_rnn(X, y,
                                     predicted_val = test_model.predict(input_sample)
                                     y_test_predicted_values.append(predicted_val[:,:,1])
 
+                            # display time stats every 10 configs
+                            if config_count%10 == 1 or True:
+                                elapsed = time.clock()
+                                elapsed = elapsed - start
+                                print(f'Last Configuration took {elapsed} seconds')
+                                time_stats.append(elapsed)
+                                print(f'\nMean time for measured configurations {sum(time_stats)/len(time_stats)} seconds\n')
                             #### END OF CONFIGURATION OPTION  ####
                             y_train_values = [item for sublist in y_train_values for item in sublist]
                             y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
