@@ -1,4 +1,4 @@
-﻿thesis/
+thesis/
 antibiotics/אנטיביוטיקה .docx
 *.pyc
 .idea/
@@ -97,3 +97,5 @@ GVHD_BAR/subject_test_100_processes_FALse/l2=16^dropout=0^factor=10^epochs=20^nu
 GVHD_BAR/subject_test_100_processes_FALse/l2=16^dropout=0^factor=10^epochs=20^number_iterations=1^number_layers=1^neurons_per_layer=20/y_test_predicted_values.npy
 GVHD_BAR/meirav code/mucositis/mucositis/General_Code/Entropy Functions/Entropy_For_Clustering_Results.m
 GVHD_BAR/meirav code/
+*.tmp
+*.npy

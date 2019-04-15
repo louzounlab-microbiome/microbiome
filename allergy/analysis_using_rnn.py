@@ -11,7 +11,7 @@ import os
 import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-RECORD = True
+RECORD = False
 USE_SIMILARITY = False
 USE_CENSORED = True
 record_inputs = False
@@ -116,7 +116,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
             plt.title(f'STD={std}, MED={med}, Mean={mean}')
 
-        epochs_list = [20, 80]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
+        epochs_list = [50, 150]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
         mse_factor_list = [0.1, 1, 10, 100, 1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
