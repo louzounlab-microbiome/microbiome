@@ -462,21 +462,23 @@ def time_series_analysis_tf(X, y,
 
 
 def time_series_analysis_rnn(X, y,
-                            input_size,
-                            l2_lambda_list,
-                            dropout_list,
-                            mse_factor_list,
-                            number_layers_list,
-                            number_neurons_per_layer_list,
-                            epochs_list,
-                            cross_val_number=5,
-                            X_train_censored=None,
-                            y_train_censored=None,
-                            record=RECORD,
-                            grid_search_dir='grid_search_rnn',
-                            beta_for_similarity=None,
-                            censored_mse_fraction_factor=None,
-                            batch_size=20):
+                             input_size,
+                             l2_lambda_list,
+                             dropout_list,
+                             mse_factor_list,
+                             number_layers_list,
+                             number_neurons_per_layer_list,
+                             epochs_list,
+                             cross_val_number=5,
+                             X_train_censored=None,
+                             y_train_censored=None,
+                             record=RECORD,
+                             grid_search_dir='grid_search_rnn',
+                             beta_for_similarity=None,
+                             censored_mse_fraction_factor=None,
+                             batch_size=20,
+                             early_stop_fraction=None,
+                             min_epochs=50):
 
     print(f'\nUsing lstm analysis\n')
     stats_of_input = stats_input(y, y_train_censored, verbose=True)
@@ -496,6 +498,8 @@ def time_series_analysis_rnn(X, y,
                 for number_layers in number_layers_list:
                     for number_neurons_per_layer in number_neurons_per_layer_list:
                         for epochs in epochs_list:
+
+
                             # clear the model
                             K.clear_session()
 
@@ -513,8 +517,14 @@ def time_series_analysis_rnn(X, y,
                             elif USE_LLO:
                                 number_iterations = int(len(X))
 
-                            current_configuration = {'l2': l2_lambda, 'dropout': dropout, 'factor': factor, 'epochs': epochs,
-                                                     'number_iterations': number_iterations, 'number_layers': number_layers, 'neurons_per_layer': number_neurons_per_layer}
+                            current_configuration = {'l2': l2_lambda, 'dropout': dropout, 'factor': factor,
+                                                     'epochs': epochs,
+                                                     'number_iterations': number_iterations,
+                                                     'number_layers': number_layers,
+                                                     'neurons_per_layer': number_neurons_per_layer}
+
+                            if epochs == 'MAX':
+                                epochs = 10000
 
                             if censored_mse_fraction_factor is not None:
                                 # use mse factor of censored_mse_fraction_factor of the uncensored for the censored samples
@@ -590,7 +600,7 @@ def time_series_analysis_rnn(X, y,
 
                                 test_model.compile_nn_model(loss=my_loss_batch, metrics=[my_loss_batch])
 
-                                def sample_generator(inputs, targets, batch_size=1):
+                                def sample_generator(inputs, targets, batch_size=None):
                                     data_grouped = inputs.groupby('groupby')
 
                                     keys, values = [], []
@@ -598,7 +608,7 @@ def time_series_analysis_rnn(X, y,
                                         keys.append(key)
                                         values.append(value)
 
-                                    batch_size = min(batch_size, len(keys))
+                                    batch_size = len(keys) if batch_size is None else min(batch_size, len(keys))
 
 
                                     def chunks(l, n):
@@ -638,36 +648,67 @@ def time_series_analysis_rnn(X, y,
 
                                         yield x_batch_to_return, target_batch_to_return
 
+                                test_samples = list(sample_generator(X_test, y_test))
+
+
                                 hist = []
+                                loss_prev_epoch = None
+                                count = 0
                                 for epoch in range(epochs):
                                     train_samples = sample_generator(X_train, y_train, batch_size=batch_size)
+                                    loss_last_epoch = 0
                                     for input_sample, target_sample in list(train_samples):
-                                        print(f'\n***Actual epoch number = {epoch+1}')
-                                        hist.append(test_model.train_model(input_sample, target_sample, epochs=1, verbose=True, batch_size=batch_size).history)
-                                        print(f'***\n')
-                                # plt.plot(hist.history['loss'])
+                                        # print(f'\n***Actual epoch number = {epoch+1}')
+                                        hist.append(test_model.train_model(input_sample, target_sample, epochs=1, verbose=False, batch_size=batch_size).history)
+                                        # loss_last_epoch += hist[-1]['loss'][0]
+                                        # print(f'***\n')
 
-                                # # test the model
-                                # test_samples = sample_generator(X_test, y_test)
-                                # for input_sample, target_sample in test_samples:
-                                #     test_model.evaluate_model(input_sample, target_sample)
 
-                                y_train_values.append(y_train.values[:, 1])
+
+                                    # early stopping mechanisem
+                                    if early_stop_fraction:
+                                        for input_sample, target_sample in test_samples:
+                                            a = test_model.evaluate_model(input_sample, target_sample,verbose=False)
+                                            loss_last_epoch += list(a[0].values())[0]
+                                            # y_test_predicted_values.append(predicted_val[:, :, 1])
+
+
+                                        if loss_prev_epoch is None:
+                                            loss_prev_epoch = loss_last_epoch
+                                        else:
+                                            print(f'{100 * (1 - loss_last_epoch / loss_prev_epoch)}%')
+                                            if 1 - loss_last_epoch/loss_prev_epoch > early_stop_fraction or epoch<min_epochs:
+                                                loss_prev_epoch = loss_last_epoch
+                                                count = 0
+                                            else:
+                                                count += 1
+
+                                            if count == 5:
+                                                print(f'\n***best epoch number = {epoch + 1 - (count-1)}')
+                                                break
+
+
 
                                 # y_train_predicted_values.append(test_model.predict(X_train.values)[:, 1])
                                 train_samples = sample_generator(X_train, y_train)
                                 for input_sample, target_sample in train_samples:
                                     predicted_val = test_model.predict(input_sample)
-                                    y_train_predicted_values.append(predicted_val[:,:,1])
-
-                                y_test_values.append(y_test.values[:, 1])
+                                    for sample, pred_sample in zip(target_sample, predicted_val):
+                                        for sequence, pred_seq in zip(sample, pred_sample):
+                                            if np.all(sequence != PADDED_VALUE):
+                                                y_train_values.append(sequence[1])
+                                                y_train_predicted_values.append(pred_seq[1])
 
                                 # y_test_predicted_values.append(test_model.predict(X_test.values)[:, 1])
                                 # test the model
                                 test_samples = sample_generator(X_test, y_test)
                                 for input_sample, target_sample in test_samples:
                                     predicted_val = test_model.predict(input_sample)
-                                    y_test_predicted_values.append(predicted_val[:,:,1])
+                                    for sample, pred_sample in zip(target_sample, predicted_val):
+                                        for sequence, pred_seq in zip(sample, pred_sample):
+                                            if np.all(sequence != PADDED_VALUE):
+                                                y_test_values.append(sequence[1])
+                                                y_test_predicted_values.append(pred_seq[1])
 
                             # display time stats every 10 configs
                             if config_count%10 == 1 or True:
@@ -677,18 +718,18 @@ def time_series_analysis_rnn(X, y,
                                 time_stats.append(elapsed)
                                 print(f'\nMean time for measured configurations {sum(time_stats)/len(time_stats)} seconds\n')
                             #### END OF CONFIGURATION OPTION  ####
-                            y_train_values = [item for sublist in y_train_values for item in sublist]
-                            y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
-                            y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
+                            # y_train_values = [item for sublist in y_train_values for item in sublist]
+                            # y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
+                            # y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
 
                             # remove the -1 values (the ones that are censored)
                             tmp = [i for i in zip(y_train_values, y_train_predicted_values) if int(i[0]) != -1]
                             y_train_values = [i[0] for i in tmp]
                             y_train_predicted_values = [i[1] for i in tmp]
 
-                            y_test_values = [item for sublist in y_test_values for item in sublist]
-                            y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
-                            y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
+                            # y_test_values = [item for sublist in y_test_values for item in sublist]
+                            # y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
+                            # y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
 
                             current_train_res, current_test_res = calc_results_and_plot(y_train_values, y_train_predicted_values,
                                                                                         y_test_values,

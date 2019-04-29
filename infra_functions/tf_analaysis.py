@@ -45,7 +45,7 @@ class nn_model:
         return self.model.predict(inputs)
 
     def evaluate_model(self, test_inputs, test_outputs, verbose=True):
-        test_loss_res= self.model.evaluate(test_inputs, test_outputs)
+        test_loss_res= self.model.evaluate(test_inputs, test_outputs,verbose=verbose)
 
         # losses
         losses = self.model.loss
