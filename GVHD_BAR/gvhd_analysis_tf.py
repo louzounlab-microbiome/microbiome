@@ -15,7 +15,7 @@ RECORD = True
 USE_SIMILARITY = True
 USE_CENSORED = True
 record_inputs = False
-use_recorded = True
+use_recorded = False
 n_components = 20
 
 
