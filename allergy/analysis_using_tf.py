@@ -11,11 +11,11 @@ import os
 import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-RECORD = True
-USE_SIMILARITY = True
+RECORD = False
+USE_SIMILARITY = False
 USE_CENSORED = True
 record_inputs = False
-use_recorded = True
+use_recorded = False
 n_components = 20
 
 
