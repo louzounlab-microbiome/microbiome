@@ -560,10 +560,10 @@ def time_series_analysis_rnn(X, y,
 
                                     shuffled_idx = list(np.random.permutation(len(groups)))
                                     X_train = pd.DataFrame()
-                                    min_x_train_len = np.ceil(0.8 * len(X))
-                                    for idx in shuffled_idx:
+                                    min_x_train_len = np.ceil(0.7 * len(X))
+                                    for list_idx, idx in enumerate(shuffled_idx):
                                         group_name_to_take = groups[idx]
-                                        shuffled_idx.pop()
+                                        shuffled_idx.pop(list_idx)
                                         group_to_take = data_grouped.get_group(group_name_to_take)
                                         X_train = X_train.append(group_to_take)
                                         if len(X_train) > min_x_train_len:
@@ -571,9 +571,9 @@ def time_series_analysis_rnn(X, y,
                                     y_train = y.loc[X_train.index]
 
                                     X_test = pd.DataFrame()
-                                    for idx in shuffled_idx:
+                                    for list_idx, idx in enumerate(shuffled_idx):
                                         group_name_to_take = groups[idx]
-                                        shuffled_idx.pop()
+                                        shuffled_idx.pop(list_idx)
                                         group_to_take = data_grouped.get_group(group_name_to_take)
                                         X_test = X_test.append(group_to_take)
                                     y_test = y.loc[X_test.index]
