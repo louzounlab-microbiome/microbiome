@@ -37,6 +37,7 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
         samples_density = as_data_frame.apply(np.sum, axis=1)
         plt.figure('Density of samples')
         samples_density.hist(bins=100)
+        plt.title(f'Density of samples')
 
     if preform_log:
         as_data_frame += eps_for_zeros
@@ -54,7 +55,7 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
     if visualize_data:
         plt.figure('Preprocess')
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - After', [325, 326])
-        plt.subplots_adjust(hspace=0.5, wspace =0.5)
+        plt.subplots_adjust(hspace=0.5, wspace=0.5)
         plt.show()
     return as_data_frame
 
