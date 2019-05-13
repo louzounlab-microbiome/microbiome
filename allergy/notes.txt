@@ -1,0 +1,10 @@
+Allergy
+--------
+
+1. The connection between MF and OTU is  #SampleID
+2. To filter by allergy types use the AllergyTypeData131118 column
+3. The grouping of patients is by PatientNumber210119
+4. The patient became de-sensitized ("non alergic") is based on the SuccessDescription column
+	a. A1 means he got de-sensitized
+5. treatment date is is col Date
+	a. to calculate the "time_to_event" we need to take the last treatment date and substract from it the current date

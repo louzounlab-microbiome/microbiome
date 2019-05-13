@@ -4,7 +4,7 @@ import numpy as np
 from sklearn import preprocessing
 
 
-def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxnomy_group=True, taxnomy_level=3, eps_for_zeros=0.01, visualize_data=True, taxonomy_col='taxonomy'):
+def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxnomy_group=True, taxnomy_level=3, eps_for_zeros=0.1, visualize_data=True, taxonomy_col='taxonomy'):
     as_data_frame = pd.DataFrame(data.T).apply(pd.to_numeric, errors='ignore').copy()
 
     if visualize_data:
@@ -50,7 +50,7 @@ def preprocess_data(data, preform_z_scoring=True, preform_log=True, preform_taxn
         plt.title(f'Samples variance before z-scoring\nmean={samples_variance.values.mean()}, std={samples_variance.values.std()}')
 
     if preform_z_scoring:
-        as_data_frame[:] = preprocessing.scale(as_data_frame)
+        as_data_frame[:] = preprocessing.scale(as_data_frame, axis=1)
 
     if visualize_data:
         plt.figure('Preprocess')

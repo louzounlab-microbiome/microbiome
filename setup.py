@@ -6,6 +6,5 @@ setup(
    description='Microbiome',
    author='Microbiome Lab',
    author_email='foomail@foo.com',
-   packages=['Microbiome'],  #same as name
-   install_requires=['numpy', 'pandas', 'sklearn', 'pytorch'], #external packages as dependencies
+   install_requires=['numpy', 'pandas', 'sklearn', 'pytorch', 'tensorflow', 'xgboost'], #external packages as dependencies
 )
