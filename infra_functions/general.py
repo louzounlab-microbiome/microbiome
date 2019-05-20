@@ -1,3 +1,5 @@
+import random
+
 from sklearn.decomposition import PCA
 import pandas as pd
 from scipy.stats import spearmanr, pearsonr
@@ -97,3 +99,141 @@ def roc_auc(y_test, y_score, verbose=False, visualize=False, graph_title='ROC Cu
         plt.xlabel('fpr')
         plt.ylabel('tpr')
     return fpr, tpr, thresholds, roc_auc
+
+
+def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, num_of_mixtures=10, ids_list=None, save_folder=None):
+    # calc ro for x=all samples values for each bacteria and y=all samples tags
+    bacterias = []
+    features_by_bacteria = []
+    if ids_list:
+        y = [id_to_binary_tag_map[id] for id in ids_list]
+        X = preproccessed_data.loc[ids_list]
+
+    else:
+        y = list(id_to_binary_tag_map.values())
+        X = preproccessed_data.loc[list(id_to_binary_tag_map.keys())]
+
+    real_rhos = []
+    real_pvalues = []
+
+    mixed_y_sum = [0 for i in y]
+
+    for num in range(num_of_mixtures):  # run a couple time to avoid accidental results
+        mixed_y = y.copy()
+        random.shuffle(mixed_y)
+        for i, item in enumerate(mixed_y):
+            mixed_y_sum[i] += item
+
+    # divide by num_of_mixtures to return to values ​​in equal sizes to the real ones
+    for i in range(len(mixed_y_sum)):
+        mixed_y_sum[i] = mixed_y_sum[i] / num_of_mixtures
+
+    mixed_rhos = []
+    mixed_pvalues = []
+    for i, item in enumerate(X.iteritems()):
+        bacterias.append(item[0])
+        f = item[1]
+        features_by_bacteria.append(f)
+
+        rho, pvalue = spearmanr(f, y, axis=None)
+        real_rhos.append(rho)
+        real_pvalues.append(pvalue)
+
+        rho_, pvalue_ = spearmanr(f, mixed_y_sum, axis=None)
+        mixed_rhos.append(rho_)
+        mixed_pvalues.append(pvalue_)
+
+    # we want to take those who are located on the sides of most (center 98%) of the mixed tags entries
+    # there for the bound isn't fixed, and is dependent on the distribution of the mixed tags
+    real_min_rho = min(real_rhos)
+    real_max_rho = max(real_rhos)
+    mix_min_rho = min(mixed_rhos)
+    mix_max_rho = max(mixed_rhos)
+
+    real_rho_range = real_max_rho - real_min_rho
+    mix_rho_range = mix_max_rho - mix_min_rho
+
+    # old fixed bound approach - 20% range for each side from which we take the real bacterias (highest and lowest)
+    # lower_bound = real_min_rho + (real_rho_range * 0.2)
+    # upper_bound = real_max_rho - (real_rho_range * 0.2)
+
+    # new method - all the items out of the mix range + 1% from the edge of the mix
+    lower_bound = mix_min_rho + (0.01 * mix_rho_range)
+    upper_bound = mix_max_rho - (0.01 * mix_rho_range)
+
+
+    significant_bacteria_and_rhos = []
+    for i, bact in enumerate(bacterias):
+        if real_rhos[i] < lower_bound or real_rhos[i] > upper_bound:  # significant
+            significant_bacteria_and_rhos.append([bact, real_rhos[i]])
+
+    significant_bacteria_and_rhos.sort(key=lambda s: s[1])
+    if save_folder:
+        with open(save_folder + "/significant_bacteria_" + title + ".csv", "w") as file:
+            for s in significant_bacteria_and_rhos:
+                file.write(str(s[1]) + "," + str(s[0]) + "\n")
+
+    # draw the distribution of real rhos vs. mixed rhos
+    # old plots
+    plt.hist(real_rhos, rwidth=0.9, bins=50, label="real tags", color="#43a2ca" )
+    plt.hist(mixed_rhos, rwidth=0.9, bins=50, alpha=0.5, label="mixed tags", color="#d95f0e")
+    plt.title("Real tags vs. Mixed tags at " + title.replace("_", " "))
+    plt.xlabel('Rho value')
+    plt.ylabel('Number of bacteria')
+    plt.legend()
+    # print("Real tags_vs_Mixed_tags_at_" + title + "_combined.png")
+    # plt.show()
+    if save_folder:
+        plt.savefig(save_folder + "/Real tags_vs_Mixed_tags_at_" + title + "_combined.png")
+    plt.close()
+
+    combined_rhos = np.array([[real_rhos[i], mixed_rhos[i]] for i in range(len(mixed_rhos))])
+    plt.hist(combined_rhos, bins=50, rwidth=0.9, histtype='bar', label=["real tags", "mixed tags"], color=["#43a2ca", "#d95f0e"])
+    plt.title("Real tags vs. Mixed tags at " + title.replace("_", " "))
+    plt.xlabel('Rho value')
+    plt.ylabel('Number of bacteria')
+    plt.legend()
+    # print("Real_tags_vs_Mixed_tags_at_" + title + ".png")
+    # plt.show()
+    if save_folder:
+        plt.savefig(save_folder + "/Real_tags_vs_Mixed_tags_at_" + title + ".png")
+    plt.close()
+
+    # positive negative figures
+
+    bacterias = [s[0] for s in significant_bacteria_and_rhos]
+    real_rhos = [s[1] for s in significant_bacteria_and_rhos]
+    # extract the last meaningful name - long multi level names to the lowest level definition
+    short_bacterias_names = []
+    for f in bacterias:
+        i = 1
+        while len(f.split(";")[-i]) < 5:  # meaningless name
+            i += 1
+        short_bacterias_names.append(f.split(";")[-i])
+
+    left_padding = 0.4
+    fig, ax = plt.subplots()
+    y_pos = np.arange(len(short_bacterias_names))
+    #coeff_color = ['green' if x else 'red' for x in real_rhos >= 0]
+    coeff_color = []
+    for x in real_rhos:
+        if x >= 0:
+            coeff_color.append('green')
+        else:
+            coeff_color.append('red')
+    # coeff_color = ['blue' for x in data >= 0]
+    ax.barh(y_pos, real_rhos, color=coeff_color)
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(short_bacterias_names)
+    plt.yticks(fontsize=10)
+    plt.title(title)
+    #ax.set_ylabel(ylabel)
+    ax.set_xlabel("Coeff value")
+    fig.subplots_adjust(left=left_padding)
+    # set_size(5, 5, ax)
+    # print("pos_neg_correlation_at_" + title + ".png")
+    # plt.show()
+    if save_folder:
+        plt.savefig(save_folder + "/pos_neg_correlation_at_" + title + ".png")
+    plt.close()
+
