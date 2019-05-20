@@ -63,7 +63,7 @@ def draw_horizontal_bar_chart(data, names=None, title=None, ylabel=None, xlabel=
 def convert_pca_back_orig(pca_components, w, original_names=None, visualize=False, title='Bacteria Coeff', ylabel='Bacteria', xlabel='Coeff Value'):
     coeff = np.dot(w, pca_components)
     if original_names is None:
-        object_to_return =  pd.DataFrame({'Coefficients': coeff})
+        object_to_return = pd.DataFrame({'Coefficients': coeff})
     else:
         object_to_return = pd.DataFrame(
         {'Taxonome': original_names,
