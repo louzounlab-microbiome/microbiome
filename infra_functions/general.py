@@ -115,18 +115,16 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
 
     real_rhos = []
     real_pvalues = []
-
+    mixed_y_list = []
     mixed_y_sum = [0 for i in y]
 
     for num in range(num_of_mixtures):  # run a couple time to avoid accidental results
         mixed_y = y.copy()
         random.shuffle(mixed_y)
-        for i, item in enumerate(mixed_y):
-            mixed_y_sum[i] += item
+        mixed_y_list.append(mixed_y)
+        #for i, item in enumerate(mixed_y):
+         #   mixed_y_sum[i] += item
 
-    # divide by num_of_mixtures to return to values ​​in equal sizes to the real ones
-    for i in range(len(mixed_y_sum)):
-        mixed_y_sum[i] = mixed_y_sum[i] / num_of_mixtures
 
     mixed_rhos = []
     mixed_pvalues = []
@@ -139,9 +137,12 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
         real_rhos.append(rho)
         real_pvalues.append(pvalue)
 
-        rho_, pvalue_ = spearmanr(f, mixed_y_sum, axis=None)
-        mixed_rhos.append(rho_)
-        mixed_pvalues.append(pvalue_)
+        for mix_y in mixed_y_list:
+            rho_, pvalue_ = spearmanr(f, mix_y, axis=None)
+            mixed_rhos.append(rho_)
+            mixed_pvalues.append(pvalue_)
+
+
 
     # we want to take those who are located on the sides of most (center 98%) of the mixed tags entries
     # there for the bound isn't fixed, and is dependent on the distribution of the mixed tags
@@ -158,9 +159,10 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     # upper_bound = real_max_rho - (real_rho_range * 0.2)
 
     # new method - all the items out of the mix range + 1% from the edge of the mix
-    lower_bound = mix_min_rho + (0.01 * mix_rho_range)
-    upper_bound = mix_max_rho - (0.01 * mix_rho_range)
-
+    # lower_bound = mix_min_rho + (0.01 * mix_rho_range)
+    # upper_bound = mix_max_rho - (0.01 * mix_rho_range)
+    upper_bound = np.percentile(mixed_rhos, 99)
+    lower_bound = np.percentile(mixed_rhos, 1)
 
     significant_bacteria_and_rhos = []
     for i, bact in enumerate(bacterias):
@@ -175,8 +177,12 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
 
     # draw the distribution of real rhos vs. mixed rhos
     # old plots
-    plt.hist(real_rhos, rwidth=0.9, bins=50, label="real tags", color="#43a2ca" )
-    plt.hist(mixed_rhos, rwidth=0.9, bins=50, alpha=0.5, label="mixed tags", color="#d95f0e")
+    [count, bins] = np.histogram(mixed_rhos, 50)
+    plt.bar(bins[:-1], count/10, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="mixed tags", color="#d95f0e")
+    [count, bins2] = np.histogram(real_rhos, 50)
+    plt.bar(bins2[:-1], count, width=0.8 * (bins[1] - bins[0]), alpha=0.8, label="real tags", color="#43a2ca")
+    # plt.hist(real_rhos, rwidth=0.6, bins=50, label="real tags", color="#43a2ca" )
+    # plt.hist(mixed_rhos, rwidth=0.9, bins=50, alpha=0.5, label="mixed tags", color="#d95f0e")
     plt.title("Real tags vs. Mixed tags at " + title.replace("_", " "))
     plt.xlabel('Rho value')
     plt.ylabel('Number of bacteria')
@@ -187,8 +193,12 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
         plt.savefig(save_folder + "/Real tags_vs_Mixed_tags_at_" + title + "_combined.png")
     plt.close()
 
-    combined_rhos = np.array([[real_rhos[i], mixed_rhos[i]] for i in range(len(mixed_rhos))])
-    plt.hist(combined_rhos, bins=50, rwidth=0.9, histtype='bar', label=["real tags", "mixed tags"], color=["#43a2ca", "#d95f0e"])
+    """
+    combined_mixed_rhos = np.array(mixed_rhos)
+    combined_mixed_rhos = combined_mixed_rhos.reshape(len(real_rhos), num_of_mixtures)
+    combined_mixed_rhos = [sum(l) for l in combined_mixed_rhos]
+    combined_rhos = np.array([[real_rhos[i], combined_mixed_rhos[i]] for i in range(len(real_rhos))])
+    plt.hist(combined_rhos, bins=50, rwidth=0.8, histtype='bar', label=["real tags", "mixed tags"], color=["#43a2ca", "#d95f0e"])
     plt.title("Real tags vs. Mixed tags at " + title.replace("_", " "))
     plt.xlabel('Rho value')
     plt.ylabel('Number of bacteria')
@@ -198,9 +208,9 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     if save_folder:
         plt.savefig(save_folder + "/Real_tags_vs_Mixed_tags_at_" + title + ".png")
     plt.close()
+    """
 
     # positive negative figures
-
     bacterias = [s[0] for s in significant_bacteria_and_rhos]
     real_rhos = [s[1] for s in significant_bacteria_and_rhos]
     # extract the last meaningful name - long multi level names to the lowest level definition
