@@ -128,8 +128,9 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
         if not use_similarity:
             mse_factor_list = [1]
-            X_train_censored = None
-            y_train_censored = None
+            if not use_censored:
+                X_train_censored = None
+                y_train_censored = None
 
 
 
@@ -148,7 +149,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                         number_layers_list,
                                                         number_neurons_per_layer_list,
                                                         epochs_list,
-                                                        cross_val_number=1,
+                                                        cross_val_number=5,
                                                         X_train_censored=X_train_censored,
                                                         y_train_censored=y_train_censored,
                                                         record=RECORD,

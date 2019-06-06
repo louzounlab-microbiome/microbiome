@@ -257,7 +257,6 @@ def compute_time_for_censored_using_similarity_matrix(not_censored_data,
     # remove subects with no data in mocrobiome
     not_censored_data = not_censored_data.loc[not_censored_data[0].notnull()]
     before_removal = not_censored_data.shape[0]
-
     # remove outliers
     if remove_outliers:
         std = not_censored_data['time_for_the_event'].values.std()
@@ -324,7 +323,7 @@ def time_series_analysis_tf(X, y,
                      * len(mse_factor_list)\
                      * len(number_layers_list)\
                      * len(number_neurons_per_layer_list)\
-                     * len(number_neurons_per_layer_list)
+                     * len(epochs_list)
     config_count = 0
     time_stats = []
     for l2_lambda in l2_lambda_list:
@@ -489,7 +488,7 @@ def time_series_analysis_rnn(X, y,
                      * len(mse_factor_list)\
                      * len(number_layers_list)\
                      * len(number_neurons_per_layer_list)\
-                     * len(number_neurons_per_layer_list)
+                     * len(epochs_list)
     config_count=0
     time_stats = []
     for l2_lambda in l2_lambda_list:

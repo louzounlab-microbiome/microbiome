@@ -178,10 +178,10 @@ def calc_result_per_param(different_configs):
         pass
     return configuration_results
 
-def plot_per_param(configuration_results):
-    for key, param_values in configuration_results.items():
+def plot_per_param(configuration_results, save=False, plot=True, path=''):
+    for param_key, param_values in configuration_results.items():
         fig, axis = plt.subplots(2, len(list(param_values.values())[0].keys())//2)
-        fig.suptitle(f'{key}', fontsize=16)
+        fig.suptitle(f'{param_key}', fontsize=16)
 
         tmp = {}
 
@@ -203,11 +203,23 @@ def plot_per_param(configuration_results):
             ax.boxplot(val)
             ax.set_title(key)
             ax.set_xticklabels(list(param_values.keys()))
-        pass
-    plt.show()
-    plt.tight_layout()
-    pass
 
+        if save:
+            folder_to_save = os.path.join('C:\\','ParameterChoosing')
+            if not os.path.exists(folder_to_save):
+                os.mkdir(folder_to_save)
+
+            folder_to_save = os.path.join(folder_to_save,os.path.basename(path) )
+            if not os.path.exists(folder_to_save):
+                os.mkdir(folder_to_save)
+
+
+            # fig.savefig(os.path.join(folder_to_save,f'{param_key}.png'))
+            # plt.close(fig)
+
+    if plot:
+        plt.show()
+        plt.tight_layout()
 def calc_stats_for_config(grid_search_folder):
     different_configs = [os.path.join(grid_search_folder, o) for o in os.listdir(grid_search_folder)
                          if os.path.isdir(os.path.join(grid_search_folder, o))]
@@ -279,7 +291,7 @@ def calc_stats_for_config(grid_search_folder):
             'Total number of records in config': len(total_test_rho)
             }
 
-    return configuration_stats
+    return configuration_stats, different_configs
 
 
 def find_best_config(configuration_stats):
@@ -324,7 +336,7 @@ def find_best_config(configuration_stats):
 
 def main(grid_search_folder):
     print(f'Analyzing {grid_search_folder}')
-    configuration_stats = calc_stats_for_config(grid_search_folder)
+    configuration_stats, different_configs = calc_stats_for_config(grid_search_folder)
     best_configs = find_best_config(configuration_stats)
 
     ## use history... currently not using it...
@@ -334,7 +346,9 @@ def main(grid_search_folder):
 
     a=print_recursive2(best_configs)
     print(a)
-    return a
+    b= f'Number of configurations: {len(different_configs)}'
+    b+='\n'+a
+    return b
 
 
 def old_analyze():
@@ -412,17 +426,61 @@ def old_analyze():
         #
         # plt.show()
 
+def plot_and_save(path, save=True, plot=False):
+    different_configs = filter_configs(path)
+    configuration_results = calc_result_per_param(different_configs)
+    plot_per_param(configuration_results, save, plot, path)
+
 
 if __name__ == '__main__':
-    grid_search_folder = r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_tf_with_similiarity'
+    grid_search_folder=[]
+    ### allergy ###
+    #RNN#
+    grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\lstm_naive\allergy_multi_grid_rnn_wo_censor_wo_similiarity')
+    grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_rnn_with_censored_without_similiarity_less_params')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_rnn_with_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_rnn_wo_censor_wo_similiarity')
+    # #FNN#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_tf_wo_censor_wo_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_tf_with_censored_without_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_tf_with_similiarity')
+    # # naive#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\allergy_multi_grid_xgboost_without_similiarity')
+    # # similiarity#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\allergy_multi_grid_xgboost_with_similiarity')
 
-    # main(grid_search_folder)
-    different_configs = filter_configs(grid_search_folder)
-    configuration_results = calc_result_per_param(different_configs)
+    ### GVHD ###
+    #RNN#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_rnn_with_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\lstm_naive\gvhd_multi_grid_rnn_wo_censor_wo_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\\gvhd_multi_grid_rnn_with_censored_without_similiarity_less_params')
+
+    # #FNN#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_tf_wo_censor_wo_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_tf_with_censored_without_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_tf_with_similiarity')
+    # # # naive#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_xgboost_without_similiarity')
+    # # similiarity#
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_xgboost_with_similiarity')
+
+    save = False
+    for folder in grid_search_folder:
+        tmp = main(folder)
+        # if save:
+        #     folder_to_save = os.path.join('C:\\','ParameterChoosing')
+        #     if not os.path.exists(folder_to_save):
+        #         os.mkdir(folder_to_save)
+        #
+        #     folder_to_save = os.path.join(folder_to_save,os.path.basename(folder) )
+        #     if not os.path.exists(folder_to_save):
+        #         os.mkdir(folder_to_save)
+        #
+        #     with open(os.path.join(folder_to_save,'Best_config.txt'),'w') as f:
+        #         f.writelines(tmp)
+        # plot_and_save(folder, plot=True)
+    # different_configs = filter_configs(grid_search_folder, filter_dict={'l2': [1], 'dropout': [0.6], 'number_layers':[2,3]})
+    # configuration_results = calc_result_per_param(different_configs)
     # plot_per_param(configuration_results)
-
-    different_configs = filter_configs(grid_search_folder, filter_dict={'l2': [1, 20], 'factor': [0.1]})
-    configuration_results = calc_result_per_param(different_configs)
-    plot_per_param(configuration_results)
-
-    plt.show()
+    #
+    # plt.show()

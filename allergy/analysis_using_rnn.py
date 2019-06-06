@@ -121,8 +121,9 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
         if not use_similarity:
             mse_factor_list = [1]
-            X_train_censored = None
-            y_train_censored = None
+            if not use_censored:
+                X_train_censored = None
+                y_train_censored = None
 
 
 
@@ -160,4 +161,4 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
 if __name__ == '__main__':
     grid_results_folder = 'rnn_grid_search_no_censored'
-    main(USE_SIMILARITY, USE_CENSORED, grid_results_folder)
+    main(USE_CENSORED, USE_SIMILARITY, grid_results_folder)
