@@ -1,4 +1,4 @@
-from GVHD_BAR.gvhd_analysis_tf import main
+from allergy.analysis_using_tf import main
 import sys
 import os
 
