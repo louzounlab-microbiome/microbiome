@@ -124,7 +124,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
             plt.title(f'STD={std}, MED={med}, Mean={mean}')
 
         epochs_list = [20, 100, 1000]#['MAX', 20, 100, 1000]
-        mse_factor_list = [0.1, 1, 10, 100, 1000] # np.arange(0.005, 1, 0.005)
+        mse_factor_list = [0.1, 10, 1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
             mse_factor_list = [1]
@@ -135,7 +135,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
 
         dropout_list = [0, 0.2, 0.6] #np.arange(0, 0.8, 0.1)
-        l2_lambda_list = [1, 10, 20, 100]
+        l2_lambda_list = [1, 20]
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
         number_neurons_per_layer_list = [20, 50]
@@ -156,7 +156,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                         grid_search_dir=grid_results_folder,
                                                         beta_for_similarity=beta,
                                                         censored_mse_fraction_factor=censored_mse_fraction_factor,
-                                                        early_stop_fraction=0.001
+                                                        early_stop_fraction=None
                                                         )
 
     total_num_of_configs = len(dropout_list) *\

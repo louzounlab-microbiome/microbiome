@@ -117,7 +117,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
             plt.title(f'STD={std}, MED={med}, Mean={mean}')
 
         epochs_list = [20, 100, 1000]#['MAX', 20, 100, 1000]
-        mse_factor_list = [0.1, 1, 10, 100, 1000] # np.arange(0.005, 1, 0.005)
+        mse_factor_list = [0.1, 10, 1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
             mse_factor_list = [1]
