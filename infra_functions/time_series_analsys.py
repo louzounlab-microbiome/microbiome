@@ -813,7 +813,7 @@ def time_series_analysis_rnn(X, y,
 
 
                                 hist = []
-                                loss_prev_epoch = None
+                                loss_best_epoch = None
                                 count = 0
                                 for epoch in range(epochs):
                                     save_and_break=False
@@ -835,15 +835,20 @@ def time_series_analysis_rnn(X, y,
                                         #     # y_test_predicted_values.append(predicted_val[:, :, 1])
                                         if loss_best_epoch is None:
                                             loss_best_epoch = loss_last_epoch
-                                        precentage = 0.02
-                                        if loss_last_epoch < (1 + precentage) * loss_best_epoch and loss_last_epoch > (1 - precentage) * loss_best_epoch:
-                                            count += 1
                                         else:
-                                            loss_best_epoch = loss_last_epoch
-                                            count = 0
-                                        if count == 15:
-                                            print(f'\n***best epoch number = {epoch + 1 - (count - 1)}')
-                                            save_and_break = True
+                                            print(f'\n epoch = {epoch}')
+                                            print(f'loss_best_epoch: {loss_best_epoch}')
+                                            print(f'loss_last_epoch: {loss_last_epoch}')
+                                            if loss_last_epoch > loss_best_epoch:
+                                                count += 1
+                                                print(count)
+                                            else:
+                                                loss_best_epoch = loss_last_epoch
+                                                count = 0
+
+                                            if count == min_epochs:
+                                                print(f'\n***best epoch number = {epoch - count}')
+                                                save_and_break = True
 
                                     if epoch % 5 == 0 or save_and_break:
                                         print(f'{100 * epoch / epochs}%')
