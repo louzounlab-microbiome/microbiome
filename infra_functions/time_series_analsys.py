@@ -619,7 +619,7 @@ def time_series_analysis_rnn(X, y,
                              censored_mse_fraction_factor=None,
                              batch_size=20,
                              early_stop_fraction=None,
-                             min_epochs=50):
+                             min_epochs=10):
 
     print(f'\nUsing lstm analysis\n')
     stats_of_input = stats_input(y, y_train_censored, verbose=True)
