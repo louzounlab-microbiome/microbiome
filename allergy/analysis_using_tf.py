@@ -11,11 +11,11 @@ import os
 import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-RECORD = False
+RECORD = True
 USE_SIMILARITY = False
-USE_CENSORED = True
+USE_CENSORED = False
 record_inputs = False
-use_recorded = False
+use_recorded = True
 n_components = 20
 
 
@@ -118,8 +118,9 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
         mse_factor_list = [0.1, 10, 1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
-            mse_factor_list = [1]
+            # mse_factor_list = [1]
             if not use_censored:
+                mse_factor_list = [1]
                 X_train_censored = None
                 y_train_censored = None
 
@@ -130,7 +131,13 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
         number_neurons_per_layer_list = [20, 50]
+        epochs_list = [1000]
 
+        best_config = 'l2=20^dropout=0.6^factor=1^epochs=1000^number_iterations=5^number_layers=1^neurons_per_layer=20'
+        l2_lambda_list = [20]
+        dropout_list = [0.6]
+        number_layers_list = [1]
+        number_neurons_per_layer_list = [20]
 
         train_res, test_res  = time_series_analysis_tf(X, y,
                                                        n_components,
@@ -140,7 +147,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                        number_layers_list,
                                                        number_neurons_per_layer_list,
                                                        epochs_list,
-                                                       cross_val_number=5,
+                                                       cross_val_number=10,
                                                        X_train_censored=X_train_censored,
                                                        y_train_censored=y_train_censored,
                                                        record=RECORD,
@@ -156,5 +163,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
     print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
 if __name__ == '__main__':
-    grid_results_folder = 'grid_search_tf_loss_with_censored'
-    main(USE_SIMILARITY, USE_CENSORED, grid_results_folder)
+    grid_results_folder = r'C:\Users\Bar\Desktop\testing\allergy_FNN_best_config'
+    for idx in range(1):
+        # for cv in range(5):
+        main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')

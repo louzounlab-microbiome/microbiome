@@ -5,7 +5,7 @@ from infra_functions.time_series_analsys import compute_time_for_censored_using_
 
 import numpy as np
 import pickle
-from GVHD_BAR.prepare_data import prepare_data as prep_data
+from allergy.prepare_data import prepare_data as prep_data
 
 import os
 import sys
@@ -13,16 +13,13 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
 USE_SIMILARITY = False
-USE_CENSORED = False
+USE_CENSORED = True
 record_inputs = False
 use_recorded = True
 n_components = 20
 
 
 def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_folder='grid_search_no_censored'):
-
-    print(f'use censored: {use_censored}, use similarity: {use_similarity}')
-
     if not use_recorded:
         x_for_deep, y_for_deep, x_for_deep_censored, y_for_deep_censored, censored_data, not_censored, otu_after_pca_wo_taxonomy, OtuMf = prep_data(n_components)
     else:
@@ -118,7 +115,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
             plt.title(f'STD={std}, MED={med}, Mean={mean}')
 
         epochs_list = [20, 80]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
-        mse_factor_list = [0.1, 1, 10, 100, 1000] # np.arange(0.005, 1, 0.005)
+        mse_factor_list = [0.1, 10, 1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
             # mse_factor_list = [1]
@@ -134,14 +131,8 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
         number_neurons_per_layer_list = [20, 50]
-        epochs_list = [1000]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
+        epochs_list = [1000]
 
-
-        best_config = 'l2=1^dropout=0.2^factor=1^epochs=1000^number_iterations=5^number_layers=1^neurons_per_layer=20'
-        l2_lambda_list = [1]
-        dropout_list = [0.2]
-        number_layers_list = [2]
-        number_neurons_per_layer_list = [50]
 
         train_res, test_res  = time_series_analysis_tf(X, y,
                                                        n_components,
@@ -151,7 +142,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                        number_layers_list,
                                                        number_neurons_per_layer_list,
                                                        epochs_list,
-                                                       cross_val_number=10,
+                                                       cross_val_number=5,
                                                        X_train_censored=X_train_censored,
                                                        y_train_censored=y_train_censored,
                                                        record=RECORD,
@@ -159,15 +150,15 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                        beta_for_similarity=beta,
                                                        censored_mse_fraction_factor=censored_mse_fraction_factor)
 
-    total_num_of_configs = len(dropout_list) *\
-                               len(l2_lambda_list) *\
-                               len(number_layers_list) *\
-                               len(number_neurons_per_layer_list) *\
-                               len(betas_list)
+    total_num_of_configs = len(dropout_list) * \
+                           len(l2_lambda_list) * \
+                           len(number_layers_list) * \
+                           len(number_neurons_per_layer_list) * \
+                           len(betas_list)
     print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
 if __name__ == '__main__':
-    grid_results_folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_best_config'
-    for idx in range(1):
+    grid_results_folder = r'C:\Users\Bar\Desktop\testing\allergy_FNN_TS_again_new'
+    for idx in range(2):
         # for cv in range(5):
         main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')

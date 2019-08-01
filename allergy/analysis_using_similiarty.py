@@ -11,7 +11,7 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
 USE_SIMILARITY = True
 record_inputs = False
-use_recorded = True
+use_recorded = False
 n_components = 20
 
 

@@ -1,7 +1,7 @@
 
 import matplotlib.pyplot as plt
 
-from infra_functions.time_series_analsys import compute_time_for_censored_using_similarity_matrix, time_series_analysis_tf, stats_input
+from infra_functions.time_series_analsys import compute_time_for_censored_using_similarity_matrix, time_series_analysis_rnn, stats_input
 
 import numpy as np
 import pickle
@@ -13,13 +13,13 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
 USE_SIMILARITY = False
-USE_CENSORED = False
+USE_CENSORED = True
 record_inputs = False
 use_recorded = True
 n_components = 20
 
 
-def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_folder='grid_search_no_censored'):
+def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_folder='rnn_grid_search_no_censored'):
 
     print(f'use censored: {use_censored}, use similarity: {use_similarity}')
 
@@ -49,6 +49,8 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
         betas_list = [1, 10, 100]
     else:
         betas_list = [None]  # just a list of one element so that the for loop will run only once
+
+
 
     for beta in betas_list:
         censored_mse_fraction_factor = None
@@ -82,12 +84,16 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
             ##### END Similarity algo ####
 
 
+
+
         starting_col = np.argwhere(x_for_deep.columns == 0).tolist()[0][0]
         X = x_for_deep.iloc[:, starting_col:starting_col + n_components]
+        X['groupby'] = x_for_deep['Personal_ID']
         y = y_for_deep  # ['delta_time']
 
         starting_col = np.argwhere(x_for_deep_censored.columns == 0).tolist()[0][0]
         X_train_censored = x_for_deep_censored.iloc[:, starting_col:starting_col + n_components]
+        X_train_censored['groupby'] = x_for_deep_censored['Personal_ID']
         y_train_censored = y_for_deep_censored
         number_samples_censored = y_train_censored.shape[0]
         print(f'Number of censored subjects: {number_samples_censored}')
@@ -117,8 +123,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
             plt.title(f'STD={std}, MED={med}, Mean={mean}')
 
-        epochs_list = [20, 80]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
-        mse_factor_list = [0.1, 1, 10, 100, 1000] # np.arange(0.005, 1, 0.005)
+        mse_factor_list = [0.01, 1, 100] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
             # mse_factor_list = [1]
@@ -127,37 +132,29 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                 X_train_censored = None
                 y_train_censored = None
 
+        l2_lambda_list = [0.01, 0.1, 1]
+        dropout_list = [0.1, 0.2, 0.3]  # np.arange(0, 0.8, 0.1)
+        epochs_list = [1000]
+        number_layers_list = [1]
+        number_neurons_per_layer_list = [10, 30]
 
-
-        dropout_list = [0, 0.2, 0.6] #np.arange(0, 0.8, 0.1)
-        l2_lambda_list = [1, 10, 20, 100]
-        #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
-        number_layers_list = [1, 2, 3]
-        number_neurons_per_layer_list = [20, 50]
-        epochs_list = [1000]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
-
-
-        best_config = 'l2=1^dropout=0.2^factor=1^epochs=1000^number_iterations=5^number_layers=1^neurons_per_layer=20'
-        l2_lambda_list = [1]
-        dropout_list = [0.2]
-        number_layers_list = [2]
-        number_neurons_per_layer_list = [50]
-
-        train_res, test_res  = time_series_analysis_tf(X, y,
-                                                       n_components,
-                                                       l2_lambda_list,
-                                                       dropout_list,
-                                                       mse_factor_list,
-                                                       number_layers_list,
-                                                       number_neurons_per_layer_list,
-                                                       epochs_list,
-                                                       cross_val_number=10,
-                                                       X_train_censored=X_train_censored,
-                                                       y_train_censored=y_train_censored,
-                                                       record=RECORD,
-                                                       grid_search_dir=grid_results_folder,
-                                                       beta_for_similarity=beta,
-                                                       censored_mse_fraction_factor=censored_mse_fraction_factor)
+        train_res, test_res  = time_series_analysis_rnn(X, y,
+                                                        n_components,
+                                                        l2_lambda_list,
+                                                        dropout_list,
+                                                        mse_factor_list,
+                                                        number_layers_list,
+                                                        number_neurons_per_layer_list,
+                                                        epochs_list,
+                                                        cross_val_number=5,
+                                                        X_train_censored=X_train_censored,
+                                                        y_train_censored=y_train_censored,
+                                                        record=RECORD,
+                                                        grid_search_dir=grid_results_folder,
+                                                        beta_for_similarity=beta,
+                                                        censored_mse_fraction_factor=censored_mse_fraction_factor,
+                                                        early_stop_fraction=None
+                                                        )
 
     total_num_of_configs = len(dropout_list) *\
                                len(l2_lambda_list) *\
@@ -167,7 +164,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
     print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
 if __name__ == '__main__':
-    grid_results_folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_best_config'
+    grid_results_folder = r'C:\Users\Bar\Desktop\testing\gvhd_lstm_TS_after_reduction'
     for idx in range(1):
         # for cv in range(5):
         main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')

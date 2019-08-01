@@ -11,11 +11,11 @@ import os
 import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-RECORD = False
+RECORD = True
 USE_SIMILARITY = False
-USE_CENSORED = True
+USE_CENSORED = False
 record_inputs = False
-use_recorded = False
+use_recorded = True
 n_components = 20
 
 
@@ -120,19 +120,23 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
         mse_factor_list = [0.1, 10, 1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
-            mse_factor_list = [1]
             if not use_censored:
+                mse_factor_list = [1]
                 X_train_censored = None
                 y_train_censored = None
 
 
 
-        dropout_list = [0, 0.2, 0.6] #np.arange(0, 0.8, 0.1)
         l2_lambda_list = [1, 20]
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
         number_neurons_per_layer_list = [20, 50]
 
+        l2_lambda_list = [0.01, 0.1, 1]
+        dropout_list = [0.1, 0.2, 0.3] #np.arange(0, 0.8, 0.1)
+        epochs_list = [1000]
+        number_layers_list = [2, 3]
+        number_neurons_per_layer_list = [30, 50]
 
     train_res, test_res  = time_series_analysis_rnn(X, y,
                                                     n_components,
@@ -160,5 +164,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
     print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
 if __name__ == '__main__':
-    grid_results_folder = 'rnn_grid_search_no_censored'
-    main(USE_CENSORED, USE_SIMILARITY, grid_results_folder)
+    grid_results_folder = r'C:\Users\Bar\Desktop\testing\allergy_lstm_naive_after_reduction'
+    for idx in range(1):
+        # for cv in range(5):
+        main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')

@@ -48,9 +48,9 @@ def prepare_data(n_components = 20):
     OtuMf = OtuMfHandler(os.path.join(SCRIPT_DIR, 'saliva_samples_231018.csv'),
                          os.path.join(SCRIPT_DIR,
                                       'saliva_samples_mapping_file_231018.csv'), from_QIIME=True)
-    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=5,
+    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=True, taxnomy_level=5,
                                          preform_taxnomy_group=True)
-    otu_after_pca_wo_taxonomy, _, _ = apply_pca(preproccessed_data, n_components=n_components, visualize=False)
+    otu_after_pca_wo_taxonomy, _, _ = apply_pca(preproccessed_data, n_components=n_components, visualize=True)
 
     ######## Pre process (Remove control group) ########
     OtuMf.mapping_file['DATE_datetime'] = OtuMf.mapping_file['DATE'].apply(get_datetime)

@@ -101,7 +101,7 @@ def roc_auc(y_test, y_score, verbose=False, visualize=False, graph_title='ROC Cu
     return fpr, tpr, thresholds, roc_auc
 
 
-def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, num_of_mixtures=10, ids_list=None, save_folder=None):
+def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, num_of_mixtures=10, ids_list=None, save_folder=None, percentile=1):
     # calc ro for x=all samples values for each bacteria and y=all samples tags
     bacterias = []
     features_by_bacteria = []
@@ -161,8 +161,8 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     # new method - all the items out of the mix range + 1% from the edge of the mix
     # lower_bound = mix_min_rho + (0.01 * mix_rho_range)
     # upper_bound = mix_max_rho - (0.01 * mix_rho_range)
-    upper_bound = np.percentile(mixed_rhos, 99)
-    lower_bound = np.percentile(mixed_rhos, 1)
+    upper_bound = np.percentile(mixed_rhos, 100-percentile)
+    lower_bound = np.percentile(mixed_rhos, percentile)
 
     significant_bacteria_and_rhos = []
     for i, bact in enumerate(bacterias):
@@ -188,10 +188,10 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     plt.ylabel('Number of bacteria')
     plt.legend()
     # print("Real tags_vs_Mixed_tags_at_" + title + "_combined.png")
-    # plt.show()
+    plt.show()
     if save_folder:
         plt.savefig(save_folder + "/Real tags_vs_Mixed_tags_at_" + title + "_combined.png")
-    plt.close()
+    # plt.close()
 
     """
     combined_mixed_rhos = np.array(mixed_rhos)
@@ -242,8 +242,8 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     fig.subplots_adjust(left=left_padding)
     # set_size(5, 5, ax)
     # print("pos_neg_correlation_at_" + title + ".png")
-    # plt.show()
+    plt.show()
     if save_folder:
         plt.savefig(save_folder + "/pos_neg_correlation_at_" + title + ".png")
-    plt.close()
+    # plt.close()
 

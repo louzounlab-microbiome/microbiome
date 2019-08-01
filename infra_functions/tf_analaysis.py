@@ -28,7 +28,7 @@ class nn_model:
             elif type_of_layer == 'dropout':
                 model.add(keras.layers.Dropout(**layer_structure[0]))
             elif type_of_layer == 'lstm':
-                model.add(tf.keras.layers.CuDNNLSTM(**layer_structure[0]))
+                model.add(keras.layers.LSTM(**layer_structure[0]))
 
         self.model = model
 

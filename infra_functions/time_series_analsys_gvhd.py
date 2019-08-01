@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV, LeaveOneOut
 from GVHD_BAR.show_data import calc_results_and_plot
 from GVHD_BAR.calculate_distances import calculate_distance
 import os
-from infra_functions.tf_functions import build_lstm_model, compile_model, my_loss_batch, my_loss, build_fnn_model
+from infra_functions.tf_functions import build_lstm_model, compile_model, my_loss_batch
 
 
 
@@ -298,309 +298,167 @@ def compute_time_for_censored_using_similarity_matrix(not_censored_data,
 
     return censored_data_with_time
 
-def time_series_analysis_tf(X, y,
-                            input_size,
-                            l2_lambda_list,
-                            dropout_list,
-                            mse_factor_list,
-                            number_layers_list,
-                            number_neurons_per_layer_list,
-                            epochs_list,
-                            cross_val_number=5,
-                            X_train_censored=None,
-                            y_train_censored=None,
-                            record=RECORD,
-                            grid_search_dir='grid_search_tf',
-                            beta_for_similarity=None,
-                            censored_mse_fraction_factor=None,
-                            early_stop_fraction=0.02,
-                            min_epochs=10):
-
-    print(f'\nUsing tf analysis\n')
-    stats_of_input = stats_input(y, y_train_censored, verbose=True)
-    train_res, test_res = {}, {}
-
-    total_num_conf = len(l2_lambda_list)\
-                     * len(dropout_list)\
-                     * len(mse_factor_list)\
-                     * len(number_layers_list)\
-                     * len(number_neurons_per_layer_list)\
-                     * len(epochs_list)
-    config_count = 0
-    time_stats = []
-    for l2_lambda in l2_lambda_list:
-        for dropout in dropout_list:
-            for factor in mse_factor_list:
-                for number_layers in number_layers_list:
-                    for number_neurons_per_layer in number_neurons_per_layer_list:
-                        for epochs in epochs_list:
-                            # clear the model
-
-                            y_train_values = []
-                            y_train_predicted_values = []
-
-                            y_test_values = []
-                            y_test_predicted_values = []
-
-                            USE_CROSS_VAL = True
-                            USE_LLO = False
-
-                            if USE_CROSS_VAL:
-                                number_iterations = cross_val_number
-                            elif USE_LLO:
-                                number_iterations = int(len(X))
-
-                            current_configuration = {'l2': l2_lambda, 'dropout': dropout, 'factor': factor, 'epochs': epochs,
-                                                     'number_iterations': number_iterations, 'number_layers': number_layers, 'neurons_per_layer': number_neurons_per_layer}
-
-                            if censored_mse_fraction_factor is not None:
-                                # use mse factor of censored_mse_fraction_factor of the uncensored for the censored samples
-                                y_train_censored['mse_coeff'].loc[y_train_censored[
-                                                                      'mse_coeff'] == 'last_censored'] = factor / censored_mse_fraction_factor
-                                current_configuration.update({'censored_mse_factor': factor / censored_mse_fraction_factor})
-
-                            if beta_for_similarity is not None:
-                                current_configuration.update({'beta_for_similarity': beta_for_similarity})
-
-                            current_configuration_str = '^'.join(
-                                [str(key) + '=' + str(value) for key, value in current_configuration.items()])
-                            print(f'Current config: {current_configuration}')
-
-                            config_count += 1
-                            if config_count % 10 == 1:
-                                start = time.clock()
-
-                            algo_name = 'Neural Network'
-                            test_model = build_fnn_model(number_neurons_per_layer, l2_lambda, input_size, number_layers,
-                                                          dropout)
-                            Wsave = test_model.model.get_weights()
-
-                            print(f'\nConfiguration progress: {str(config_count)}/{total_num_conf} ({round(config_count / (total_num_conf), 3)}%)')
-
-                            for i in range(number_iterations):
-                                # print(Wsave)
-                                test_model.model.set_weights(Wsave)
-                                test_model.compile_nn_model(loss=my_loss, metrics=[my_loss])
-
-                                print(f'CV Iteration number: {str(i + 1)}/{number_iterations}')
-                                if USE_CROSS_VAL:
-                                    y['mse_coeff'] = y['mse_coeff'].astype(float)
-                                    y['mse_coeff'] = factor
-                                    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-                                # elif USE_LLO:
-                                #     X_test = X.iloc[i].to_frame().transpose()
-                                #     y_test = pd.Series(y.iloc[i], [y.index[i]])
-                                #     X_train = X.drop(X.index[i])
-                                #     y_train = y.drop(y.index[i])
-
-                                # add censored
-                                X_train = X_train.append(X_train_censored)
-                                y_train = y_train.append(y_train_censored)
-
-                                # shuffle
-                                idx = np.random.permutation(X_train.index)
-                                X_train = X_train.reindex(idx)
-                                y_train = y_train.reindex(idx)
-
-                                hist = []
-                                loss_best_epoch = None
-                                count = 0
-                                for epoch in range(epochs):
-                                    save_and_break=False
-                                    y_train_values_per_epoch = []
-                                    y_train_predicted_values_per_epoch = []
-                                    y_test_values_per_epoch = []
-                                    y_test_predicted_values_per_epoch = []
-                                    loss_last_epoch = 0
-                                    hist.append(
-                                        test_model.train_model(X_train.values,  y_train.values.astype(np.float), epochs=1, verbose=False,
-                                                               batch_size=10).history)
-                                    # if early_stop_fraction is not None:
-                                    #     loss_last_epoch = hist[-1]['loss'][0]
-                                    #
-                                    #     if loss_best_epoch is None:
-                                    #         loss_best_epoch = loss_last_epoch
-                                    #     else:
-                                    #         early_stop_fraction=0
-                                    #
-                                    #         if loss_last_epoch > loss_best_epoch:
-                                    #             count += 1
-                                    #             print(f'\nloss_best_epoch: {loss_best_epoch}')
-                                    #             print(f'loss_last_epoch: {loss_last_epoch}')
-                                    #             print(f'loss_last_epoch - loss_best_epoch: {loss_last_epoch - loss_best_epoch}')
-                                    #             print(count)
-                                    #         else:
-                                    #             loss_best_epoch = loss_last_epoch
-                                    #             count = 0
-                                    #
-                                    #         if count == min_epochs:
-                                    #             print(f'\n***best epoch number = {epoch + 1 - (count - 1)}')
-                                    #             save_and_break = True
-
-                                            # if loss_last_epoch < 0.995*loss_best_epoch or :
-                                            #     loss_best_epoch = loss_last_epoch
-                                            #     count = 0
-                                            # else:
-                                            #     count += 1
-                                            # if count == 20:
-                                            #     print(f'\n***best epoch number = {epoch + 1 - (count - 1)}')
-                                            #     save_and_break=True
-
-                                    predicted_val = test_model.predict(X_train.values)
-                                    y_train_values_per_epoch.append(y_train.values.astype(np.float))
-                                    y_train_predicted_values_per_epoch.append(predicted_val)
-
-                                    predicted_val = test_model.predict(X_test.values)
-                                    y_test_values_per_epoch.append(y_test.values.astype(np.float))
-                                    y_test_predicted_values_per_epoch.append(predicted_val)
-
-                                    y_train_values_per_epoch = [item for sublist in y_train_values_per_epoch for item in sublist]
-                                    y_train_predicted_values_per_epoch = [item for sublist in y_train_predicted_values_per_epoch for
-                                                                item in sublist]
-
-                                    # remove the -1 values (the ones that are censored)
-                                    tmp = [i for i in zip(y_train_values_per_epoch, y_train_predicted_values_per_epoch) if
-                                           int(i[0][1]) != -1]
-                                    y_train_values_per_epoch = [i[0][1] for i in tmp]
-                                    y_train_predicted_values_per_epoch = [i[1][1] for i in tmp]
-
-                                    y_test_values_per_epoch = [item for sublist in y_test_values_per_epoch for item in sublist]
-                                    y_test_predicted_values_per_epoch = [item for sublist in y_test_predicted_values_per_epoch for item
-                                                               in sublist]
-
-                                    y_test_values_per_epoch = [i[1] for i in y_test_values_per_epoch]
-                                    y_test_predicted_values_per_epoch = [i[1] for i in y_test_predicted_values_per_epoch]
-
-
-
-                                    # y_test_values = [item for sublist in y_test_values for item in sublist]
-                                    # y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
-                                    # y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
-
-                                    current_train_res, current_test_res = calc_results_and_plot(
-                                        y_train_values_per_epoch, y_train_predicted_values_per_epoch,
-                                        y_test_values_per_epoch,
-                                        y_test_predicted_values_per_epoch, algo_name='NeuralNetwork',
-                                        visualize=PLOT,
-                                        title=f'Epochs: {epochs}, Validation iterations: {number_iterations}',
-                                        show=False)
-
-                                    loss_last_epoch = current_train_res['mse']
-
-                                    if loss_best_epoch is None:
-                                        loss_best_epoch = loss_last_epoch
-                                    else:
-                                        print(f'\n epoch = {epoch}')
-                                        print(f'loss_best_epoch: {loss_best_epoch}')
-                                        print(f'loss_last_epoch: {loss_last_epoch}')
-                                        if loss_last_epoch > loss_best_epoch:
-                                            count += 1
-                                            print(count)
-                                        else:
-                                            loss_best_epoch = loss_last_epoch
-                                            count = 0
-
-                                        if count == min_epochs:
-                                            print(f'\n***best epoch number = {epoch - count}')
-                                            save_and_break = True
-
-
-                                    if epoch % 5 == 0 or save_and_break:
-                                        print(f'{100 * epoch / epochs}%')
-                                        if not os.path.exists(os.path.dirname(grid_search_dir)):
-                                            os.mkdir(os.path.dirname(grid_search_dir))
-                                        if not os.path.exists(grid_search_dir):
-                                            os.mkdir(grid_search_dir)
-                                        dir_to_save = os.path.join(grid_search_dir, f'{current_configuration_str}')
-                                        if not os.path.exists(dir_to_save):
-                                            os.mkdir(dir_to_save)
-                                        dir_to_save = os.path.join(dir_to_save, f'cv_{i}')
-                                        if not os.path.exists(dir_to_save):
-                                            os.mkdir(dir_to_save)
-
-                                        np.save(dir_to_save + f'\\y_train_values_epoch_{epoch}.npy',
-                                                y_train_values_per_epoch)
-                                        np.save(dir_to_save + f'\\y_train_predicted_values_epoch_{epoch}.npy',
-                                                y_train_predicted_values_per_epoch)
-                                        np.save(dir_to_save + f'\\y_test_values_epoch_{epoch}.npy',
-                                                y_test_values_per_epoch)
-                                        np.save(dir_to_save + f'\\y_test_predicted_values_epoch_{epoch}.npy',
-                                                y_test_predicted_values_per_epoch)
-
-                                        with open(dir_to_save + '\\' + 'grid_search_results.txt', 'a') as f:
-                                            f.writelines(
-                                                [f'Epoch{epoch}\n Train\n ', str(current_train_res), '\nTest\n ',
-                                                 str(current_test_res),
-                                                 '\n'])
-
-                                    if save_and_break:
-                                        break
-
-
-
-                                    # y_train_predicted_values.append(test_model.predict(X_train.values)[:, 1])
-
-                                predicted_val = test_model.predict(X_train.values)
-                                y_train_values.append(y_train.values.astype(np.float))
-                                y_train_predicted_values.append(predicted_val)
-
-                                predicted_val = test_model.predict(X_test.values)
-                                y_test_values.append(y_test.values.astype(np.float))
-                                y_test_predicted_values.append(predicted_val)
-
-                                # display time stats every 10 configs
-                            if config_count % 10 == 1 or True:
-                                elapsed = time.clock()
-                                elapsed = elapsed - start
-                                print(f'Last Configuration took {elapsed} seconds')
-                                time_stats.append(elapsed)
-                                print(f'\nMean time for measured configurations {sum(time_stats) / len(time_stats)} seconds\n')
-
-                            #### END OF CONFIGURATION OPTION  ####
-                            y_train_values = [item for sublist in y_train_values for item in sublist]
-                            y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
-
-                            # remove the -1 values (the ones that are censored)
-                            tmp = [i for i in zip(y_train_values, y_train_predicted_values) if
-                                   int(i[0][1]) != -1]
-                            y_train_values = [i[0][1] for i in tmp]
-                            y_train_predicted_values = [i[1][1] for i in tmp]
-
-                            y_test_values = [item for sublist in y_test_values for item in sublist]
-                            y_test_predicted_values = [item for sublist in y_test_predicted_values
-                                                                 for item
-                                                                 in sublist]
-
-                            y_test_values = [i[1] for i in y_test_values]
-                            y_test_predicted_values = [i[1] for i in y_test_predicted_values]
-
-                            current_train_res, current_test_res = calc_results_and_plot(y_train_values, y_train_predicted_values,
-                                                                                        y_test_values,
-                                                                                        y_test_predicted_values, algo_name='NeuralNetwork',
-                                                                                        visualize=PLOT,
-                                                                                        title=f'Epochs: {epochs}, Validation iterations: {number_iterations}',
-                                                                                        show=False)
-
-                            # print(current_train_res)
-                            # print(current_test_res)
-                            if record:
-                                record_results(grid_search_dir,
-                                               current_configuration_str,
-                                               y_train_values,
-                                               y_train_predicted_values,
-                                               y_test_values,
-                                               y_test_predicted_values,
-                                               stats_of_input,
-                                               current_train_res,
-                                               current_test_res,
-                                               hist)
-
-                            train_res.update({current_configuration_str: current_train_res})
-                            test_res.update({current_configuration_str: current_test_res})
-
-    return train_res, test_res
-
+# def time_series_analysis_tf(X, y,
+#                             input_size,
+#                             l2_lambda_list,
+#                             dropout_list,
+#                             mse_factor_list,
+#                             number_layers_list,
+#                             number_neurons_per_layer_list,
+#                             epochs_list,
+#                             cross_val_number=5,
+#                             X_train_censored=None,
+#                             y_train_censored=None,
+#                             record=RECORD,
+#                             grid_search_dir='grid_search_tf',
+#                             beta_for_similarity=None,
+#                             censored_mse_fraction_factor=None):
+#
+#     print(f'\nUsing tf analysis\n')
+#     stats_of_input = stats_input(y, y_train_censored, verbose=True)
+#     train_res, test_res = {}, {}
+#
+#     total_num_conf = len(l2_lambda_list)\
+#                      * len(dropout_list)\
+#                      * len(mse_factor_list)\
+#                      * len(number_layers_list)\
+#                      * len(number_neurons_per_layer_list)\
+#                      * len(epochs_list)
+#     config_count = 0
+#     time_stats = []
+#     for l2_lambda in l2_lambda_list:
+#         for dropout in dropout_list:
+#             for factor in mse_factor_list:
+#                 for number_layers in number_layers_list:
+#                     for number_neurons_per_layer in number_neurons_per_layer_list:
+#                         for epochs in epochs_list:
+#                             # clear the model
+#                             K.clear_session()
+#
+#                             y_train_values = []
+#                             y_train_predicted_values = []
+#
+#                             y_test_values = []
+#                             y_test_predicted_values = []
+#
+#                             USE_CROSS_VAL = True
+#                             USE_LLO = False
+#
+#                             if USE_CROSS_VAL:
+#                                 number_iterations = cross_val_number
+#                             elif USE_LLO:
+#                                 number_iterations = int(len(X))
+#
+#                             current_configuration = {'l2': l2_lambda, 'dropout': dropout, 'factor': factor, 'epochs': epochs,
+#                                                      'number_iterations': number_iterations, 'number_layers': number_layers, 'neurons_per_layer': number_neurons_per_layer}
+#
+#                             if censored_mse_fraction_factor is not None:
+#                                 # use mse factor of censored_mse_fraction_factor of the uncensored for the censored samples
+#                                 y_train_censored['mse_coeff'].loc[y_train_censored[
+#                                                                       'mse_coeff'] == 'last_censored'] = factor / censored_mse_fraction_factor
+#                                 current_configuration.update({'censored_mse_factor': factor / censored_mse_fraction_factor})
+#
+#                             if beta_for_similarity is not None:
+#                                 current_configuration.update({'beta_for_similarity': beta_for_similarity})
+#
+#                             current_configuration_str = '^'.join(
+#                                 [str(key) + '=' + str(value) for key, value in current_configuration.items()])
+#                             print(f'Current config: {current_configuration}')
+#
+#                             config_count += 1
+#                             if config_count % 10 == 1:
+#                                 start = time.clock()
+#                             print(f'\nConfiguration progress: {str(config_count)}/{total_num_conf} ({round(config_count / (total_num_conf), 3)}%)')
+#                             for i in range(number_iterations):
+#                                 print(f'CV Iteration number: {str(i + 1)}/{number_iterations}')
+#                                 if USE_CROSS_VAL:
+#                                     y['mse_coeff'] = y['mse_coeff'].astype(float)
+#                                     y['mse_coeff'] = factor
+#                                     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+#
+#                                 elif USE_LLO:
+#                                     X_test = X.iloc[i].to_frame().transpose()
+#                                     y_test = pd.Series(y.iloc[i], [y.index[i]])
+#                                     X_train = X.drop(X.index[i])
+#                                     y_train = y.drop(y.index[i])
+#
+#                                 # add censored
+#                                 X_train = X_train.append(X_train_censored)
+#                                 y_train = y_train.append(y_train_censored)
+#
+#                                 # shuffle
+#                                 idx = np.random.permutation(X_train.index)
+#                                 X_train = X_train.reindex(idx)
+#                                 y_train = y_train.reindex(idx)
+#
+#                                 algo_name = 'Neural Network'
+#
+#                                 test_model = tf_analaysis.nn_model()
+#                                 regularizer = regularizers.l2(l2_lambda)
+#
+#                                 model_structure = [{'units': input_size, 'activation': tf.nn.relu, 'kernel_regularizer': regularizer}]
+#                                 for layer_idx in range(number_layers):
+#                                     model_structure.append({'units': number_neurons_per_layer, 'activation': tf.nn.relu, 'kernel_regularizer': regularizer})
+#                                     model_structure.append(({'rate': dropout}, 'dropout'))
+#
+#                                 model_structure.append({'units': 4, 'kernel_regularizer': regularizer})
+#                                 test_model.build_nn_model(hidden_layer_structure=model_structure)
+#
+#                                 test_model.compile_nn_model(loss=my_loss, metrics=[my_loss])
+#                                 hist = test_model.train_model(X_train.values, y_train.values.astype(np.float), epochs=epochs, verbose=False, batch_size=10)
+#                                 # plt.plot(hist.history['loss'])
+#                                 # test_model.evaluate_model(X_test.values, y_test.values.astype(np.float))
+#
+#                                 y_train_values.append(y_train.values[:, 1])
+#                                 y_train_predicted_values.append(test_model.predict(X_train.values)[:, 1])
+#
+#                                 y_test_values.append(y_test.values[:, 1])
+#                                 y_test_predicted_values.append(test_model.predict(X_test.values)[:, 1])
+#                                 # display time stats every 10 configs
+#                             if config_count % 10 == 1 or True:
+#                                 elapsed = time.clock()
+#                                 elapsed = elapsed - start
+#                                 print(f'Last Configuration took {elapsed} seconds')
+#                                 time_stats.append(elapsed)
+#                                 print(f'\nMean time for measured configurations {sum(time_stats) / len(time_stats)} seconds')
+#                             #### END OF CONFIGURATION OPTION  ####
+#                             y_train_values = [item for sublist in y_train_values for item in sublist]
+#                             y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
+#
+#                             # remove the -1 values (the ones that are censored)
+#                             tmp = [i for i in zip(y_train_values, y_train_predicted_values) if int(i[0]) != -1]
+#                             y_train_values = [i[0] for i in tmp]
+#                             y_train_predicted_values = [i[1] for i in tmp]
+#
+#                             y_test_values = [item for sublist in y_test_values for item in sublist]
+#                             y_test_predicted_values = [item for sublist in y_test_predicted_values for item in sublist]
+#
+#                             current_train_res, current_test_res = calc_results_and_plot(y_train_values, y_train_predicted_values,
+#                                                                                         y_test_values,
+#                                                                                         y_test_predicted_values, algo_name='NeuralNetwork',
+#                                                                                         visualize=PLOT,
+#                                                                                         title=f'Epochs: {epochs}, Validation iterations: {number_iterations}',
+#                                                                                         show=False)
+#
+#                             # print(current_train_res)
+#                             # print(current_test_res)
+#                             if record:
+#                                 record_results(grid_search_dir,
+#                                                current_configuration_str,
+#                                                y_train_values,
+#                                                y_train_predicted_values,
+#                                                y_test_values,
+#                                                y_test_predicted_values,
+#                                                stats_of_input,
+#                                                current_train_res,
+#                                                current_test_res,
+#                                                hist.history)
+#
+#                             train_res.update({current_configuration_str: current_train_res})
+#                             test_res.update({current_configuration_str: current_test_res})
+#
+#     return train_res, test_res
+#
 
 def time_series_analysis_rnn(X, y,
                              input_size,
@@ -714,46 +572,46 @@ def time_series_analysis_rnn(X, y,
 
                                 # name = input("press anykey to continue")
                                 print(f'CV Iteration number: {str(i + 1)}/{number_iterations}')
-                                if USE_CROSS_VAL:
-                                    # to supress the warning about copy...
-                                    y.loc[:, 'mse_coeff'] = y['mse_coeff'].astype(float)
-                                    y['mse_coeff'] = factor
-
-
-                                    # split the data such that a sample is only in one group, or the train or the test
-                                    data_grouped = X.groupby('groupby')
-
-                                    groups = list(data_grouped.groups.keys())
-
-                                    shuffled_idx = list(np.random.permutation(len(groups)))
-                                    X_train = pd.DataFrame()
-                                    min_x_train_len = np.ceil(0.7 * len(X))
-                                    for list_idx, idx in enumerate(shuffled_idx):
-                                        group_name_to_take = groups[idx]
-                                        shuffled_idx.pop(list_idx)
-                                        group_to_take = data_grouped.get_group(group_name_to_take)
-                                        X_train = X_train.append(group_to_take)
-                                        if len(X_train) > min_x_train_len:
-                                            break
-                                    y_train = y.loc[X_train.index]
-
-                                    X_test = pd.DataFrame()
-                                    for list_idx, idx in enumerate(shuffled_idx):
-                                        group_name_to_take = groups[idx]
-                                        shuffled_idx.pop(list_idx)
-                                        group_to_take = data_grouped.get_group(group_name_to_take)
-                                        X_test = X_test.append(group_to_take)
-                                    y_test = y.loc[X_test.index]
-
-
-
+                                # if USE_CROSS_VAL:
+                                #     # to supress the warning about copy...
+                                #     y.loc[:, 'mse_coeff'] = y['mse_coeff'].astype(float)
+                                #     y['mse_coeff'] = factor
+                                #
+                                #
+                                #     # split the data such that a sample is only in one group, or the train or the test
+                                #     data_grouped = X.groupby('groupby')
+                                #
+                                #     groups = list(data_grouped.groups.keys())
+                                #
+                                #     shuffled_idx = list(np.random.permutation(len(groups)))
+                                #     X_train = pd.DataFrame()
+                                #     min_x_train_len = np.ceil(0.7 * len(X))
+                                #     for list_idx, idx in enumerate(shuffled_idx):
+                                #         group_name_to_take = groups[idx]
+                                #         shuffled_idx.pop(list_idx)
+                                #         group_to_take = data_grouped.get_group(group_name_to_take)
+                                #         X_train = X_train.append(group_to_take)
+                                #         if len(X_train) > min_x_train_len:
+                                #             break
+                                #     y_train = y.loc[X_train.index]
+                                #
+                                #     X_test = pd.DataFrame()
+                                #     for list_idx, idx in enumerate(shuffled_idx):
+                                #         group_name_to_take = groups[idx]
+                                #         shuffled_idx.pop(list_idx)
+                                #         group_to_take = data_grouped.get_group(group_name_to_take)
+                                #         X_test = X_test.append(group_to_take)
+                                #     y_test = y.loc[X_test.index]
+                                #
+                                #
+                                #
                                 #
                                 # idx_for_save = '4'
-                                # with open(f'C:\\Users\\Bar\\Desktop\\testing\\inputs_iter_{idx_for_save}.p', 'wb') as f:
+                                # with open(f'C:\\Users\\Bar\\Desktop\\testing\\inputs_iter_{i}.p', 'wb') as f:
                                 #     pickle.dump([X_train, y_train, X_test, y_test], f)
 
-                                # with open(f'C:\\Users\\Bar\\Desktop\\testin_inputs\\inputs_iter_{grid_search_dir[-1]}.p', 'rb') as f:
-                                #     [X_train, y_train, X_test, y_test] = pickle.load(f)
+                                with open(f'C:\\Users\\Bar\\Desktop\\testin_inputs\\gvhd\\inputs_iter_{grid_search_dir[-1]}.p', 'rb') as f:
+                                    [X_train, y_train, X_test, y_test] = pickle.load(f)
 
                                 # add censored
                                 X_train = X_train.append(X_train_censored)
@@ -816,7 +674,6 @@ def time_series_analysis_rnn(X, y,
                                 loss_prev_epoch = None
                                 count = 0
                                 for epoch in range(epochs):
-                                    save_and_break=False
                                     y_train_values_per_epoch = []
                                     y_train_predicted_values_per_epoch = []
                                     y_test_values_per_epoch = []
@@ -826,26 +683,9 @@ def time_series_analysis_rnn(X, y,
                                     for input_sample, target_sample in list(train_samples):
                                         # print(f'\n***Actual epoch number = {epoch+1}')
                                         hist.append(test_model.train_model(input_sample, target_sample, epochs=1, verbose=False, batch_size=batch_size).history)
-
-                                    if True:
-                                        loss_last_epoch = hist[-1]['loss'][0]
-                                        # for input_sample, target_sample in test_samples:
-                                        #     a = test_model.evaluate_model(input_sample, target_sample, verbose=False)
-                                        #     loss_last_epoch += list(a[0].values())[0]
-                                        #     # y_test_predicted_values.append(predicted_val[:, :, 1])
-                                        if loss_best_epoch is None:
-                                            loss_best_epoch = loss_last_epoch
-                                        precentage = 0.02
-                                        if loss_last_epoch < (1 + precentage) * loss_best_epoch and loss_last_epoch > (1 - precentage) * loss_best_epoch:
-                                            count += 1
-                                        else:
-                                            loss_best_epoch = loss_last_epoch
-                                            count = 0
-                                        if count == 15:
-                                            print(f'\n***best epoch number = {epoch + 1 - (count - 1)}')
-                                            save_and_break = True
-
-                                    if epoch % 5 == 0 or save_and_break:
+                                        # loss_last_epoch += hist[-1]['loss'][0]
+                                        # print(f'***\n')
+                                    if epoch%5 ==0:
                                         print(f'{100 * epoch / epochs}%')
                                         train_samples = sample_generator(X_train, y_train)
                                         for input_sample, target_sample in train_samples:
@@ -903,8 +743,32 @@ def time_series_analysis_rnn(X, y,
                                             f.writelines(
                                                 [f'Epoch{epoch}\n Train\n ', str(current_train_res), '\nTest\n ', str(current_test_res),
                                                  '\n'])
-                                    if save_and_break:
-                                        break
+
+
+
+                                    # early stopping mechanisem
+                                    if early_stop_fraction:
+                                        for input_sample, target_sample in test_samples:
+                                            a = test_model.evaluate_model(input_sample, target_sample,verbose=False)
+                                            loss_last_epoch += list(a[0].values())[0]
+                                            # y_test_predicted_values.append(predicted_val[:, :, 1])
+
+
+                                        if loss_prev_epoch is None:
+                                            loss_prev_epoch = loss_last_epoch
+                                        else:
+                                            print(f'{100 * (1 - loss_last_epoch / loss_prev_epoch)}%')
+                                            if 1 - loss_last_epoch/loss_prev_epoch > early_stop_fraction or epoch<min_epochs:
+                                                loss_prev_epoch = loss_last_epoch
+                                                count = 0
+                                            else:
+                                                count += 1
+
+                                            if count == 5:
+                                                print(f'\n***best epoch number = {epoch + 1 - (count-1)}')
+                                                break
+
+
 
                                 # y_train_predicted_values.append(test_model.predict(X_train.values)[:, 1])
                                 train_samples = sample_generator(X_train, y_train)

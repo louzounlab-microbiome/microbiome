@@ -2,7 +2,8 @@ import os
 import matplotlib.pyplot as plt
 import pickle
 import numpy as np
-
+from matplotlib.lines import Line2D
+from shutil import copyfile, rmtree
 use_hist = False
 
 # # grid_search_file = r'C:\Thesis\GVHD_BAR\GridSearch_my_loss_corrected\grid_search_results.txt'
@@ -178,8 +179,11 @@ def calc_result_per_param(different_configs):
         pass
     return configuration_results
 
-def plot_per_param(configuration_results, save=False, plot=True, path=''):
+def plot_per_param\
+                (configuration_results, save=False, plot=True, path='', show_one_only=False):
     for param_key, param_values in configuration_results.items():
+        if not show_one_only and len(param_values) == 1:
+            continue
         fig, axis = plt.subplots(2, len(list(param_values.values())[0].keys())//2)
         fig.suptitle(f'{param_key}', fontsize=16)
 
@@ -220,12 +224,13 @@ def plot_per_param(configuration_results, save=False, plot=True, path=''):
     if plot:
         plt.show()
         plt.tight_layout()
-def calc_stats_for_config(grid_search_folder):
-    different_configs = [os.path.join(grid_search_folder, o) for o in os.listdir(grid_search_folder)
-                         if os.path.isdir(os.path.join(grid_search_folder, o))]
+
+def calc_stats_for_config_new(different_configs):
 
     configuration_stats = {}
     print(f'Total different configs: {len(different_configs)}')
+    all_train_rho = []
+    all_test_rho = []
     for config in different_configs:
         grid_search_file = os.path.join(config, 'grid_search_results.txt')
         hist_file = os.path.join(config, 'hist_res.p')
@@ -242,69 +247,85 @@ def calc_stats_for_config(grid_search_folder):
         total_train_rho = []
 
         count = 0
-        for idx in range(0, int(len(grid_search_data) / 4)):
-            configuration_set = grid_search_data[idx * 4:(idx + 1) * 4]
-            try:
-                current_config = {configuration_set[0][:-1]: eval(configuration_set[1][1:-1])}
-                current_config.update({configuration_set[2][:-1]: eval(configuration_set[3][1:-1])})
-                test_mse = current_config['Test']['mse']
-                train_mse = current_config['Train']['mse']
-                test_rho = current_config['Test']['spearman']
-                train_rho = current_config['Train']['spearman']
-                test_pearson_rho = current_config['Test']['pearson']
-                train_pearson_rho = current_config['Train']['pearson']
+        number_of_runs = int(len(grid_search_data) / 4)
+        if number_of_runs >= 1:
+            for idx in range(0, number_of_runs):
+                configuration_set = grid_search_data[idx * 4:(idx + 1) * 4]
+                try:
+                    current_config = {configuration_set[0][:-1]: eval(configuration_set[1][1:-1])}
+                    current_config.update({configuration_set[2][:-1]: eval(configuration_set[3][1:-1])})
+                    test_mse = current_config['Test']['mse']
+                    train_mse = current_config['Train']['mse']
+                    test_rho = current_config['Test']['spearman']
+                    train_rho = current_config['Train']['spearman']
+                    test_pearson_rho = current_config['Test']['pearson']
+                    train_pearson_rho = current_config['Train']['pearson']
 
-                total_test_rho.append(test_rho)
-                total_test_mse.append(test_mse)
-                total_test_pearson_rho.append(test_pearson_rho)
+                    total_test_rho.append(test_rho)
+                    total_test_mse.append(test_mse)
+                    total_test_pearson_rho.append(test_pearson_rho)
 
-                total_train_rho.append(train_rho)
-                total_train_mse.append(train_mse)
-                total_train_pearson_rho.append(train_pearson_rho)
+                    total_train_rho.append(train_rho)
+                    total_train_mse.append(train_mse)
+                    total_train_pearson_rho.append(train_pearson_rho)
 
-                count += 1
-            except:
-                pass
-            idx += 4
+                    count += 1
 
-        # get_stats_for_array([x['rho'] for x in total_train_rho])
-        configuration_stats[config_name] = {
-            'raw_stats': {'total_train_rho': total_train_rho, 'total_train_mse': total_train_mse,
-                          'total_test_rho': total_test_rho, 'total_test_mse': total_test_mse},
-            'test_rho': {'rho': get_stats_for_array(
-                np.array([x['rho'] for x in total_test_rho])),
-                'pval': get_stats_for_array(
-                    np.array([x['pvalue'] for x in total_test_rho]))},
-            'test_mse': {'mse': get_stats_for_array(np.array(total_test_mse))},
-            'test_pearson_rho': {'rho': get_stats_for_array(
-                np.array([x['rho'] for x in total_test_pearson_rho])),
-                'pval': get_stats_for_array(np.array(
-                    [x['pvalue'] for x in total_test_pearson_rho]))},
+                    all_train_rho.append(train_rho)
+                    all_test_rho.append(test_rho)
 
-            'train_rho': {'rho': get_stats_for_array(np.array([x['rho'] for x in total_train_rho])),
-                          'pval': get_stats_for_array(np.array([x['pvalue'] for x in total_train_rho]))},
-            'train_mse': {'mse': get_stats_for_array(np.array(total_train_mse))},
-            'train_pearson_rho': {'rho': get_stats_for_array(np.array([x['rho'] for x in total_train_pearson_rho])),
-                                  'pval': get_stats_for_array(
-                                      np.array([x['pvalue'] for x in total_train_pearson_rho]))},
-            'hist': hist_file,
-            'Total number of records in config': len(total_test_rho)
-            }
+                except:
+                    pass
+                idx += 4
 
-    return configuration_stats, different_configs
+
+            # get_stats_for_array([x['rho'] for x in total_train_rho])
+            configuration_stats[config_name] = {
+                'raw_stats': {'total_train_rho': total_train_rho, 'total_train_mse': total_train_mse,
+                              'total_test_rho': total_test_rho, 'total_test_mse': total_test_mse},
+                'test_rho': {'rho': get_stats_for_array(
+                    np.array([x['rho'] for x in total_test_rho])),
+                    'pval': get_stats_for_array(
+                        np.array([x['pvalue'] for x in total_test_rho]))},
+                'test_mse': {'mse': get_stats_for_array(np.array(total_test_mse))},
+                'test_pearson_rho': {'rho': get_stats_for_array(
+                    np.array([x['rho'] for x in total_test_pearson_rho])),
+                    'pval': get_stats_for_array(np.array(
+                        [x['pvalue'] for x in total_test_pearson_rho]))},
+
+                'train_rho': {'rho': get_stats_for_array(np.array([x['rho'] for x in total_train_rho])),
+                              'pval': get_stats_for_array(np.array([x['pvalue'] for x in total_train_rho]))},
+                'train_mse': {'mse': get_stats_for_array(np.array(total_train_mse))},
+                'train_pearson_rho': {'rho': get_stats_for_array(np.array([x['rho'] for x in total_train_pearson_rho])),
+                                      'pval': get_stats_for_array(
+                                          np.array([x['pvalue'] for x in total_train_pearson_rho]))},
+                'hist': hist_file,
+                'Total number of records in config': len(total_test_rho)
+                }
+
+    return configuration_stats, different_configs ,all_train_rho, all_test_rho
+
+def calc_stats_for_config(grid_search_folder):
+    different_configs = [os.path.join(grid_search_folder, o) for o in os.listdir(grid_search_folder)
+                         if os.path.isdir(os.path.join(grid_search_folder, o))]
+
+    return calc_stats_for_config_new(different_configs)
 
 
 def find_best_config(configuration_stats):
     best_test_rho = 0
     best_combined_mse = 99999999999
     best_test_mse = 99999999999
-
+    all_train_rho = []
+    all_test_rho = []
     for key, val in configuration_stats.items():
         train_rho = val['train_rho']['rho']['mean']
         train_mse = val['train_mse']['mse']['mean']
 
         test_rho = val['test_rho']['rho']['mean']
         test_mse = val['test_mse']['mse']['mean']
+
+
 
         if test_rho > best_test_rho:
             best_test_rho = test_rho
@@ -331,12 +352,12 @@ def find_best_config(configuration_stats):
         'best_combined_mse_config': {'name': best_combined_mse_config,
                                      'stats': configuration_stats[best_combined_mse_config]}}
 
-    return best_configs
+    return best_configs#, all_train_rho, all_test_rho
 
 
 def main(grid_search_folder):
     print(f'Analyzing {grid_search_folder}')
-    configuration_stats, different_configs = calc_stats_for_config(grid_search_folder)
+    configuration_stats, different_configs, all_train_rho, all_test_rho = calc_stats_for_config(grid_search_folder)
     best_configs = find_best_config(configuration_stats)
 
     ## use history... currently not using it...
@@ -348,6 +369,119 @@ def main(grid_search_folder):
     print(a)
     b= f'Number of configurations: {len(different_configs)}'
     b+='\n'+a
+
+
+    if True:
+        legend={'blue': [False,20], 'red': [False, 1000],  'green': [False, 100], 'orange': [False, 80],'black':[False, 300] ,'purple': [False, '']}
+        fig, ax = plt.subplots()
+        fig2, ax2 = plt.subplots()
+        fig3, ax3 = plt.subplots()
+        fig4, ax4 = plt.subplots()
+        fig5, ax5 = plt.subplots()
+        fig6, ax6 = plt.subplots()
+
+        # ax[0].hist([x['rho'] for x in all_train_rho], bins=100)
+        # ax[1].hist([x['rho'] for x in all_test_rho], bins=100)
+
+        all_train_rho_centered = []
+        all_test_rho_centered = []
+        for key, value in configuration_stats.items():
+            if 'epochs=20^' in key:
+                color_to_use='blue'
+
+            elif 'epochs=100^' in key:
+                color_to_use='green'
+            elif 'epochs=1000^' in key:
+                color_to_use='red'
+            elif 'epochs=80^' in key:
+                color_to_use = 'orange'
+            elif 'epochs=300^' in key:
+                color_to_use = 'black'
+            else:
+                color_to_use='purple'
+                # print(key)
+            legend[color_to_use][0]=True
+
+            mean_train_value = value['train_rho']['rho']['mean']
+            mean_test_value = value['test_rho']['rho']['mean']
+            std_test_value = value['test_rho']['rho']['std']
+            mse_mean_test_value = value['test_mse']['mse']['mean']
+            mse_std_test_value = value['test_mse']['mse']['std']
+            ax3.scatter(mse_mean_test_value, mean_test_value,color=color_to_use)
+            ax3.set_xlabel('mean mse')
+            ax3.set_ylabel('mean rho')
+            ax3.set_title('Test - mean rho vs mean mse')
+
+
+
+            ax4.scatter(mse_mean_test_value, mse_std_test_value,color=color_to_use)
+            ax4.set_xlabel('mean')
+            ax4.set_ylabel('std')
+            ax4.set_title('Test - MSE std vs mean MSE')
+
+            ax.scatter(mean_test_value, std_test_value,color=color_to_use)
+
+            mean_test_value = value['train_rho']['rho']['mean']
+            std_test_value = value['train_rho']['rho']['std']
+            ax2.scatter(mean_test_value, std_test_value, color=color_to_use)
+
+            test_rho_values = [x['rho']for x in value['raw_stats']['total_test_rho']]
+            #
+            # all_test_rho_centered = [x-mean_test_value for x in test_rho_values]
+            #
+            # mean_train_value = value['train_rho']['rho']['mean']
+            train_rho_values = [x['rho'] for x in value['raw_stats']['total_train_rho']]
+
+            ax5.scatter(test_rho_values, train_rho_values, color=color_to_use)
+            ax5.set_xlabel('test rho')
+            ax5.set_ylabel('train rho')
+            ax5.set_title('test rho vs train rho')
+
+            # all_train_rho_centered = [x-mean_train_value for x in train_rho_values]
+            #
+            # fig, ax = plt.subplots(2)
+            # fig.suptitle('RHO')
+            # ax[0].hist(train_rho_values, bins=100)
+            # ax[1].hist(test_rho_values, bins=100)
+            #
+            # fig, ax = plt.subplots(2)
+            # fig.suptitle('RHO-<RHO>')
+            # ax[0].hist(all_train_rho_centered, bins=100)
+            # ax[1].hist(all_test_rho_centered, bins=100)
+
+            mean_test_value_pearson = value['test_pearson_rho']['rho']['mean']
+            ax6.scatter(mse_mean_test_value, mean_test_value_pearson,color=color_to_use)
+            ax6.set_xlabel('mean mse')
+            ax6.set_ylabel('mean pearson rho')
+            ax6.set_title('Test - mean pearson rho vs mean mse')
+
+        legend_elements = []
+
+        def add_legend(legend_elements, color):
+            if legend[color][0]:
+                legend_elements.append(Line2D([0], [0], marker='o', color='w', label=legend[color][1],
+                                              markerfacecolor=color, markersize=7))
+            return legend_elements
+
+        legend_elements=add_legend(legend_elements,'blue')
+        legend_elements=add_legend(legend_elements,'green')
+        legend_elements=add_legend(legend_elements,'red')
+        legend_elements=add_legend(legend_elements,'orange')
+        legend_elements=add_legend(legend_elements,'black')
+        legend_elements=add_legend(legend_elements,'purple')
+
+        ax.set_xlabel('mean')
+        ax.set_ylabel('std')
+        ax.set_title('Test - std rho vs mean rho')
+        ax.legend(handles=legend_elements)
+        ax2.set_xlabel('mean')
+        ax2.set_ylabel('std')
+        ax2.set_title('Train - std rho vs mean rho')
+        ax2.legend(handles=legend_elements)
+        ax3.legend(handles=legend_elements)
+        ax4.legend(handles=legend_elements)
+
+    plt.show()
     return b
 
 
@@ -434,53 +568,108 @@ def plot_and_save(path, save=True, plot=False):
 
 if __name__ == '__main__':
     grid_search_folder=[]
-    ### allergy ###
-    #RNN#
-    grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\lstm_naive\allergy_multi_grid_rnn_wo_censor_wo_similiarity')
-    grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_rnn_with_censored_without_similiarity_less_params')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_rnn_with_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_rnn_wo_censor_wo_similiarity')
-    # #FNN#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_tf_wo_censor_wo_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_tf_with_censored_without_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\allergy_multi_grid_tf_with_similiarity')
-    # # naive#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\allergy_multi_grid_xgboost_without_similiarity')
-    # # similiarity#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\allergy_multi_grid_xgboost_with_similiarity')
 
-    ### GVHD ###
-    #RNN#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_rnn_with_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\lstm_naive\gvhd_multi_grid_rnn_wo_censor_wo_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\\gvhd_multi_grid_rnn_with_censored_without_similiarity_less_params')
 
-    # #FNN#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_tf_wo_censor_wo_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_tf_with_censored_without_similiarity')
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\reports_new\gvhd_multi_grid_tf_with_similiarity')
-    # # # naive#
+###########FNN#######
+    grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\GVHD_FNN_AGAIN')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\alergy_FNN_Again')
+
+    # # # # naive#
     # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_xgboost_without_similiarity')
-    # # similiarity#
+    # # # similiarity#
     # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_xgboost_with_similiarity')
 
-    save = False
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\gvhd_lstm_naive_iter_0')
+
+
+    ### combine all the runs into one run for calculations ###
+    combined_folder = os.path.join(grid_search_folder[0],'combined_folder')
+    if os.path.exists(combined_folder):
+        rmtree(combined_folder)
+        import time
+        time.sleep(1)
+    os.mkdir(combined_folder)
     for folder in grid_search_folder:
-        tmp = main(folder)
-        # if save:
-        #     folder_to_save = os.path.join('C:\\','ParameterChoosing')
-        #     if not os.path.exists(folder_to_save):
-        #         os.mkdir(folder_to_save)
-        #
-        #     folder_to_save = os.path.join(folder_to_save,os.path.basename(folder) )
-        #     if not os.path.exists(folder_to_save):
-        #         os.mkdir(folder_to_save)
-        #
-        #     with open(os.path.join(folder_to_save,'Best_config.txt'),'w') as f:
-        #         f.writelines(tmp)
-        # plot_and_save(folder, plot=True)
-    # different_configs = filter_configs(grid_search_folder, filter_dict={'l2': [1], 'dropout': [0.6], 'number_layers':[2,3]})
-    # configuration_results = calc_result_per_param(different_configs)
-    # plot_per_param(configuration_results)
+        run_dirs = os.listdir(folder)
+        run_dirs = [x for x in run_dirs if x != 'combined_folder' and '^' not in x]
+        for run_dir in run_dirs:
+            configs = (filter_configs(os.path.join(folder,run_dir)))
+            for config in configs:
+                folder_to_save = os.path.join(combined_folder, os.path.basename(config))
+                if not os.path.exists(folder_to_save):
+                    os.mkdir(folder_to_save)
+                    copyfile(os.path.join(config,'grid_search_results.txt'), os.path.join(folder_to_save,'grid_search_results.txt'))
+                else:
+                    with open(os.path.join(config,'grid_search_results.txt'), 'r') as f:
+                        current_run_config_result = f.readlines()
+                    with open(os.path.join(folder_to_save,'grid_search_results.txt'),'a') as f:
+                        for line in current_run_config_result:
+                            f.writelines(line)
+
+
+    # GVHD FNN #
+    different_configs = filter_configs(combined_folder,filter_dict={'l2': [1], 'dropout': [0.2], 'number_layers': [2],  'neurons_per_layer': [50]})
+
+    # Allergy FNN #
+    # different_configs = filter_configs(combined_folder,filter_dict={'l2': [20], 'dropout': [0.6], 'number_layers': [1], 'neurons_per_layer': [20]})
+
+    configuration_results = calc_result_per_param(different_configs)
+
+    # save = True
+    # for folder in grid_search_folder:
+    #     tmp = main(folder)
+    #     if save:
+    #         folder_to_save = os.path.join('C:\\','ParameterChoosing')
+    #         if not os.path.exists(folder_to_save):
+    #             os.mkdir(folder_to_save)
     #
-    # plt.show()
+    #         folder_to_save = os.path.join(folder_to_save,os.path.basename(folder) )
+    #         if not os.path.exists(folder_to_save):
+    #             os.mkdir(folder_to_save)
+    #
+    #         with open(os.path.join(folder_to_save,'Best_config.txt'),'w') as f:
+    #             f.writelines(tmp)
+    #     # plot_and_save(folder, plot=False)
+    # # different_configs = filter_configs(folder, filter_dict={'l2': [1], 'number_layers':[1], 'dropout': [0.2]})
+    #
+    # ########## FNN + Early Stop ##############
+    #     # GVHD #
+    #         # FNN #
+    # # different_configs = filter_configs(folder, filter_dict={'l2': [1], 'dropout': [0.2], 'neurons_per_layer': [50], 'number_layers': [2]})
+    #         # FNN + TS #
+    # different_configs = filter_configs(combined_folder, filter_dict={'l2': [1], 'factor': [100], 'neurons_per_layer': [50], 'dropout': [0.6], 'number_layers': [3]})
+    #
+    # #C:\Users\Bar\Desktop\testing\gvhd_FNN_again_iter_0\l2=1^dropout=0.2^factor=1^epochs=1000^number_iterations=5^number_layers=2^neurons_per_layer=50#
+    # # , filter_dict = {'dropout': [0.6], 'factor': [10], 'neurons_per_layer': [50], 'l2': [100], 'number_layers': [2]
+    # ########## END FNN + Early Stop ##############
+    #
+    #
+    #
+    #
+    #
+    # # #  GVHD + RNN
+    # # # different_configs = filter_configs(folder, filter_dict={'neurons_per_layer': [10],   'dropout': [0.2], 'l2': [0.1]})
+    # #
+    # # #  GVHD + RNN + TS
+    # # # different_configs = filter_configs(folder, filter_dict={'factor': [100], 'neurons_per_layer': [10], 'dropout': [0.2], 'l2': [1]})
+    # #
+    # # #  GVHD + RNN + TS + SIM
+    # # different_configs = filter_configs(folder,filter_dict={'factor': [100], 'l2': [1], 'neurons_per_layer': [10], 'dropout': [0.3], 'beta_for_similarity': [10]})
+    # #
+    # # #  Allergy + RNN
+    # # # different_configs = filter_configs(folder, filter_dict={'l2': [0.1], 'neurons_per_layer': [30], 'dropout': [0.3], 'number_layers': [3]})
+    # #
+    # # #  Allergy + RNN + TS
+    # # # different_configs = filter_configs(folder, filter_dict={'factor': [100], 'dropout': [0.2],  'neurons_per_layer': [30],  'number_layers': [2], 'l2': [0.01]})
+    # #
+    # # #  Allergy + RNN + TS + SIM
+    # # # different_configs = filter_configs(folder)
+    #
+    # configuration_results = calc_result_per_param(different_configs)
+    #
+    # configuration_results = calc_result_per_param(different_configs)
+    plot_per_param(configuration_results, show_one_only=True)
+    # #
+    plt.show()
+    config_stats = calc_stats_for_config_new(different_configs)
+    print_recursive(config_stats[0])

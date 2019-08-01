@@ -13,7 +13,7 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 RECORD = True
 USE_SIMILARITY = False
-USE_CENSORED = False
+USE_CENSORED = True
 record_inputs = False
 use_recorded = True
 n_components = 20
@@ -131,17 +131,13 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
         dropout_list = [0, 0.2, 0.6] #np.arange(0, 0.8, 0.1)
         l2_lambda_list = [1, 10, 20, 100]
+        l2_lambda_list = [20, 100]
+
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
         number_neurons_per_layer_list = [20, 50]
         epochs_list = [1000]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
 
-
-        best_config = 'l2=1^dropout=0.2^factor=1^epochs=1000^number_iterations=5^number_layers=1^neurons_per_layer=20'
-        l2_lambda_list = [1]
-        dropout_list = [0.2]
-        number_layers_list = [2]
-        number_neurons_per_layer_list = [50]
 
         train_res, test_res  = time_series_analysis_tf(X, y,
                                                        n_components,
@@ -151,13 +147,15 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                        number_layers_list,
                                                        number_neurons_per_layer_list,
                                                        epochs_list,
-                                                       cross_val_number=10,
+                                                       cross_val_number=5,
                                                        X_train_censored=X_train_censored,
                                                        y_train_censored=y_train_censored,
                                                        record=RECORD,
                                                        grid_search_dir=grid_results_folder,
                                                        beta_for_similarity=beta,
-                                                       censored_mse_fraction_factor=censored_mse_fraction_factor)
+                                                       censored_mse_fraction_factor=censored_mse_fraction_factor,
+                                                       early_stop_fraction=0.005,
+                                                       min_epochs=10)
 
     total_num_of_configs = len(dropout_list) *\
                                len(l2_lambda_list) *\
@@ -167,7 +165,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
     print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
 if __name__ == '__main__':
-    grid_results_folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_best_config'
+    grid_results_folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_TS_again_new'
     for idx in range(1):
         # for cv in range(5):
         main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')
