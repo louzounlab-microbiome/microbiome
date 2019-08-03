@@ -128,7 +128,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
         dropout_list = [0, 0.2, 0.6] #np.arange(0, 0.8, 0.1)
         l2_lambda_list = [1, 10, 20, 100]
-        l2_lambda_list = [10, 20, 100]
+        # l2_lambda_list = [10, 20, 100]
 
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
@@ -161,6 +161,6 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
 if __name__ == '__main__':
     grid_results_folder = r'C:\Users\Bar\Desktop\testing\allergy_FNN_TS_SIM_again_new'
-    for idx in range(1):
+    for idx in range(3):
         # for cv in range(5):
         main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')

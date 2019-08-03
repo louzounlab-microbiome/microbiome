@@ -119,7 +119,7 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
         epochs_list = [20, 80]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
         mse_factor_list = [0.1, 1, 10, 100, 1000] # np.arange(0.005, 1, 0.005)
-        mse_factor_list = [1000] # np.arange(0.005, 1, 0.005)
+        # mse_factor_list = [1000] # np.arange(0.005, 1, 0.005)
 
         if not use_similarity:
             # mse_factor_list = [1]
@@ -131,13 +131,20 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
 
 
         dropout_list = [0, 0.2, 0.6] #np.arange(0, 0.8, 0.1)
-        dropout_list = [0.6] #np.arange(0, 0.8, 0.1)
+        # dropout_list = [0.6] #np.arange(0, 0.8, 0.1)
         l2_lambda_list = [1, 10, 20, 100]
         #np.logspace(0, 2, 5) #  0.01, 0.1, 1, 10, 100
         number_layers_list = [1, 2, 3]
         number_neurons_per_layer_list = [20, 50]
         epochs_list = [1000]#[10, 50, 100] #list(range(10,100,20)) + list(range(100,200,30))
 
+        total_num_of_configs = len(betas_list) * \
+                               len(mse_factor_list) * \
+                               len(dropout_list) * \
+                               len(l2_lambda_list) * \
+                               len(number_layers_list) * \
+                               len(number_neurons_per_layer_list)
+        print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
         train_res, test_res  = time_series_analysis_tf(X, y,
                                                        n_components,
@@ -157,15 +164,9 @@ def main(use_censored=USE_CENSORED, use_similarity=USE_SIMILARITY, grid_results_
                                                        early_stop_fraction=0.005,
                                                        min_epochs=10)
 
-    total_num_of_configs = len(dropout_list) *\
-                               len(l2_lambda_list) *\
-                               len(number_layers_list) *\
-                               len(number_neurons_per_layer_list) *\
-                               len(betas_list)
-    print(f'Total number of configuration that were checked: {total_num_of_configs}')
 
 if __name__ == '__main__':
     grid_results_folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_TS_SIM_again_new'
-    for idx in range(1):
+    for idx in range(3):
         # for cv in range(5):
         main(USE_CENSORED, USE_SIMILARITY, f'{grid_results_folder}_iter_{idx}')
