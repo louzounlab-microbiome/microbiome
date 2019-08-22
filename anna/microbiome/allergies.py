@@ -11,8 +11,8 @@ from xgboost import XGBClassifier
 from sklearn import metrics
 
 def allergies(perform_distance=False,level =3):
-    otu = 'C:/Users/Anna/Documents/allergy_otu.csv'
-    mapping = 'C:/Users/Anna/Documents/allergy_mf.csv'
+    otu = 'allergy_otu.csv'
+    mapping = 'allergy_mf.csv'
     OtuMf = OtuMfHandler(otu, mapping, from_QIIME=False)
     preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=7)
     preproccessed_data = preproccessed_data.join(OtuMf.mapping_file[['AllergyType', 'SuccessDescription']],
@@ -22,7 +22,6 @@ def allergies(perform_distance=False,level =3):
     mapping_file = OtuMf.mapping_file.loc[(OtuMf.mapping_file['AllergyType']  == 'Milk') | (OtuMf.mapping_file['AllergyType']  == 'Peanut')]
     mapping_disease = {'Milk': 1, 'Peanut': 0}
     mapping_file['AllergyType'] = mapping_file['AllergyType'].map(mapping_disease)
-    mapping_disease = {'Milk': 1, 'Peanut': 0}
     mapping_file = mapping_file['AllergyType']
 
     if perform_distance:
@@ -65,50 +64,50 @@ def allergies(perform_distance=False,level =3):
         return preproccessed_data, mapping_file
     #print('done')
 
-df, mapping_file = allergies(perform_distance=False,level =3)
-#visualize_pca(df)
-otu_after_pca, _ = apply_pca(df, n_components=30)
-merged_data = otu_after_pca.join(mapping_file)
-
-X = merged_data.drop(['AllergyType'], axis =1)
-y = merged_data['AllergyType']
-loo = LeaveOneOut()
-
-csvfile = 'C:/Users/Anna/Documents/allergies_xgboost.csv'
-headers = ['ms', 'ne', 'learning rate', 'regularization', 'auc test', 'auc train']
-with open(csvfile, "w") as output:
-    writer = csv.writer(output, delimiter=',', lineterminator='\n')
-    writer.writerow(headers)
-for md in range(3,5):
-      for ne in range (100,350,50):
-           for lr in range (15, 20, 5):
-               for rg in range(250,600,50):
-                    accuracy = []
-                    y_pred_list = []
-                    auc = []
-                    auc_train = []
-                    for train_index, test_index in loo.split(X):
-                        train_index=list(train_index)
-                        #print("%s %s" % (train_index, test_index))
-                        X_train, X_test = X.iloc[train_index,:], X.iloc[test_index,:]
-                        y_train, y_test = y[train_index], y[test_index]
-                        model = XGBClassifier(max_depth=md,n_estimators = ne ,learning_rate = lr/100,  #objective='multi:softmax' )
-                                              objective= 'binary:logistic',
-                                              reg_lambda = rg)
-                        model.fit(X_train, y_train)
-                        #y_pred = model.predict(X_test)
-                        pred_train = model.predict_proba(X_train)[:, 1]
-                        auc_train.append(metrics.roc_auc_score(y_train, pred_train))
-                        y_pred = model.predict_proba(X_test)[:,1]
-                        y_pred_list.append(y_pred)
-                    try:
-                        auc = metrics.roc_auc_score(y, y_pred_list)
-                    except:
-                        pass
-                    with open(csvfile, "a") as output:
-                         writer = csv.writer(output, delimiter=',', lineterminator='\n')
-                         writer.writerow([md, ne, lr, rg, round(auc, 2), round(sum(auc_train) / len(auc_train), 2)])
-                    print(md, ne, lr, rg, round(auc, 2), round(sum(auc_train) / len(auc_train), 2))
-
-
-
+# df, mapping_file = allergies(perform_distance=False,level =3)
+# #visualize_pca(df)
+# otu_after_pca, _ = apply_pca(df, n_components=30)
+# merged_data = otu_after_pca.join(mapping_file)
+#
+# X = merged_data.drop(['AllergyType'], axis =1)
+# y = merged_data['AllergyType']
+# loo = LeaveOneOut()
+#
+# # csvfile = 'C:/Users/Anna/Documents/allergies_xgboost.csv'
+# # headers = ['ms', 'ne', 'learning rate', 'regularization', 'auc test', 'auc train']
+# # with open(csvfile, "w") as output:
+# #     writer = csv.writer(output, delimiter=',', lineterminator='\n')
+# #     writer.writerow(headers)
+# for md in range(3,5):
+#       for ne in range (100,350,50):
+#            for lr in range (15, 20, 5):
+#                for rg in range(250,800,50):
+#                     accuracy = []
+#                     y_pred_list = []
+#                     auc = []
+#                     auc_train = []
+#                     for train_index, test_index in loo.split(X):
+#                         train_index=list(train_index)
+#                         #print("%s %s" % (train_index, test_index))
+#                         X_train, X_test = X.iloc[train_index,:], X.iloc[test_index,:]
+#                         y_train, y_test = y[train_index], y[test_index]
+#                         model = XGBClassifier(max_depth=md,n_estimators = ne ,learning_rate = lr/100,  #objective='multi:softmax' )
+#                                               objective= 'binary:logistic',
+#                                               reg_lambda = rg)
+#                         model.fit(X_train, y_train)
+#                         #y_pred = model.predict(X_test)
+#                         pred_train = model.predict_proba(X_train)[:, 1]
+#                         auc_train.append(metrics.roc_auc_score(y_train, pred_train))
+#                         y_pred = model.predict_proba(X_test)[:,1]
+#                         y_pred_list.append(y_pred)
+#                     try:
+#                         auc = metrics.roc_auc_score(y, y_pred_list)
+#                     except:
+#                         pass
+#                     #with open(csvfile, "a") as output:
+#                     #     writer = csv.writer(output, delimiter=',', lineterminator='\n')
+#                     #     writer.writerow([md, ne, lr, rg, round(auc, 2), round(sum(auc_train) / len(auc_train), 2)])
+#                     print(md, ne, lr, rg, round(auc, 2), round(sum(auc_train) / len(auc_train), 2))
+#
+#
+#
