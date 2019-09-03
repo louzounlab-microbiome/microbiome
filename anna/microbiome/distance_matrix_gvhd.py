@@ -7,8 +7,8 @@ from sklearn import metrics
 from sklearn.metrics import recall_score, precision_score
 from sklearn.model_selection import train_test_split, RepeatedStratifiedKFold,LeaveOneOut
 from xgboost import XGBClassifier
-
-df, mapping_file = gvhd(perform_distance=False,level =5)
+level =3
+df, mapping_file, dict_bact, taxonomy = gvhd(perform_distance=True,level =level)
 cols = [col for col in df.columns if len(df[col].unique()) != 1]
 dist_mat = pd.DataFrame(columns = cols, index = cols)
 df = df[cols]
@@ -28,12 +28,35 @@ def allergies_distance_matrix(distance = 'spearman', clustering='spectral'):
     clustering.fit(dist_mat.values)
     bact_label1 =[]
     bact_label0 =[]
+    bact_label = {0: [], 1: []}
+
     for i in range(0,df.shape[1]):
         if clustering.labels_[i]==1:
             bact_label1.append(df.columns[i])
         else:
             bact_label0.append(df.columns[i])
-
+    bact_label_name = {0: [], 1: []}
+    bact_label_tmp = {0: [], 1: []}
+    bact_level = level-1
+    for k in [0, 1]:
+        for i in bact_label[k]:
+            for key, value in dict_bact.items():
+                for j in value:
+                    if i == j:
+                        bact_label_tmp[k].append(key)
+        bact_label_tmp[k] = set(bact_label_tmp[k])
+        for i in bact_label_tmp[k]:
+            if i != 'else':
+                for j in taxonomy:
+                    try:
+                        if j.split(';')[bact_level] == i:
+                            bact_label_name[k].append(','.join(j.split(';')[0:bact_level+1]))
+                            break
+                    except:
+                        continue
+            else:
+                bact_label_name[k].append('else')
+        bact_label_name[k] = set(bact_label_name[k])
     df1 = df[bact_label1]
     df0 = df[bact_label0]
     pca = PCA(n_components=min(round(df0.shape[1] / 2) + 1, df0.shape[0]))
@@ -67,12 +90,21 @@ def allergies_distance_matrix(distance = 'spearman', clustering='spectral'):
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         y_pred_list.append(y_pred)
+    y_pred_train = model.predict(X_train)
+    print('Train Precision: ' + str(round(precision_score(y_train, y_pred_train), 2)))
+    print('Train Recall: ' + str(round(recall_score(y_train, y_pred_train), 2)))
+
+    cnf_matrix = metrics.confusion_matrix(y_train, y_pred_train)
+    class_names = ['Control', 'GVHD']
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=list(class_names), normalize=True,
+                          title='Normalized confusion matrix')
+    plt.show()
 
     print( 'Precision: ' + str(round(precision_score(y,y_pred_list),2)))
     print( 'Recall: ' + str(round(recall_score(y, y_pred_list),2)))
 
     cnf_matrix = metrics.confusion_matrix(y,y_pred_list)
-    class_names = ['Healthy', 'GVHD']
     # # Plot normalized confusion matrix
     plt.figure()
     plot_confusion_matrix(cnf_matrix, classes=list(class_names), normalize=True,
@@ -110,20 +142,34 @@ def allergies_distance_matrix(distance = 'spearman', clustering='spectral'):
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         y_pred_list.append(y_pred)
-    print( 'Precision: ' + str(round(precision_score(y,y_pred_list),2)))
-    print( 'Recall: ' + str(round(recall_score(y, y_pred_list),2)))
-    cnf_matrix = metrics.confusion_matrix(y,y_pred_list)
-    class_names = ['Healthy', 'GVHD']
+
+    y_pred_train = model.predict(X_train)
+    print('Train Precision: ' + str(round(precision_score(y_train, y_pred_train), 2)))
+    print('Train Recall: ' + str(round(recall_score(y_train, y_pred_train), 2)))
+
+    cnf_matrix = metrics.confusion_matrix(y_train, y_pred_train)
+    class_names = ['Control', 'GVHD']
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=list(class_names), normalize=True,
+                          title='Normalized confusion matrix')
+    plt.show()
+
+    print('Precision: ' + str(round(precision_score(y, y_pred_list), 2)))
+    print('Recall: ' + str(round(recall_score(y, y_pred_list), 2)))
+
+    cnf_matrix = metrics.confusion_matrix(y, y_pred_list)
     # # Plot normalized confusion matrix
     plt.figure()
     plot_confusion_matrix(cnf_matrix, classes=list(class_names), normalize=True,
-                             title='Normalized confusion matrix')
+                          title='Normalized confusion matrix')
     plt.show()
 
-for distance in ['spearman', 'euclidean']:
-#distance = 'spearman'
-    for clustering in ['spectral', 'hierarchical']:
-        print ( '####' + str(distance) + '#####' + str(clustering))
-        allergies_distance_matrix(distance=distance, clustering=clustering)
+
+distance = 'spearman'
+clustering  = 'spectral'
+#for clustering in ['spectral', 'hierarchical']:
+#    for distance in ['spearman', 'euclidean']:
+print ( '####' + str(distance) + '#####' + str(clustering))
+allergies_distance_matrix(distance=distance, clustering=clustering)
 
 

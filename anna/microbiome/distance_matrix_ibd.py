@@ -8,8 +8,8 @@ from sklearn.metrics import recall_score, precision_score
 
 from sklearn.model_selection import train_test_split, RepeatedStratifiedKFold,LeaveOneOut
 from xgboost import XGBClassifier
-
-df, mapping_file = ibd(perform_distance=False,level =4)
+level =5
+df, mapping_file, dict_bact, taxonomy = ibd(perform_distance=True,level =level)
 cols = [col for col in df.columns if len(df[col].unique()) != 1]
 dist_mat = pd.DataFrame(columns = cols, index = cols)
 df = df[cols]
@@ -47,15 +47,25 @@ def pca_and_conf_matrix_per_group(df):
         y_pred = model.predict(X_test)
         y_pred_list.append(y_pred)
 
-    print('Precision: ' + str(round(precision_score(y, y_pred_list), 2)))
-    print('Recall: ' + str(round(recall_score(y, y_pred_list), 2)))
+    y_pred_train = model.predict(X_train)
+    print('Train Precision: ' + str(round(precision_score(y_train, y_pred_train), 2)))
+    print('Train Recall: ' + str(round(recall_score(y_train, y_pred_train), 2)))
 
-    cnf_matrix = metrics.confusion_matrix(y, y_pred_list)
+    cnf_matrix = metrics.confusion_matrix(y_train, y_pred_train)
     class_names = ['UC', 'CD']
     # # Plot normalized confusion matrix
     plt.figure()
     plot_confusion_matrix(cnf_matrix, classes=list(class_names), normalize=True,
-                          title='Normalized confusion matrix')
+                          title='Normalized confusion matrix(train)')
+    plt.show()
+
+    print('Precision: ' + str(round(precision_score(y, y_pred_list), 2)))
+    print('Recall: ' + str(round(recall_score(y, y_pred_list), 2)))
+
+    cnf_matrix = metrics.confusion_matrix(y, y_pred_list)
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=list(class_names), normalize=True,
+                          title='Normalized confusion matrix(test)')
     plt.show()
 
 def ibd_distance_matrix(distance = 'spearman', clustering='spectral'):
@@ -78,13 +88,38 @@ def ibd_distance_matrix(distance = 'spearman', clustering='spectral'):
     for i in range(0,df.shape[1]):
         bact_label[clustering.labels_[i]].append(df.columns[i])
 
+    bact_label_name = {0: [], 1: []}
+    bact_label_tmp = {0: [], 1: []}
+    bact_level = level-1
+    for k in [0, 1]:
+        for i in bact_label[k]:
+            for key, value in dict_bact.items():
+                for j in value:
+                    if i == j:
+                        bact_label_tmp[k].append(key)
+        bact_label_tmp[k] = set(bact_label_tmp[k])
+        for i in bact_label_tmp[k]:
+            if i != 'else':
+                for j in taxonomy:
+                    try:
+                        if j.split(';')[bact_level] == i:
+                            bact_label_name[k].append(','.join(j.split(';')[0:bact_level+1]))
+                            break
+                    except:
+                        continue
+            else:
+                bact_label_name[k].append('else')
+        bact_label_name[k] = set(bact_label_name[k])
     df0 = df[bact_label[0]]
     df1 = df[bact_label[1]]
 
+    print(len(bact_label[0]))
     pca_and_conf_matrix_per_group(df0)
+    print(len(bact_label[1]))
     pca_and_conf_matrix_per_group(df1)
 
-for distance in ['spearman', 'euclidean']:
-    for clustering in ['spectral', 'hierarchical']:
+#ibd_distance_matrix(distance='spearman', clustering='spectral')
+for clustering in ['spectral', 'hierarchical']:
+   for distance in ['spearman', 'euclidean']:
         print('####' + str(distance) + '#####' + str(clustering))
         ibd_distance_matrix(distance=distance, clustering=clustering)
