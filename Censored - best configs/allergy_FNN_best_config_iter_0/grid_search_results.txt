@@ -1,0 +1,6 @@
+
+l2=20^dropout=0.6^factor=1^epochs=1000^number_iterations=10^number_layers=1^neurons_per_layer=20
+Train
+ {'spearman': {'rho': 0.6663637187042425, 'pvalue': 3.989486565470155e-50}, 'pearson': {'rho': 0.7731927244657836, 'pvalue': 9.076032109171361e-77}, 'mse': 3509.2644451606307}
+Test
+ {'spearman': {'rho': 0.3234260156939599, 'pvalue': 0.0010296977381088685}, 'pearson': {'rho': 0.43928374126666647, 'pvalue': 4.8246404514389806e-06}, 'mse': 9336.046605061518}
