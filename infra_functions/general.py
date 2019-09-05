@@ -1,13 +1,39 @@
 import random
 
-from sklearn.decomposition import PCA
 import pandas as pd
 from scipy.stats import spearmanr, pearsonr
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import auc, roc_curve
+from sklearn.manifold import TSNE
 
 # from sc
+
+
+def apply_tsne(data, n_components=15, visualize=False):
+    tsne = TSNE(n_components=n_components, method='exact')
+    tsne.fit(data)
+    data_components = tsne.fit_transform(data)
+    str_to_print =''
+    # str_to_print = str("Explained variance per component: \n" +
+    #       '\n'.join(['Component ' + str(i) + ': ' +
+    #                  str(component) + ', Accumalative variance: ' + str(accu_var) for accu_var, (i, component) in zip(pca.explained_variance_ratio_.cumsum(), enumerate(tsne.explained_variance_ratio_))]))
+    #
+    # str_to_print += str("\nTotal explained variance: " + str(tsne.explained_variance_ratio_.sum()))
+    #
+    # print(str_to_print)
+    # if visualize:
+    #     plt.figure()
+    #     plt.plot(tsne.explained_variance_ratio_.cumsum())
+    #     plt.bar(np.arange(0,n_components), height=tsne.explained_variance_ratio_)
+    #     plt.title(f'PCA - Explained variance using {n_components} components: {tsne.explained_variance_ratio_.sum()}')
+    #     plt.xlabel('PCA #')
+    #     plt.xticks(list(range(0,n_components)), list(range(1,n_components+1)))
+    #
+    #     plt.ylabel('Explained Variance')
+    #     plt.show()
+    return pd.DataFrame(data_components).set_index(data.index), tsne, str_to_print
+
 
 def apply_pca(data, n_components=15, visualize=False):
     pca = PCA(n_components=n_components)

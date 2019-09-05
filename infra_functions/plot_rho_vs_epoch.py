@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from GVHD_BAR.show_data import calc_results_and_plot
 from infra_functions.analyze_grid_search import get_stats_for_array
 from matplotlib.lines import Line2D
-from infra_functions.visualize_prediction import get_regressor_input, fit_line_with_confidence, remove_outliers
+remove_outliers
 
 def main(folder_to_use, cv_title=None, epoch_to_use=None, verbose_per_cv=False):
     configuration_stats, different_configs, all_train_rho, all_test_rho = calc_stats_for_config(folder_to_use)
@@ -133,7 +133,7 @@ def calc_stats_for_config(grid_search_folder):
 def get_data_from_last_epoch(test_iter_cv_iter, epochs_list, epoch=None):
     actual_path = os.path.join(folder, test_iter_cv_iter)
     # epochs_list = value['epoch_list']
-    last_epoch = int(np.ceil((epochs_list[-1]-10)/5)*5)
+    last_epoch = int(np.ceil((epochs_list[-1]-10)/5)*5) if epoch is None else epoch
     print(f'best epoch - {epochs_list[-1]-10} Using Epoch {last_epoch}')
     test_predicted = np.load(os.path.join(actual_path, f'y_test_predicted_values_epoch_{last_epoch}.npy'))
     test_real = np.load(os.path.join(actual_path, f'y_test_values_epoch_{last_epoch}.npy'))
@@ -159,7 +159,7 @@ def calc_full_rho(configuration_stats, epoch_to_use=None, verbose_per_cv=False):
 
     for idx, (test_iter_cv_iter, value) in enumerate(configuration_stats.items()):
         print(test_iter_cv_iter)
-        test_real, test_predicted, train_real, train_predicted = get_data_from_last_epoch(test_iter_cv_iter, value['epoch_list'], -10)
+        test_real, test_predicted, train_real, train_predicted = get_data_from_last_epoch(test_iter_cv_iter, value['epoch_list'], epoch_to_use)
         total_test_values+= test_real.tolist()
         total_test_predicted_values+= test_predicted.tolist()
         total_train_values += train_real.tolist()
@@ -182,7 +182,7 @@ def calc_full_rho(configuration_stats, epoch_to_use=None, verbose_per_cv=False):
 
         if verbose_per_cv:
             print(f'\tTrain\n\t\t{current_train}')
-
+            print(f'\tTest\n\t\t{current_test}')
 
         if (idx+1)%len(configuration_stats)==0:
             current_train_res, current_test_res = calc_results_and_plot(total_train_values,
@@ -232,7 +232,7 @@ def vis_predict(configuration_stats, title=None , epoch_to_use=None):
         ax[0][idx % len(configuration_stats)].set_ylabel('Predicted', fontsize=6)
         ax[0][idx % len(configuration_stats)].yaxis.set_label_coords(0, 0.5)
         ax[1][idx % len(configuration_stats)].scatter(test_real, test_predicted, s=10)
-        ax[1][idx % len(configuration_stats)].set_title('Test - Predicted vs Real', fontsize=8)
+        ax[1][idx % len(configuration_stats)].set_title('Test - Predicted vs Real', fontsize=6)
         ax[1][idx % len(configuration_stats)].set_xlabel('Real', fontsize=8)
         ax[1][idx % len(configuration_stats)].set_ylabel('Predicted', fontsize=8)
         ax[1][idx % len(configuration_stats)].yaxis.set_label_coords(0, 0.5)
@@ -257,6 +257,28 @@ def vis_predict(configuration_stats, title=None , epoch_to_use=None):
     train_y_predicted = np.array(total_train_predicted).flatten()
     test_y = np.array(total_test_real).flatten()
     test_y_predicted = np.array(total_test_predicted).flatten()
+
+    if train_y[0].shape is not ():
+        total=[]
+        for a in train_y:
+            total += a.tolist()
+        train_y = np.array(total)
+
+        total=[]
+        for a in train_y_predicted:
+            total += a.tolist()
+        train_y_predicted = np.array(total)
+
+    if test_y[0].shape is not ():
+        total = []
+        for a in test_y:
+            total += a.tolist()
+            test_y = np.array(total)
+
+        total = []
+        for a in test_y_predicted:
+            total += a.tolist()
+        test_y_predicted = np.array(total)
 
     mask = remove_outliers(train_y)
     train_y = train_y[mask]
@@ -301,8 +323,41 @@ def vis_predict(configuration_stats, title=None , epoch_to_use=None):
 # main(folder, cv_title='GVHD FNN ', epoch_to_use=None, verbose_per_cv=True)
 #
 
-folder = r'C:\Users\Bar\Desktop\testing\allergy_FNN_best_config_iter_0\l2=20^dropout=0.6^factor=1^epochs=1000^number_iterations=10^number_layers=1^neurons_per_layer=20'
-main(folder, cv_title='Allergy FNN ', epoch_to_use=None, verbose_per_cv=True)
+# folder = r'C:\Users\Bar\Desktop\testing\allergy_FNN_best_config_iter_0\l2=20^dropout=0.6^factor=1^epochs=1000^number_iterations=10^number_layers=1^neurons_per_layer=20'
+# main(folder, cv_title='Allergy FNN ', epoch_to_use=None, verbose_per_cv=True)
+
+# folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_TS_best_config_iter_0\CVS'
+# main(folder, cv_title='GVHD FNN TS', epoch_to_use=None, verbose_per_cv=True)
+
+# folder = r'C:\Users\Bar\Desktop\testing\allergy_FNN_TS_again_best_config_iter_0\l2=100^dropout=0.6^factor=1000^epochs=1000^number_iterations=10^number_layers=2^neurons_per_layer=20'
+# main(folder, cv_title='Allergy FNN TS', epoch_to_use=None, verbose_per_cv=True)
+
+# folder = r'Z:\allergy_FNN_TS_SIM_best_config_iter_0\CVS'
+# main(folder, cv_title='Allergy FNN TS SIM', epoch_to_use=None, verbose_per_cv=True)
+
+# folder = r'C:\Users\Bar\Desktop\testing\gvhd_FNN_TS_SIM_best_config_iter_0\CVS'
+# main(folder, cv_title='GVHD FNN TS SIM', epoch_to_use=None, verbose_per_cv=True)
+
+folder = r'C:\Users\Bar\Desktop\testing\gvhd_lstm_best\l2=1^dropout=0^factor=1^epochs=1000^number_iterations=20^number_layers=1^neurons_per_layer=10'
+# main(folder, cv_title='GVHD LSTM', epoch_to_use=None, verbose_per_cv=True)
+#
+
+# folder = r'Z:\allergy_best_lstm\l2=10^dropout=0^factor=1^epochs=1000^number_iterations=5^number_layers=2^neurons_per_layer=30'
+# main(folder, cv_title='Allergy LSTM', epoch_to_use=None, verbose_per_cv=True)
+
+
+folder = r'Z:\gvhd_lstm_TS_best_config_iter_1\l2=100^dropout=0^factor=100^epochs=1000^number_iterations=40^number_layers=3^neurons_per_layer=30'
+# main(folder, cv_title='GVHD LSTM TS', epoch_to_use=None, verbose_per_cv=True)
+
+folder = r'z:\gvhd_lstm_TS_sim_best_config_iter_0\l2=100^dropout=0^factor=100^epochs=1000^number_iterations=30^number_layers=1^neurons_per_layer=30^censored_mse_factor=50.0^beta_for_similarity=5'
+# main(folder, cv_title='GVHD LSTM TS SIM', epoch_to_use=None, verbose_per_cv=True)
+
+folder = r'Z:\allergy_lstm_TS_best_config_right_iter_0\l2=100^dropout=0^factor=100^epochs=1000^number_iterations=30^number_layers=3^neurons_per_layer=30\CVS'
+folder = r'C:\Users\Bar\Desktop\testing\allergy_lstm_TS_best_config_right_pls_iter_0\l2=100^dropout=0^factor=100^epochs=1000^number_iterations=30^number_layers=1^neurons_per_layer=30'
+# main(folder, cv_title='Allergy LSTM TS', epoch_to_use=None, verbose_per_cv=True)
+
+folder =r'z:\allergy_lstm_TS_sim_best_conf_pls_iter_0\CVS'
+# main(folder, cv_title='Allergy LSTM TS SIM', epoch_to_use=None, verbose_per_cv=True)
 
 
 plt.show()

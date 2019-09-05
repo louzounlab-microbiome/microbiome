@@ -101,7 +101,7 @@ def fit_line_with_confidence(x, y, one_sided_precent=2.5, intercept=True):
     model = sm.OLS(y, x)
 
     fitted = model.fit()
-
+    print(fitted.summary())
     # x_pred = np.linspace(min(x.min(), 0), x.max(), 50)
     x_pred = np.linspace(x.min(), x.max(), 50)
 

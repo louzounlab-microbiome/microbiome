@@ -26,7 +26,7 @@ use_hist = False
 # grid_search_folder = r'C:\Thesis\multi_process_analysis\allergy_multi_grid_xgboost_with_similiarity'
 # grid_search_folder = r'C:\Thesis\multi_process_analysis\allergy_multi_grid_xgboost_without_similiarity'
 # grid_search_folder = r'C:\Thesis\multi_process_analysis\gvhd_multi_grid_xgboost_with_similiarity'
-grid_search_folder = r'C:\Thesis\multi_process_analysis\gvhd_multi_grid_xgboost_without_similiarity'
+# grid_search_folder = r'C:\Thesis\multi_process_analysis\gvhd_multi_grid_xgboost_without_similiarity'
 
 
 # grid_search_folder = r'C:\Thesis\gvhd_multi_grid_xgboost_with_similiarity'
@@ -571,15 +571,20 @@ if __name__ == '__main__':
 
 
 ###########FNN#######
-    grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\GVHD_FNN_AGAIN')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\GVHD_FNN_AGAIN')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\GVHS_FNN_TS_AGAIN')
+    # grid_search_folder.append(r'z:\GVHD_FNN_TS_SIM')
     # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\alergy_FNN_Again')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\allergy_FNN_TS_AGAIN')
+    # grid_search_folder.append(r'z:\allergy_FNN_TS_SIM_AGAIN')
 
-    # # # # naive#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_xgboost_without_similiarity')
-    # # # similiarity#
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\reports\gvhd_multi_grid_xgboost_with_similiarity')
+    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\GVHD_LSTM')
+    # grid_search_folder.append(r'Z:\allergy_lstm')
+    # grid_search_folder.append(r'Z:\gvhd_lstm_ts')
+    # grid_search_folder.append(r'Z:\allergy_lstm_ts')
 
-    # grid_search_folder.append(r'C:\Users\Bar\Desktop\testing\gvhd_lstm_naive_iter_0')
+    # grid_search_folder.append(r'Z:\gvhd_lstm_ts_sim')
+    grid_search_folder.append(r'Z:\allergy_lstm_ts_sim')
 
 
     ### combine all the runs into one run for calculations ###
@@ -606,13 +611,52 @@ if __name__ == '__main__':
                         for line in current_run_config_result:
                             f.writelines(line)
 
-
+    different_configs = None
     # GVHD FNN #
-    different_configs = filter_configs(combined_folder,filter_dict={'l2': [1], 'dropout': [0.2], 'number_layers': [2],  'neurons_per_layer': [50]})
+    # different_configs = filter_configs(combined_folder,filter_dict={'l2': [1], 'dropout': [0.2], 'number_layers': [2],  'neurons_per_layer': [50]})
+
+    # GVHD FNN TS#
+    # different_configs = filter_configs(combined_folder, filter_dict={'factor':[100], 'l2':[10], 'dropout':[0.6], 'number_layers': [3],  'neurons_per_layer': [20]})
+
+    # GVHD FNN TS SIM#
+    # different_configs = filter_configs(combined_folder, filter_dict={'factor':[100], 'l2':[1],
+    #                                                                  'dropout': [0.6], 'neurons_per_layer': [20],
+    #                                                                  'number_layers': [2], 'beta_for_similarity': [1]})
+
 
     # Allergy FNN #
     # different_configs = filter_configs(combined_folder,filter_dict={'l2': [20], 'dropout': [0.6], 'number_layers': [1], 'neurons_per_layer': [20]})
 
+    # Allergy FNN TS #
+    # different_configs = filter_configs(combined_folder,filter_dict={'factor':[1000], 'dropout': [0.6], 'l2': [100], 'neurons_per_layer': [20], 'number_layers':[2]})
+
+    # Allergy FNN TS SIM #
+    # different_configs = filter_configs(combined_folder,filter_dict={'dropout': [0.6], 'l2':[100], 'beta_for_similarity': [100],
+    #                                                                 'number_layers':[2], 'neurons_per_layer': [50], 'factor':[10]})
+
+
+    # GVHD LSTM #
+    # different_configs = filter_configs(combined_folder, filter_dict={ 'dropout': [0], 'l2':[1], 'number_layers':[1], 'neurons_per_layer': [10]})
+
+    # Allergy LSTM #
+    # different_configs = filter_configs(combined_folder, filter_dict={ 'dropout': [0], 'number_layers':[2], 'l2':[10],  'neurons_per_layer': [30]})
+
+
+    # GVHD LSTM  TS #
+    # different_configs = filter_configs(combined_folder, filter_dict={'dropout': [0], 'factor':[100], 'l2':[100], 'number_layers': [3], 'neurons_per_layer': [30]})
+
+    # GVHD LSTM  TS SIM#
+    # different_configs = filter_configs(combined_folder, filter_dict={ 'dropout': [0],'factor':[100], 'l2':[100],  'number_layers':[1], 'neurons_per_layer': [30]})
+
+
+    # Allergy LSTM  TS #
+    different_configs = filter_configs(combined_folder, filter_dict={ 'dropout': [0], 'factor': [100], 'number_layers': [3],  'l2':[100],  'neurons_per_layer': [10]})
+
+    # Allergy LSTM  TS SIM #
+    # different_configs = filter_configs(combined_folder, filter_dict={'dropout': [0], 'number_layers': [1], 'factor': [100],'l2':[100],  'neurons_per_layer': [30],  'beta_for_similarity': [5]})
+
+
+    different_configs = filter_configs(combined_folder) if different_configs is None else different_configs
     configuration_results = calc_result_per_param(different_configs)
 
     # save = True
@@ -668,7 +712,7 @@ if __name__ == '__main__':
     # configuration_results = calc_result_per_param(different_configs)
     #
     # configuration_results = calc_result_per_param(different_configs)
-    plot_per_param(configuration_results, show_one_only=True)
+    plot_per_param(configuration_results, show_one_only=False)
     # #
     plt.show()
     config_stats = calc_stats_for_config_new(different_configs)
