@@ -38,7 +38,7 @@ from preprocess_and_distance_GVHD import gvhd
 # merged_data['Smoking'] = merged_data['Smoking'].map(mappin_boolean)
 
 #
-df, mapping_file = gvhd(perform_distance=True,level =4)
+df, mapping_file = gvhd(perform_distance=True,level =3)
 otu_after_pca, _ = apply_pca(df, n_components=5)
 merged_data = otu_after_pca.join(mapping_file)
 

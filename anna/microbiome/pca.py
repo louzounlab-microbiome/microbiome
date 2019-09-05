@@ -32,16 +32,17 @@ def visualize_pca(new_matrix):
     fig = Figure(data=data, layout=layout)
     py.plot(fig)
 
-def apply_pca(data, n_components=15):
+def apply_pca(data, n_components=15, print_data=True):
     pca = PCA(n_components=n_components)
     pca.fit(data)
     data_components = pca.fit_transform(data)
     #i = np.identity(data.shape[1])
     #coef = pca.transform(i)
-    print("Explained variance per component: \n" +
+    if print_data:
+        print("Explained variance per component: \n" +
           '\n'.join(['Component ' + str(i) + ': ' +
                      str(component) for (i, component) in enumerate(pca.explained_variance_ratio_)]))
-    print("Total explained variance: " + str(pca.explained_variance_ratio_.sum()))
+        print("Total explained variance: " + str(pca.explained_variance_ratio_.sum()))
     return pd.DataFrame(data_components).set_index(data.index), pca.components_
 
 def apply_pca_with_diff_data(data1, data2, n_components=15):

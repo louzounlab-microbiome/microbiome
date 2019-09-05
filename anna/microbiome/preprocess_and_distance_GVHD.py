@@ -58,7 +58,9 @@ def gvhd(perform_distance=True,level =3):
 
         new_df = pd.DataFrame(index=preproccessed_data.index)
         col = 0
+        new_dict = {}
         for key, values in dict_bact.items():
+            new_dict[key] = []
             new_data = preproccessed_data[values]
             pca = PCA(n_components=round(new_data.shape[1] / 2) + 1)
             pca.fit(new_data)
@@ -75,7 +77,8 @@ def gvhd(perform_distance=True,level =3):
             otu_after_pca_new, pca_components = apply_pca(new_data, n_components=num_comp)
             for j in range(otu_after_pca_new.shape[1]):
                 new_df[col + j] = otu_after_pca_new[j]
+                new_dict[key].append(col + j)
             col += num_comp
-        return new_df, mapping_file
+        return new_df, mapping_file,  new_dict, OtuMf.otu_file.T['taxonomy'].values
     else:
-        return preproccessed_data, mapping_file
+        return preproccessed_data, mapping_file, {}, []

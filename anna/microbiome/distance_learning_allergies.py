@@ -4,14 +4,14 @@ from allergies import *
 df, mapping_file = allergies(perform_distance=False,level =3)
 
 
-max_num_of_pcas =40
+max_num_of_pcas =35
 train_accuracy = []
 test_accuracy = []
 pcas =[]
 def pca_graph(max_num_of_pcas = max_num_of_pcas,train_accuracy_all=train_accuracy, test_accuracy_all = test_accuracy, pcas =pcas, df = df, mapping_file = mapping_file):
     for i in range (2,max_num_of_pcas):
         pcas.append(i)
-        otu_after_pca, _ = apply_pca(df, n_components=30)
+        otu_after_pca, _ = apply_pca(df, n_components=i)
         merged_data = otu_after_pca.join(mapping_file)
 
         X = merged_data.drop(['AllergyType'], axis=1)
@@ -26,9 +26,9 @@ def pca_graph(max_num_of_pcas = max_num_of_pcas,train_accuracy_all=train_accurac
             # print("%s %s" % (train_index, test_index))
             X_train, X_test = X.iloc[train_index, :], X.iloc[test_index, :]
             y_train, y_test = y[train_index], y[test_index]
-            model = XGBClassifier(max_depth=3, n_estimators=250, learning_rate=15 / 100,
+            model = XGBClassifier(max_depth=4, n_estimators=300, learning_rate=15 / 100,
                                   objective='binary:logistic',
-                                  reg_lambda=250)
+                                  reg_lambda=300)
             model.fit(X_train, y_train)
             pred_train = model.predict_proba(X_train)[:, 1]
             auc_train.append(metrics.roc_auc_score(y_train, pred_train))
@@ -42,10 +42,10 @@ def pca_graph(max_num_of_pcas = max_num_of_pcas,train_accuracy_all=train_accurac
         train_accuracy_all.append(scores_train)
         test_accuracy_all.append(round(scores.mean(), 2))
 
-pca_graph(max_num_of_pcas = max_num_of_pcas,train_accuracy_all=train_accuracy, test_accuracy_all = test_accuracy, df=df,
-          mapping_file=mapping_file,pcas=pcas)
+#pca_graph(max_num_of_pcas = max_num_of_pcas,train_accuracy_all=train_accuracy, test_accuracy_all = test_accuracy, df=df,
+#          mapping_file=mapping_file,pcas=pcas)
 
-df_dist, mapping_file_dist = allergies(perform_distance=True,level =3)
+df_dist, mapping_file_dist = allergies(perform_distance=True,level =5)
 train_accuracy_dist = []
 test_accuracy_dist = []
 pcas_dist =[]
