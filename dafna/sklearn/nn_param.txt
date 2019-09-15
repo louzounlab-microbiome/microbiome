@@ -1,0 +1,12 @@
+in_dim:4
+mid_dim_1:10
+mid_dim_2:20
+out_dim:3
+criterion:CrossEntropyLoss
+optimizer:SGD
+lr:0.01
+batch_size:8
+shuffle:True
+num_workers:4
+test_size:0.2
+epochs:1000
