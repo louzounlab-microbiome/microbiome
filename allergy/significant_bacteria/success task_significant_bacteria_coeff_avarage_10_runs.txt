@@ -1,0 +1,33 @@
+-0.11633944115374548,k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae
+-0.1104022729631122,k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae
+-0.09948371429888296,k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae
+-0.09408743022736542,k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae
+-0.09324546242674299,k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Pasteurellales; f__Pasteurellaceae
+-0.08436490493906862,k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Carnobacteriaceae
+-0.08431784793272563,k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]
+-0.08394259464849718,k__Bacteria; p__Firmicutes; c__Bacilli; o__Gemellales; f__Gemellaceae
+-0.083076103179152,k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae
+-0.0788015107133622,k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__RF32; f__
+-0.07607492942864184,k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae
+-0.07501472225250877,k__Bacteria; p__Firmicutes; c__Clostridia; o__SHA-98; f__
+-0.07174651569943655,k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]
+-0.07165348363180905,k__Bacteria; p__Fusobacteria; c__Fusobacteriia; o__Fusobacteriales; f__Fusobacteriaceae
+-0.06339635828084998,k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Micrococcaceae
+-0.05385525601579717,k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Oxalobacteraceae
+-0.05327753634841277,k__Bacteria; p__Tenericutes; c__RF3; o__ML615J-28; f__
+-0.05051932984250898,k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Neisseriales; f__Neisseriaceae
+-0.050203723382080866,k__Bacteria; p__WPS-2; c__; o__; f__
+-0.050203723382080206,k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__Rhizobiales
+-0.04836888374060565,k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae
+-0.04407341724591935,k__Bacteria; p__Bacteroidetes
+0.05544736810247669,k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Leuconostocaceae
+0.0577902178381906,k__Bacteria; p__Deferribacteres; c__Deferribacteres; o__Deferribacterales; f__Deferribacteraceae
+0.06488034081784307,k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Enterococcaceae
+0.06789110949888741,k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptostreptococcaceae
+0.07371769121900804,k__Bacteria; p__Bacteroidetes; c__[Saprospirae]; o__[Saprospirales]; f__Chitinophagaceae
+0.08652357804595454,k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Bifidobacteriales; f__Bifidobacteriaceae
+0.08768882737363232,k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+0.09077569653112534,k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]
+0.10104519222019927,k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__Rhizobiales; f__Bradyrhizobiaceae
+0.10724579588142139,k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae
+0.12643273560155238,k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae

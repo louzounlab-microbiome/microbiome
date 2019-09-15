@@ -1,0 +1,24 @@
+train_auc:               precision    recall  f1-score   support
+
+           0       0.57      0.57      0.57       983
+           1       0.51      0.58      0.54       805
+           2       0.51      0.43      0.47       883
+           3       0.42      0.45      0.44       529
+
+   micro avg       0.51      0.51      0.51      3200
+   macro avg       0.50      0.51      0.50      3200
+weighted avg       0.51      0.51      0.51      3200
+
+test_auc:               precision    recall  f1-score   support
+
+           0       0.48      0.49      0.49       242
+           1       0.47      0.50      0.48       205
+           2       0.45      0.42      0.44       217
+           3       0.42      0.41      0.42       136
+
+   micro avg       0.46      0.46      0.46       800
+   macro avg       0.46      0.46      0.46       800
+weighted avg       0.46      0.46      0.46       800
+
+train_rho: 0.3677778180042852
+test_rho: 0.28841435055778636

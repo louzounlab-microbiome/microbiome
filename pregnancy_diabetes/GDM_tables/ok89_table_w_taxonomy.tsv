@@ -1,0 +1,511 @@
+# Constructed from biom file
+#OTU ID	H273YM-STOOL-T3-rep-1	H276MO-STOOL-T3-rep-1	H284OS-STOOL-T3-rep-1	H287LK-STOOL-T3-rep-1	taxonomy
+067d1dcc8b7683b94c44e902caf18fe8	9928.0	6326.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Megasphaera; s__
+79401670f3c1c3e49aa6da2be9bac1a4	0.0	0.0	15682.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__copri
+6f60d6119519e14e00dbdd03fe8dc641	508.0	2136.0	118.0	6537.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+dba678fce9a6c16e6c29fe4d413ef2e4	6015.0	0.0	0.0	587.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+d2f7716340300dc3248d4738d8752161	0.0	0.0	5940.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__copri
+321504ef7843f9b5978732cf37896060	1119.0	456.0	55.0	3026.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__uniformis
+18bef6b2da86449bc4c33bff71fd8d8b	643.0	3084.0	30.0	662.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Bifidobacteriales; f__Bifidobacteriaceae; g__Bifidobacterium
+aec71ce59c85554a3ee6d466d9a5de5e	0.0	187.0	0.0	3461.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+8fad68e5c8a81aabd3fdd70d9f93325b	1961.0	0.0	0.0	1616.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Acidaminococcus; s__
+72010295a86cabdd51b241d8666620f5	1629.0	82.0	0.0	1361.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__caccae
+4b9cdeb88109d14ca0d30aee576525ba	52.0	2306.0	72.0	625.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Roseburia; s__faecis
+ef2e08c65a790677976451aad877c6c3	0.0	0.0	2574.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Paraprevotellaceae]; g__[Prevotella]; s__
+92d4c027205d21ac0dbb8101ab24d785	0.0	1778.0	0.0	528.0	k__Bacteria; p__Verrucomicrobia; c__Verrucomicrobiae; o__Verrucomicrobiales; f__Verrucomicrobiaceae; g__Akkermansia; s__muciniphila
+c3b975bc5cf6c737e5c58349e0a986f7	139.0	88.0	60.0	1914.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides
+4f1330365ef7fd57cb4686ae641023fd	59.0	0.0	39.0	2100.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides
+1fb1b544cebe69d7edcae4a78cd054d5	790.0	293.0	146.0	562.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+b842ebe51f833046bd0216e235e304e3	502.0	239.0	116.0	908.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+06d0de66e95909d0104f957bd278e2dd	196.0	651.0	268.0	610.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+3bff10425c5fb690f433f67bafdfad15	1487.0	0.0	8.0	14.0	k__Bacteria; p__Verrucomicrobia; c__Verrucomicrobiae; o__Verrucomicrobiales; f__Verrucomicrobiaceae; g__Akkermansia; s__muciniphila
+4fd966c1e39eba81a6d86f74779181dc	0.0	0.0	0.0	1508.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__fragilis
+c8d8bb2fdfe147a627497f706e982d3a	0.0	0.0	0.0	1448.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__
+157646422453e679814c33ee96cfc476	343.0	191.0	191.0	666.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+8ea8e2a6fb1f5a4effa8acad3c8fb921	105.0	853.0	0.0	391.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+1d8d7f157f76cfb76bb73f58d292c048	1016.0	0.0	236.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]; g__; s__
+0c77dd59fc526aac9169182fd5275543	363.0	115.0	44.0	713.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__putredinis
+75d4599cb3906c8a05ec9563ed4b6732	10.0	1146.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__eutactus
+a587e67eaa2a38c687463427ca9c2d06	0.0	806.0	90.0	260.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Paraprevotellaceae]; g__Paraprevotella; s__
+81fd2bb21fe754d2e3c4a80e4c474344	158.0	639.0	30.0	242.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+5adc89fd70b35c13f818201bdba00423	284.0	24.0	0.0	759.0	k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Enterobacteriales; f__Enterobacteriaceae
+251ef0960a6cd09f9ce1ee6c318e8fae	527.0	38.0	115.0	382.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Dialister; s__
+6f881cdf9ec3a98b79b6250cceb5cb04	109.0	0.0	0.0	789.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+572c7c23df346ba4f4a5ac29009499bf	546.0	53.0	19.0	259.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+e7c0a2f1e7cccad7de7d1ff34c7c8aad	0.0	0.0	0.0	864.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+b34e01974f28df680dfe502a1de45c96	516.0	114.0	22.0	161.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__Collinsella; s__aerofaciens
+05240d1f3f275161ddd933652c33b921	0.0	23.0	293.0	486.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+33df38d9a2741bb1a2c0c95ac264d3c2	0.0	793.0	5.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+60ac1898091f0c3f570e95f019eff433	155.0	186.0	29.0	419.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__clostridioforme
+46905af21df7f029ff528c1475620edb	172.0	53.0	33.0	515.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Gemmiger; s__formicilis
+26b7fbc430cd912f7f5e2cf4fc99c0fb	760.0	0.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__human; s__gut metagenome
+e9b1abd66c2963e57adf8247fe66065a	0.0	0.0	760.0	0.0	k__Bacteria; p__Cyanobacteria; c__4C0d-2; o__YS2; f__; g__; s__
+22635b6a246d774703fbf9a9c6ed6e39	565.0	190.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+5650b51f6aaed6b2c62286ecd7865434	0.0	538.0	53.0	154.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides; s__distasonis
+7b0e39d42b1fca475f8f79cf78699947	681.0	35.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+697ab2c0908007d60fdbbb75d0f06ae9	0.0	332.0	0.0	382.0	k__Archaea; p__Euryarchaeota; c__Methanobacteria; o__Methanobacteriales; f__Methanobacteriaceae; g__Methanobrevibacter; s__
+b6e6cd3c1f96599baa6c63ada063e28a	0.0	73.0	0.0	622.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__ovatus
+4f0ecdd7e99ff2d642e2a64bdc4f39f7	0.0	0.0	0.0	666.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+fb6950eb36ddf9268d5790f538a59233	76.0	336.0	24.0	193.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+87e393180ad3382354f2b389efd22eea	0.0	0.0	0.0	601.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Megasphaera; s__
+c2900c7ed4f0a80cd6579ba07d6d4d73	250.0	201.0	19.0	92.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides; s__
+4893009b30d18139d42c6bd53f19d972	0.0	194.0	70.0	291.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides
+3ac66f36de88f8e436fe7170913b1764	178.0	0.0	101.0	275.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+2650df2ec028c4081404a67932be47e5	73.0	0.0	0.0	473.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+088333c7f72deb249b8f2c0683422d73	163.0	112.0	64.0	172.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+f7306c2124dbccbde7dce097013a7aec	53.0	65.0	26.0	365.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+42a416f08af1c8968c48572f2179915c	0.0	196.0	307.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__bromii
+80ffd29ffb13eebede7228db00a746b9	0.0	80.0	413.0	0.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Bifidobacteriales; f__Bifidobacteriaceae; g__Bifidobacterium; s__
+4c717f1fd0503a33661151b9d6d46448	316.0	14.0	73.0	78.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__; s__
+66b5887b82f04898676d45045853a024	39.0	0.0	0.0	442.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Phascolarctobacterium; s__
+01b8455f53d68af678478e79c6d358e2	471.0	0.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__plebeius
+f2c5067d575be4de5b71777eefee83a6	137.0	133.0	0.0	190.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Roseburia; s__
+4edaae2fac191a4968ea6e807b36ac8c	0.0	0.0	422.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+fc484465ab3346cbecd77fd3dd47f522	143.0	70.0	95.0	93.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+2b5c2b08eb7554c28076348480392677	10.0	352.0	10.0	17.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__onderdonkii
+b547e083870017f9ca750377ef376167	0.0	18.0	329.0	40.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+f39b3cab1f00cd1d14bdd8e08e930552	104.0	64.0	29.0	167.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__
+d1530b0a2788b37d4a5e929889bffeb7	0.0	161.0	87.0	116.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+e7d0222084ef002666b27a506be4eb7a	7.0	0.0	0.0	355.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__[Ruminococcus]; s__torques
+a0de63ecc424371bf7ba1f4f92892680	149.0	104.0	0.0	107.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+ccd8f48d15eea4fa77b850e23873d848	61.0	84.0	68.0	141.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+273f9d036a37197d85057f9255a130f5	146.0	97.0	88.0	0.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Bifidobacteriales; f__Bifidobacteriaceae; g__Bifidobacterium; s__
+20e720f4327722a56f93aa3fdce744bc	56.0	57.0	36.0	180.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+0b7a6e784f15fa2d03bfa6be413c33c0	306.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+01ecccd8cfa5406400cf7f1579f3b866	39.0	32.0	0.0	230.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Roseburia
+437d0f92456fab4538978a00d1480c15	0.0	0.0	187.0	114.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Paraprevotellaceae]; g__Paraprevotella; s__
+84477f8dcb54cbb89e47e9e5dd65958f	102.0	37.0	43.0	118.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__obeum
+f02470d618a1e4bc47033755c3e0b2d9	0.0	102.0	0.0	190.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__[Eubacterium]; s__biforme
+340518f1e51be0eb052aba961eeb58d1	0.0	249.0	39.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+9673791653640d76728c5807476be933	0.0	3.0	0.0	283.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__
+b2a82c5481832887b456e46db94468f3	17.0	0.0	0.0	255.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium
+9b9879d7d3422dc07d29b64ee07c1027	0.0	270.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+23c1f035c443fb018ebf879b65522740	189.0	76.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__Desulfovibrio; s__
+f6328c5106f4f663b5abb9cfaf0e82c0	264.0	0.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides; s__gordonii
+8edaeefdfafba0431be925b740076bfd	72.0	47.0	15.0	126.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__formicigenerans
+cff627ca7f43014a3fe7f0afeca293ea	13.0	0.0	0.0	244.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+f4ddb05cb868a205a88e8f81eef340dc	0.0	144.0	0.0	106.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Paraprevotellaceae]; g__Paraprevotella; s__
+fa645fd2a770c0f3a48877de3e348261	234.0	11.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+9055b09c708de8178fedf7453f423321	0.0	22.0	0.0	223.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+0aeffa500ef41f3289f2d984d6dad4da	22.0	48.0	31.0	132.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Odoribacter; s__
+206b701f85218c326a83d39757b29a89	146.0	15.0	0.0	71.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+e93baf66dbf17ab2873700bd2efeef77	16.0	15.0	8.0	190.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+71a8f4e2c140fa290f02c2c9fe4a8f8f	73.0	0.0	46.0	107.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Roseburia; s__
+b88b2a7be32fcd0c88c02d5dfff9a8ec	5.0	0.0	140.0	79.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+111fceb4799855bb4bb042a356ced592	0.0	222.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+2ebeec4e58ae444b7b93a96de3d43a21	0.0	9.0	0.0	205.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+f533c27fe32411d0137aeddea8ee32f2	0.0	0.0	0.0	208.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+e1fee477f943866947657ccd162c8de0	6.0	0.0	167.0	32.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+b1f0da526129d14d16a133164ddf28ba	0.0	66.0	139.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+04d41713d61358e3f1e8124686dda779	10.0	194.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+14e9812367485b4800d530f801f24e56	12.0	19.0	72.0	99.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__; s__
+5d2ce43dd1e997fb2f97ff3258881093	0.0	0.0	201.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+35ee17f1540498ea0645a5150e84a989	0.0	41.0	0.0	158.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+a749f3165852885d51c87aea428e1ece	10.0	0.0	40.0	147.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+d3ee9b5bf91d5c1f2cc29495c8ce330e	62.0	45.0	35.0	54.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__[Ruminococcus]; s__
+7f6b65ba5886ef0fcfeb58a4522ce2b1	0.0	101.0	92.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+23ed09b118ac6e4347a7cffd1d70a768	0.0	192.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+8692618c00ef4f2dde45ce9efe26e6af	0.0	0.0	0.0	188.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]; g__; s__
+d074e8e8afb10bd5a6936f64da406d6a	105.0	0.0	0.0	77.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides; s__distasonis
+8c9f24a362226a177923ab3f15cc5e43	0.0	35.0	0.0	144.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Bifidobacteriales; f__Bifidobacteriaceae; g__Bifidobacterium; s__bifidum
+59dadb6f34585a015e62ed0bed0fbb78	43.0	59.0	14.0	57.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales
+f6c215b827bc483bf3789d651428e412	96.0	0.0	0.0	73.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__indistinctus
+c146fde9898af18d8c709ab7c8711dff	0.0	0.0	0.0	165.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__
+36c6f235fe3a72435af334bd722ebf9b	0.0	0.0	162.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+ad43dfb45ca8c8f3406d8b202869b783	30.0	38.0	87.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__Clostridium; s__celatum
+ec6f30c5640cdd2566228c1e5bca5bc3	154.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+7f603ab4e56db5a99d670531f5cbf2ce	0.0	149.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides
+78e5e639ee6d438fe82e29bc52c504bf	0.0	119.0	30.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+63f4eca28afcfd79abea38153468462c	9.0	28.0	27.0	83.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+c6069aca849a1befaba9d0eabd531eea	0.0	0.0	147.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__02d06; s__
+2077bab244c5aa8de18fb180fddc3e23	15.0	8.0	32.0	91.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales
+96ec896059c02ea810e84f4e367a7345	15.0	23.0	26.0	75.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__Clostridium; s__
+db277fab18fb526b67ce41710ccc5ffd	0.0	0.0	131.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+dc48d139654d154a67de3fe5d9c70cbb	0.0	0.0	136.0	0.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+938670b2a20c390a8b2b020304898b0d	131.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+cd93571c3d9ca70ec94b6f6552e6309b	0.0	128.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__eggerthii
+438c7fd07adaab519d9a7859223ff3c1	114.0	12.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__; s__
+3d43fd9f91ecd94a3f06c404a03c6eff	100.0	10.0	14.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+cb7aa2735c9ff8324762d64df58c7c40	0.0	0.0	123.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+18af5d55372ca5b243cd55104db54dfa	0.0	52.0	70.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+7976ae6b2613b30e52c430e45bf01429	43.0	0.0	13.0	65.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__Bilophila; s__
+6f8e1ecc4463168622a8c3f02d9a73c3	10.0	11.0	20.0	76.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__catus
+9daf3b8456491c198c100e8d458fc537	0.0	117.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+bf7ee67ba29f0bdf67fb5d578842a5b7	0.0	29.0	21.0	65.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+561fec2c722437ca3c790d6b713bfecf	0.0	0.0	114.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+84443aed1435a9c61d58b60dc004a2be	0.0	105.0	8.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__callidus
+c0d01131c1cdf5c04fb7e49e639019a1	0.0	111.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+eabe99e48d6ecd27d2974fa7c483f6ab	0.0	0.0	0.0	109.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides; s__
+eef0364b47e4a1ffbd530fdd50e66a65	63.0	0.0	11.0	33.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+f08d43a6f11016351c2c2c0b04f3fc15	0.0	107.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+bd7c8a3a81e46acdbc34e36ef7d85cec	15.0	35.0	11.0	44.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+127d8f54d7fdbed4c199e0a9c81a30cd	16.0	7.0	82.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+4a621d27dd937e27ada2adb854bdd196	0.0	105.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Phascolarctobacterium; s__
+94bc08f71302ee45357aea3c51fc8953	0.0	94.0	0.0	11.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnobacterium; s__
+5663e7ddf1d0e65ca7b88a1c706b7272	0.0	0.0	0.0	103.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Porphyromonas; s__
+7182c2dc5512c08b40f88e07bfc694cd	78.0	24.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Butyricimonas; s__
+0fcbeb08e0267863abe171871411dea0	0.0	102.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+a4e17a84974fd44d38d8ea687c3b5026	0.0	0.0	0.0	101.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+9b25408a84e9d6a029b8fbec07fceb29	0.0	99.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+460ba6aa07f9e96739495a89f4a56860	0.0	0.0	0.0	99.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+9af922b7722f37220b6aac09d7707a08	0.0	0.0	0.0	99.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+4a25f517a4ae22f05586959bcc4009b6	24.0	31.0	14.0	25.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+641e0b0c42f76ba8070d703beb63645e	0.0	0.0	94.0	0.0	k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__RF32; f__; g__; s__
+14dba51123a6e81b9d989ba59e840b76	0.0	0.0	18.0	75.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+e25fd19ba387d1b88d72193949783fec	0.0	0.0	0.0	93.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Megasphaera; s__
+1164ac5692a2b077b365971c54e7a75a	0.0	83.0	9.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+42097ae4bacbb21885707a0eb4ab9a0b	0.0	0.0	92.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__eutactus
+68972f0ad0b1ad5e5cecb0fdd00deaf3	19.0	0.0	0.0	72.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+36def7e02a1f33a9bd4e9a35bb37ec32	0.0	0.0	87.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+4c3f58264c2c7236e5f5422d861f0729	0.0	38.0	45.0	0.0	k__Bacteria; p__Bacteroidetes
+4e64a924f74047b00670883390058576	62.0	0.0	20.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+befcaafd56e6bc37487ef24697454c24	0.0	0.0	82.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+a4ecbcf6e2939b277bae0e920c2874cb	0.0	12.0	36.0	33.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+14a26cf72e85f548eb7e0d8f0bc11dec	6.0	10.0	3.0	61.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__; s__
+b0fa42b2ff8982c3093e6c12f7146f62	38.0	0.0	0.0	42.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Butyricimonas; s__
+38c3124f4f9396e3edba0901ce221b93	0.0	18.0	0.0	57.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__[Ruminococcus]; s__gnavus
+876324f87fc200044e4a12a96221ed5b	74.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+72858831dbdbd7880622826b8e352997	0.0	28.0	0.0	46.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Anaerostipes; s__
+eb90690260fe5efe4233ffdf92bc81b5	0.0	0.0	0.0	74.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+e686b3eb924f37a202820116548f28fe	0.0	0.0	0.0	74.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus
+02689242bdca8e4773d79347311ec6f8	0.0	31.0	0.0	42.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+989cd2a87b996066101dda8b664c9378	72.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+59d704ffbc7aa2a9cf1a64bfcfdc338c	0.0	20.0	52.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+ae75f9ab10d845c5926ceebbe638174a	0.0	0.0	71.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+23589198b062dae119f0a8b1e3a903b1	0.0	0.0	69.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+d9a7c5eef7f88451f715c07435acee4a	0.0	17.0	7.0	44.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__; s__
+752dcd4ede1281da884d07039eb0d9f9	0.0	0.0	0.0	68.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+9dfda40de95a0b11e9e23a2fbbffebf4	0.0	66.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+2be34e838fb9d07c2ce1775006406733	15.0	0.0	0.0	48.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+14301162fe4b40fbe0073922fd8e01ee	63.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Roseburia; s__
+0f8a7778364f57652adb0d897f651e57	0.0	0.0	0.0	63.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides; s__distasonis
+8e375fc07bf48c456f300273069eed48	32.0	0.0	13.0	17.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+0a291e1351105bb6c9387a7a9012cd6e	0.0	19.0	0.0	42.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__
+50c038bbc47789da636ea740c3109984	0.0	0.0	60.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+0ea7ac03c57b718df15665f91b3a5346	33.0	21.0	5.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+57e6d0f34ba508f6fcf03a51cfabcc46	0.0	59.0	0.0	0.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__Slackia; s__
+0e47f03b44a734f6d8fcbfde2960b3da	0.0	35.0	24.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+7fa00db3460401683542fd9b2f94d9c3	0.0	0.0	59.0	0.0	k__Bacteria
+36dfb52500705c0b114449da9bee3b46	0.0	0.0	27.0	31.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+a8c60c294cd53dc19da9a5c21ee44d51	0.0	39.0	18.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+71ddcf5716372ba756bd8d4187818b91	0.0	0.0	0.0	57.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Acidaminococcus; s__
+3b13bf10d6047d7cdca6be49ce1f0af9	42.0	0.0	3.0	11.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Alcaligenaceae; g__Sutterella; s__
+f69b5b6b94317fe3d40469d8625cb6c7	56.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+0ebd5e8f1939d91e1016fa96bb78c62a	0.0	56.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+11f9451e0f923b834d5222cbc88c15bf	55.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+9327fcc1115c16a552b8bb210e94f1c5	0.0	0.0	55.0	0.0	k__Bacteria; p__Cyanobacteria; c__4C0d-2; o__YS2; f__; g__; s__
+d461caa356dae30356775e1bfe8ed0d4	0.0	12.0	9.0	33.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__finegoldii
+3ca04980ea317873fc243cba2c8dde40	0.0	0.0	54.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+a67a63452bd2ddba881c13352b2bd1ba	53.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+6591f8dd8090459e3ee24888f161576f	31.0	0.0	22.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__; s__
+9a13e8d23e6535f118b5a8b92c96a9c1	0.0	0.0	53.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__; s__
+4c91de9bcd0cd305ee60f194799d021f	12.0	0.0	0.0	39.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__Adlercreutzia; s__
+fc0bad664071c07ae6c05f6dfc2263e2	0.0	0.0	51.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+2f61ac9dfc3a09efef95b77056bcc791	50.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+35810d380b96787fc9120ab5ebeff8f3	16.0	0.0	34.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+404591aef37096d272ddbd4d6518d6df	0.0	50.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium; s__prausnitzii
+52f6b7a67abcc1855cf32af53cd7b6b4	0.0	0.0	0.0	50.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Actinomycetaceae; g__Varibaculum; s__
+f628f07bc54a8792aa8eb66468dcae5f	0.0	0.0	0.0	50.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__hathewayi
+648b0c48ce71fe0b06f8bf69f8a2ba1c	0.0	49.0	0.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+eadcb56d46f889dd8a8a4b5d0370bde4	0.0	49.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+fc75a4d2cce1ca24967f2f4b404593af	0.0	49.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Enterobacteriales; f__Enterobacteriaceae
+e3b48f878c2290cda6bc7d1e27cd3f2c	0.0	20.0	0.0	29.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+ec3b306a602a0a80d557d65c0a3872a5	13.0	0.0	0.0	35.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+0d1abc74249e953132a19e41fca21664	48.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+d342a20324417bd20956984fdd752d95	0.0	0.0	48.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+1c80b25d1e74e472e80f2f792d03a186	0.0	0.0	0.0	48.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+649da8b603d8a5110d536931d4bc9ff5	0.0	26.0	21.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+52e5e68cea2dbea35110ac5f9923e915	0.0	0.0	47.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+b3e8286118328046db69f0fcda76c982	0.0	0.0	47.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+41f5a6007109aeb6edb3d5c9b3492caa	14.0	0.0	0.0	31.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+e30da8814ac40f778c865fc5b1a484f9	12.0	0.0	33.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+0c23031abc047501fe492821ce569c04	28.0	0.0	0.0	17.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia
+6a4e736501539dd68ff3653cce868748	45.0	0.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Butyricimonas; s__
+b0d881dca47935a53f565219aae38931	0.0	0.0	45.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+fa246482b51f16cdfd2b43daee0176e1	0.0	0.0	0.0	45.0	k__Bacteria; p__Proteobacteria; c__Epsilonproteobacteria; o__Campylobacterales; f__Campylobacteraceae; g__Campylobacter; s__
+7f3e6527e76db2a2fa08f4f22372203b	44.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+da05ed9f529792dd62ba7e58fbfa17d0	0.0	44.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__[Eubacterium]; s__biforme
+cde89543e51ab86a5d3a1590683d4a4e	0.0	0.0	0.0	44.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+184c4798811d2c5be80f815381400b6f	0.0	6.0	37.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales
+e6d5138313b5be0448623116aa079cf6	0.0	0.0	0.0	43.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__
+a7b8b60b02d2442f39bec40dec7e7c66	42.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+b5dc1043599f1b13aeb505231199e241	0.0	25.0	17.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__; s__
+e39f18460f3e797f301a6417ed5f554d	15.0	0.0	26.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+74cd8ac0d5d52f32cb352018738c74ea	0.0	41.0	0.0	0.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__; s__
+9d45a2f42c4fbe80c475bf2f7271b8ce	0.0	0.0	41.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+75019403444c335fb4061ad71a04baa0	21.0	3.0	8.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+f326dc192aacad32b8d38e1ab2c292e4	10.0	0.0	6.0	24.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+24e522653d1910862d24a451ccc2d7e8	0.0	6.0	0.0	34.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+7dd3cd0297b4a7ed75b1e1736e34eb8c	39.0	0.0	0.0	0.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__; s__
+2e2ed4f91c4f594097e9229b363cfd0e	0.0	30.0	0.0	9.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+ffb9787d9ffe03d843247df5963efbbc	0.0	0.0	39.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+52a622a5dcf9a1637e318cb634bc2ae4	0.0	0.0	0.0	39.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__bromii
+96aab17e33f3c9264ac2487206900ca1	38.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+818c42d325f06f20b1dcbbd1e01b5cc5	0.0	38.0	0.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+b152198dd390e477aeb3c477f7942cf8	0.0	26.0	0.0	12.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+a2e38992e0585768fdff7020b03f1f93	0.0	0.0	37.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+d5f1b0380be770ad761eda277e5f2e1c	36.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+32781485ecdbdc671d7bdc6e35340de8	0.0	36.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]
+d2bbb3f980af4bf23fe67f0062b06593	0.0	18.0	18.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+3f797b76e2da6703c70525731fbf12f8	0.0	0.0	36.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+41a40893f4e67678ba377e79d730640a	17.0	6.0	0.0	12.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]; g__; s__
+713cbf82aaeb9c781df369348af307b4	0.0	35.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__eggerthii
+d7da2a28d45dfcae479de12aff6d1701	0.0	33.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__RF32; f__; g__; s__
+14400878f2433ce06dfddebc845bf1f0	0.0	33.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Odoribacter; s__
+883eb1b75665cc034d32226ff1ff44e1	0.0	33.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__; s__
+a36d13e023b7f89c1b08b5228b66e461	0.0	0.0	33.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+b9e459a8170f54d5020b527719c68074	0.0	0.0	33.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+3a65f4d0a1acba714f68780afb1e5633	0.0	0.0	33.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+f2df2cf7822704c406b916e1e38df13b	0.0	0.0	0.0	32.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+b4649ec1bce97d22665cede30766cc8c	0.0	31.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__; s__
+30be8c338491cf1d7a82788a0aae8de8	5.0	0.0	0.0	25.0	k__Bacteria; p__Firmicutes; c__Bacilli; o__Turicibacterales; f__Turicibacteraceae; g__Turicibacter; s__
+8a98f8ff0b371ecc1680f66ea20983a2	17.0	0.0	0.0	13.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+da5f8ea4aecb37022310d0f8ab35f74d	8.0	0.0	17.0	5.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__indistinctus
+325fda377e6f53aa0e6a5d819ac37210	30.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__formicigenerans
+b385fdc530b4870e4673a6f0d277df68	0.0	0.0	0.0	30.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+94d7be0c7b66c746f6784aecdfcbf62e	0.0	0.0	0.0	29.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__Desulfovibrio; s__
+535632ccbf628131108bb6ed8388c088	0.0	0.0	0.0	29.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+78f35327f6cfcb6a0e7714dc75bd139b	0.0	28.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__SHA-98; f__; g__; s__
+357a5ad4a32b379564c58b9817a39a27	0.0	0.0	28.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+bcb6a1a63f93eebe33dfa9dadc316316	27.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__flavefaciens
+2d4d615cca67a57095246e9e032c0265	0.0	27.0	0.0	0.0	k__Archaea; p__Euryarchaeota; c__Methanobacteria; o__Methanobacteriales; f__Methanobacteriaceae; g__Methanosphaera; s__
+a6ee1729a51cc3355dd8b7f74b96f4cb	0.0	27.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Anaerostipes; s__
+0b142307a9b25c63f872a468659cefba	0.0	0.0	27.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+494cbadb4236eafb62a294af4d5e83b1	12.0	7.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+a8f7f15c8907d0b18db19264b3049551	0.0	7.0	11.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+66df1e7ec5d6c40fc6ca251894004599	0.0	0.0	26.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+3b689577d47ed8abe10708f254a03549	0.0	0.0	26.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+823f9402d3c968f535c920c13a8d11b0	10.0	15.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+f53ff3e24f4cc412193e4fcaba3f9ce0	25.0	0.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+fd2937800e32ff03e77844187ffb8b86	0.0	0.0	0.0	25.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Dialister; s__
+ea503a24878f75f3833e3e7c2f3cf2b3	0.0	0.0	0.0	25.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__hathewayi
+ba07371d0397bf3714d6d6bcb3bec468	0.0	3.0	21.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+fe3e6ab6a05e1e5ed50134a3d581604a	0.0	0.0	0.0	24.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+216bdeb0a2d2cbff9d8acd213a91e860	23.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__obeum
+30ead1e92a0bb7ca57301014b5c93e54	0.0	0.0	23.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium
+73aeca47597f6321a52fedd4ae850df8	0.0	0.0	0.0	23.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+5b81288fa034300a689007bd1cca4cc8	0.0	0.0	0.0	23.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+b25c5c252c880595a9997b2b25989e70	0.0	0.0	0.0	23.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+dedadf525cc9380746a37037da08f1aa	22.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+5410fe950b8b13a557cf72483ac45a4b	0.0	22.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+a67c7be051a053ea022dace2404953b4	0.0	0.0	22.0	0.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__[Eubacterium]; s__biforme
+729c02f3d7cfc225bb4d4793f79c869d	0.0	0.0	22.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+a179c109762f732506c0669cfc8ca879	0.0	0.0	4.0	18.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+c20cf2df3188622e60abab552111fa39	0.0	0.0	3.0	19.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__; s__
+9e2f90cd384583c17f917ced0a2538ab	21.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+8b73f673c6e4baea46c88b06d3e26d1c	0.0	21.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]; g__; s__
+a692befe2f119a02b1540035ed6ff77e	12.0	8.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__indistinctus
+619ea6841eabf87e4eb6daf8c420c14d	20.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__
+a4262a54fcfc189a3373fc22eca7e28e	13.0	0.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__[Ruminococcus]; s__
+3f7d4e373ed9db3b8f740f89d2ef669f	0.0	20.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+0a8d9d7ddd989590b7ec3e3ff3401fb6	0.0	0.0	20.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+e76ef60a599da5b77076977ccfaf9bcc	0.0	0.0	5.0	15.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__producta
+e4a840be6c0219d42f87a25431f3c54b	0.0	0.0	0.0	20.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+838144ccbcfd35dd13b1c9f17c3f68ae	0.0	19.0	0.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+71e5fa64c8b153f35586c99523995184	0.0	0.0	19.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+1c45df7752924c9e969e92a57164d751	0.0	0.0	0.0	19.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Tissierellaceae]; g__1-68; s__
+493fb478d0e31f707c38797121e12d90	18.0	0.0	0.0	0.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__; s__
+244a02d5308a674b8e0150639b9a6c1f	12.0	6.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]; g__; s__
+a0815439adcfc3b779161c14f5b0e1f7	3.0	7.0	0.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+71dc4a622006aa3fac09e8685446dc5d	0.0	18.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides
+7298360a2dc291cb78c70fc4aa96be8d	0.0	7.0	0.0	11.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+1dac2bdd8824593917b85c7905eed69f	0.0	0.0	18.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+d85bb3705b98f14c9628d3f5f2b80226	0.0	0.0	0.0	18.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__[Ruminococcus]; s__
+49f0d39e1cdbdcdf84e71db9bc982083	0.0	0.0	0.0	18.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+dcf0f08c61ed7a10cd99a298bf3b7876	0.0	0.0	0.0	18.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium
+c065f1a51b4c55698c9c88b954887798	0.0	0.0	0.0	18.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+6b55f7930c267858a9d2cf3085107009	0.0	0.0	0.0	18.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+daf6ab952e25edea2b00776b8e1da353	17.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+8102671e78e7e9fbdcf217ec76e36c42	17.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Dorea; s__
+787c7ccad5ec018bf116b123479f183f	0.0	17.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__Bilophila; s__
+e54e8fcb3e6c62cae395d6f931352425	0.0	7.0	0.0	10.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+51eda50dae3d8d1eae8e68a10cdd4da3	0.0	0.0	0.0	17.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__symbiosum
+4437beb44e2613de8309e103920f0c41	0.0	0.0	0.0	17.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+d5af20ff04615e698c62233450355b04	9.0	0.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Streptococcaceae; g__Streptococcus; s__
+d688ef209f85a1fba37dbcfc7785e261	0.0	10.0	6.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Barnesiellaceae]; g__; s__
+ec36070c63befbe527c21327d2a84207	0.0	0.0	16.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Veillonella; s__dispar
+a16dea477349555c9ed230b4a9444939	0.0	0.0	0.0	16.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Tissierellaceae]; g__WAL_1855D; s__
+5c0b64c38e6f4201196877e43eb57052	0.0	0.0	0.0	16.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__massiliensis
+120e43568409d131795efcb7218eba63	7.0	0.0	8.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Dehalobacteriaceae; g__; s__
+1ba28a2ccb422cc882110466883b4a8f	9.0	0.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+ebc0b6185d82d6ce01c3e7a1a036f681	0.0	15.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+3eadd3fd1c728bcc5a66abad1206fd17	0.0	8.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+7c8051480ddb0f5e692cdc54c60cd0f2	0.0	3.0	12.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+8315d9fc594180e751d664b25bc20dd8	0.0	0.0	15.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+0965939050959601d108558327a2960b	0.0	0.0	0.0	15.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__
+69c18adc4ec80586e7c103e1936d4c79	0.0	0.0	0.0	15.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+b6839262c61e21a711a17fd7d3374b73	14.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+3cd2ea276118dcd4204c5d43b19abb1b	0.0	14.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Lactobacillaceae; g__Lactobacillus; s__ruminis
+be8f96a7d07ddb94032578f13bb6d9ba	0.0	14.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+9f29fa853fdfcb17b5cf19c1b7512a11	0.0	0.0	14.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+5e87315f381db81b0f01401db04e7924	0.0	0.0	14.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+6eda2ca8d151576bd45a8f5a1512c1fd	0.0	0.0	14.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Butyricimonas; s__
+962b07c7c801c91e1ea9fbabae2c2dfd	0.0	0.0	14.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+6dd8f213d103c9ba032cb61581881ac7	0.0	0.0	14.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__SMB53; s__
+1d6357856f2e9eeab5679d97e6d934b9	0.0	0.0	0.0	14.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+bbcc9f18725a6139f2cfe7a77ee5636c	0.0	0.0	0.0	14.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+c5430a1bfa3cccff211cff8c9dc70bc0	0.0	6.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+86d4c60f1b8a72052a9d9c63e7d92f97	0.0	6.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+16870430a99c34d8b0a4fa474fd93af3	0.0	0.0	13.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+60f9d802a9954532ce59560dfdeb0ad0	0.0	0.0	13.0	0.0	k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Burkholderiales; f__Oxalobacteraceae; g__Oxalobacter; s__formigenes
+901c8b84196351ee5b1aaf50238a5716	0.0	0.0	13.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+10a4f74f63ecf1fb48431a7db8e7618d	9.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__Clostridium; s__spiroforme
+bb8cf70b6067e0723835b2e3077180d6	9.0	3.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__; s__
+1691517d7b3beb168db2e8a0bf4dd1e7	12.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+84a2e4f65484f54fc458323331b17b79	5.0	0.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+7c78a14e72731ac20fe2eaf18e6fe1e3	0.0	2.0	0.0	10.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+1548c8ab1cfccfc03e7bfc9aa40f11fa	0.0	0.0	12.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+9a6534f4e6a623c5f55eed8421434ec8	0.0	0.0	12.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+f36219346135d4ec42181b6508a7d117	0.0	0.0	12.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+a49594db578233bbfc8787dcb6711342	0.0	0.0	12.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+e8c800374cbdfc2050e2d5b526af0e0d	0.0	0.0	0.0	12.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+a352302f82b51d4e74fcb7750e9e237a	0.0	0.0	0.0	12.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Porphyromonas; s__
+beb18cf214e881daf71eff2ba014d3cc	11.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Blautia; s__
+14e5486884a61ab49488124b9527f141	11.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+845515c31099e594cdf925b1dcc94747	11.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__aldenense
+3b0f67bbacd09a8b388ae1fb29eaa9f3	0.0	11.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__colinum
+7f74fb508f0ff6d79b62ff9550d32818	0.0	11.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+9fcf9aa7e4e1c823d66bf6c35d873b20	0.0	11.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Rikenellaceae; g__Alistipes; s__indistinctus
+6d9bb9d164f6b2d4f2d94d06375a6fa1	0.0	0.0	11.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+30d98d6765fbfce5fba20a7a4573715b	0.0	0.0	0.0	11.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptococcaceae; g__; s__
+7e017be41bc251c599334ef0f5fbc12a	2.0	2.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+221938fc6f49f2348453f3844a3ca047	0.0	10.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+79e243639493290c0a81ef8d40efdb21	0.0	10.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+29d4ed61c671ed425364f9fe3b9806fb	0.0	3.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+4943331cb5e0e2f9f1b33c077f661d36	0.0	0.0	10.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+21416e78e8243ef95f9eeaadac4d20d9	0.0	0.0	10.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+b801c3cff0bbf7b8efc8418a5e3c657a	0.0	0.0	0.0	10.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__Christensenella; s__
+5b3286d5b407708a0cbf1fa05447e4e5	0.0	0.0	0.0	10.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+5f4dd380a7fb1468a62a7259417df699	9.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+3ce68482adaf98358b6b356e17f6460a	9.0	0.0	0.0	0.0	k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales; f__Coriobacteriaceae; g__Adlercreutzia; s__
+28f4098b540233363c24c5b8085b4d8c	0.0	9.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+637f976925f202a8857ab72abcf1b38f	0.0	9.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+2b1bf7f04ec68582393ae40ef313fdf6	0.0	3.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+de28433865fb21a6c116aba9388e3b1e	0.0	0.0	9.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+0963cf4805181377e6207156ae9b4b1e	0.0	0.0	9.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__Clostridium; s__
+41a2e0e160f7264f965e0ba066386a08	0.0	0.0	9.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+be1419bc3a89f87bfa263f7bfd6257a7	0.0	0.0	9.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Anaerostipes; s__
+6871913aa41bddcb2954dc67d45b2fb9	0.0	0.0	9.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+56dbeb516d14115173669438ff22fca1	0.0	0.0	9.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella; s__copri
+393d55110f14e40855eec75ec6704fd6	0.0	0.0	0.0	9.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Clostridiaceae; g__Clostridium; s__celatum
+42d47001cd5dc53e573f7315e9b4327b	0.0	0.0	0.0	9.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+29ad7c53cd7706b3542655c710ea665d	0.0	8.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+28be987eff1937f7854372bc5f919dcc	0.0	0.0	8.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptococcaceae; g__; s__
+fc53a8a36bcbaec07a4b7741b2babf97	0.0	0.0	8.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+60fa15f5f8e4e3156c22b44027b99a0b	0.0	0.0	8.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+9f212ccf3a369e93900ed9c0185c17a9	0.0	0.0	8.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+eceff59bebd1095f9ccbc3503d18fac9	0.0	0.0	0.0	8.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Corynebacteriaceae; g__Corynebacterium; s__
+927bc97d4ca3f9b4cd2c7d3b162c250c	0.0	0.0	0.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Dialister; s__
+53554aab9efc34a837330e8a185b787a	0.0	0.0	0.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+11456a60abfeeb9fd41a3314ebd14b22	0.0	0.0	0.0	8.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Actinomycetaceae; g__Actinomyces
+995cd156457b5ed54353a046cc954da9	0.0	0.0	0.0	8.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+980f0ef1364040bcdfc275fe9e03a05a	0.0	7.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Porphyromonas; s__
+b00d1bcfc41ce7edc1eb111112bfd48d	0.0	7.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+e9b7dc3041a0f04740db145e73acb13a	0.0	7.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+d5aa3d93020ef88a5064c8e46f054be5	0.0	7.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+d559ca34e918c7278d0b5fc8396c103b	0.0	0.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+71ff779a3c9ba4c1081b8478288a2bcf	0.0	0.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+5da121087339dda3490dfb1c3aaeba6e	0.0	0.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+2654fb6cb682f9fe671c90eee212fcbc	0.0	0.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+d302b8c5a95a7fa43041bd50e88d85a6	0.0	0.0	7.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+e9ca49b1891ba499961627303660d988	0.0	0.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+9e225d785d30f31d5ebd23de65c79816	0.0	0.0	0.0	7.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Actinomycetaceae; g__Mobiluncus; s__
+396bbfd74bcadd9f89a0b69ca544cb38	0.0	0.0	0.0	7.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+bd0a0bb1e7c55444291ff8fdb983783b	6.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+4bc86b395aac0ebb1dcc8bbf6fe325fc	0.0	6.0	0.0	0.0	k__Bacteria; p__Synergistetes; c__Synergistia; o__Synergistales; f__Synergistaceae; g__Cloacibacillus; s__
+903ff60fb053b39d341f1ddc92a5bedf	0.0	6.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+83f9b793e92583b4b2413cca8beda926	0.0	6.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+e28d19eab64cb0cd591a1f9f75f5a236	0.0	6.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Dialister; s__
+d478b164af1a6c4659d45f5f8866391b	0.0	6.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Butyricimonas; s__
+7c055a9544396ed64a06b8859a4289a7	0.0	6.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Lachnospira; s__
+c13ee2b85400b1557f1c2e0e98b8719e	0.0	0.0	6.0	0.0	k__Bacteria; p__Tenericutes; c__RF3; o__ML615J-28; f__; g__; s__
+7c9601b272411cb8af3b0672f5fe9513	0.0	0.0	6.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+b7a3c10642302300c5359cd21b56c0ca	0.0	0.0	6.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+1626da3ce9c16299f6355bde5867cf50	0.0	0.0	6.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+3fabac4dbd19ec38b22732ca60efb053	0.0	0.0	6.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+89782500266beddfd4235e577a7800bd	0.0	0.0	6.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptostreptococcaceae
+dc8f93063e3b563425c4262518de57b0	0.0	0.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+709335da756afa8568c7113554768a19	0.0	0.0	0.0	6.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__
+efd9a99ae90e1142b5be923ca5b8896b	0.0	0.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__Christensenella; s__
+2b3839bc16a3125c2d9f2270ed3f56a6	0.0	0.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+e86e51bcdf2fba4af967cd081519c594	0.0	0.0	0.0	6.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+db3063a7d5c7a9964909d41e9b09fc4e	5.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+ec205d78c0d7e2e3200f01cb6a6b969d	5.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__; s__
+c40e2f557cef6c0f4b90ccb63003bfe6	5.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+e0d7ecbfa7b3cd22c30bd24fc5a02960	0.0	5.0	0.0	0.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__[Odoribacteraceae]; g__Odoribacter; s__
+ad3dd65b2d7fc0413c068dc81a580539	0.0	5.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+aa0802e7bd66ad1d659dae1ab3f0f207	0.0	0.0	5.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+fe94c95cb04b7c9cbef4f431d5ff0bc9	0.0	0.0	5.0	0.0	k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__; s__
+0a94574b7827b69567103d9d0097c54c	0.0	0.0	5.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+c29d3ed7e64407a2876d1ee19374f179	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Tissierellaceae]; g__ph2; s__
+d3ead5e1ba2a343dadc31011a0f4ef63	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Streptococcaceae; g__Streptococcus; s__anginosus
+deef70c2435fb29234cd6b18b32c0841	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+3da6851bde486276bee9608f86063899	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+19bc15b82db7911d113423cb139703c0	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+287cb7493daa5e5ba3760b7d6d70c7ac	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+d324a47f3d299b4131661f78b5cf5d22	0.0	0.0	0.0	5.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Clostridium; s__lavalense
+ffa4b7e497bc4672dcdd2f8708e7dd6d	4.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+fc5ff0d7366bcfbf8e8b124f78c4f41d	4.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+b62819e9928097f38381d52a75a4d74d	4.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+1f80fe341594a3daa2dc6c0f63874587	4.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+6cfe45309d9292d0bbe86a377ebf1dc1	4.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+cb18d3f7934f3d9f07420edead05d919	0.0	4.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+1f162920d001f7cefc47c577c80e993f	0.0	4.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae
+4c50b49cc5b60f1d358e13bec9d7e5d3	0.0	4.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+cfb891d500fd9f4b9d4916192dcab725	0.0	4.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+fc35038e5c50cfdf7973609aa336f66c	0.0	4.0	0.0	0.0	k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__RF32; f__; g__; s__
+e32f1b6fc9e5b05d139f5cc9e6f9c834	0.0	4.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+11fedf1532ff2acf087be76ad588e9bb	0.0	4.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptostreptococcaceae; g__; s__
+a65f232baaa0aaf0e1edceb5a7b6cb9d	0.0	0.0	4.0	0.0	k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Pasteurellales; f__Pasteurellaceae; g__Haemophilus; s__parainfluenzae
+dd973b6704a7d72394a1c7f52910351a	0.0	0.0	4.0	0.0	k__Bacteria; p__Lentisphaerae; c__[Lentisphaeria]; o__Victivallales; f__Victivallaceae
+89015b9fb2a1905886e8abcbe0c1c337	0.0	0.0	4.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+81a8ac27d1bac5b6290ec179800638fc	0.0	0.0	4.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+e5a9ac77c17fe38176c82b7f5a79d8d3	0.0	0.0	4.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+905732c1bfe963b90c9ba4ed0340306f	0.0	0.0	4.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+214f6cb81bebefbbd2e9a3cf614e2636	0.0	0.0	4.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae
+f25ce23085809c5f022a95ec863d8b63	0.0	0.0	0.0	4.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Succiniclasticum; s__
+fd5807f6fd358993febf471f7637ca2e	0.0	0.0	0.0	4.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+5f8e9b58eeb0f27fd2c28c2e75870b90	0.0	0.0	0.0	4.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__S24-7; g__; s__
+0052c7121c50cf11aa5d7c03b67511ea	0.0	0.0	0.0	4.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+9e6ef35f803d09c7036281121d720d6d	0.0	0.0	0.0	4.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+a5d3f77f2a2836983848a74a8ebd8705	0.0	0.0	0.0	4.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+8e4f6aa5c451979a4782659a249f2232	0.0	0.0	0.0	4.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+70b7d2d5c801ea042c532f178008e828	3.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+6aad2f88a48a552a36f82856ea7601db	3.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__[Eubacterium]; s__dolichum
+9ec5e7e0c4de4f259c63f55fb2e292a7	0.0	3.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+db84324d5bbb36adf425d53e40f4f160	0.0	3.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+0495a7c568eb5c12063942e566bb2fab	0.0	3.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+a50299756ce43b2186b04816d6635639	0.0	3.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__; s__
+37153e4299dc8180a3fb672eb1488358	0.0	0.0	3.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+c905b1ee692ed6dfcd8d480404f19ea4	0.0	0.0	3.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+3e5f9ddc9186c30add32885a8b6f6747	0.0	0.0	3.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Dialister; s__
+5c0838a0d31fc8fe023b335df1036b0f	0.0	0.0	3.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+0baf71e1de526607cef9f8d4f1eeff85	0.0	0.0	0.0	3.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Actinomycetaceae; g__Actinomyces; s__
+9c82ddc222cc8b1fa0325d9a935184d6	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Tissierellaceae]; g__Anaerococcus; s__
+7fc64c5931164ac29a15624a4e49b2e2	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales; f__Erysipelotrichaceae; g__Holdemania; s__
+8bd7abb964bfe5938abd9355c358afd9	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Mitsuokella; s__
+55eeeefacc3d6e0b14d4a0e7b1545df8	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+3d0180994b6bebd33bb117c2291d0759	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales
+454ded2dd9cd9774656989ca3d04c65b	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Veillonella; s__parvula
+b7e8775c883800fef8ad2f89468f3158	0.0	0.0	0.0	3.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__Mogibacterium; s__
+7cb13a0a5fcad574f0f8965a36c4e7e0	0.0	0.0	0.0	3.0	k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Bacteroidaceae; g__Bacteroides; s__uniformis
+c92d0885c7cf295075009eddb8972aeb	0.0	0.0	0.0	3.0	k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Enterobacteriales; f__Enterobacteriaceae
+352d054c82d147581b220d6a7fc1ecb9	2.0	0.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptococcaceae; g__; s__
+c045346072c7951e947c2733d2a0f3e4	2.0	0.0	0.0	0.0	k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales; f__Actinomycetaceae; g__Actinomyces; s__
+922cdf18c6eefb2d771549cf1cf0a21f	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae; g__Coprococcus; s__
+8d8099437fd5c2c348b5041165bef659	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales
+3eb61d5c7152d23987121465a91b55c3	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+7662ed956959dfd6cd14c76270eaa5b1	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Dehalobacteriaceae; g__Dehalobacterium; s__
+af240af418945bbc565cc78552b69444	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Mogibacteriaceae]; g__; s__
+2fa75995b36e2300b8a26b6000699391	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__; s__
+5f52b1e888cc084c67d071eecf6fc523	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+0230d70556e091a0dd5cfa45fcf607d6	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+1b9ec2ffab718e10985fca765515aee4	0.0	2.0	0.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus; s__
+f48b97a47872caa6e4984dbc74efe2d8	0.0	0.0	2.0	0.0	k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Enterobacteriales; f__Enterobacteriaceae
+de86aa348ac643d0aac9c98f98e36675	0.0	0.0	2.0	0.0	k__Bacteria; p__Firmicutes; c__Bacilli; o__Lactobacillales; f__Lactobacillaceae; g__Lactobacillus; s__vaginalis
+cd85956bdea039849df24be3d634f0e7	0.0	0.0	2.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+742b0fb66b7dba4f2f7128ec6c1fcd3b	0.0	0.0	2.0	0.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira; s__
+1390558259e617e1bd18335e5d4f8c8d	0.0	0.0	0.0	2.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
+3475bfb384767d6fb7145f5ef6b075d0	0.0	0.0	0.0	2.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae
+e75bae14ab482eecb2893548965dd4b6	0.0	0.0	0.0	2.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__; s__
+5379fb05da7424b33f48afe5157d6949	0.0	0.0	0.0	2.0	k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__; s__
