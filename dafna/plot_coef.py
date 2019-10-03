@@ -3,6 +3,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def create_coeff_plots_by_alogorithm(averages, bacterias, task_name, algorithm, num_of_iters, edge_percent=4, folder=False):
     min_rho = min(averages)
     max_rho = max(averages)

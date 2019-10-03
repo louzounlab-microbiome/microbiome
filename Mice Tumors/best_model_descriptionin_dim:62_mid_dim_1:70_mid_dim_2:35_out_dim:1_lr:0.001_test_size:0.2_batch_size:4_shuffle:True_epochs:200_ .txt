@@ -1,0 +1,9 @@
+in_dim:62
+mid_dim_1:70
+mid_dim_2:35
+out_dim:1
+lr:0.001
+test_size:0.2
+batch_size:4
+shuffle:True
+epochs:200

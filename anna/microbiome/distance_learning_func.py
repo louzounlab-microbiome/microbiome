@@ -1,24 +1,27 @@
-from load_merge_otu_mf import OtuMfHandler
-from preprocess import preprocess_data
-from pca import *
+from infra_functions.load_merge_otu_mf import OtuMfHandler
+from infra_functions.preprocess import preprocess_data
+from sklearn.decomposition import PCA
 import pandas as pd
+from infra_functions.general import apply_pca
 
-otu = 'allergy_otu.csv'
-mapping = 'allergy_mf.csv'
-## preprocessing
-OtuMf = OtuMfHandler(otu, mapping, from_QIIME=False)
-preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=7)
-preproccessed_data = preproccessed_data.join(OtuMf.mapping_file[['AllergyType', 'SuccessDescription']],
-                                             how='inner')
-preproccessed_data = preproccessed_data.loc[(preproccessed_data['AllergyType'] == 'Milk') | ((preproccessed_data['AllergyType'] == 'Peanut'))]
-preproccessed_data = preproccessed_data.drop(['AllergyType', 'SuccessDescription'], axis =1)
-mapping_file = OtuMf.mapping_file.loc[(OtuMf.mapping_file['AllergyType']  == 'Milk') | (OtuMf.mapping_file['AllergyType']  == 'Peanut')]
-mapping_disease = {'Milk': 1, 'Peanut': 0}
-mapping_file['AllergyType'] = mapping_file['AllergyType'].map(mapping_disease)
-mapping_file = mapping_file['AllergyType']
+if __name__ == "__main__":
+    otu = 'allergy_otu.csv'
+    mapping = 'allergy_mf.csv'
+    ## preprocessing
+    OtuMf = OtuMfHandler(otu, mapping, from_QIIME=False)
+    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=7)
+    preproccessed_data = preproccessed_data.join(OtuMf.mapping_file[['AllergyType', 'SuccessDescription']],
+                                                 how='inner')
+    preproccessed_data = preproccessed_data.loc[(preproccessed_data['AllergyType'] == 'Milk') | ((preproccessed_data['AllergyType'] == 'Peanut'))]
+    preproccessed_data = preproccessed_data.drop(['AllergyType', 'SuccessDescription'], axis =1)
+    mapping_file = OtuMf.mapping_file.loc[(OtuMf.mapping_file['AllergyType']  == 'Milk') | (OtuMf.mapping_file['AllergyType']  == 'Peanut')]
+    mapping_disease = {'Milk': 1, 'Peanut': 0}
+    mapping_file['AllergyType'] = mapping_file['AllergyType'].map(mapping_disease)
+    mapping_file = mapping_file['AllergyType']
+
 
 ## distance learning
-def distance_learning(perform_distance=False,level =3,preproccessed_data= preproccessed_data, mappping_file = mapping_file):
+def distance_learning(perform_distance, level, preproccessed_data, mapping_file):
     if perform_distance:
         cols = [col for col in preproccessed_data.columns if len(preproccessed_data[col].unique()) != 1]
         dict_bact = {'else': []}
@@ -50,7 +53,10 @@ def distance_learning(perform_distance=False,level =3,preproccessed_data= prepro
                     break
             if num_comp == 0:
                 num_comp += 1
-            otu_after_pca_new, pca_components = apply_pca(new_data, n_components=num_comp)
+            # new
+            otu_after_pca_new, pca_obj, pca_str = apply_pca(new_data, n_components=num_comp)
+            # old
+            # otu_after_pca_new, pca_components = apply_pca(new_data, n_components=num_comp)
             for j in range(otu_after_pca_new.shape[1]):
                 new_df[col + j] = otu_after_pca_new[j]
             col += num_comp

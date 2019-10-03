@@ -2,17 +2,19 @@ import pandas as pd
 
 
 class OtuMfHandler:
-    def __init__(self, otu_csv_file_path, mapping_csv_file_path, from_QIIME=False, id_col='#OTU ID', taxonomy_col='taxonomy'):
+    def __init__(self, otu_csv_file_path, mapping_csv_file_path, from_QIIME=False, id_col='#OTU ID', taxonomy_col='taxonomy', create_otu_file_wo_taxonomy=True):
         self.id_col = id_col
         self.taxonomy_col = taxonomy_col
         self.from_QIIME = from_QIIME
         self.mapping_file_path = mapping_csv_file_path
         self.otu_file_path = otu_csv_file_path
         self.mapping_file, self.otu_file = self._load_data()
-        self.otu_file_wo_taxonomy = self.get_otu_file_wo_taxonomy()
+        if create_otu_file_wo_taxonomy:
+            self.otu_file_wo_taxonomy = self.get_otu_file_wo_taxonomy()
         self.merged_data = self._merge_otu_mf()
 
     def _load_data(self):
+        print(self.mapping_file_path)
         mapping_file = pd.read_csv(self.mapping_file_path)
         mapping_file = mapping_file.set_index('#SampleID').sort_index()
         skip_rows = 0

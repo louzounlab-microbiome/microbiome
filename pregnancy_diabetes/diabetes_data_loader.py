@@ -9,14 +9,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import zscore, spearmanr
 # from sklearn import svm
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn import svm, metrics
 from collections import Counter
-from allergy.dafna import calc_auc_on_joined_results, edit_confusion_matrix, print_confusion_matrix
+from dafna.plot_auc import calc_auc_on_joined_results
+from dafna.plot_rho import draw_dynamics_rhos_calculation_figure
+from dafna.plot_confusion_mat import edit_confusion_matrix, print_confusion_matrix
 from anna.microbiome.distance_learning_func import distance_learning
-from infra_functions.general import apply_pca, draw_rhos_calculation_figure, roc_auc, convert_pca_back_orig, \
-    draw_dynamics_rhos_calculation_figure
+from infra_functions.general import apply_pca, draw_rhos_calculation_figure, roc_auc, convert_pca_back_orig
 from infra_functions.load_merge_otu_mf import OtuMfHandler
 from infra_functions.preprocess import preprocess_data
 from matplotlib import pyplot as plt
@@ -1032,7 +1033,6 @@ def predict_GMM(ddl, TUNED_PAREMETERS=False, Cross_validation=10):
         pickle.dump(svm_results, open("svm_all_results_df_" + task_name + ".pkl", 'wb'))
 
 
-
     # Split the data set
     X_trains = []
     X_tests = []
@@ -1243,7 +1243,6 @@ def calc_clusters(ddl, folder="clustering"):
                                             round(stool_counter/num_of_samples, 5),
                                             round(meconium_counter/num_of_samples, 5)]
 
-
             t1_counter = len([0 for z in sub_group if 'T1' in z])
             t2_counter = len([0 for z in sub_group if 'T2' in z])
             t3_counter = len([0 for z in sub_group if 'T3' in z])
@@ -1307,9 +1306,6 @@ def calc_clusters(ddl, folder="clustering"):
         plt.title("Cluster Distribution Of " + title + " - MI=" + str(round(mi, 4)))
         plt.savefig(os.path.join(folder, title.replace(" ", "_") + "_cluster_distribution.png"))
 
-
-
-
     GDM_cluster_df.to_csv(os.path.join(folder, "GDM_cluster_df.csv"))
     trimester_cluster_df.to_csv(os.path.join(folder, "trimester_cluster_df.csv"))
     file_cluster_df.to_csv(os.path.join(folder, "file_cluster_df.csv"))
@@ -1321,9 +1317,6 @@ def calc_clusters(ddl, folder="clustering"):
     cluster_2 = [ids[i] for i, c in enumerate(clusters_pred) if c == 2]
     cluster_3 = [ids[i] for i, c in enumerate(clusters_pred) if c == 3]
     cluster_4 = [ids[i] for i, c in enumerate(clusters_pred) if c == 4]
-
-
-
 
 
 if __name__ == "__main__":  # microbial
@@ -1351,7 +1344,6 @@ if __name__ == "__main__":  # microbial
 
     if False:
         run_diabetic_healthy_task(ddl, TUNED_PAREMETERS=True)
-
     if False:
         # calc_dynamics(ddl, plt=False)
         get_extreme_bact_in_corr(margin, val_to_comp)
@@ -1366,7 +1358,5 @@ if __name__ == "__main__":  # microbial
         # clac_distance_between_samples(id_to_features_map, 'B001VVC-STOOL-T1-rep-1', 'B002LA-Meconium-T4-rep-1')
         clac_distance_between_all_samples_and_plot(ddl)
     if True:
-
-
         calc_clusters(ddl)
 

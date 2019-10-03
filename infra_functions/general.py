@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import auc, roc_curve
 from sklearn.manifold import TSNE
-
+from sklearn.decomposition import PCA
 # from sc
 
 

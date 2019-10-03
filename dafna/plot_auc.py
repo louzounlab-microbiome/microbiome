@@ -1,3 +1,5 @@
+from scipy.stats import stats
+from sklearn import metrics
 from sklearn.metrics import roc_curve, auc
 import os
 import numpy as np
@@ -118,4 +120,46 @@ def multi_class_roc_auc(y_test, y_score, labels_names, graph_title='ROC Curve', 
         plt.close()
 
     return fpr, tpr, roc_auc
+
+
+def calc_auc_on_joined_results(Cross_validation, y_trains, y_train_preds, y_tests, y_test_preds):
+    all_y_train = []
+    for i in range(Cross_validation):
+        all_y_train = all_y_train + y_trains[i]
+
+    all_predictions_train = []
+    for i in range(Cross_validation):
+        all_predictions_train = all_predictions_train + list(y_train_preds[i])
+
+    all_test_real_tags = []
+    for i in range(Cross_validation):
+        all_test_real_tags = all_test_real_tags + y_tests[i]
+
+    all_test_pred_tags = []
+    for i in range(Cross_validation):
+        all_test_pred_tags = all_test_pred_tags + list(y_test_preds[i])
+
+    try:
+        train_auc = metrics.roc_auc_score(all_y_train, all_predictions_train)
+        #fpr, tpr, thresholds = metrics.roc_auc_score(all_test_real_tags, all_test_pred_tags)
+        # test_auc = metrics.auc(fpr, tpr)
+        test_auc = metrics.roc_auc_score(all_test_real_tags, all_test_pred_tags)
+        train_rho, pval_train = stats.spearmanr(all_y_train, np.array(all_predictions_train))
+        test_rho, p_value = stats.spearmanr(all_test_real_tags, np.array(all_test_pred_tags))
+    except ValueError:
+        # Compute ROC curve and ROC area for each class
+        print("train classification_report")
+        train_auc = metrics.classification_report(all_y_train, all_predictions_train)
+        for row in train_auc.split("\n"):
+            print(row)
+        print("test classification_report")
+        test_auc = metrics.classification_report(all_test_real_tags, all_test_pred_tags)
+        for row in test_auc.split("\n"):
+            print(row)
+
+        train_rho, pval_train = stats.spearmanr(all_y_train, np.array(all_predictions_train))
+        test_rho, p_value = stats.spearmanr(all_test_real_tags, np.array(all_test_pred_tags))
+
+    return all_y_train, all_predictions_train, all_test_real_tags, all_test_pred_tags,\
+           train_auc, test_auc, train_rho, test_rho
 

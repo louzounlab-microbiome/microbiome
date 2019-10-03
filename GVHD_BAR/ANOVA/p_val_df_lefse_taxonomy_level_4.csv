@@ -1,0 +1,21 @@
+taxonomy,time,state,time*state
+k__Bacteria; p__Actinobacteria,0.1400078135922019,0.576698651386373,0.5932176344959597
+k__Bacteria; p__Actinobacteria; c__Actinobacteria; o__Actinomycetales,0.7265309054572805,0.4299530566759897,0.66239748570461
+k__Bacteria; p__Actinobacteria; c__Coriobacteriia; o__Coriobacteriales,0.43336866713220634,0.9058869486584046,0.7401313199041675
+k__Bacteria; p__Bacteroidetes,0.8186765816382153,0.24969912109395076,0.527536271347494
+k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales,0.03194689182937525,0.9748271545017938,0.6232222466938199
+k__Bacteria; p__Bacteroidetes; c__Flavobacteriia; o__Flavobacteriales,0.7121057285461827,0.8713646903853888,0.55064529714176
+k__Bacteria; p__Firmicutes,0.19854612129627186,0.6272888662525213,0.9967597383333754
+k__Bacteria; p__Firmicutes; c__Bacilli; o__Bacillales,0.14972674735523256,0.15430728873734237,0.996140228560289
+k__Bacteria; p__Firmicutes; c__Bacilli; o__Gemellales,0.03213376786752878,0.6261922167378342,0.3794831963601448
+k__Bacteria; p__Firmicutes; c__Erysipelotrichi; o__Erysipelotrichales,0.032450800537303454,0.649077372736776,0.23987388913423682
+k__Bacteria; p__Fusobacteria; c__Fusobacteriia; o__Fusobacteriales,0.06546575699834938,0.541291700805725,0.31842937068822735
+k__Bacteria; p__Proteobacteria,0.1400078135922019,0.576698651386373,0.5932176344959597
+k__Bacteria; p__Proteobacteria; c__Alphaproteobacteria; o__Rhizobiales,0.8185615483681963,0.1282821785222744,0.658626874301898
+k__Bacteria; p__Proteobacteria; c__Betaproteobacteria,0.1400078135922019,0.576698651386373,0.5932176344959597
+k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Neisseriales,0.6081418754546002,0.8605356893407604,0.29084090496424664
+k__Bacteria; p__Proteobacteria; c__Epsilonproteobacteria; o__Campylobacterales,0.010945465606007855,0.02828975879798518,0.8498140889398534
+k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria,0.5480176210576891,0.37176010497853884,0.26738995930269405
+k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Pasteurellales,0.10582588416546525,0.015400604053939827,0.48736895343781217
+k__Bacteria; p__Synergistetes; c__Synergistia; o__Synergistales,0.32164498519872364,0.008875275837513715,0.4947685231948895
+k__Bacteria; p__Tenericutes; c__Mollicutes; o__Mycoplasmatales,0.026331329130965603,0.134543952489586,0.6121000644898407

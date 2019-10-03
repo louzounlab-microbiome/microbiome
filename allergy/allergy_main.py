@@ -16,13 +16,13 @@ from sklearn.utils import class_weight
 
 from dafna.nn import nn_main
 from infra_functions.general import convert_pca_back_orig, draw_rhos_calculation_figure
-# import keras
 
 from allergy.allergy_data_loader import AllergyDataLoader
 
-from dafna.plot_auc import multi_class_roc_auc, roc_auc
+from dafna.plot_auc import multi_class_roc_auc, roc_auc, calc_auc_on_joined_results
 from dafna.plot_coef import create_coeff_plots_by_alogorithm
 from dafna.plot_confusion_mat import edit_confusion_matrix, print_confusion_matrix
+
 
 from infra_functions import tf_analaysis
 from infra_functions.general import convert_pca_back_orig
@@ -203,48 +203,6 @@ def get_xgb_clf(title, weights):
                                 gamma=0, min_child_weight=1)
 
     return clf
-
-
-def calc_auc_on_joined_results(Cross_validation, y_trains, y_train_preds, y_tests, y_test_preds):
-    all_y_train = []
-    for i in range(Cross_validation):
-        all_y_train = all_y_train + y_trains[i]
-
-    all_predictions_train = []
-    for i in range(Cross_validation):
-        all_predictions_train = all_predictions_train + list(y_train_preds[i])
-
-    all_test_real_tags = []
-    for i in range(Cross_validation):
-        all_test_real_tags = all_test_real_tags + y_tests[i]
-
-    all_test_pred_tags = []
-    for i in range(Cross_validation):
-        all_test_pred_tags = all_test_pred_tags + list(y_test_preds[i])
-
-    try:
-        train_auc = metrics.roc_auc_score(all_y_train, all_predictions_train)
-        #fpr, tpr, thresholds = metrics.roc_auc_score(all_test_real_tags, all_test_pred_tags)
-        # test_auc = metrics.auc(fpr, tpr)
-        test_auc = metrics.roc_auc_score(all_test_real_tags, all_test_pred_tags)
-        train_rho, pval_train = stats.spearmanr(all_y_train, np.array(all_predictions_train))
-        test_rho, p_value = stats.spearmanr(all_test_real_tags, np.array(all_test_pred_tags))
-    except ValueError:
-        # Compute ROC curve and ROC area for each class
-        print("train classification_report")
-        train_auc = metrics.classification_report(all_y_train, all_predictions_train)
-        for row in train_auc.split("\n"):
-            print(row)
-        print("test classification_report")
-        test_auc = metrics.classification_report(all_test_real_tags, all_test_pred_tags)
-        for row in test_auc.split("\n"):
-            print(row)
-
-        train_rho, pval_train = stats.spearmanr(all_y_train, np.array(all_predictions_train))
-        test_rho, p_value = stats.spearmanr(all_test_real_tags, np.array(all_test_pred_tags))
-
-    return all_y_train, all_predictions_train, all_test_real_tags, all_test_pred_tags,\
-           train_auc, test_auc, train_rho, test_rho
 
 
 def get_confusin_matrix_names(data_loader, title):
