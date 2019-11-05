@@ -1,5 +1,5 @@
 import random
-
+import os
 import pandas as pd
 from scipy.stats import spearmanr, pearsonr
 import matplotlib.pyplot as plt
@@ -8,6 +8,7 @@ from sklearn.metrics import auc, roc_curve
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 # from sc
+from dafna.general_functions import shorten_bact_names
 
 
 def apply_tsne(data, n_components=15, visualize=False):
@@ -61,7 +62,7 @@ def apply_pca(data, n_components=15, visualize=False):
 
 def set_size(w,h, ax=None):
     """ w, h: width, height in inches """
-    if not ax: ax=plt.gca()
+    if not ax: ax = plt.gca()
     l = ax.figure.subplotpars.left
     r = ax.figure.subplotpars.right
     t = ax.figure.subplotpars.top
@@ -197,6 +198,8 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
 
     significant_bacteria_and_rhos.sort(key=lambda s: s[1])
     if save_folder:
+        if not os.path.exists(save_folder):
+            os.makedirs(save_folder)
         with open(save_folder + "/significant_bacteria_" + title + ".csv", "w") as file:
             for s in significant_bacteria_and_rhos:
                 file.write(str(s[1]) + "," + str(s[0]) + "\n")
@@ -240,12 +243,7 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     bacterias = [s[0] for s in significant_bacteria_and_rhos]
     real_rhos = [s[1] for s in significant_bacteria_and_rhos]
     # extract the last meaningful name - long multi level names to the lowest level definition
-    short_bacterias_names = []
-    for f in bacterias:
-        i = 1
-        while len(f.split(";")[-i]) < 5:  # meaningless name
-            i += 1
-        short_bacterias_names.append(f.split(";")[-i])
+    short_bacterias_names, bacterias = shorten_bact_names(bacterias)
 
     left_padding = 0.4
     fig, ax = plt.subplots()

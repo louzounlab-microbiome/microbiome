@@ -134,6 +134,7 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     bacterias = [s[0] for s in significant_bacteria_and_rhos]
     real_rhos = [s[1] for s in significant_bacteria_and_rhos]
     # extract the last meaningful name - long multi level names to the lowest level definition
+
     short_bacterias_names = []
     for f in bacterias:
         i = 1

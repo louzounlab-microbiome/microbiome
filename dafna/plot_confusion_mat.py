@@ -6,7 +6,7 @@ import seaborn as sns
 import copy
 
 
-def print_confusion_matrix(confusion_matrix, class_names, acc, algorithm, TITLE, figsize=(10, 7), fontsize=17):
+def print_confusion_matrix(confusion_matrix, class_names, acc, algorithm, title, folder, figsize=(10, 7), fontsize=17):
     df_cm = pd.DataFrame(
         confusion_matrix, index=class_names, columns=class_names,
     )
@@ -18,16 +18,16 @@ def print_confusion_matrix(confusion_matrix, class_names, acc, algorithm, TITLE,
     heatmap.yaxis.set_ticklabels(heatmap.yaxis.get_ticklabels(), rotation=0, ha='right', fontsize=fontsize)
     heatmap.xaxis.set_ticklabels(heatmap.xaxis.get_ticklabels(), rotation=45, ha='right', fontsize=fontsize)
     ac = str(round(acc, 3))
-    plt.title(TITLE.capitalize() + "\n" + algorithm + " Confusion Matrix Heat Map\n" + "Accuracy = " + ac, fontsize=17)
+    plt.title(title.capitalize() + "\n" + algorithm + " Confusion Matrix Heat Map\n" + "Accuracy = " + ac, fontsize=17)
     plt.ylabel('True label', fontsize=17)
     plt.xlabel('Predicted label', fontsize=17)
     # plt.show()
-    plt.savefig(os.path.join(TITLE, TITLE + "_" + algorithm + "_confusion_matrix_heat_map_" + ac + ".svg"),
+    plt.savefig(os.path.join(folder, title + "_" + algorithm + "_confusion_matrix_heat_map_" + ac + ".svg"),
                 bbox_inches='tight', format='svg')
     return fig
 
 
-def edit_confusion_matrix(title, confusion_matrixes, data_loader, algo, names, BINARY=True):
+def edit_confusion_matrix(title, confusion_matrixes, data_loader, algo, names, BINARY=False):
     if BINARY:
         if algo == "NN":
             c = confusion_matrixes.tolist()

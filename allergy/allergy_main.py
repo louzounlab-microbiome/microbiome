@@ -15,6 +15,7 @@ import tensorflow as tf
 from sklearn.utils import class_weight
 
 from dafna.nn import nn_main
+from dafna.plot_3D_pca import plot_data_3d, plot_data_2d, PCA_t_test
 from infra_functions.general import convert_pca_back_orig, draw_rhos_calculation_figure
 
 from allergy.allergy_data_loader import AllergyDataLoader
@@ -72,7 +73,11 @@ def get_learning_data(title, data_loader, only_single_allergy_type):
         # ids = [i for i in ids if i in time_zero]
         tag_map = data_loader.get_id_to_allergy_number_type_tag_map
 
-
+    elif title == "Single vs. multiple allergy task":
+        W_CON = False
+        tag_map = data_loader.get_id_to_single_or_multiple_allergy_map
+        ids = tag_map.keys()
+        task_name = 'single vs. multiple allergy task'
 
     elif title == 'Milk_allergy_task':
         W_CON = False
@@ -138,6 +143,9 @@ def get_svm_clf(title):
         # {'C': 1, 'gamma': 'scale', 'kernel': 'rbf'}
         #  0.7081696718971948
         clf = svm.SVC(kernel='linear', C=1, gamma='scale', class_weight='balanced')
+
+    if title == "Single vs. multiple allergy task":
+        clf = svm.SVC(kernel='linear', C=1, gamma='scale', class_weight='balanced')
     return clf
 
 
@@ -202,17 +210,23 @@ def get_xgb_clf(title, weights):
             clf = XGBClassifier(max_depth=3, learning_rate=0.1, n_estimators=100, objective='binary:logistic',
                                 gamma=0, min_child_weight=1)
 
+    elif title == "Single vs. multiple allergy task":
+        clf = XGBClassifier(max_depth=3, learning_rate=0.1, n_estimators=100, objective='binary:logistic',
+                            gamma=0, min_child_weight=1)
+
     return clf
 
 
 def get_confusin_matrix_names(data_loader, title):
-    if title in ["Success_task",  "Health_task", "Prognostic_task", "Milk_allergy_task"]:
+    if title in ["Success_task",  "Health_task", "Prognostic_task", "Milk_allergy_task", "Single vs. multiple allergy task"]:
         if title == "Milk_allergy_task":
             names = ['Other', 'Milk']
         elif title == "Health_task":
             names = ['Allergic', 'Healthy']
         elif title in ["Success_task", "Prognostic_task"]:
             names = ['No', 'Yes']
+        elif title in ["Single vs. multiple allergy task"]:
+            names = ['Single', 'multiple']
 
     elif title in ["Allergy_type_task"]:  # MULTI CLASS
         tag_to_allergy_type_map = data_loader.get_tag_to_allergy_type_map
@@ -226,7 +240,7 @@ def get_confusin_matrix_names(data_loader, title):
     return names
 
 
-def run_learning(TITLE, PRINT, REG, RHOS, SVM, XGBOOST, NN, Cross_validation, COEFF_PLOTS, TUNED_PAREMETERS, only_single_allergy_type):
+def run_learning(TITLE, PRINT, REG, RHOS, SVM, XGBOOST, NN, Cross_validation, COEFF_PLOTS, TUNED_PAREMETERS, PCA, only_single_allergy_type):
 
     data_loader = AllergyDataLoader(TITLE, PRINT, REG, WEIGHTS=True, ANNA_PREPROCESS=False)
 
@@ -239,12 +253,19 @@ def run_learning(TITLE, PRINT, REG, RHOS, SVM, XGBOOST, NN, Cross_validation, CO
         draw_rhos_calculation_figure(tag_map, data_loader.get_preproccessed_data, TITLE, ids_list=ids, save_folder="rhos")
 
     id_to_features_map = data_loader.get_id_to_features_map
-    X = [id_to_features_map[id] for id in ids]
-    y = [tag_map[id] for id in ids]
+    X = [id_to_features_map[id] for id in ids if id in id_to_features_map.keys()]
+    y = [tag_map[id] for id in ids if id in id_to_features_map.keys()]
 
     # ----------------------------------------------! SVM ------------------------------------------------
     # Set the parameters by cross-validation
     # multi_class =”crammer_singer”
+
+    if PCA:
+        PCA_t_test(group_1=[x for x, y in zip(X, y) if y == 0], group_2=[x for x, y in zip(X, y) if y == 1],
+                   title="T test for PCA dimentions on " + task_name, save=True, folder="PCA")
+        plot_data_3d(X, y, data_name=task_name.capitalize(), save=True, folder="PCA")
+        plot_data_2d(X, y,  data_name=task_name.capitalize(), save=True, folder="PCA")
+
     if SVM:
         print("SVM...")
         if TUNED_PAREMETERS:
@@ -839,12 +860,25 @@ if __name__ == "__main__":
     RHOS = False  # calculate correlation between reaction to treatment to the tags
     """
 
-    TITLES = ["Health_task"] #"Allergy_type_task"] #  "Milk_allergy_task"] # , "Success_task","Prognostic_task","Milk_allergy_task", ,
+    """
+            data_loader = AllergyDataLoader("Single vs. Multiple allergies", False, False, WEIGHTS=True, ANNA_PREPROCESS=False)
+        id_to_single_or_multiple_allergy_map = data_loader.get_id_to_single_or_multiple_allergy_map
+        ids = list(id_to_single_or_multiple_allergy_map.keys())
+        id_to_features_map = data_loader.get_id_to_features_map
+        X = [id_to_features_map[id] for id in ids if id in id_to_features_map]
+        y = [id_to_single_or_multiple_allergy_map[id] for id in ids if id in id_to_features_map]
+
+        id_to_single_or_multiple_allergy_map = data_loader.get_id_to_single_or_multiple_allergy_map
+        plot_data_2d(X, y, "Single vs. Multiple allergies", save=True, folder="PCA")
+        plot_data_3d(X, y, "Single vs. Multiple allergies", save=True, folder="PCA")
+    """
+
+    TITLES = ["Health_task"] #"Single vs. multiple allergy task"] # "Health_task"] # "Allergy_type_task"] #  "Milk_allergy_task"] # , "Success_task","Prognostic_task","Milk_allergy_task", ,
 
     # only_single_allergy_type = remove patients with more then one allergy
     for t in TITLES:
-        run_learning(TITLE=t, PRINT=False, REG=False, RHOS=False, SVM=False, XGBOOST=False, NN=True, COEFF_PLOTS=True,
-                     Cross_validation=5, TUNED_PAREMETERS=False, only_single_allergy_type=False)
+        run_learning(TITLE=t, PRINT=False, REG=False, RHOS=False, SVM=False, XGBOOST=True, NN=False, COEFF_PLOTS=True,
+                     Cross_validation=5, TUNED_PAREMETERS=False, PCA=False, only_single_allergy_type=False)
 
     # create a deep neural network for better accuracy percentages
 

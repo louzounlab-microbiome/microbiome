@@ -27,7 +27,12 @@ def roc_auc(y_test, y_score, visualize=False, graph_title='ROC Curve', save=Fals
 
         if save:
             if folder:
-                plt.savefig(os.path.join(folder, graph_title.replace(" ", "_").replace("\n", "_") + "_" +
+                if not os.path.exists(folder):
+                    os.makedirs(folder)
+                res_path = os.path.join(folder, str(round(roc_auc, 5)))
+                os.mkdir(res_path)
+
+                plt.savefig(os.path.join(res_path, graph_title.replace(" ", "_").replace("\n", "_") + "_" +
                                          str(round(roc_auc, 3)) + ".svg"), bbox_inches='tight', format='svg')
             else:
                 plt.savefig(graph_title.replace(" ", "_").replace("\n", "_") + "_" + str(round(roc_auc, 3)) + ".svg",

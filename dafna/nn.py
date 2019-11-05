@@ -131,7 +131,7 @@ class data_set(Dataset):
 def nn_main(X, y, title, folder, in_dim, mid_dim_1, mid_dim_2, out_dim, lr=0.001, test_size=0.2, batch_size=4, shuffle=True,
             num_workers=4, epochs=500):
     # make general, send params from file!
-    param_dict = { "lr": lr, "test_size": test_size, "batch_size": batch_size, "shuffle": shuffle,
+    param_dict = {"lr": lr, "test_size": test_size, "batch_size": batch_size, "shuffle": shuffle,
             "num_workers": num_workers, "epochs": epochs}
     net = Net(in_dim, mid_dim_1, mid_dim_2, out_dim)
     criterion = nn.MSELoss()

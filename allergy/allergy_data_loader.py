@@ -135,6 +135,10 @@ class AllergyDataLoader(Dataset):
     def get_pca_obj(self):
         return self._pca_obj
 
+    @property
+    def get_id_to_single_or_multiple_allergy_map(self):
+        return self.id_to_single_or_multiple_allergy_map
+
     def lineplot2y(self, x_data, x_label, y1_data, y1_color, y1_label, y2_data, y2_color, y2_label, title):
         # Each variable will actually have its own plot object but they
         # will be displayed in just one plot
@@ -227,6 +231,15 @@ class AllergyDataLoader(Dataset):
         for id, s_or_m in zip(single_or_multiple_id_list, single_or_multiple_list):
             single_or_multiple_map[id] = s_or_m
         ids_list_wo_multiple = [key for key, val in single_or_multiple_map.items() if val == 'Single']
+        ids_of_multiple = [key for key, val in single_or_multiple_map.items() if val == 'Multiple']
+        id_to_single_or_multiple_allergy_map = {}
+        for id in ids_list_wo_multiple:
+            id_to_single_or_multiple_allergy_map[id] = 0
+        for id in ids_of_multiple:
+            id_to_single_or_multiple_allergy_map[id] = 1
+        self.id_to_single_or_multiple_allergy_map = id_to_single_or_multiple_allergy_map
+
+
         # mf_merge_ok84_ok93_ok66_69_TreeNuts_controls_271118_040219 post     MG17 07.05.19.xlsx
         samples_data_file = 'mf_merge_ok84_ok93_ok66_69_merged_by_RestoredSampleCode_as_ID_290119.csv'
 
