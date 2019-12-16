@@ -1,0 +1,27 @@
+Taxonomy,PCV,Rota,PCV*Rota
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Oscillospira,2.2402143812468467e-06,1.2950088867740809e-06,0.0910949002609889
+k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Prevotellaceae; g__Prevotella,0.0005859736496025321,7.17767638130973e-06,0.882866622698079
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__; g__,0.00011854193579334147,0.0001237847260721734,0.07299876562243106
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Ruminococcus,4.8836272535721825e-08,0.0002062108718420096,0.20469013154367335
+k__Bacteria; p__Fusobacteria; c__Fusobacteriia; o__Fusobacteriales; f__Fusobacteriaceae; g__Cetobacterium,0.971637855510187,0.000455688875309321,0.005244923812824348
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Selenomonas,0.0011691038865828335,0.0005602096286918564,0.01459781387181182
+k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Pasteurellales; f__Pasteurellaceae; g__Actinobacillus,0.00041650511687211963,0.0005875460770344658,0.09845919692652419
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae,0.001905371520086807,0.0007937601297927835,0.018090778031746715
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Gemmiger,0.991574586828834,0.0008769082265000464,0.4527530459418463
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Faecalibacterium,0.36134459601108315,0.0011047797676061592,0.3950265507804759
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Veillonellaceae; g__Acidaminococcus,9.888699680832047e-05,0.0011941142725728556,0.00028618335121782963
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Christensenellaceae; g__Christensenella,0.024341943377377342,0.0013756830098554161,0.1044387315134492
+k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Dysgonomonas,0.0001914789298743769,0.0016007201528953545,0.00034051792605868365
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Peptococcaceae; g__Peptococcus,0.010851692615425193,0.0023875542012286263,0.2634022873522642
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Ruminococcaceae; g__Subdoligranulum,2.9316150526396986e-05,0.0026380017303067496,0.343918808743056
+k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales,0.00015655904513738798,0.002869411805838838,0.3695178200380955
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Dehalobacteriaceae; g__,0.020500187145309722,0.003955690673422599,0.4126865782187239
+k__Bacteria; p__Proteobacteria; c__Gammaproteobacteria; o__Pasteurellales; f__Pasteurellaceae,0.801913507652045,0.004408494402634902,0.0663429995612631
+k__Bacteria; p__Proteobacteria; c__Betaproteobacteria; o__Neisseriales; f__Neisseriaceae; g__Neisseria,0.25459616501860777,0.0054119809467873545,0.42940000375651066
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__Lachnospiraceae,0.03903087448833158,0.005650605388978802,0.02206344516542643
+k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__Porphyromonadaceae; g__Parabacteroides,0.009835010011119487,0.0056925648442049444,0.4112306683675787
+k__Bacteria; p__Firmicutes; c__Bacilli; o__Bacillales; f__Bacillaceae; g__,4.371261977152592e-05,0.005872335339463928,0.04332385109974894
+k__Bacteria; p__Tenericutes; c__Mollicutes; o__RF39; f__; g__,0.043050804527184426,0.006225446633185623,0.15118544519021354
+k__Bacteria; p__Firmicutes; c__Clostridia; o__Clostridiales; f__[Tissierellaceae]; g__Anaerococcus,0.6218197715160092,0.0067131451255172765,0.3405051716693439
+k__Bacteria; p__Bacteroidetes; c__Bacteroidia; o__Bacteroidales; f__; g__,5.611250015814984e-06,0.006902272326625785,0.23731632021538074
+k__Bacteria; p__Proteobacteria; c__Deltaproteobacteria; o__Desulfovibrionales; f__Desulfovibrionaceae; g__Bilophila,0.0024313038020883143,0.006950799683925634,0.09332306710329868

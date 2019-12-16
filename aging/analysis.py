@@ -27,7 +27,7 @@ def plot_spearman_vs_params(spearman_values, label=None):
         x_values.append(i)
         y_values.append(1-spearman_value['spearman_rho'])
     plt.plot(x_values, y_values, label=label, linewidth=0.5)
-    plt.title(r'$1-\rho$ vs params')
+    plt.title(r'$1-\rho$ vs params.json')
     plt.xlabel('sample #')
     plt.ylabel(r'$1-\rho$ value')
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     n_estimators_list = range(1, 1000 , 50)
     max_features_list = range(80, 1 , -5)
     min_samples_leaf_list = range(30, 1, -5)
-    best_params = {'mse': {'params': {}, 'mse': 999999, 'spearman_rho': -2}, 'spearman_rho': {'params': {}, 'mse': 999999, 'spearman_rho': -2}}
+    best_params = {'mse': {'params.json': {}, 'mse': 999999, 'spearman_rho': -2}, 'spearman_rho': {'params.json': {}, 'mse': 999999, 'spearman_rho': -2}}
     spearman_train_values = []
     spearman_test_values = []
     count = 0
@@ -95,13 +95,13 @@ if __name__ == "__main__":
                              .format(current_params['n_estimators'], current_params['max_features'], current_params['min_samples_leaf'], spearman_value['rho'], mse))
                 if spearman_value['rho'] > best_params['spearman_rho']['spearman_rho']:
                     best_params['spearman_rho']['spearman_rho'] = spearman_value['rho']
-                    best_params['spearman_rho']['params'] = current_params
+                    best_params['spearman_rho']['params.json'] = current_params
                     best_params['spearman_rho']['mse'] = mse
 
-                spearman_train_values.append({'params': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
+                spearman_train_values.append({'params.json': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
                 test_predicted_df, spearman_value = predict_get_spearman_value(test_set, regressor)
                 mse = mean_squared_error(test_predicted_df['age_in_days'], test_predicted_df['predicted'])
-                spearman_test_values.append({'params': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
+                spearman_test_values.append({'params.json': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
                 if DRAW_FIT:
                     plt.subplot(len(min_samples_leaf_list), 2, 2*t+1+1)
                     plot_fit(train_predicted_df['age_in_days'], train_predicted_df['predicted'],

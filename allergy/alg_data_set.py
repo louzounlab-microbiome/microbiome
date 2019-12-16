@@ -1,12 +1,9 @@
-from sys import stdout
 from anna.microbiome.distance_learning_func import distance_learning
-from dafna.abstract_data_set import AbstractDataLoader
+from LearningMethods.abstract_data_set import AbstractDataLoader
 from infra_functions.load_merge_otu_mf import OtuMfHandler
 from infra_functions.preprocess import preprocess_data
 import os
 import pandas as pd
-from scipy.stats import zscore
-import matplotlib.pyplot as plt
 import numpy as np
 from infra_functions.general import apply_pca
 
@@ -77,18 +74,50 @@ class AlgDataLoader(AbstractDataLoader):
         self._index_to_id_map = index_to_id_map
         self._id_to_features_map = id_to_features_map
         ids_list = otu_after_pca_wo_taxonomy.index.tolist()
-        self._ids_list = ids_list
+        ids_list_wo_con = otu_after_pca_wo_taxonomy.index.drop(otu_after_pca_wo_taxonomy.index[0:62])
 
-        XXXXX_column = 'SuccessDescription'
-        id_to_tag_map = {}
-        for sample in ids_list:
-            t = OtuMf.mapping_file.loc[sample, XXXXX_column]
-            id_to_tag_map[sample] = t
-            if t == 'A1':
-                id_to_tag_map[sample] = 1
-            else:
-                id_to_tag_map[sample] = 0
-        self._id_to_tag_map = id_to_tag_map
+        if self._task == "health task":
+            self._ids_list = ids_list
+            id_to_tag_map = {}
+            for sample in ids_list:
+                if sample.startswith('Con'):
+                    id_to_tag_map[sample] = 1
+                else:
+                    id_to_tag_map[sample] = 0
+            self._id_to_tag_map = id_to_tag_map
+
+        if self._task == "prognostic task":
+            treatment_point_column = 'TreatmentPoint'
+            before_treatment_ids = []
+            for sample in ids_list_wo_con:
+                s = OtuMf.mapping_file.loc[sample, treatment_point_column]
+                if s == "before":
+                    before_treatment_ids.append(sample)
+
+            self._ids_list = list(before_treatment_ids)
+            success_column = 'SuccessDescription'
+            id_to_tag_map = {}
+            for sample in before_treatment_ids:
+                t = OtuMf.mapping_file.loc[sample, success_column]
+                id_to_tag_map[sample] = t
+                if t == 'A1':
+                    id_to_tag_map[sample] = 1
+                else:
+                    id_to_tag_map[sample] = 0
+            self._id_to_tag_map = id_to_tag_map
+
+        if self._task == "diagnostics task":
+            self._ids_list = list(ids_list_wo_con)
+            success_column = 'SuccessDescription'
+            id_to_tag_map = {}
+            for sample in ids_list_wo_con:
+                t = OtuMf.mapping_file.loc[sample, success_column]
+                id_to_tag_map[sample] = t
+                if t == 'A1':
+                    id_to_tag_map[sample] = 1
+                else:
+                    id_to_tag_map[sample] = 0
+            self._id_to_tag_map = id_to_tag_map
 
         # -------------------------------------------- weights !--------------------------------------------
         # calculate weights
@@ -97,18 +126,23 @@ class AlgDataLoader(AbstractDataLoader):
                        np.unique(np.array(y))]
         classes_ratio = [1 - (a / sum(classes_sum)) for a in classes_sum]
         weights = [classes_ratio[a] for a in np.array(y)]
-        self._weight_map = classes_ratio
+        self._weight_map = {i: classes_ratio[i] for i in range(len(classes_ratio))}
+
 
         # return the list of features and the list of ids in the same order
         feature_list = [id_to_features_map[id] for id in ids_list]
         self._feature_list = feature_list
 
     def get_confusin_matrix_names(self):
-        names = ['Healthy', 'Allergic']
+        if self._task == "prognostic task" or self._task == "diagnostics task":
+            names = ['No Response', 'Response']
+        if self._task == "health task":
+            names = ['Healthy', 'Allergic']
         return names
 
+
 if __name__ == "__main__":
-    task = 'success task'
+    task = 'prognostic task'
     bactria_as_feature_file = 'feature-table_Allergy_cleaned_taxa_290119_updated_in_140219.csv'
     samples_data_file = 'mf_merge_ok84_ok93_ok66_69_merged_by_RestoredSampleCode_as_ID_290119.csv'
     tax = 6

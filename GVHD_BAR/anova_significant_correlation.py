@@ -2,14 +2,12 @@ from os.path import join
 
 from GVHD_BAR.prepare_data import prepare_data
 import pandas as pd
-import numpy as np
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-from dafna.general_functions import shorten_bact_names
-from dafna.plot_anove import plot_anove_significant_bacteria
+from LearningMethods.general_functions import shorten_bact_names
+from Plot.plot_anove import plot_anove_significant_bacteria
 from matplotlib import pyplot as plt
-from matplotlib import cm as cm
 import seaborn as sns
 
 

@@ -1,0 +1,60 @@
+linear regression
+rhos mean,0.31616
+rhos median,0.31395
+rhos std,0.12275
+p value mean,0.06672
+random rhos mean,0.00148
+random rhos median,-8e-05
+random rhos std,0.03684
+random p value mean,0.4938
+
+ridge regression
+rhos mean,0.35371
+rhos median,0.36859
+rhos std,0.12626
+p value mean,0.04333
+random rhos mean,-0.00475
+random rhos median,-0.00559
+random rhos std,0.03556
+random p value mean,0.49351
+
+ard regression
+rhos mean,0.37582
+rhos median,0.39433
+rhos std,0.14713
+p value mean,0.03968
+random rhos mean,-0.00178
+random rhos median,0.00067
+random rhos std,0.03474
+random p value mean,0.50378
+
+svr
+rhos mean,0.28615
+rhos median,0.28889
+rhos std,0.10762
+p value mean,0.02256
+random rhos mean,0.00018
+random rhos median,0.00205
+random rhos std,0.01555
+random p value mean,0.4999
+
+decision tree
+rhos mean,0.05771
+rhos median,0.06028
+rhos std,0.06547
+p value mean,0.31123
+random rhos mean,-0.00116
+random rhos median,-0.00112
+random rhos std,0.01565
+random p value mean,0.49459
+
+random forest
+rhos mean,0.32503
+rhos median,0.32957
+rhos std,0.10763
+p value mean,0.0084
+random rhos mean,0.001
+random rhos median,0.00021
+random rhos std,0.01386
+random p value mean,0.51269
+

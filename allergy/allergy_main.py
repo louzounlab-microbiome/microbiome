@@ -1,31 +1,23 @@
 import os
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import pickle
 
-from imblearn.keras import BalancedBatchGenerator
-from sklearn import svm, metrics
-from scipy import stats
-from sklearn.metrics import classification_report, roc_curve, auc, accuracy_score, confusion_matrix
+from sklearn import svm
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.model_selection import GridSearchCV, train_test_split
-from tensorflow.python.keras import regularizers
 from xgboost import XGBClassifier
-import tensorflow as tf
-from sklearn.utils import class_weight
 
-from dafna.nn import nn_main
-from dafna.plot_3D_pca import plot_data_3d, plot_data_2d, PCA_t_test
-from infra_functions.general import convert_pca_back_orig, draw_rhos_calculation_figure
+from LearningMethods.nn import nn_main
+from Plot.plot_3D_pca import plot_data_3d, plot_data_2d, PCA_t_test
+from infra_functions.general import draw_rhos_calculation_figure
 
 from allergy.allergy_data_loader import AllergyDataLoader
 
-from dafna.plot_auc import multi_class_roc_auc, roc_auc, calc_auc_on_joined_results
-from dafna.plot_coef import create_coeff_plots_by_alogorithm
-from dafna.plot_confusion_mat import edit_confusion_matrix, print_confusion_matrix
+from Plot.plot_auc import multi_class_roc_auc, roc_auc, calc_auc_on_joined_results
+from Plot.plot_coef import create_coeff_plots_by_alogorithm
+from Plot.plot_confusion_mat import edit_confusion_matrix, print_confusion_matrix
 
-
-from infra_functions import tf_analaysis
 from infra_functions.general import convert_pca_back_orig
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))

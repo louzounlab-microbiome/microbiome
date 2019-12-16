@@ -155,10 +155,10 @@ stds_train = xgb_clf.cv_results_['std_train_score']
 
 """
 xgb_conf_stats = ''
-for train_mean, train_std, test_mean, test_std, params in zip(means_train, stds_train, means_test, stds_test,
-                                                              xgb_clf.cv_results_['params']):
+for train_mean, train_std, test_mean, test_std, params.json in zip(means_train, stds_train, means_test, stds_test,
+                                                              xgb_clf.cv_results_['params.json']):
     xgb_conf_stats += ("Train: %0.3f (+/-%0.03f) , Test: %0.3f (+/-%0.03f) for %r \n" % (
-    train_mean, train_std * 2, test_mean, test_std * 2, params))
+    train_mean, train_std * 2, test_mean, test_std * 2, params.json))
 
 entire_W = xgb_clf.best_estimator_.coef_[0]
 W_pca = entire_W[starting_col:starting_col + n_components]

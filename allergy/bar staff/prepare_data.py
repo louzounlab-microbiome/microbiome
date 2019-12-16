@@ -49,9 +49,9 @@ def prepare_data(n_components = 20):
                          os.path.join(SCRIPT_DIR,
                                       'mf_merge_ok84_ok93_ok66_69_merged_by_RestoredSampleCode_as_ID_290119.csv'),
                          from_QIIME=True, id_col='Feature ID', taxonomy_col='Taxonomy')
-    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=5, taxonomy_col='Taxonomy',
+    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=True, taxnomy_level=5, taxonomy_col='Taxonomy',
                                          preform_taxnomy_group=True)
-    otu_after_pca_wo_taxonomy, _, _ = apply_pca(preproccessed_data, n_components=n_components, visualize=False)
+    otu_after_pca_wo_taxonomy, _, _ = apply_pca(preproccessed_data, n_components=n_components, visualize=True)
 
     ######## Pre process (Remove control group) ########
     column_to_use_for_filter = 'AllergyTypeData131118'

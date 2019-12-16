@@ -1,0 +1,8 @@
+ANOVE 3 way test
+p value of group: 0.5394797749426812
+p value of time: 2.3101992345786965e-05
+p value of chemotherapy: 0.7646290671826337
+p value of group*time: 0.8661219631156535
+p value of group*chemotherapy: 0.6466535206237003
+p value of chemotherapy*time: 1.36701482722677e-05
+p value of chemotherapy*time*group: 0.7264124316721068

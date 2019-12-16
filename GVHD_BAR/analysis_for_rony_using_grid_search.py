@@ -91,7 +91,7 @@ def plot_spearman_vs_params(spearman_values, label=None, plot=True):
         y_values.append(1 - spearman_value['spearman_rho'])
     if plot:
         plt.plot(x_values, y_values, label=label, linewidth=0.5)
-        plt.title(r'$1-\rho$ vs params')
+        plt.title(r'$1-\rho$ vs params.json')
         plt.xlabel('sample #')
         plt.ylabel(r'$1-\rho$ value')
     return x_values, y_values
@@ -145,7 +145,7 @@ if not use_recorded:
         f.write(f'{pca_str}\n\n')
 
     with open(f'{file_name}_csv.txt', 'w') as f:
-        str_to_write = '\t'.join(['Config', 'SVM best params', 'SVM best score',' SVM Val score','xg best params', 'xg best score',' xg Val score'])
+        str_to_write = '\t'.join(['Config', 'SVM best params.json', 'SVM best score',' SVM Val score','xg best params.json', 'xg best score',' xg Val score'])
         f.write(f'{str_to_write}\n')
 
     # otu_after_pca = OtuMf.add_taxonomy_col_to_new_otu_data(otu_after_pca_wo_taxonomy)
@@ -479,7 +479,7 @@ for type_of_input in types_of_input:
 
             svm_conf_stats = ''
             for train_mean, train_std, test_mean, test_std, params in zip(means_train, stds_train, means_test,
-                                                                          stds_test, svm_clf.cv_results_['params']):
+                                                                          stds_test, svm_clf.cv_results_['params.json']):
                 svm_conf_stats += ("Train: %0.3f (+/-%0.03f) , Test: %0.3f (+/-%0.03f) for %r \n" % (
                 train_mean, train_std * 2, test_mean, test_std * 2, params))
 
@@ -514,7 +514,7 @@ for type_of_input in types_of_input:
 
             xgboost_conf_stats = ''
             for train_mean, train_std, test_mean, test_std, params in zip(means_train, stds_train, means_test,
-                                                                          stds_test, xgboost_clf.cv_results_['params']):
+                                                                          stds_test, xgboost_clf.cv_results_['params.json']):
                 xgboost_conf_stats += ("Train: %0.3f (+/-%0.03f) , Test: %0.3f (+/-%0.03f) for %r \n" % (
                     train_mean, train_std * 2, test_mean, test_std * 2, params))
 

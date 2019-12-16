@@ -1,4 +1,0 @@
-,#SampleID,BarcodeSequence,LinkerPrimerSequence,womanno.,trimester,body_site,Control/GDM,Run,Plate,Well,Type,Sample
-0,#q2:types,categorical,categorical,categorical,categorical,categorical,categorical,categorical,categorical,categorical,categorical,categorical
-1,B018DB-SALIVA-T3-rep-2,CGGTTGGCGGGT,TATGGTAATTGTGTGCCAGCMGCCGCGGTAA,B018DB,3,SALIVA,Control,OK104,PLATE4,F10,Mother,B018DB-SALIVA-T3
-2,B018DB-STOOL-T3-rep-1,AACGATCATAGA,TATGGTAATTGTGTGCCAGCMGCCGCGGTAA,B018DB,3,STOOL,Control,OK104,PLATE4,A12,Mother,B018DB-STOOL-T3

@@ -46,7 +46,7 @@ def plot_spearman_vs_params(spearman_values, label=None, plot=True):
         y_values.append(1 - spearman_value['spearman_rho'])
     if plot:
         plt.plot(x_values, y_values, label=label, linewidth=0.5)
-        plt.title(r'$1-\rho$ vs params')
+        plt.title(r'$1-\rho$ vs params.json')
         plt.xlabel('sample #')
         plt.ylabel(r'$1-\rho$ value')
     return x_values, y_values
@@ -342,7 +342,7 @@ for beta in betas:
                             # plt.figure(count)
                             for idx2, max_depth in enumerate(_max_depth):
                                 print(
-                                    f'***** sample num = {sample_num} *****\n params: alpha={alpha}, n_estimators={n_estimators}, reg_lambda={reg_lambda}, max_depth={max_depth}, min_child_weight={min_child_weight}')
+                                    f'***** sample num = {sample_num} *****\n params.json: alpha={alpha}, n_estimators={n_estimators}, reg_lambda={reg_lambda}, max_depth={max_depth}, min_child_weight={min_child_weight}')
 
                                 xg_reg = xgb.XGBRegressor(objective='reg:linear', colsample_bytree=1, learning_rate=0.1,
                                                           reg_lambda=reg_lambda,
@@ -414,8 +414,8 @@ for beta in betas:
             # # n_estimators_list = range(1, 50, 15)
             # # max_features_list = range(n_components, 1, -2)
             # # min_samples_leaf_list = range(20, 1, -3)
-            # best_params = {'mse': {'params': {}, 'mse': 999999, 'spearman_rho': -2},
-            #                'spearman_rho': {'params': {}, 'mse': 999999, 'spearman_rho': -2}}
+            # best_params = {'mse': {'params.json': {}, 'mse': 999999, 'spearman_rho': -2},
+            #                'spearman_rho': {'params.json': {}, 'mse': 999999, 'spearman_rho': -2}}
             # spearman_train_values = []
             # spearman_test_values = []
             # count = 0
@@ -445,7 +445,7 @@ for beta in betas:
             #                                  current_params['min_samples_leaf'], spearman_value['rho'], mse))
             #             if spearman_value['rho'] > best_params['spearman_rho']['spearman_rho']:
             #                 best_params['spearman_rho']['spearman_rho'] = spearman_value['rho']
-            #                 best_params['spearman_rho']['params'] = current_params
+            #                 best_params['spearman_rho']['params.json'] = current_params
             #                 best_params['spearman_rho']['mse'] = mse
             #
             #             key = '_'.join([x + '_' + str(eval(x)) for x in
@@ -460,13 +460,13 @@ for beta in betas:
             #                 y_train_dict[key]['y_train_predicted_values'] += predicted_y.tolist()
             #
             #             spearman_train_values.append(
-            #                 {'params': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
+            #                 {'params.json': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
             #             predicted_y, spearman_value = predict_get_spearman_value(X_test, y_test, regressor)
             #             mse = mean_squared_error(y_test.values, predicted_y)
             #             y_test_values += y_test.values.tolist()
             #             y_test_predicted_values += predicted_y.tolist()
             #             spearman_test_values.append(
-            #                 {'params': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
+            #                 {'params.json': current_params, 'mse': mse, 'spearman_rho': spearman_value['rho']})
             #
             #             if key not in y_test_dict.keys():
             #                 y_test_dict[key] = {}
@@ -524,7 +524,7 @@ for beta in betas:
         # if cross_val_number > 1:
         #     plt.plot(x_train_values, y_train_spearman_values, label='Train', linewidth=0.5)
         #     plt.plot(x_test_values, y_test_spearman_values, label='Test', linewidth=0.5)
-        #     plt.title(r'$1-\rho$ vs params')
+        #     plt.title(r'$1-\rho$ vs params.json')
         #     plt.xlabel('sample #')
         #     plt.ylabel(r'$1-\rho$ value')
 

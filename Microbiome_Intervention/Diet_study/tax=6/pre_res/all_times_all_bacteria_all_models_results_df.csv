@@ -1,0 +1,973 @@
+BACTERIA_NUMBER,BACTERIA,ALGORITHM,RHO,P_VALUE,PARAMS
+0,k__Bacteria;NA,linear regression,0.3298017771701981,0.00339957622099357,
+0,k__Bacteria;NA,ridge regression,0.3404753141595247,0.00244660087242801,
+0,k__Bacteria;NA,ard regression,0.3725485041274513,0.0008480777323997468,
+0,k__Bacteria;NA,svr,0.3568507428527936,5.269298744609759e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+0,k__Bacteria;NA,decision tree,0.02269648487207481,0.6570813948312882,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+0,k__Bacteria;NA,random forest,0.22516473780359755,8.153964893842394e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+1,k__Bacteria;NA;NA,linear regression,0.25349983571036633,0.026112102410899674,
+1,k__Bacteria;NA;NA,ridge regression,0.3711551606288448,0.0008900625084884414,
+1,k__Bacteria;NA;NA,ard regression,0.4064356695935643,0.0002446518582073196,
+1,k__Bacteria;NA;NA,svr,0.33777365435847106,9.955993552965279e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+1,k__Bacteria;NA;NA,decision tree,0.05247919029548812,0.3043848149455269,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+1,k__Bacteria;NA;NA,random forest,0.26843581954724405,8.871449679509012e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+2,k__Bacteria;NA;NA;NA,linear regression,0.4244364114727519,0.00011954429645771045,
+2,k__Bacteria;NA;NA;NA,ridge regression,0.515063883484936,1.64432027061709e-06,
+2,k__Bacteria;NA;NA;NA,ard regression,0.3665019191334981,0.001044315768933223,
+2,k__Bacteria;NA;NA;NA,svr,0.28703129221399193,9.764928572431029e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+2,k__Bacteria;NA;NA;NA,decision tree,-0.01107551373850433,0.8285066144111666,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+2,k__Bacteria;NA;NA;NA,random forest,0.2258560226773816,7.635356562269243e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+3,k__Bacteria;NA;NA;NA;NA,linear regression,0.4687378820357907,1.7114319240980082e-05,
+3,k__Bacteria;NA;NA;NA;NA,ridge regression,0.5079394289920605,2.411475519023078e-06,
+3,k__Bacteria;NA;NA;NA;NA,ard regression,0.4999211315000788,3.672891880378488e-06,
+3,k__Bacteria;NA;NA;NA;NA,svr,0.33724642052242393,1.076808999931921e-11,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+3,k__Bacteria;NA;NA;NA;NA,decision tree,-0.01767463441667668,0.7295676489668523,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+3,k__Bacteria;NA;NA;NA;NA,random forest,0.1793002896374543,0.00040719244752675487,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+4,k__Bacteria;NA;NA;NA;NA;NA,linear regression,0.6015865817640169,7.20085297666693e-09,
+4,k__Bacteria;NA;NA;NA;NA;NA,ridge regression,0.6186708028813291,2.018486126648188e-09,
+4,k__Bacteria;NA;NA;NA;NA;NA,ard regression,0.6140701403859298,2.8643291405629473e-09,
+4,k__Bacteria;NA;NA;NA;NA;NA,svr,0.26229294466671216,1.7745741057793312e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+4,k__Bacteria;NA;NA;NA;NA;NA,decision tree,-0.0439917060743374,0.3893538970927721,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+4,k__Bacteria;NA;NA;NA;NA;NA,random forest,0.3190937846962745,1.4645665383617582e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+5,k__Bacteria;p__Actinobacteria,linear regression,0.2539828592460171,0.025818982616137347,
+5,k__Bacteria;p__Actinobacteria,ridge regression,0.2675482412324517,0.018653469618018604,
+5,k__Bacteria;p__Actinobacteria,ard regression,0.4073295125926704,0.00023632756975175884,
+5,k__Bacteria;p__Actinobacteria,svr,0.25100435631121104,6.064807073575625e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+5,k__Bacteria;p__Actinobacteria,decision tree,-0.06413346467093921,0.2092644506690104,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+5,k__Bacteria;p__Actinobacteria,random forest,0.3206432457193829,1.1799563560523885e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+6,k__Bacteria;p__Actinobacteria;c__Actinobacteria,linear regression,0.1865313581827195,0.10430654872690416,
+6,k__Bacteria;p__Actinobacteria;c__Actinobacteria,ridge regression,0.15487144434512853,0.17865963874004648,
+6,k__Bacteria;p__Actinobacteria;c__Actinobacteria,ard regression,0.10037331089962667,0.3850865732466894,
+6,k__Bacteria;p__Actinobacteria;c__Actinobacteria,svr,0.08015901722027756,0.11635767533954025,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+6,k__Bacteria;p__Actinobacteria;c__Actinobacteria,decision tree,0.05204615476425683,0.3083980469374854,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+6,k__Bacteria;p__Actinobacteria;c__Actinobacteria,random forest,0.10951357220480057,0.0316907518872452,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+7,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales,linear regression,0.23924803777724524,0.03611836865284845,
+7,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales,ridge regression,0.3859035701140964,0.0005278677433307557,
+7,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales,ard regression,0.2905515537094484,0.01036417519720565,
+7,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales,svr,0.14525246041278694,0.004290789671408473,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+7,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales,decision tree,0.06949042552106657,0.17360459482536628,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+7,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales,random forest,0.03848248395533183,0.4515072719453754,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+8,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae,linear regression,-0.06501521536075103,0.5742729531119763,
+8,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae,ridge regression,-0.005652242494347758,0.9610887584193226,
+8,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae,ard regression,0.01593143698406856,0.8906198593999599,
+8,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae,svr,0.10738802972635926,0.03517410135289931,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+8,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae,decision tree,0.027798894141076842,0.5865893028521993,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+8,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae,random forest,0.1997357778300205,7.940463408163541e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+9,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae;g__Bifidobacterium,linear regression,0.1620221883379778,0.15918871465057066,
+9,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae;g__Bifidobacterium,ridge regression,0.1911772438088228,0.09580606715383004,
+9,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae;g__Bifidobacterium,ard regression,0.2577422577422577,0.02363148208862007,
+9,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae;g__Bifidobacterium,svr,0.1883772640517595,0.0002011677211314103,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+9,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae;g__Bifidobacterium,decision tree,0.0447566961716443,0.3811533482156879,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+9,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Bifidobacteriales;f__Bifidobacteriaceae;g__Bifidobacterium,random forest,0.13385947022964426,0.008543076546202828,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+10,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales,linear regression,0.35852404954725103,0.0013660446477811266,
+10,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales,ridge regression,0.3915821021084179,0.0004288496772409743,
+10,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales,ard regression,0.3900836006099164,0.00045317945923510324,
+10,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales,svr,0.2592282618490753,2.4916569981265613e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+10,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales,decision tree,0.040914969133474983,0.4234011803498985,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+10,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales,random forest,0.2879080293286304,8.764338261520824e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+11,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae,linear regression,0.4378253325621746,6.832584439973618e-05,
+11,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae,ridge regression,0.5183763604816235,1.3720693675506888e-06,
+11,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae,ard regression,0.40427993059572,0.00026584867467987583,
+11,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae,svr,0.3134566936544305,3.1813129163613815e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+11,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae,decision tree,0.008177515863712065,0.8729319732947554,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+11,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae,random forest,0.24868639576083626,7.750068796992787e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+12,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae;g__Cellulomonas,linear regression,0.3136924988614967,0.0054675992381239035,
+12,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae;g__Cellulomonas,ridge regression,0.393290919606709,0.0004025669038774805,
+12,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae;g__Cellulomonas,ard regression,0.4390609390609391,6.481106591212894e-05,
+12,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae;g__Cellulomonas,svr,0.2691118698283015,8.210942824596307e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+12,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae;g__Cellulomonas,decision tree,0.054369006149456535,0.2872764479586536,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+12,k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__Cellulomonadaceae;g__Cellulomonas,random forest,0.2581657136816244,2.7999782343169745e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+13,k__Bacteria;p__Actinobacteria;c__Coriobacteriia,linear regression,0.4491823965508176,4.172595817587016e-05,
+13,k__Bacteria;p__Actinobacteria;c__Coriobacteriia,ridge regression,0.4973447605026552,4.195117209258274e-06,
+13,k__Bacteria;p__Actinobacteria;c__Coriobacteriia,ard regression,0.5315473999684526,6.553155989059797e-07,
+13,k__Bacteria;p__Actinobacteria;c__Coriobacteriia,svr,0.3775144975247848,1.734801200190859e-14,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+13,k__Bacteria;p__Actinobacteria;c__Coriobacteriia,decision tree,0.030384795180095674,0.5522503584727321,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+13,k__Bacteria;p__Actinobacteria;c__Coriobacteriia,random forest,0.3944358234043431,8.793296717331423e-16,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+14,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales,linear regression,0.2457295712864688,0.03122869828139207,
+14,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales,ridge regression,0.2330038382669961,0.04141814534785535,
+14,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales,ard regression,0.21494295178505704,0.060480671796520426,
+14,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales,svr,0.2722777380910655,5.699125154751947e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+14,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales,decision tree,-0.054814385517250964,0.2833404713296981,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+14,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales,random forest,0.2772762301847926,3.17150580732575e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+15,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae,linear regression,0.3154968097058627,0.005190679990754709,
+15,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae,ridge regression,0.3297754876702245,0.003402283925288199,
+15,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae,ard regression,0.2860560492139439,0.011668488406255808,
+15,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae,svr,0.1989602714616336,8.475039996432888e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+15,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae,decision tree,-0.025838592151258867,0.6132599093201807,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+15,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae,random forest,0.1867949111777533,0.00022802586781998712,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+16,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae;g__Collinsella,linear regression,0.2815361055854065,0.013121450454976244,
+16,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae;g__Collinsella,ridge regression,0.4337767495662232,8.111856963780245e-05,
+16,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae;g__Collinsella,ard regression,0.34428729165571265,0.0021693433334485216,
+16,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae;g__Collinsella,svr,0.19715387948934526,9.854475073064666e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+16,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae;g__Collinsella,decision tree,0.09315642804674636,0.0678668525491111,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+16,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Coriobacteriales;f__Coriobacteriaceae;g__Collinsella,random forest,0.2362818024898245,2.7636234462425884e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+17,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales,linear regression,0.26189599873810393,0.021399736394467,
+17,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales,ridge regression,0.3419212366580787,0.0023378993151433234,
+17,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales,ard regression,0.4357747515642252,7.455113418684058e-05,
+17,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales,svr,0.4889258824802682,1.5745390765965276e-24,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+17,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales,decision tree,-0.005752644336985328,0.9104198836540116,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+17,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales,random forest,0.4612454066309265,1.1166189252122175e-21,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+18,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae,linear regression,0.3784234985316193,0.0006901219217420764,
+18,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae,ridge regression,0.3836163836163836,0.0005733365057605098,
+18,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae,ard regression,0.3737315316262684,0.0008138517081044384,
+18,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae,svr,0.43528076216366346,3.13283568480218e-19,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+18,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae,decision tree,0.06289396489753253,0.21821992256713896,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+18,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae,random forest,0.4455991606516794,3.532774858143527e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+19,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Adlercreutzia,linear regression,0.3775913988827661,0.0007107306563183402,
+19,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Adlercreutzia,ridge regression,0.3985225301014774,0.00033099610512973024,
+19,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Adlercreutzia,ard regression,0.3140280771859719,0.00541512795471487,
+19,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Adlercreutzia,svr,0.314331704999646,2.823410622154854e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+19,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Adlercreutzia,decision tree,0.03864779734520609,0.4495644819351553,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+19,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Adlercreutzia,random forest,0.3448784894714017,3.4106808208436414e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+20,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Eggerthella,linear regression,0.17148340735786965,0.13590407174207805,
+20,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Eggerthella,ridge regression,0.29812292970187704,0.008453430542937266,
+20,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Eggerthella,ard regression,0.3306956201693043,0.0033086503718754014,
+20,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Eggerthella,svr,0.27470376220903664,4.2944118257725684e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+20,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Eggerthella,decision tree,0.0034296190771487,0.9465217026166542,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+20,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Eggerthella,random forest,0.33097587519027416,2.705327573176143e-11,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+21,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Gordonibacter,linear regression,0.3712603186287397,0.0008868292028230893,
+21,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Gordonibacter,ridge regression,0.3720490036279509,0.0008629173799339907,
+21,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Gordonibacter,ard regression,0.4398496240601504,6.265604690735494e-05,
+21,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Gordonibacter,svr,0.271900893892526,5.9537667982889796e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+21,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Gordonibacter,decision tree,0.04105249865575807,0.4218431676028961,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+21,k__Bacteria;p__Actinobacteria;c__Coriobacteriia;o__Eggerthellales;f__Eggerthellaceae;g__Gordonibacter,random forest,0.2942302728565104,3.9752897082521e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+22,k__Bacteria;p__Bacteroidetes,linear regression,0.4625637520374362,2.280978475326253e-05,
+22,k__Bacteria;p__Bacteroidetes,ridge regression,0.5176928334823071,1.4245090281033253e-06,
+22,k__Bacteria;p__Bacteroidetes,ard regression,0.5232399179767601,1.04819432640248e-06,
+22,k__Bacteria;p__Bacteroidetes,svr,0.4786215753380411,1.9443790565280783e-23,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+22,k__Bacteria;p__Bacteroidetes,decision tree,0.08179934685064279,0.10904804224367684,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+22,k__Bacteria;p__Bacteroidetes,random forest,0.4729591951252449,7.46615403962249e-23,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+23,k__Bacteria;p__Bacteroidetes;NA,linear regression,0.3968925811031073,0.0003519331129766377,
+23,k__Bacteria;p__Bacteroidetes;NA,ridge regression,0.4392975445607024,6.415745143510421e-05,
+23,k__Bacteria;p__Bacteroidetes;NA,ard regression,0.4815710605184289,9.251250546705754e-06,
+23,k__Bacteria;p__Bacteroidetes;NA,svr,0.3953277354499059,7.478177487049378e-16,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+23,k__Bacteria;p__Bacteroidetes;NA,decision tree,-0.02487203186128746,0.6266035550318008,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+23,k__Bacteria;p__Bacteroidetes;NA,random forest,0.4013588566029038,2.468509589448674e-16,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+24,k__Bacteria;p__Bacteroidetes;NA;NA,linear regression,0.3679602481305165,0.000993547892518803,
+24,k__Bacteria;p__Bacteroidetes;NA;NA,ridge regression,0.4977916820022083,4.099796377663514e-06,
+24,k__Bacteria;p__Bacteroidetes;NA;NA,ard regression,0.4941637310058362,4.936127156376568e-06,
+24,k__Bacteria;p__Bacteroidetes;NA;NA,svr,0.468036065449695,2.3570410652514256e-22,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+24,k__Bacteria;p__Bacteroidetes;NA;NA,decision tree,0.050635293083701634,0.3217142014701241,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+24,k__Bacteria;p__Bacteroidetes;NA;NA,random forest,0.3993048646654687,3.609712811911831e-16,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+25,k__Bacteria;p__Bacteroidetes;NA;NA;NA,linear regression,0.3763341921236658,0.0007429322094776957,
+25,k__Bacteria;p__Bacteroidetes;NA;NA;NA,ridge regression,0.4555181660444818,3.1447394181645785e-05,
+25,k__Bacteria;p__Bacteroidetes;NA;NA;NA,ard regression,0.4743940270256059,1.3089781610140198e-05,
+25,k__Bacteria;p__Bacteroidetes;NA;NA;NA,svr,0.390999353503338,1.633978829044257e-15,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+25,k__Bacteria;p__Bacteroidetes;NA;NA;NA,decision tree,0.12027258775265535,0.018234538762379262,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+25,k__Bacteria;p__Bacteroidetes;NA;NA;NA,random forest,0.33865989609947783,8.723612558634418e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+26,k__Bacteria;p__Bacteroidetes;NA;NA;NA;NA,linear regression,0.2711499027288501,0.017065902925711134,
+26,k__Bacteria;p__Bacteroidetes;NA;NA;NA;NA,ridge regression,0.3684210526315789,0.0009779780068574929,
+26,k__Bacteria;p__Bacteroidetes;NA;NA;NA;NA,ard regression,0.3599032546400968,0.0013047086953224215,
+26,k__Bacteria;p__Bacteroidetes;NA;NA;NA;NA,svr,0.4959111566665554,2.727898646018853e-25,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+26,k__Bacteria;p__Bacteroidetes;NA;NA;NA;NA,decision tree,0.08422565858180621,0.0989048260456795,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+26,k__Bacteria;p__Bacteroidetes;NA;NA;NA;NA,random forest,0.3705548944912875,5.629656298487503e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+27,k__Bacteria;p__Bacteroidetes;c__Bacteroidia,linear regression,0.3773069036226931,0.0007179042911104743,
+27,k__Bacteria;p__Bacteroidetes;c__Bacteroidia,ridge regression,0.4677164940322834,1.7954175655092554e-05,
+27,k__Bacteria;p__Bacteroidetes;c__Bacteroidia,ard regression,0.5704032809295967,6.109025389527776e-08,
+27,k__Bacteria;p__Bacteroidetes;c__Bacteroidia,svr,0.4140571369555697,2.2203027154451504e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+27,k__Bacteria;p__Bacteroidetes;c__Bacteroidia,decision tree,0.1748163817608647,0.0005698760011146423,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+27,k__Bacteria;p__Bacteroidetes;c__Bacteroidia,random forest,0.4259153095264974,2.1312334509950767e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+28,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales,linear regression,0.6027433273654511,6.622297699028523e-09,
+28,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales,ridge regression,0.625216888374783,1.2146824905274876e-09,
+28,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales,ard regression,0.5977706504022293,9.470227492798153e-09,
+28,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales,svr,0.43125416102905995,7.196483254574777e-19,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+28,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales,decision tree,0.14565079048065827,0.004185007908444271,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+28,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales,random forest,0.4142022865021778,2.158718760256022e-17,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+29,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA,linear regression,0.3343958883061353,0.002954899159156557,
+29,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA,ridge regression,0.3921078921078921,0.0004206001559799362,
+29,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA,ard regression,0.47421000052579,1.3205442297322495e-05,
+29,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA,svr,0.4818155217499777,9.002478510721892e-24,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+29,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA,decision tree,0.10106677099665844,0.04751262134345946,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+29,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA,random forest,0.44846901859502775,1.8997908277105037e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+30,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA;NA,linear regression,0.2736790909443664,0.016021763185517082,
+30,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA;NA,ridge regression,0.306114937693885,0.006778416223558608,
+30,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA;NA,ard regression,0.46803196803196795,1.769075225757662e-05,
+30,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA;NA,svr,0.3604474805477461,2.960183055903105e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+30,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA;NA,decision tree,0.12232711010333942,0.016330157171085966,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+30,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;NA;NA,random forest,0.4522813189665687,8.257668011400653e-21,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+31,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae,linear regression,0.2572444479552902,0.02391177269359034,
+31,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae,ridge regression,0.2990430622009569,0.008243700894393503,
+31,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae,ard regression,0.3309322256690677,0.0032849479324438768,
+31,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae,svr,0.4093792107902861,5.4570117241941167e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+31,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae,decision tree,0.09437912064725262,0.06431905423890742,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+31,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae,random forest,0.4217589707759841,4.897293894454109e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+32,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;NA,linear regression,0.2612061940592996,0.0217574004924498,
+32,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;NA,ridge regression,0.2457542457542457,0.031211204857761236,
+32,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;NA,ard regression,0.281691992218308,0.013068844739799235,
+32,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;NA,svr,0.22910230000664106,5.592521300335258e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+32,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;NA,decision tree,0.0474618234042576,0.3530116157342271,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+32,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;NA,random forest,0.2190988252490359,1.4387058690354739e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+33,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides,linear regression,0.5332597222611248,5.939148480410068e-07,
+33,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides,ridge regression,0.5663809874336191,7.921995564072918e-08,
+33,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides,ard regression,0.5981387034018613,9.224708614942508e-09,
+33,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides,svr,0.4142841236562479,2.1247402475542587e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+33,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides,decision tree,0.181607661765722,0.00034144361000744124,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+33,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides,random forest,0.3762956037748552,2.1363612444600706e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+34,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Mediterranea,linear regression,0.20676691729323304,0.07119255115234056,
+34,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Mediterranea,ridge regression,0.22251432777748567,0.05176546594705333,
+34,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Mediterranea,ard regression,0.19180819180819167,0.09469480360887346,
+34,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Mediterranea,svr,0.2431694321004912,1.3757890911009288e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+34,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Mediterranea,decision tree,0.02432302552517868,0.6342376906152607,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+34,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Mediterranea,random forest,0.2291904506771948,5.545083999199706e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+35,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae,linear regression,0.1254534938745465,0.27697234802695114,
+35,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae,ridge regression,0.2115516062884484,0.06475314844022981,
+35,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae,ard regression,0.3086913086913087,0.006304632363312575,
+35,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae,svr,0.2255303196548003,7.875661510530023e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+35,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae,decision tree,0.04765494404623713,0.3510539119725036,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+35,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae,random forest,0.16762449197395834,0.000960917503631332,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+36,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae;g__Barnesiella,linear regression,0.06264787843735213,0.5883191428491579,
+36,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae;g__Barnesiella,ridge regression,0.12963352437036646,0.2611518443180496,
+36,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae;g__Barnesiella,ard regression,0.12332404437667595,0.28527289389458504,
+36,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae;g__Barnesiella,svr,0.1801784174027128,0.00038089244538053977,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+36,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae;g__Barnesiella,decision tree,0.13629201962312915,0.007405122020197858,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+36,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Barnesiellaceae;g__Barnesiella,random forest,0.13420200899461918,0.008373946103303168,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+37,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae,linear regression,0.2794310952205689,0.013849979189808766,
+37,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae,ridge regression,0.2400494242599505,0.03548114850184934,
+37,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae,ard regression,0.1828434723171565,0.11146299983823872,
+37,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae,svr,0.35445057103196004,7.711174769720465e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+37,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae,decision tree,0.030700684049388006,0.5481239186751106,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+37,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae,random forest,0.3044358322756347,1.064552344169319e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+38,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Butyricimonas,linear regression,0.11786974781885985,0.30727828956448155,
+38,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Butyricimonas,ridge regression,0.17524580682475416,0.12739708218035492,
+38,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Butyricimonas,ard regression,0.2442294547557705,0.03230782787577797,
+38,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Butyricimonas,svr,0.09182829973408067,0.07190061986783343,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+38,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Butyricimonas,decision tree,-0.04181478062575298,0.4132685175711026,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+38,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Butyricimonas,random forest,0.1671721548486001,0.0009923418738828976,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+39,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Odoribacter,linear regression,0.16011725194396473,0.16421480301037325,
+39,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Odoribacter,ridge regression,0.3192596876807403,0.004652787942326496,
+39,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Odoribacter,ard regression,0.32259845417740146,0.004217545953363281,
+39,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Odoribacter,svr,0.3845756773244328,5.10383153378014e-15,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+39,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Odoribacter,decision tree,0.1931353937621937,0.00013716236105736377,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+39,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Odoribacteraceae;g__Odoribacter,random forest,0.2045114171850475,5.28702190137247e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+40,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae,linear regression,0.28667762079374537,0.0114800488457805,
+40,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae,ridge regression,0.3514643251485356,0.0017227379997614596,
+40,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae,ard regression,0.3823807771176192,0.000599360144196037,
+40,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae,svr,0.28885439764338305,7.795778096274653e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+40,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae,decision tree,0.07005596391619885,0.17012148697252244,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+40,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae,random forest,0.21793323174647414,1.6016755672380702e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+41,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;NA,linear regression,0.30784094646103544,0.0064576764174879365,
+41,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;NA,ridge regression,0.3671065776328934,0.0010229874683634961,
+41,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;NA,ard regression,0.5447973079552026,3.0171935153047837e-07,
+41,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;NA,svr,0.2461429809463825,1.0114543268259504e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+41,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;NA,decision tree,0.08553790162605328,0.09374008728527344,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+41,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;NA,random forest,0.21782200496537826,1.6181115301822055e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+42,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Paraprevotella,linear regression,0.3865608076134392,0.0005154249957942063,
+42,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Paraprevotella,ridge regression,0.4389294915610704,6.517684744277551e-05,
+42,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Paraprevotella,ard regression,0.4217887375782112,0.00013316212673071542,
+42,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Paraprevotella,svr,0.2420450749106621,1.543922081542371e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+42,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Paraprevotella,decision tree,0.06912089706472484,0.1759089922774594,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+42,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Paraprevotella,random forest,0.2549433403334329,3.9759638899028156e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+43,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotella,linear regression,0.2952836637047163,0.00913035186670778,
+43,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotella,ridge regression,0.27109732372890266,0.017088215839253372,
+43,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotella,ard regression,0.2385772122614228,0.03665909734078685,
+43,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotella,svr,0.09830834148593996,0.0539363140815304,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+43,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotella,decision tree,0.06155110705586789,0.2282281492072057,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+43,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotella,random forest,0.1701992697649735,0.0007988606154160648,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+44,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotellamassilia,linear regression,0.31335975446122444,0.005520070864696964,
+44,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotellamassilia,ridge regression,0.3904516536095483,0.0004470895521060693,
+44,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotellamassilia,ard regression,0.3368210736631789,0.002741787736924572,
+44,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotellamassilia,svr,0.19345075094756284,0.00013368097630212067,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+44,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotellamassilia,decision tree,0.11015011353641528,0.03070671292453321,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+44,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Prevotellaceae;g__Prevotellamassilia,random forest,0.2930838130115184,4.594708595760353e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+45,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae,linear regression,0.3420286426058585,0.002330000331661377,
+45,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae,ridge regression,0.4530206635469794,3.517951584673844e-05,
+45,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae,ard regression,0.471843945528156,1.4780150112228656e-05,
+45,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae,svr,0.345167785911721,3.263213629613529e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+45,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae,decision tree,0.03830723880896805,0.4535719370466133,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+45,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae,random forest,0.3840742867384168,5.5725156216665965e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+46,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;NA,linear regression,0.3896103896103896,0.0004611207622932749,
+46,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;NA,ridge regression,0.3947631316052368,0.00038111446529360464,
+46,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;NA,ard regression,0.4030969030969031,0.00027818542707605564,
+46,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;NA,svr,0.1903751189451603,0.00017147868161823096,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+46,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;NA,decision tree,-0.010610947216251743,0.8355954431743486,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+46,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;NA,random forest,0.3044812831287593,1.058201933205623e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+47,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes,linear regression,0.304808476062958,0.0070304377102774615,
+47,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes,ridge regression,0.3162626846837373,0.005076940150059921,
+47,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes,ard regression,0.31744571218255424,0.004905584995776364,
+47,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes,svr,0.27972813229487165,2.368816515290509e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+47,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes,decision tree,0.1578558504984198,0.0018913393970000961,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+47,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes,random forest,0.4071761458396824,8.29410170506101e-17,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+48,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae,linear regression,0.4426713288493028,5.547828494600243e-05,
+48,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae,ridge regression,0.4835427730164572,8.398339313575855e-06,
+48,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae,ard regression,0.5873600084126399,1.964167260816737e-08,
+48,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae,svr,0.4538884739845594,5.793557119838227e-21,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+48,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae,decision tree,0.16440871170854646,0.0012058202960129574,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+48,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae,random forest,0.3843489385996447,5.310786702193326e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+49,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides,linear regression,0.2751721962248278,0.01543156437228185,
+49,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides,ridge regression,0.3468373731531626,0.001999970678986048,
+49,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides,ard regression,0.28387402071612594,0.012351452909374885,
+49,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides,svr,0.4076932531760632,7.519937948637325e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+49,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides,decision tree,0.07898104327320149,0.12183949204969635,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+49,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides,random forest,0.38442379178255615,5.241570909456846e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+50,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Tannerella,linear regression,0.233123673198113,0.0413106742735298,
+50,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Tannerella,ridge regression,0.22085808927914188,0.053578189749544924,
+50,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Tannerella,ard regression,0.27651296072348697,0.014917655778300412,
+50,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Tannerella,svr,0.1815551450092183,0.00034282307139487945,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+50,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Tannerella,decision tree,-0.030565176611867875,0.5498921854250323,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+50,k__Bacteria;p__Bacteroidetes;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Tannerella,random forest,0.1554640085170843,0.0022198419196400427,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+51,k__Bacteria;p__Firmicutes,linear regression,0.4071454860928545,0.00023801980435830586,
+51,k__Bacteria;p__Firmicutes,ridge regression,0.4068825910931174,0.0002404566083506729,
+51,k__Bacteria;p__Firmicutes,ard regression,0.4913507545086492,5.6920433427980945e-06,
+51,k__Bacteria;p__Firmicutes,svr,0.3844138153170733,5.250744677310682e-15,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+51,k__Bacteria;p__Firmicutes,decision tree,0.16597647364619314,0.001080026973024648,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+51,k__Bacteria;p__Firmicutes,random forest,0.4825102248043753,7.606030591434655e-24,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+52,k__Bacteria;p__Firmicutes;NA,linear regression,0.5285503969714496,7.774443078975009e-07,
+52,k__Bacteria;p__Firmicutes;NA,ridge regression,0.5315736894684262,6.543291963250931e-07,
+52,k__Bacteria;p__Firmicutes;NA,ard regression,0.5514485514485514,2.0182852849644718e-07,
+52,k__Bacteria;p__Firmicutes;NA,svr,0.3614452422390275,2.519330922582838e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+52,k__Bacteria;p__Firmicutes;NA,decision tree,0.21354842898556395,2.385829298080613e-05,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+52,k__Bacteria;p__Firmicutes;NA,random forest,0.4244639267046486,2.853468719060476e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+53,k__Bacteria;p__Firmicutes;NA;NA,linear regression,0.26428834323571165,0.02019791100992064,
+53,k__Bacteria;p__Firmicutes;NA;NA,ridge regression,0.29609863820390137,0.008931361541402423,
+53,k__Bacteria;p__Firmicutes;NA;NA,ard regression,0.3850885956149114,0.0005436773953472132,
+53,k__Bacteria;p__Firmicutes;NA;NA,svr,0.34567352291034786,3.020236479929117e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+53,k__Bacteria;p__Firmicutes;NA;NA,decision tree,0.29616466112482365,3.1090280722904824e-09,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+53,k__Bacteria;p__Firmicutes;NA;NA,random forest,0.5204421595206964,4.158975397018234e-28,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+54,k__Bacteria;p__Firmicutes;NA;NA;NA,linear regression,0.3618223881381776,0.0012235023708431069,
+54,k__Bacteria;p__Firmicutes;NA;NA;NA,ridge regression,0.3754403491245596,0.0007666280741988673,
+54,k__Bacteria;p__Firmicutes;NA;NA;NA,ard regression,0.4931384405068615,5.200018545652916e-06,
+54,k__Bacteria;p__Firmicutes;NA;NA;NA,svr,0.3592197276917135,3.607115745026053e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+54,k__Bacteria;p__Firmicutes;NA;NA;NA,decision tree,0.19835853762209327,8.912979015940874e-05,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+54,k__Bacteria;p__Firmicutes;NA;NA;NA,random forest,0.4469446516841444,2.643166347479096e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+55,k__Bacteria;p__Firmicutes;NA;NA;NA;NA,linear regression,0.4554978639894017,3.1476187086336855e-05,
+55,k__Bacteria;p__Firmicutes;NA;NA;NA;NA,ridge regression,0.4683211525316788,1.7452453901096866e-05,
+55,k__Bacteria;p__Firmicutes;NA;NA;NA;NA,ard regression,0.3928702876071297,0.0004088960306290154,
+55,k__Bacteria;p__Firmicutes;NA;NA;NA;NA,svr,0.3711739204181537,5.0758218838930836e-14,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+55,k__Bacteria;p__Firmicutes;NA;NA;NA;NA,decision tree,0.18328621685624694,0.00029998369462760053,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+55,k__Bacteria;p__Firmicutes;NA;NA;NA;NA,random forest,0.4990089584810066,1.2375355685613644e-25,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+56,k__Bacteria;p__Firmicutes;c__Bacilli,linear regression,0.4641735130207133,2.117503113462305e-05,
+56,k__Bacteria;p__Firmicutes;c__Bacilli,ridge regression,0.4766023450233976,1.1773720246366111e-05,
+56,k__Bacteria;p__Firmicutes;c__Bacilli,ard regression,0.4551501130448498,3.197320224207567e-05,
+56,k__Bacteria;p__Firmicutes;c__Bacilli,svr,0.31209639624691826,3.826922115462596e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+56,k__Bacteria;p__Firmicutes;c__Bacilli,decision tree,0.012524129803926164,0.8064938113935838,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+56,k__Bacteria;p__Firmicutes;c__Bacilli,random forest,0.22407179766317398,9.042906386034464e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+57,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales,linear regression,0.21854461328145533,0.056196864367196536,
+57,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales,ridge regression,0.22664177927335816,0.047465973533514456,
+57,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales,ard regression,0.18799621431200367,0.10156524540105556,
+57,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales,svr,0.2726079987781698,5.4846315807601735e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+57,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales,decision tree,0.20120299321005544,7.01481016126548e-05,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+57,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales,random forest,0.2551957458840852,3.868903785668797e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+58,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae,linear regression,0.43254682882475054,8.542355288162381e-05,
+58,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae,ridge regression,0.4488932120511068,4.226244097710895e-05,
+58,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae,ard regression,0.5819706609180292,2.8369424897510433e-08,
+58,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae,svr,0.2947845843271831,3.7056287931129916e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+58,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae,decision tree,0.02972087114954125,0.5609723630125947,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+58,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae,random forest,0.4293644688074501,1.0591770071840819e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+59,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,linear regression,0.2900505469412701,0.010502946277614479,
+59,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,ridge regression,0.3829591461170409,0.0005870476623419321,
+59,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,ard regression,0.5216099689783901,1.1477120957189196e-06,
+59,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,svr,0.2829759223901327,1.6023147165755402e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+59,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,decision tree,0.1976323791276575,9.469828697940708e-05,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+59,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,random forest,0.3771163824182476,1.8570604630921885e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+60,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae,linear regression,0.21072487200670706,0.06583084099938616,
+60,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae,ridge regression,0.2709921657290078,0.017132916908897112,
+60,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae,ard regression,0.23074294126925704,0.04348964471113504,
+60,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae,svr,0.2467743775565893,9.470134400338171e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+60,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae,decision tree,0.07582565978371572,0.13751526246566775,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+60,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae,random forest,0.2254916716856239,7.90464950124756e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+61,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,linear regression,0.350178441161417,0.0017960820790486399,
+61,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,ridge regression,0.4662179925337821,1.925618494486722e-05,
+61,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,ard regression,0.5101477469898522,2.14357459838182e-06,
+61,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,svr,0.3246795310555824,6.6815359281576e-11,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+61,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,decision tree,0.03705791963836825,0.4684436788107754,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+61,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,random forest,0.18536547464432948,0.00025513589038925476,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+62,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae,linear regression,0.4736053420263946,1.3592229860019193e-05,
+62,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae,ridge regression,0.5719017824280981,5.540367602461743e-08,
+62,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae,ard regression,0.5186918344813082,1.348484728395838e-06,
+62,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae,svr,0.4195822827415743,7.536975354844093e-18,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+62,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae,decision tree,0.0723922741630835,0.15628394601179268,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+62,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae,random forest,0.3409579377787055,6.180639023475809e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+63,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae;g__Streptococcus,linear regression,0.3586831502992337,0.0013588385629531255,
+63,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae;g__Streptococcus,ridge regression,0.334901940165098,0.002909245587146197,
+63,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae;g__Streptococcus,ard regression,0.33366633366633364,0.0030218434432797065,
+63,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae;g__Streptococcus,svr,0.350026480023432,1.5427237464648533e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+63,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae;g__Streptococcus,decision tree,0.0798084285649772,0.1179686118098572,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+63,k__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Streptococcaceae;g__Streptococcus,random forest,0.3732172468811941,3.6004966453260834e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+64,k__Bacteria;p__Firmicutes;c__Clostridia,linear regression,0.2814139052836969,0.013162816519423168,
+64,k__Bacteria;p__Firmicutes;c__Clostridia,ridge regression,0.3369262316630737,0.002732866436069746,
+64,k__Bacteria;p__Firmicutes;c__Clostridia,ard regression,0.4185551290814448,0.0001517322526302551,
+64,k__Bacteria;p__Firmicutes;c__Clostridia,svr,0.4151464822140152,1.797154505898392e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+64,k__Bacteria;p__Firmicutes;c__Clostridia,decision tree,0.1415170731940685,0.0054066773637826745,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+64,k__Bacteria;p__Firmicutes;c__Clostridia,random forest,0.4754537672780761,4.1401356588977826e-23,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+65,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales,linear regression,0.4916136495083863,5.6170465798002185e-06,
+65,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales,ridge regression,0.5535517114464482,1.7740852755456078e-07,
+65,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales,ard regression,0.5977180714022818,9.505805366267303e-09,
+65,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales,svr,0.29983877545311305,1.9394543243840185e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+65,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales,decision tree,0.1485611431557192,0.003480917803006878,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+65,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales,random forest,0.4512556573977082,1.0343240568391436e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+66,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA,linear regression,0.4961551101315934,4.459087693730638e-06,
+66,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA,ridge regression,0.5692202534307798,6.596645423254866e-08,
+66,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA,ard regression,0.5701140964298858,6.224959663480902e-08,
+66,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA,svr,0.2496459342862387,7.004079776728098e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+66,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA,decision tree,0.192912405800206,0.00013967518646016796,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+66,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA,random forest,0.4383099048423188,1.6635409008944563e-19,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+67,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA;NA,linear regression,0.2350211636850797,0.039639570854023684,
+67,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA;NA,ridge regression,0.3286187496713812,0.003523343891909911,
+67,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA;NA,ard regression,0.483201009516799,8.540695952824668e-06,
+67,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA;NA,svr,0.3141494352190081,2.894576082424834e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+67,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA;NA,decision tree,0.1983451297027161,8.922975553921783e-05,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+67,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;NA;NA,random forest,0.4973074977978153,1.9121919279316034e-25,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+68,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__,linear regression,0.4000289190979327,0.00031266792816545127,
+68,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__,ridge regression,0.4915084915084914,5.646933407261102e-06,
+68,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__,ard regression,0.5819969504180029,2.8319048385912938e-08,
+68,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__,svr,0.14164781471447724,0.0053635861235085715,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+68,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__,decision tree,0.0043644855366621405,0.9319757196032028,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+68,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__,random forest,0.3204859661901777,1.20619104620721e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+69,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Flavonifractor,linear regression,0.3226773226773227,0.004207717512586428,
+69,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Flavonifractor,ridge regression,0.3536726431463273,0.0016030530244260648,
+69,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Flavonifractor,ard regression,0.3826436721173563,0.0005937346630264395,
+69,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Flavonifractor,svr,0.2406803902568413,1.7744944091676732e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+69,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Flavonifractor,decision tree,0.03285849657991058,0.5203490526186817,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+69,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Flavonifractor,random forest,0.2625311910072079,1.7280541139704106e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+70,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Intestinimonas,linear regression,0.2477636467836441,0.029813995361119002,
+70,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Intestinimonas,ridge regression,0.2743309322256691,0.01576175228928442,
+70,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Intestinimonas,ard regression,0.2446500867553499,0.032002128365672115,
+70,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Intestinimonas,svr,0.29910884720850434,2.1312068432231387e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+70,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Intestinimonas,decision tree,0.011771355878449468,0.8179148924863765,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+70,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Intestinimonas,random forest,0.2931905547743952,4.533299440809809e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+71,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Pseudoflavonifractor,linear regression,0.28064963504411816,0.013424101664248856,
+71,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Pseudoflavonifractor,ridge regression,0.4042273515957726,0.0002663861262488805,
+71,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Pseudoflavonifractor,ard regression,0.44142699405857294,5.854395673891257e-05,
+71,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Pseudoflavonifractor,svr,0.3114932987016185,4.152365713854566e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+71,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Pseudoflavonifractor,decision tree,0.06348941321781551,0.21388410505509367,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+71,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__;g__Pseudoflavonifractor,random forest,0.3751207687751297,2.6089913819340142e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+72,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae,linear regression,0.4652452810347546,2.0147938829867775e-05,
+72,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae,ridge regression,0.4842525895157474,8.109744414684854e-06,
+72,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae,ard regression,0.5102529049897471,2.131543583735644e-06,
+72,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae,svr,0.2460015356169809,1.0264561914187024e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+72,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae,decision tree,0.11763146364989968,0.02096515923707077,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+72,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae,random forest,0.3865134468775015,3.6292715626986825e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+73,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Butyricicoccus,linear regression,-0.10531781347964764,0.3619884054568131,
+73,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Butyricicoccus,ridge regression,0.028392659971607337,0.8063643858071687,
+73,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Butyricicoccus,ard regression,0.1635995583364004,0.15511395473674178,
+73,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Butyricicoccus,svr,0.23602909024015464,2.834135788808408e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+73,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Butyricicoccus,decision tree,-0.008093905708527844,0.8742203375929307,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+73,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Butyricicoccus,random forest,0.2182123896388148,1.5611197726371077e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+74,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,linear regression,0.4810121590951223,9.50737395217023e-06,
+74,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,ridge regression,0.5018665544981334,3.3197045443751582e-06,
+74,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,ard regression,0.4813344550186655,9.358879431795537e-06,
+74,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,svr,0.28936371818167417,7.318292030305611e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+74,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,decision tree,0.08123511273678644,0.11152043606637986,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+74,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,random forest,0.4065849825419001,9.275308574048055e-17,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+75,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Hungatella,linear regression,0.3842018093438323,0.0005613701465035328,
+75,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Hungatella,ridge regression,0.4533098480466901,3.472719574932532e-05,
+75,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Hungatella,ard regression,0.5333876649666124,5.895522039235403e-07,
+75,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Hungatella,svr,0.3920885308017229,1.343684826913483e-15,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+75,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Hungatella,decision tree,0.10753068665522243,0.034930528505117305,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+75,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Hungatella,random forest,0.4534697515893107,6.3551166662767316e-21,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+76,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis,linear regression,0.2443625083029557,0.032210865592650274,
+76,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis,ridge regression,0.4109574635890425,0.00020514434152575696,
+76,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis,ard regression,0.5686944634313055,6.825020360911577e-08,
+76,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis,svr,0.3402982049222135,6.825363070668187e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+76,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis,decision tree,0.06494671739130553,0.20353456376866474,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+76,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis,random forest,0.24981265000156344,6.881701853166403e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+77,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis;g__Emergencia,linear regression,0.5731355448734544,5.1102586449670474e-08,
+77,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis;g__Emergencia,ridge regression,0.5724275724275724,5.353028187354184e-08,
+77,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis;g__Emergencia,ard regression,0.539776013460224,4.064026655279452e-07,
+77,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis;g__Emergencia,svr,0.29812915542477103,2.4177024315232704e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+77,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis;g__Emergencia,decision tree,0.02184546229455366,0.6691636361227828,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+77,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiales Family XIII. Incertae Sedis;g__Emergencia,random forest,0.3178653169104047,1.73672047556879e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+78,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae,linear regression,0.4800920145008923,9.943544808549741e-06,
+78,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae,ridge regression,0.3880067301119933,0.0004889883256639524,
+78,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae,ard regression,0.4615384615384615,2.391153375805231e-05,
+78,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae,svr,0.30919963271390577,5.654210194819188e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+78,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae,decision tree,0.1022012715842725,0.04506325686616447,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+78,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae,random forest,0.4468788562707164,2.681010896415141e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+79,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae;g__Eubacterium,linear regression,0.3725796911265036,0.000847158935100241,
+79,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae;g__Eubacterium,ridge regression,0.3607445186392553,0.0012685297910373775,
+79,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae;g__Eubacterium,ard regression,0.4782322940217677,1.088285491873108e-05,
+79,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae;g__Eubacterium,svr,0.33779353182429833,9.92657560424616e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+79,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae;g__Eubacterium,decision tree,0.047483004927549526,0.35279655905122165,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+79,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Eubacteriaceae;g__Eubacterium,random forest,0.4311314273830789,7.379957843908781e-19,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+80,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae,linear regression,0.31174089068825905,0.005781759585794881,
+80,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae,ridge regression,0.2652084757347915,0.019751286169665764,
+80,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae,ard regression,0.3283295651716704,0.0035542025641310524,
+80,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae,svr,0.35103936418200105,1.3175036927911184e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+80,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae,decision tree,0.08286567358145315,0.10449364108497627,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+80,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae,random forest,0.38782769080143936,2.8762808452636666e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+81,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;NA,linear regression,0.3059460667429422,0.0068105379167606025,
+81,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;NA,ridge regression,0.41905462958094536,0.00014871581914097665,
+81,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;NA,ard regression,0.5360691939639307,5.047886049969025e-07,
+81,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;NA,svr,0.2695859632998168,7.776319837137775e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+81,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;NA,decision tree,0.03438907604375658,0.5010953148601428,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+81,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;NA,random forest,0.4030084051682687,1.8157811606760908e-16,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+82,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__,linear regression,0.1978099984449305,0.08462320231886901,
+82,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__,ridge regression,0.2270624112729376,0.0470448339968448,
+82,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__,ard regression,0.2809295967190704,0.013327873099344837,
+82,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__,svr,0.2820507819639527,1.7919819868065503e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+82,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__,decision tree,0.06359293966124623,0.2131366280604757,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+82,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__,random forest,0.3503762551271766,1.4609945105964468e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+83,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Anaerostipes,linear regression,0.4082971298666169,0.0002276102810945229,
+83,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Anaerostipes,ridge regression,0.4846732215153267,7.943134796349992e-06,
+83,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Anaerostipes,ard regression,0.4688206530311794,1.7047890952987522e-05,
+83,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Anaerostipes,svr,0.36393433592643104,1.680762727739211e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+83,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Anaerostipes,decision tree,0.017505528552803292,0.7320554289600767,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+83,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Anaerostipes,random forest,0.28518418167875953,1.224776722487349e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+84,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Blautia,linear regression,0.2558035597802813,0.024739033894946805,
+84,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Blautia,ridge regression,0.2699931647300068,0.017562613760498162,
+84,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Blautia,ard regression,0.4157421525842578,0.00016979934493467313,
+84,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Blautia,svr,0.2876557590377057,9.041591949784082e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+84,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Blautia,decision tree,0.0193294642756762,0.7053759508334123,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+84,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Blautia,random forest,0.4407570971897625,9.929389309948091e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+85,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Butyrivibrio,linear regression,0.4076795672898441,0.00023313909567643468,
+85,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Butyrivibrio,ridge regression,0.5411167779588832,3.7551098812828324e-07,
+85,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Butyrivibrio,ard regression,0.5270518954729481,8.462759480754428e-07,
+85,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Butyrivibrio,svr,0.2916146871244982,5.526371702315087e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+85,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Butyrivibrio,decision tree,-0.08225175202665341,0.10709702709487694,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+85,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Butyrivibrio,random forest,0.3736233164369274,3.3619978870529e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+86,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Coprococcus,linear regression,0.3722822516206243,0.000855958711012873,
+86,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Coprococcus,ridge regression,0.4018875860981124,0.00029133764903745927,
+86,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Coprococcus,ard regression,0.2738577212261422,0.015950145019606555,
+86,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Coprococcus,svr,0.2594400451398985,2.434236736380195e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+86,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Coprococcus,decision tree,0.02711936688262561,0.595773812402143,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+86,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Coprococcus,random forest,0.2727712556224865,5.381500709934515e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+87,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Dorea,linear regression,0.44610510833830463,4.7773924450525263e-05,
+87,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Dorea,ridge regression,0.4250223460749776,0.00011670998663238057,
+87,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Dorea,ard regression,0.3493085861506914,0.0018472787796736207,
+87,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Dorea,svr,0.2380783753400211,2.308555478127053e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+87,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Dorea,decision tree,0.01889574373413865,0.7116889773065129,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+87,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Dorea,random forest,0.3635837735648813,1.779735579799858e-13,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+88,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Eisenbergiella,linear regression,0.3346280997239562,0.0029338712371551642,
+88,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Eisenbergiella,ridge regression,0.42441768757558224,0.00011963590812842043,
+88,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Eisenbergiella,ard regression,0.4364845680635154,7.233909400366444e-05,
+88,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Eisenbergiella,svr,0.3899677382741183,1.965243840697602e-15,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+88,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Eisenbergiella,decision tree,0.1286211565978623,0.01153617519315201,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+88,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Eisenbergiella,random forest,0.4421928308749735,7.321388852109577e-20,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+89,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Fusicatenibacter,linear regression,0.2644723697355276,0.02010790173297887,
+89,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Fusicatenibacter,ridge regression,0.24633261475366736,0.030803513152070725,
+89,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Fusicatenibacter,ard regression,0.21189336978810647,0.06431182877710895,
+89,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Fusicatenibacter,svr,0.09885745861838607,0.05260296108056388,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+89,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Fusicatenibacter,decision tree,0.0487978261842292,0.339608987940478,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+89,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Fusicatenibacter,random forest,0.15360693147496007,0.002509941045693205,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+90,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Lachnoclostridium,linear regression,0.5697234983790591,6.384868445260509e-08,
+90,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Lachnoclostridium,ridge regression,0.4892738840107261,6.3183913143139705e-06,
+90,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Lachnoclostridium,ard regression,0.5745833114254166,4.64595884491255e-08,
+90,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Lachnoclostridium,svr,0.3357769183723242,1.3387919423904401e-11,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+90,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Lachnoclostridium,decision tree,0.07842712457341627,0.12448576558667535,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+90,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Lachnoclostridium,random forest,0.26204485610862344,1.8242967547269032e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+91,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Roseburia,linear regression,0.23339818076660185,0.04106536077187686,
+91,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Roseburia,ridge regression,0.1857616068142384,0.10576994391802276,
+91,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Roseburia,ard regression,0.3446290551553709,0.0021459203932551615,
+91,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Roseburia,svr,0.159979287039478,0.001637632337488634,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+91,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Roseburia,decision tree,-0.005888623777340113,0.9083116144566068,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+91,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Roseburia,random forest,0.2283508196815492,6.012933617153334e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+92,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Tyzzerella,linear regression,0.2519076443850373,0.027098348422924967,
+92,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Tyzzerella,ridge regression,0.3240443766759556,0.004040561835269437,
+92,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Tyzzerella,ard regression,0.4933224670066775,5.151699548252446e-06,
+92,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Tyzzerella,svr,0.2187121866923677,1.4909339903987271e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+92,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Tyzzerella,decision tree,0.11089889135509223,0.029582729417891706,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+92,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Lachnospiraceae;g__Tyzzerella,random forest,0.4213413294759544,5.320929380505181e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+93,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae,linear regression,0.233192462697073,0.04124908668433749,
+93,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae,ridge regression,0.3705767916294232,0.0009080378273080992,
+93,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae,ard regression,0.3921867606078132,0.0004193753266136689,
+93,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae,svr,0.34616660678091377,2.8003918237890308e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+93,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae,decision tree,0.019442431835654358,0.7037349399639009,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+93,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae,random forest,0.2907060674538698,6.1915953555068236e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+94,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae;g__Oscillibacter,linear regression,0.3805085804787021,0.000640848314873159,
+94,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae;g__Oscillibacter,ridge regression,0.4509437930490562,3.859260624671041e-05,
+94,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae;g__Oscillibacter,ard regression,0.37822703612177294,0.0006949380527264621,
+94,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae;g__Oscillibacter,svr,0.283537936997992,1.496737304784269e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+94,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae;g__Oscillibacter,decision tree,0.07942175636933503,0.11976550544733199,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+94,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Oscillospiraceae;g__Oscillibacter,random forest,0.31114408598078863,4.35294691828271e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+95,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae,linear regression,0.5261518239034915,8.90341499238891e-07,
+95,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae,ridge regression,0.5332036384667963,5.958368102328322e-07,
+95,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae,ard regression,0.5736894684263104,4.927640269104148e-08,
+95,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae,svr,0.3138758103999192,3.004696576477216e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+95,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae,decision tree,0.011857602782551152,0.8166043515780911,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+95,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae,random forest,0.2796798721265097,2.382527109727915e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+96,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae;g__Clostridioides,linear regression,0.39909034773977203,0.0003239748590901678,
+96,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae;g__Clostridioides,ridge regression,0.4198433145801566,0.00014406544960065241,
+96,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae;g__Clostridioides,ard regression,0.5363320889636679,4.971289521417885e-07,
+96,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae;g__Clostridioides,svr,0.2969292902657949,2.8197513403866868e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+96,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae;g__Clostridioides,decision tree,-0.014674156930089027,0.7741069797243858,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+96,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptostreptococcaceae;g__Clostridioides,random forest,0.2686569910558448,8.649916799052796e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+97,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae,linear regression,0.2982543772017456,0.00842318581651976,
+97,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae,ridge regression,0.3617435196382565,0.0012267473466293394,
+97,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae,ard regression,0.35193753614806245,0.001696433783611601,
+97,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae,svr,0.41135638994812496,3.737954955232915e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+97,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae,decision tree,0.050546403703166674,0.3225655051301254,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+97,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae,random forest,0.4108717141278692,4.102189183851957e-17,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+98,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;NA,linear regression,0.3209422156790577,0.004428710794587962,
+98,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;NA,ridge regression,0.2743309322256691,0.01576175228928442,
+98,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;NA,ard regression,0.3388453651611546,0.002574552518053991,
+98,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;NA,svr,0.289716499927241,7.004298616976958e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+98,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;NA,decision tree,0.18568394881888275,0.0002488473058316731,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+98,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;NA,random forest,0.3543831989567185,7.793673889474379e-13,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+99,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__,linear regression,0.3622346369028033,0.0012066668109966359,
+99,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__,ridge regression,0.3768336926231664,0.0007299825576692325,
+99,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__,ard regression,0.4163205215836793,0.00016593021462254123,
+99,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__,svr,0.3131159411811405,3.3323108874867213e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+99,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__,decision tree,0.1537397331317873,0.002488101780433281,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+99,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__,random forest,0.3809849850044616,9.54339944955384e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+100,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaeromassilibacillus,linear regression,0.4515705000582046,3.7531564696190426e-05,
+100,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaeromassilibacillus,ridge regression,0.470660918029339,1.5631704260916565e-05,
+100,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaeromassilibacillus,ard regression,0.4640096745359903,2.1336276280158413e-05,
+100,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaeromassilibacillus,svr,0.1557871634455045,0.002172606295072408,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+100,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaeromassilibacillus,decision tree,0.10011646694597713,0.0496492211026998,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+100,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaeromassilibacillus,random forest,0.2216381939841056,1.1365033934915076e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+101,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaerotruncus,linear regression,0.2496335876913089,0.02856145858850496,
+101,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaerotruncus,ridge regression,0.34465534465534464,0.002144128073148575,
+101,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaerotruncus,ard regression,0.3663178926336821,0.0010508865403210763,
+101,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaerotruncus,svr,0.2599007881525571,2.3136821732630052e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+101,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaerotruncus,decision tree,0.06666170040544174,0.19182607786406064,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+101,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Anaerotruncus,random forest,0.37749520882918297,1.7405384530312024e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+102,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Angelakisella,linear regression,0.34378779115621216,0.002203989982576052,
+102,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Angelakisella,ridge regression,0.28466270571533725,0.012100697505023449,
+102,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Angelakisella,ard regression,0.4498922130501077,4.043585516862672e-05,
+102,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Angelakisella,svr,0.34021867307717185,6.907386044548433e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+102,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Angelakisella,decision tree,0.13672840223361285,0.007215952507996134,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+102,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Angelakisella,random forest,0.5271291397482267,6.466417920522226e-29,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+103,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Faecalibacterium,linear regression,0.3675714755493375,0.0010068584174149887,
+103,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Faecalibacterium,ridge regression,0.3660812871339187,0.0010593897346466176,
+103,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Faecalibacterium,ard regression,0.3890057311109943,0.0004714530628144705,
+103,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Faecalibacterium,svr,0.37223663252971656,4.246877150447139e-14,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+103,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Faecalibacterium,decision tree,0.0877599904405623,0.08548779863036736,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+103,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Faecalibacterium,random forest,0.472533010417151,8.25349217373937e-23,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+104,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Gemmiger,linear regression,0.37609432933574666,0.0007492246845766003,
+104,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Gemmiger,ridge regression,0.21680950628319048,0.058228631073261275,
+104,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Gemmiger,ard regression,0.1989063568010936,0.08287868752793195,
+104,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Gemmiger,svr,0.11843841352624912,0.020095479237288112,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+104,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Gemmiger,decision tree,0.018553298511672364,0.7166874166946862,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+104,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Gemmiger,random forest,0.12316228868229424,0.015607229279853403,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+105,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Negativibacillus,linear regression,0.2615542352384458,0.021576308948887315,
+105,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Negativibacillus,ridge regression,0.3760187181239813,0.0007512182703593472,
+105,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Negativibacillus,ard regression,0.4281770860718229,0.00010248782011932054,
+105,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Negativibacillus,svr,0.3558064403819383,6.221214511985203e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+105,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Negativibacillus,decision tree,0.07805519729535462,0.12628751014104514,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+105,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Negativibacillus,random forest,0.36533951347110616,1.335356436757437e-13,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+106,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Neglecta,linear regression,0.3525159051474841,0.001664776001868734,
+106,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Neglecta,ridge regression,0.4731321310268678,1.3902289727247918e-05,
+106,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Neglecta,ard regression,0.4942951785057048,4.903218416343464e-06,
+106,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Neglecta,svr,0.3096160415639749,5.34707725039953e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+106,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Neglecta,decision tree,-0.02726710213308449,0.5937714690523984,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+106,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Neglecta,random forest,0.16919133295239652,0.0008590283971409037,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+107,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Phocea,linear regression,0.2825219683139015,0.012791825725730838,
+107,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Phocea,ridge regression,0.3054314106945685,0.0069092610156897185,
+107,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Phocea,ard regression,0.4031231925968768,0.0002779056613346637,
+107,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Phocea,svr,0.1727021701087188,0.0006658958077458969,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+107,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Phocea,decision tree,0.016808163776264984,0.7423440296564798,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+107,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Phocea,random forest,0.290215613847974,6.58225974228766e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+108,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Provencibacterium,linear regression,0.29563125626026904,0.009045011731031794,
+108,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Provencibacterium,ridge regression,0.3396077606603922,0.0025139762404368226,
+108,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Provencibacterium,ard regression,0.320100951679899,0.004539522470604493,
+108,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Provencibacterium,svr,0.2525511498336229,5.142465052512632e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+108,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Provencibacterium,decision tree,0.004390632035592583,0.9315691975831596,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+108,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Provencibacterium,random forest,0.3251686475507629,6.232990823882528e-11,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+109,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminiclostridium,linear regression,0.19095503809128767,0.09619985564137734,
+109,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminiclostridium,ridge regression,0.1051842893948157,0.3626007566431316,
+109,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminiclostridium,ard regression,-0.032520111467479886,0.7788871363596914,
+109,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminiclostridium,svr,0.026801537219394274,0.6000919069688827,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+109,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminiclostridium,decision tree,-0.04303823288280025,0.3997233228899135,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+109,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminiclostridium,random forest,0.028208233535217998,0.5810883999075825,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+110,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminococcus,linear regression,0.4132713759321794,0.0001872826079246345,
+110,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminococcus,ridge regression,0.5070455859929544,2.5286141296452093e-06,
+110,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminococcus,ard regression,0.5705084389294915,6.067377779699742e-08,
+110,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminococcus,svr,0.1766933716800326,0.0004955594728195988,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+110,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminococcus,decision tree,0.02359895838895233,0.644365577697765,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+110,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruminococcus,random forest,0.3910460230908451,1.6203652980240066e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+111,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruthenibacterium,linear regression,0.2939467630881624,0.009465182428094208,
+111,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruthenibacterium,ridge regression,0.3109259161890741,0.00591760085632018,
+111,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruthenibacterium,ard regression,0.3587202271412797,0.0013571642001649962,
+111,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruthenibacterium,svr,0.32516934420607685,6.232373372320088e-11,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+111,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruthenibacterium,decision tree,0.07368081441149113,0.1490252546607035,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+111,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Ruthenibacterium,random forest,0.3489650717454082,1.819048952752678e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+112,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Subdoligranulum,linear regression,0.22146274777853725,0.05291047436995753,
+112,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Subdoligranulum,ridge regression,0.2879226037120774,0.011110556315132636,
+112,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Subdoligranulum,ard regression,0.3093222566906777,0.006193153431405697,
+112,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Subdoligranulum,svr,0.3344382177766793,1.6309241411385984e-11,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+112,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Subdoligranulum,decision tree,0.07991258818101593,0.11748819442030045,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+112,k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__Subdoligranulum,random forest,0.4184157622096293,9.483844268217435e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+113,k__Bacteria;p__Firmicutes;c__Erysipelotrichia,linear regression,0.479779689739598,1.009580130816015e-05,
+113,k__Bacteria;p__Firmicutes;c__Erysipelotrichia,ridge regression,0.4480782375519217,4.380903498089652e-05,
+113,k__Bacteria;p__Firmicutes;c__Erysipelotrichia,ard regression,0.5308112939691887,6.835115924356025e-07,
+113,k__Bacteria;p__Firmicutes;c__Erysipelotrichia,svr,0.2857422534712592,1.1439470492322075e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+113,k__Bacteria;p__Firmicutes;c__Erysipelotrichia,decision tree,0.10689731256075877,0.0360230094012584,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+113,k__Bacteria;p__Firmicutes;c__Erysipelotrichia,random forest,0.3065055525203191,8.098123226776633e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+114,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales,linear regression,0.33245920172126725,0.003135591202068916,
+114,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales,ridge regression,0.3370839686629161,0.0027195331976915785,
+114,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales,ard regression,0.3093748356906251,0.006183942495503616,
+114,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales,svr,0.2970893777776075,2.762580825764787e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+114,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales,decision tree,0.05116992843812032,0.3166247886457148,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+114,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales,random forest,0.3808873530213982,9.706150660854924e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+115,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae,linear regression,0.3392134181607865,0.002545147427434463,
+115,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae,ridge regression,0.3334034386665965,0.003046296999433959,
+115,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae,ard regression,0.3804879331195121,0.0006413201052062808,
+115,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae,svr,0.27911551643113586,2.548663069171916e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+115,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae,decision tree,0.026970224245809752,0.5977983358395808,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+115,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae,random forest,0.3428505159264699,4.643520758531501e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+116,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;NA,linear regression,0.4770755560229244,1.150829803822374e-05,
+116,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;NA,ridge regression,0.5573111099426888,1.4057094858836374e-07,
+116,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;NA,ard regression,0.5403806719596194,3.921850713647249e-07,
+116,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;NA,svr,0.4744523621392023,5.2488829167034957e-23,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+116,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;NA,decision tree,0.08090888138833838,0.1129699106979289,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+116,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;NA,random forest,0.4616516024663199,1.0184019190799786e-21,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+117,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__,linear regression,0.5645933014354066,8.882099376463002e-08,
+117,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__,ridge regression,0.6540301803459697,1.1205338282532064e-10,
+117,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__,ard regression,0.6733792523266205,1.9479376327441027e-11,
+117,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__,svr,0.39718223851723294,5.331217017005577e-16,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+117,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__,decision tree,0.08817799738190563,0.08400282744894054,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+117,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__,random forest,0.5119022003435487,4.222788817135155e-27,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+118,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Faecalitalea,linear regression,0.34542228067394376,0.0020924294806307967,
+118,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Faecalitalea,ridge regression,0.3909248646090751,0.0004393696329076957,
+118,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Faecalitalea,ard regression,0.4584888795415111,2.748873452599981e-05,
+118,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Faecalitalea,svr,0.2807113112604124,2.105545069910549e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+118,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Faecalitalea,decision tree,-0.05435410666837327,0.2874087522827419,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+118,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Faecalitalea,random forest,0.3570662348606124,5.09140180580191e-13,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+119,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Holdemania,linear regression,0.3767285346232713,0.0007326916047251129,
+119,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Holdemania,ridge regression,0.42896577107103423,9.919191649563612e-05,
+119,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Holdemania,ard regression,0.552578999947421,1.88332828061415e-07,
+119,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Holdemania,svr,0.28337693054619995,1.5262749233509542e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+119,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Holdemania,decision tree,-0.02856170583764645,0.5763577011587653,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+119,k__Bacteria;p__Firmicutes;c__Erysipelotrichia;o__Erysipelotrichales;f__Erysipelotrichaceae;g__Holdemania,random forest,0.2964962606920651,2.980205377441053e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+120,k__Bacteria;p__Firmicutes;c__Negativicutes,linear regression,0.30493792275347803,0.007005104235552786,
+120,k__Bacteria;p__Firmicutes;c__Negativicutes,ridge regression,0.2592933382407066,0.022775992513320832,
+120,k__Bacteria;p__Firmicutes;c__Negativicutes,ard regression,0.21349702928650294,0.06227340242900356,
+120,k__Bacteria;p__Firmicutes;c__Negativicutes,svr,0.1560393893102595,0.0021363781083581744,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+120,k__Bacteria;p__Firmicutes;c__Negativicutes,decision tree,0.05276283344543011,0.3017749081328699,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+120,k__Bacteria;p__Firmicutes;c__Negativicutes,random forest,0.17846803462343366,0.0004336691469967224,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+121,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales,linear regression,0.3517101770545327,0.0017090264024176534,
+121,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales,ridge regression,0.4745780535254219,1.297506818393737e-05,
+121,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales,ard regression,0.5045217939954781,2.8889014079645834e-06,
+121,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales,svr,0.261154134009667,2.0141097403692925e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+121,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales,decision tree,0.1408706713244866,0.0056243345595639645,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+121,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales,random forest,0.3311305571269838,2.6452066737701423e-11,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+122,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae,linear regression,0.5427730164572269,3.4041136515718644e-07,
+122,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae,ridge regression,0.5284715284715285,7.809312337164549e-07,
+122,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae,ard regression,0.4295967190704032,9.662607104737253e-05,
+122,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae,svr,0.16364683865818608,0.0012716984680377426,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+122,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae,decision tree,0.048841725929385967,0.33917417848493503,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+122,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae,random forest,0.34242189124200584,4.955030693942476e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+123,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Acidaminococcus,linear regression,0.25387936984202736,0.02588154873204231,
+123,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Acidaminococcus,ridge regression,0.17335296282664706,0.13162470762622686,
+123,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Acidaminococcus,ard regression,0.1863662653136337,0.10461907636218627,
+123,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Acidaminococcus,svr,0.2733561138074037,5.0271860721969284e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+123,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Acidaminococcus,decision tree,-0.045639162237362696,0.371825781511224,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+123,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Acidaminococcus,random forest,0.4593132750539343,1.727322980540819e-21,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+124,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Phascolarctobacterium,linear regression,0.3806794655979275,0.0006369557287993782,
+124,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Phascolarctobacterium,ridge regression,0.4679793890320206,1.7734404164611043e-05,
+124,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Phascolarctobacterium,ard regression,0.4595930385404069,2.613960235969357e-05,
+124,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Phascolarctobacterium,svr,0.3059674053759092,8.696781299362294e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+124,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Phascolarctobacterium,decision tree,0.07419471225454276,0.14620291528692456,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+124,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Acidaminococcales;f__Acidaminococcaceae;g__Phascolarctobacterium,random forest,0.4959852582750631,2.67705781339748e-25,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+125,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales,linear regression,0.012605898088355815,0.9133521424856818,
+125,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales,ridge regression,-0.07195436142804564,0.5340230945415332,
+125,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales,ard regression,-0.15479257584520742,0.1788836574672059,
+125,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales,svr,-0.017299659755908366,0.7350878304215289,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+125,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales,decision tree,0.04263253538999346,0.4041851630922548,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+125,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales,random forest,0.2945633313630305,3.811066554281747e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+126,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae,linear regression,0.17819023082180974,0.12102757716733245,
+126,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae,ridge regression,0.11375466638624533,0.3245904382977186,
+126,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae,ard regression,0.0370681949629318,0.7489214495045435,
+126,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae,svr,0.02261546590008054,0.6582278720180725,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+126,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae,decision tree,0.06119345862540247,0.23094775144339005,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+126,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae,random forest,0.3528198797209249,9.96958667471052e-13,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+127,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae;g__Dialister,linear regression,-0.011396947677548824,0.9216343537836786,
+127,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae;g__Dialister,ridge regression,0.01156737998843262,0.920466240537672,
+127,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae;g__Dialister,ard regression,0.05794205794205794,0.6166919899149994,
+127,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae;g__Dialister,svr,-0.0039867762844736365,0.9378502083310976,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+127,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae;g__Dialister,decision tree,-0.07932065973114953,0.12023881262006915,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+127,k__Bacteria;p__Firmicutes;c__Negativicutes;o__Veillonellales;f__Veillonellaceae;g__Dialister,random forest,0.16480721559620234,0.0011726269722254956,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+128,k__Bacteria;p__Proteobacteria,linear regression,0.6088648193911351,4.227403332070136e-09,
+128,k__Bacteria;p__Proteobacteria,ridge regression,0.6065776328934223,5.004852333530435e-09,
+128,k__Bacteria;p__Proteobacteria,ard regression,0.5961932804038067,1.059469336106356e-08,
+128,k__Bacteria;p__Proteobacteria,svr,0.3651824302103808,1.3702198085505818e-13,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+128,k__Bacteria;p__Proteobacteria,decision tree,0.17446768332540927,0.0005847726149468597,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+128,k__Bacteria;p__Proteobacteria,random forest,0.3145135882564893,2.754093744605965e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+129,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria,linear regression,0.22273925245796586,0.05152321397571144,
+129,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria,ridge regression,0.35156948314843045,0.0017168610669069087,
+129,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria,ard regression,0.4765234765234765,1.1818509849698475e-05,
+129,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria,svr,0.16510416990449814,0.0011484413474580355,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+129,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria,decision tree,0.07354305173835922,0.14978884673859127,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+129,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria,random forest,0.20787585168673672,3.9472566485406575e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+130,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales,linear regression,0.1657432419145761,0.14970133285673246,
+130,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales,ridge regression,0.14616961985383034,0.2046267991610676,
+130,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales,ard regression,0.2127872127872128,0.06316910145051723,
+130,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales,svr,0.148452281080624,0.0035051892812643115,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+130,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales,decision tree,0.1482926993922141,0.0035410463180579406,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+130,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales,random forest,0.2531904405257719,4.802009790640229e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+131,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA,linear regression,0.2340817077659183,0.040459777382118985,
+131,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA,ridge regression,0.3494663231505337,0.0018378985343182426,
+131,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA,ard regression,0.4345128555654871,7.863906161264045e-05,
+131,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA,svr,0.22264360771899228,1.0344165865930057e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+131,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA,decision tree,0.023945386169987603,0.6395115639685514,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+131,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA,random forest,0.21205214333870911,2.72826851329213e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+132,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA;NA,linear regression,0.3049136368275132,0.007009851003206613,
+132,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA;NA,ridge regression,0.28445238971554754,0.012167129554251262,
+132,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA;NA,ard regression,0.3174982911825017,0.004898089617631651,
+132,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA;NA,svr,0.10560152683393258,0.03834867580957723,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+132,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA;NA,decision tree,0.051364812365094416,0.3147827669727365,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+132,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;NA;NA,random forest,0.217892559361762,1.6076672490442246e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+133,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__,linear regression,0.25488340309042423,0.025279934307721658,
+133,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__,ridge regression,0.32220411167779583,0.0042669948243457285,
+133,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__,ard regression,0.2880540512119459,0.011072155491872359,
+133,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__,svr,0.2138888367676489,2.313824998241701e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+133,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__,decision tree,0.08559456394125432,0.09352202279757506,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+133,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__,random forest,0.22092037856993013,1.2151740380668093e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+134,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae,linear regression,0.10875966139124034,0.3464235383584756,
+134,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae,ridge regression,0.15878857984121142,0.16778914739354447,
+134,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae,ard regression,0.3150270781849729,0.005261550455379621,
+134,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae,svr,0.3086238811774325,6.10726155029146e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+134,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae,decision tree,0.031904139329686325,0.532543661502197,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+134,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae,random forest,0.5025854916789149,4.918796758454733e-26,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+135,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;NA,linear regression,0.4853631285335528,7.676789658463104e-06,
+135,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;NA,ridge regression,0.5106998264893001,2.0811169170864576e-06,
+135,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;NA,ard regression,0.5237657079762342,1.0178672987214321e-06,
+135,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;NA,svr,0.4948180770434424,3.5984922212603873e-25,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+135,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;NA,decision tree,-0.02186245413006344,0.6689215477858934,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+135,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;NA,random forest,0.495300230196641,3.1850291827214325e-25,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+136,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae,linear regression,0.21875492928124504,0.05595456880316695,
+136,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae,ridge regression,0.23726273726273725,0.037738250910687485,
+136,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae,ard regression,0.21481150428518847,0.0606418956213205,
+136,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae,svr,0.1264877797403583,0.012999502827414364,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+136,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae,decision tree,0.08137421996982573,0.11090683327113776,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+136,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae,random forest,0.2049547208812587,5.088689001294272e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+137,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Dakarella,linear regression,0.27893526127943863,0.014026589247273407,
+137,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Dakarella,ridge regression,0.28069299121930696,0.01340916000524978,
+137,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Dakarella,ard regression,0.234107997265892,0.040436634671127486,
+137,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Dakarella,svr,0.18449984810517708,0.0002729866673412014,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+137,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Dakarella,decision tree,-0.057789659195659475,0.2579820752494356,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+137,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Dakarella,random forest,0.390364197735673,1.830794596203608e-15,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+138,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Parasutterella,linear regression,0.29948998370051,0.008143488427571769,
+138,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Parasutterella,ridge regression,0.2640254482359745,0.020327093075584723,
+138,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Parasutterella,ard regression,0.2751721962248278,0.01543156437228185,
+138,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Parasutterella,svr,0.20835195223281813,3.7859023796716426e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+138,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Parasutterella,decision tree,0.051860303807368516,0.3101310958006275,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+138,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Parasutterella,random forest,0.13955210255927514,0.00609289965636802,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+139,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Sutterella,linear regression,0.1984620440526373,0.08358220057044073,
+139,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Sutterella,ridge regression,0.2600031547399968,0.022393377441848102,
+139,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Sutterella,ard regression,0.33466533466533466,0.0029305118995740786,
+139,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Sutterella,svr,0.1356536555983063,0.007689833326095612,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+139,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Sutterella,decision tree,-0.014210391345398869,0.7810619440674935,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+139,k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Sutterellaceae;g__Sutterella,random forest,0.32074635721277056,1.1630594398049368e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+140,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria,linear regression,0.3573531731426468,0.0014201478477454525,
+140,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria,ridge regression,0.3833534886166465,0.0005787855240356649,
+140,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria,ard regression,0.30041011619958985,0.007940526917071034,
+140,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria,svr,0.379660726845776,1.1997899159338881e-14,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+140,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria,decision tree,0.0964539599174597,0.05864835375519178,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+140,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria,random forest,0.2689612093321452,8.353900047549008e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+141,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales,linear regression,0.2615953887970481,0.02155498131528435,
+141,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales,ridge regression,0.346074977653925,0.002049316936444029,
+141,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales,ard regression,0.26328934223671063,0.02069256600353765,
+141,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales,svr,0.3417453666861583,5.488663160331311e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+141,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales,decision tree,-0.0036237017399439616,0.9435002661623532,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+141,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales,random forest,0.4158248301714998,1.574833311433561e-17,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+142,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae,linear regression,0.4256577790948264,0.00011370649783064438,
+142,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae,ridge regression,0.4158210210841789,0.00016926688544090162,
+142,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae,ard regression,0.3509648246490351,0.0017509017001299948,
+142,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae,svr,0.2957141601585437,3.29272522587936e-09,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+142,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae,decision tree,0.039697636446137975,0.4373373684574821,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+142,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae,random forest,0.35008058349702803,1.5297958960410098e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+143,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Bilophila,linear regression,0.4291789078048148,9.831819933817614e-05,
+143,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Bilophila,ridge regression,0.4911404385088595,5.752715654037412e-06,
+143,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Bilophila,ard regression,0.4364582785635417,7.241992492943422e-05,
+143,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Bilophila,svr,0.35249569629250205,1.049006870618987e-12,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+143,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Bilophila,decision tree,0.07635399740814643,0.13478765938041953,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+143,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Bilophila,random forest,0.3193185457656673,1.4194815553852652e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+144,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Desulfovibrio,linear regression,0.4309797503888656,9.121508313185009e-05,
+144,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Desulfovibrio,ridge regression,0.3779904306220095,0.0007007788720813687,
+144,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Desulfovibrio,ard regression,0.37880540512119454,0.0006808466255870017,
+144,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Desulfovibrio,svr,0.18080410735411007,0.0003631274313820951,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+144,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Desulfovibrio,decision tree,-0.02170337606611893,0.6711893247002798,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+144,k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfovibrionales;f__Desulfovibrionaceae;g__Desulfovibrio,random forest,0.27104391780040177,6.574378707397461e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+145,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria,linear regression,0.4898879363691672,6.126783046883178e-06,
+145,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria,ridge regression,0.5664598559335401,7.881992503110398e-08,
+145,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria,ard regression,0.5666175929333823,7.802560449983185e-08,
+145,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria,svr,0.388825572987924,2.409073381078517e-15,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+145,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria,decision tree,0.06888553937092423,0.17738849179658828,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+145,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria,random forest,0.3974333383247358,5.091616616435716e-16,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+146,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales,linear regression,0.4628703324466228,2.2489649132687226e-05,
+146,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales,ridge regression,0.5791576844208423,3.4280641810138974e-08,
+146,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales,ard regression,0.5724275724275724,5.353028187354184e-08,
+146,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales,svr,0.4829442215538999,6.844488107910175e-24,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+146,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales,decision tree,-0.014657894577745632,0.7743505600259888,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+146,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales,random forest,0.419866042747568,7.126310207798561e-18,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+147,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae,linear regression,0.4898522530101477,6.137766886492675e-06,
+147,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae,ridge regression,0.5481097849518901,2.4723514730107866e-07,
+147,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae,ard regression,0.538224932961775,4.4513424183975047e-07,
+147,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae,svr,0.4995733337390476,1.07063350251256e-25,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+147,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae,decision tree,0.060050376292404416,0.2397934367374277,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+147,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae,random forest,0.3332777832869525,1.9337686551886765e-11,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+148,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae;g__Campylobacter,linear regression,0.4305957200694042,9.268874364390495e-05,
+148,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae;g__Campylobacter,ridge regression,0.5240023134759976,1.004491758424443e-06,
+148,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae;g__Campylobacter,ard regression,0.4542036910457963,3.336309068513069e-05,
+148,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae;g__Campylobacter,svr,0.4132997264663595,2.570759548726356e-17,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+148,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae;g__Campylobacter,decision tree,0.05938379441033712,0.24506022955163265,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+148,k__Bacteria;p__Proteobacteria;c__Epsilonproteobacteria;o__Campylobacterales;f__Campylobacteraceae;g__Campylobacter,random forest,0.3142772548751709,2.844489935855762e-10,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+149,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria,linear regression,0.20929621165578827,0.06772728456373846,
+149,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria,ridge regression,0.28710762921289235,0.011351238503463366,
+149,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria,ard regression,0.2026131762973868,0.07719102914170582,
+149,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria,svr,0.2516735060797219,5.64781335217844e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+149,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria,decision tree,-0.08434954851100307,0.09840774717537552,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+149,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria,random forest,0.2390238150523148,2.098805505557059e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+150,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales,linear regression,0.17767027949678224,0.122134244487063,
+150,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales,ridge regression,0.2073715757926284,0.07035145397364377,
+150,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales,ard regression,0.3866659656133339,0.0005134591972634229,
+150,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales,svr,0.3211930121534376,1.0925467735018187e-10,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+150,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales,decision tree,0.08274846132174632,0.1049867848027374,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+150,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales,random forest,0.20002450860307106,7.749672289325099e-05,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+151,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae,linear regression,0.08741258741258741,0.4496821778342718,
+151,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae,ridge regression,0.17188075082811924,0.13498586757696007,
+151,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae,ard regression,0.2439139807560861,0.03253870800962045,
+151,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae,svr,0.3263298491712808,5.2823862913293854e-11,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+151,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae,decision tree,0.000762604716205782,0.9881002067612336,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+151,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae,random forest,0.329905771687492,3.159308172974065e-11,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+152,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;NA,linear regression,-0.16777195747391474,0.14471021298836473,
+152,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;NA,ridge regression,0.16012934433987064,0.16418253264636593,
+152,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;NA,ard regression,0.3166570271833429,0.00501924180938499,
+152,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;NA,svr,0.2706620034933421,6.870649412796062e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+152,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;NA,decision tree,0.026368046972891912,0.6060040095575632,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+152,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;NA,random forest,0.3746767148853501,2.8131206502375585e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+153,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia,linear regression,0.2388548218597638,0.03643451211095234,
+153,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia,ridge regression,0.2857668647142331,0.011757071943681896,
+153,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia,ard regression,0.37578211262421785,0.0007574878947243105,
+153,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia,svr,0.2607143253428901,2.1147090608073376e-07,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+153,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia,decision tree,0.03921900550709028,0.4428880160581112,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+153,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia,random forest,0.2923348068246088,5.0488720927219836e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+154,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales,linear regression,0.5099869208150136,2.162098174494438e-06,
+154,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales,ridge regression,0.5366212734633787,4.888301890948593e-07,
+154,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales,ard regression,0.535043903464956,5.357396054842451e-07,
+154,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales,svr,0.5143868307856968,2.1660106533011622e-27,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+154,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales,decision tree,0.02836717430012348,0.578958976139325,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+154,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales,random forest,0.3697999717936637,6.385584765576827e-14,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+155,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae,linear regression,0.5430441816692266,3.3496897517008647e-07,
+155,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae,ridge regression,0.6152531678847468,2.619219550692784e-09,
+155,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae,ard regression,0.6400704558599295,3.6681513268496964e-10,
+155,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae,svr,0.5103678167293402,6.36012960109127e-27,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+155,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae,decision tree,0.0020804621660440443,0.9675438922175764,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+155,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae,random forest,0.4020541402141306,2.16924851430766e-16,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+156,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae;g__Haemophilus,linear regression,0.4517413851774302,3.724699232267699e-05,
+156,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae;g__Haemophilus,ridge regression,0.4664283085335717,1.906827887369721e-05,
+156,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae;g__Haemophilus,ard regression,0.4916662285083337,5.602158846713417e-06,
+156,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae;g__Haemophilus,svr,0.4779881422013645,2.2630173970890412e-23,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+156,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae;g__Haemophilus,decision tree,0.090326537071024,0.07669519434824408,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+156,k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pasteurellales;f__Pasteurellaceae;g__Haemophilus,random forest,0.3501950569852691,1.5027908182390568e-12,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+157,k__Bacteria;p__Verrucomicrobia,linear regression,0.211513562189503,0.06480242590962977,
+157,k__Bacteria;p__Verrucomicrobia,ridge regression,0.1705136968294863,0.13816476571656655,
+157,k__Bacteria;p__Verrucomicrobia,ard regression,0.2958094537041905,0.009001532277080908,
+157,k__Bacteria;p__Verrucomicrobia,svr,0.1955090182199108,0.00011291745859957256,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+157,k__Bacteria;p__Verrucomicrobia,decision tree,0.08350730162121492,0.10182652722480802,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+157,k__Bacteria;p__Verrucomicrobia,random forest,0.30438925198953765,1.0710989580840845e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+158,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae,linear regression,0.2798927335870557,0.01368728175074145,
+158,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae,ridge regression,0.2474630632525369,0.03001958850672992,
+158,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae,ard regression,0.3725747936274252,0.0008473031599788145,
+158,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae,svr,0.28018509813290304,2.242718250965724e-08,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+158,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae,decision tree,0.058237388164003,0.2543062235019052,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+158,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae,random forest,0.2230589765753536,9.948407802316696e-06,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+159,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales,linear regression,0.3931775612955642,0.0004042636882427433,
+159,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales,ridge regression,0.4771281350228718,1.1479154580940885e-05,
+159,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales,ard regression,0.4857773805142225,7.520907236245584e-06,
+159,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales,svr,0.20875778288479105,3.653306907894676e-05,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+159,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales,decision tree,-0.02650803461681444,0.6040919676888097,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+159,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales,random forest,0.3048563844080778,1.0071787175948838e-09,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+160,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae,linear regression,0.2422362290068581,0.03378996129621598,
+160,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae,ridge regression,0.2661548977338451,0.019300742663362798,
+160,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae,ard regression,0.4356958830643041,7.480074680440131e-05,
+160,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae,svr,0.22629118960256064,7.3251686064885834e-06,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+160,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae,decision tree,0.14576824434601773,0.004154269533464761,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+160,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae,random forest,0.2515317230367787,5.733801915217763e-07,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+161,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae;g__Akkermansia,linear regression,0.333287326413203,0.0030571535279088373,
+161,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae;g__Akkermansia,ridge regression,0.29883274620116723,0.008291232642966934,
+161,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae;g__Akkermansia,ard regression,0.34129028865870964,0.0023847882978691986,
+161,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae;g__Akkermansia,svr,0.17813952948907844,0.0004445538740826631,{'kernel': 'linear'; 'gamma': 'auto'; 'C': 0.01}
+161,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae;g__Akkermansia,decision tree,-0.04104586462526678,0.4219182447309179,{'max_features': 2; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}
+161,k__Bacteria;p__Verrucomicrobia;c__Verrucomicrobiae;o__Verrucomicrobiales;f__Akkermansiaceae;g__Akkermansia,random forest,0.28515832533203134,1.2286526626007236e-08,{'max_depth': 5; 'min_samples_split': 4; 'n_estimators': 50; 'min_samples_leaf': 2}

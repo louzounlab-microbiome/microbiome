@@ -1,13 +1,13 @@
-from dafna.plot_rho import draw_rhos_calculation_figure
+from LearningMethods import pop_idx
+from Plot.plot_rho import draw_rhos_calculation_figure
 from infra_functions.load_merge_otu_mf import OtuMfHandler
 from infra_functions.preprocess import preprocess_data
 import numpy as np
-from infra_functions.general import apply_pca
 import os
 from sklearn.linear_model import LinearRegression
 import pandas as pd
+
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-from collections import Counter
 
 
 def prepare_data(tax_file, map_file, preform_z_scoring=True, taxnomy_level=6, n_components=20):
@@ -188,6 +188,15 @@ if __name__ == "__main__":
         differences = calc_linear_regression(x1, y)
         id_to_diff_map = {i: diff for i, diff in zip(ids, differences)}
         # look for correlations between differences and bacteria
+
+        df = pd.DataFrame(index=ids, columns=["y", "y after removing antibiotics influence"])
+        df["y"] = y
+        df["y after removing antibiotics influence"] = differences
+        df.to_csv("old_and_new_tags.csv")
+        with open("new_tags.txt", "w") as f:
+            for key, val in id_to_diff_map.items():
+                f.write(key + "," + str(val) + "\n")
+
 
         time_to_title_map = {"A": "pre-treatment", "B": "durin-treatment 9-12 weeks",
         "C": "4-6 months post treatment", "D": "6-12 months post treatment"}

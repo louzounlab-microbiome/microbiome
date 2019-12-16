@@ -76,7 +76,7 @@ def calc_results(y_train_dict, y_test_dict, algo_name, n_rows=3, n_cols=3, visua
         test_data = [x['spearman']['rho'] for x in test_res.values()]
         plt.scatter(list(range(len(test_data))), test_data, label='Test', linewidth=0.3)
         plt.legend()
-        plt.title(algo_name + ' Spearman' + r'$\rho$ vs params')
+        plt.title(algo_name + ' Spearman' + r'$\rho$ vs params.json')
         plt.xlabel('sample #')
         plt.ylabel(r'$\rho$ value')
         plt.show()

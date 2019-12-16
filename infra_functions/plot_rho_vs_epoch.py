@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from GVHD_BAR.show_data import calc_results_and_plot
 from infra_functions.analyze_grid_search import get_stats_for_array
 from matplotlib.lines import Line2D
-remove_outliers
+# remove_outliers
 
 def main(folder_to_use, cv_title=None, epoch_to_use=None, verbose_per_cv=False):
     configuration_stats, different_configs, all_train_rho, all_test_rho = calc_stats_for_config(folder_to_use)

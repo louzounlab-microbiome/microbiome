@@ -15,7 +15,7 @@ class OtuMfHandler:
 
     def _load_data(self):
         print(self.mapping_file_path)
-        mapping_file = pd.read_csv(self.mapping_file_path)
+        mapping_file = pd.read_csv(self.mapping_file_path, header=0)
         mapping_file = mapping_file.set_index('#SampleID').sort_index()
         skip_rows = 0
         if self.from_QIIME:
@@ -32,7 +32,12 @@ class OtuMfHandler:
         :return: otu file without the taxonomy
         """
         tmp_copy = self.otu_file.T.copy()
-        return tmp_copy.drop([self.taxonomy_col], axis=1).T
+        try:
+            df = tmp_copy.drop([self.taxonomy_col], axis=1).T
+        except:
+            df = tmp_copy.drop([self.taxonomy_col], axis=0)
+
+        return df
 
     def merge_mf_with_new_otu_data(self, new_otu_data):
         """

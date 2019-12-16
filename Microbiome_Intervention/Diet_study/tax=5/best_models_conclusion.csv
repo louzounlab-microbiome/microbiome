@@ -1,0 +1,5 @@
+algorithm,rhos mean,rhos median,rhos std,p value mean,rmse mean,rmse median,rmse std
+ard regression - real,0.36233,0.3706,0.15882,0.05407,0.08699,0.05419,0.07613
+ard regression - random,-0.00386,-0.00337,0.04223,0.49389,0.12685,0.07724,0.11432
+random forest - real,0.32899,0.32646,0.10062,0.00227,0.08451,0.05312,0.07341
+random forest - random,-0.00087,-0.00154,0.0159,0.51302,0.11833,0.07517,0.10609

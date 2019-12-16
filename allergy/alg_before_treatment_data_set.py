@@ -1,13 +1,10 @@
-from sys import stdout
-
+#from anna.microbiome.distance_learning_func import distance_learning
+from LearningMethods.abstract_data_set import AbstractDataLoader
 from anna.microbiome.distance_learning_func import distance_learning
-from dafna.abstract_data_set import AbstractDataLoader
 from infra_functions.load_merge_otu_mf import OtuMfHandler
 from infra_functions.preprocess import preprocess_data
 import os
 import pandas as pd
-from scipy.stats import zscore
-import matplotlib.pyplot as plt
 import numpy as np
 from infra_functions.general import apply_pca
 

@@ -420,7 +420,7 @@ def compute_time_for_censored_using_similarity_matrix(not_censored_data,
 #                                 elapsed = elapsed - start
 #                                 print(f'Last Configuration took {elapsed} seconds')
 #                                 time_stats.append(elapsed)
-#                                 print(f'\nMean time for measured configurations {sum(time_stats) / len(time_stats)} seconds')
+#                                 print(f'\nMean time for measured configurations.yml {sum(time_stats) / len(time_stats)} seconds')
 #                             #### END OF CONFIGURATION OPTION  ####
 #                             y_train_values = [item for sublist in y_train_values for item in sublist]
 #                             y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]
@@ -1059,7 +1059,7 @@ def time_series_analysis_rnn(X, y,
 #                                 elapsed = elapsed - start
 #                                 print(f'Last Configuration took {elapsed} seconds')
 #                                 time_stats.append(elapsed)
-#                                 print(f'\nMean time for measured configurations {sum(time_stats)/len(time_stats)} seconds\n')
+#                                 print(f'\nMean time for measured configurations.yml {sum(time_stats)/len(time_stats)} seconds\n')
 #                             #### END OF CONFIGURATION OPTION  ####
 #                             y_train_values = [item for sublist in y_train_values for item in sublist]
 #                             y_train_predicted_values = [item for sublist in y_train_predicted_values for item in sublist]

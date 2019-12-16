@@ -82,7 +82,7 @@ def plot_spearman_vs_params(spearman_values, label=None, plot=True):
         y_values.append(1 - spearman_value['spearman_rho'])
     if plot:
         plt.plot(x_values, y_values, label=label, linewidth=0.5)
-        plt.title(r'$1-\rho$ vs params')
+        plt.title(r'$1-\rho$ vs params.json')
         plt.xlabel('sample #')
         plt.ylabel(r'$1-\rho$ value')
     return x_values, y_values
