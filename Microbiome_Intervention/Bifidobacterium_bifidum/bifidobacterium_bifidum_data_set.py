@@ -2,7 +2,7 @@ import pickle
 from Microbiome_Intervention import TimeSerieDataLoader
 from Microbiome_Intervention.create_learning_data_from_data_set import create_data_for_markob_model_learning, \
     create_data_for_signal_bacteria_model_learning
-from Microbiome_Intervention.naive_prediction_of_natural_dynamics import preform_learning
+from Microbiome_Intervention.naive_prediction_of_natural_dynamics import preform_reggression_learning
 from Microbiome_Intervention.significant_bacteria import check_if_bacteria_correlation_is_significant, \
     get_significant_beta_from_file
 from infra_functions.load_merge_otu_mf import OtuMfHandler
@@ -14,11 +14,11 @@ n_components = 20
 
 
 class Bifidobacterium_bifidum_DataLoader(TimeSerieDataLoader):
-    def __init__(self, title, bactria_as_feature_file, samples_data_file, taxnomy_level, created_data):
-        super().__init__(title, bactria_as_feature_file, samples_data_file, taxnomy_level, created_data)
+    def __init__(self, title, bactria_as_feature_file, samples_data_file, taxnomy_level, created_data, cross_validation, test_size):
+        super().__init__(title, bactria_as_feature_file, samples_data_file, taxnomy_level, created_data, cross_validation, test_size)
 
-    def _read_file(self, title, bactria_as_feature_file, samples_data_file, created_data):
-        tax = 'tax=' + str(self._taxnomy_level)
+    def _read_file(self, title, bactria_as_feature_file, samples_data_file, created_data, cross_validation, test_size):
+        tax = os.path.join(title, 'tax=' + str(self._taxnomy_level))
         if not os.path.exists(tax):
             os.mkdir(tax)
 
@@ -31,7 +31,7 @@ class Bifidobacterium_bifidum_DataLoader(TimeSerieDataLoader):
                                              preform_taxnomy_group=True)
         self._preproccessed_data = preproccessed_data
 
-        bacteria = preproccessed_data.columns
+        bacteria = list(preproccessed_data.columns)
         with open(os.path.join(tax, "bacteria.txt"), "w") as file:
             for b in bacteria:
                 file.write(b + '\n')
@@ -115,7 +115,7 @@ class Bifidobacterium_bifidum_DataLoader(TimeSerieDataLoader):
 
         # create all models for each bacterium to predict its change, through the
         # previous general state (all bacteria values)
-        preform_learning(tax, list(bacteria), X_y_files_path)
+        preform_reggression_learning(tax, list(bacteria), X_y_files_path, cross_validation, test_size)
 
 
 if __name__ == "__main__":
@@ -129,7 +129,7 @@ if __name__ == "__main__":
         bifidum_dataset = Bifidobacterium_bifidum_DataLoader(title=task,
                                                              bactria_as_feature_file=bactria_as_feature_file,
                                                              samples_data_file=samples_data_file, taxnomy_level=tax,
-                                                             created_data=True)
+                                                             created_data=True, cross_validation=5)
 
     calc_significant_bacteria = True
     all_times_all_bact_results_path = "all_times_all_bacteria_best_models_results_df.csv"

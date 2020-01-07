@@ -2,7 +2,7 @@ import pickle
 from Microbiome_Intervention import TimeSerieDataLoader
 from Microbiome_Intervention.create_learning_data_from_data_set import create_data_for_signal_bacteria_model_learning
 from Microbiome_Intervention.create_learning_data_from_data_set import create_data_for_markob_model_learning
-from Microbiome_Intervention.naive_prediction_of_natural_dynamics import preform_learning
+from Microbiome_Intervention.naive_prediction_of_natural_dynamics import preform_reggression_learning
 from Microbiome_Intervention.significant_bacteria import check_if_bacteria_correlation_is_significant, \
     get_significant_beta_from_file
 from infra_functions.load_merge_otu_mf import OtuMfHandler
@@ -16,14 +16,20 @@ n_components = 20
 
 
 class BokulichDataLoader(TimeSerieDataLoader):
-    def __init__(self, title, bactria_as_feature_file, samples_data_file, taxnomy_level, created_data):
-        super().__init__(title, bactria_as_feature_file, samples_data_file, taxnomy_level, created_data)
+    def __init__(self, data_name, bactria_as_feature_file, samples_data_file, taxnomy_level,
+                 create_regression_data, create_time_serie_data):
+        super().__init__(data_name, taxnomy_level)
+        if create_regression_data or create_time_serie_data:
+            self._read_file(data_name, bactria_as_feature_file, samples_data_file)
+        if create_regression_data:
+            self.create_reg_data()
+        if create_time_serie_data:
+            self.create_time_serie_data()
 
-    def _read_file(self, title, bactria_as_feature_file, samples_data_file, created_data):
-        tax = 'tax=' + str(self._taxnomy_level)
+    def _read_file(self, title, bactria_as_feature_file, samples_data_file):
+        tax = self.load_and_save_path
         if not os.path.exists(tax):
             os.mkdir(tax)
-
         OtuMf = OtuMfHandler(os.path.join(SCRIPT_DIR, bactria_as_feature_file),
                              os.path.join(SCRIPT_DIR, samples_data_file),
                              from_QIIME=False, id_col='#SampleID', taxonomy_col='taxonomy')
@@ -33,7 +39,7 @@ class BokulichDataLoader(TimeSerieDataLoader):
                                                  preform_taxnomy_group=True)
         self._preproccessed_data = preproccessed_data
 
-        bacteria = preproccessed_data.columns
+        bacteria = list(preproccessed_data.columns)
         with open(os.path.join(tax, "bacteria.txt"), "w") as file:
             for b in bacteria:
                 file.write(b + '\n')
@@ -73,33 +79,36 @@ class BokulichDataLoader(TimeSerieDataLoader):
         periods.sort()
         period_to_index = {p: i for i, p in enumerate(periods)}
 
-        if not created_data:
-            bact_list, X_y_files_path = create_data_for_signal_bacteria_model_learning(OtuMf, tax, bacteria, period_column,
-                                          id_to_period_map, id_to_participant_map, id_to_features_map,
-                                          participant_to_ids_map, period_to_index)
-            pickle.dump(bact_list, open(os.path.join(tax, "time_points_list.pkl"), "wb"))
-            pickle.dump(X_y_files_path, open(os.path.join(tax, "X_y_files_path.pkl"), "wb"))
-        else:
-            # time_points_list = pickle.load(open(os.path.join(tax, "time_points_list.pkl"), "rb"))
-            X_y_files_path = pickle.load(open(os.path.join(tax, "X_y_files_path.pkl"), "rb"))
-
-        # create all models for each bacterium to predict its change, through the
-        # previous general state (all bacteria values)
-        preform_learning(tax, list(bacteria), X_y_files_path)
+        self.otu_mf = OtuMf
+        self.data_set_tax_path = tax
+        self.bacteria = bacteria
+        self.period_column = period_column
+        self.id_to_period_map = id_to_period_map
+        self.id_to_participant_map = id_to_participant_map
+        self.id_to_features_map = id_to_features_map
+        self.participant_to_ids_map = participant_to_ids_map
+        self.period_to_index = period_to_index
 
 
 if __name__ == "__main__":
-    task = 'task'
+    data = 'MITRE_data_bokulich'
     bactria_as_feature_file = 'dafna_proccessed_abundance.csv'
     samples_data_file = 'sample_metadata_no_repeats.csv'
     tax = 6
-
+    create_regression_data = True
+    create_time_serie_data = True
+    run_regression = False
+    run_rnn = True
+    run_lstm = True
+    cross_val = 10
+    test_size = 0.5
 
     create_data = True
     if create_data:
-        bokulich_dataset = BokulichDataLoader(title=task, bactria_as_feature_file=bactria_as_feature_file,
-                                              samples_data_file=samples_data_file, taxnomy_level=tax,
-                                              created_data=True)
+        bokulich_dataset = BokulichDataLoader(data_name=data, bactria_as_feature_file=bactria_as_feature_file,
+                                samples_data_file=samples_data_file, taxnomy_level=tax,
+                                create_regression_data=create_regression_data,
+                                create_time_serie_data=create_time_serie_data)
     calc_significant_bacteria = True
     all_times_all_bact_results_path = "all_times_all_bacteria_best_models_results_df.csv"
     # if we want to run on a single model, change to a different csv file with the same structure

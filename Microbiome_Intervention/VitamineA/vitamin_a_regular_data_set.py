@@ -25,7 +25,7 @@ class VitaminARegularDataLoader:
                                                           visualize=False)
         self._pca_obj = pca_obj
 
-        bacteria = preproccessed_data.columns
+        bacteria = list(preproccessed_data.columns)
         with open(os.path.join("bacteria.txt"), "w") as file:
             for b in bacteria:
                 file.write(b + '\n')

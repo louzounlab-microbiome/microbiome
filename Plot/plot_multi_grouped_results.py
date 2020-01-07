@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # https://matplotlib.org/gallery/lines_bars_and_markers/barchart.html#sphx-glr-gallery-lines-bars-and-markers-barchart-py
+from sklearn.model_selection import LeaveOneOut
 
 
 def autolabel(ax, rects):
@@ -40,16 +41,20 @@ def plot_multi_grouped_results(names, values_1, values_2, label_1, label_2, y_la
 
 
 if __name__ == "__main__":
-    data_sets_names = ['Diet_study', 'VitamineA', 'MITRE_data_bokulich', 'MITRE_data_david'] # 'MDSINE_data_cdiff']
+    best_models_conclusion_file_name = "10_fold_test_size_0.5_conclusions.csv"
+    plots_folder = "plots"
+    data_sets_names = ['MDSINE_data_cdiff', 'MDSINE_data_diet', 'Diet_study',
+                       'MITRE_data_bokulich', 'MITRE_data_david', 'VitamineA']
+    """
     # tax=5 vs. tax=6
     for algo in ["random forest", "ard regression"]:
         data_tax_5_real_rhos = []
         data_tax_6_real_rhos = []
         for data in data_sets_names:
-            df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=5", "best_models_conclusion.csv"))
+            df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=5", best_models_conclusion_file_name))
             df = df.set_index("algorithm")
             data_tax_5_real_rhos.append(df.loc[algo + " - real"]["rhos mean"])
-            df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=6", "best_models_conclusion.csv"))
+            df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=6", best_models_conclusion_file_name))
             df = df.set_index("algorithm")
             data_tax_6_real_rhos.append(df.loc[algo + " - real"]["rhos mean"])
 
@@ -57,19 +62,22 @@ if __name__ == "__main__":
         plt = plot_multi_grouped_results(data_sets_names, data_tax_5_real_rhos, data_tax_6_real_rhos, 'Tax=5', 'Tax=6', 'Rhos',
                                    'Rhos by data set\n' + algo + ' algorithm' + '\n')
         plt.savefig(
-            os.path.join("..", "Microbiome_Intervention", "plots", title.replace("\n", "_").replace(" ", "_") + ".svg")
+            os.path.join("..", "Microbiome_Intervention", plots_folder, title.replace("\n", "_").replace(" ", "_") + ".svg")
             , bbox_inches='tight', format='svg')
 
-
-    data_sets_names = ['Diet_study', 'VitamineA', 'MDSINE_data_cdiff', 'MDSINE_data_diet', 'MITRE_data_bokulich', 'MITRE_data_david'] # 'MDSINE_data_cdiff']
+    """
     # real vs. random
-    for algo in ["ard regression", "random forest"]:
-        for tax in ["5", "6"]:
+    for algo in ["ard regression"]:
+        for tax in ["6"]:
             data_real_rhos = []
             data_random_rhos = []
             for data in data_sets_names:
-                df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=" + str(tax),
-                                              "best_models_conclusion.csv"))
+                if data in ['MDSINE_data_cdiff', 'MDSINE_data_diet']:
+                    df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=7",
+                                                  best_models_conclusion_file_name))
+                else:
+                    df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=" + str(tax),
+                                                  best_models_conclusion_file_name))
                 df = df.set_index("algorithm")
                 data_real_rhos.append(df.loc[algo + " - real"]["rhos mean"])
                 data_random_rhos.append(df.loc[algo + " - random"]["rhos mean"])
@@ -78,19 +86,23 @@ if __name__ == "__main__":
             plt = plot_multi_grouped_results(data_sets_names, data_real_rhos, data_random_rhos, 'Real Rhos',
                                              'Random Rhos', 'Rhos',
                                              title)
-            plt.savefig(os.path.join("..", "Microbiome_Intervention", "plots",
+            plt.savefig(os.path.join("..", "Microbiome_Intervention", plots_folder,
                                      title.replace("\n", "_").replace(" ", "_") + ".svg")
                         , bbox_inches='tight', format='svg')
             plt.show()
 
     # real vs. random
-    for algo in ["ard regression", "random forest"]:
-        for tax in ["5", "6"]:
+    for algo in ["ard regression"]:
+        for tax in ["6"]:
             data_real_rmse = []
             data_random_rmse = []
             for data in data_sets_names:
-                df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=" + str(tax),
-                                              "best_models_conclusion.csv"))
+                if data in ['MDSINE_data_cdiff', 'MDSINE_data_diet']:
+                    df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=7",
+                                                  best_models_conclusion_file_name))
+                else:
+                    df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=" + str(tax),
+                                                  best_models_conclusion_file_name))
                 df = df.set_index("algorithm")
                 data_real_rmse.append(df.loc[algo + " - real"]["rmse mean"])
                 data_random_rmse.append(df.loc[algo + " - random"]["rmse mean"])
@@ -99,28 +111,53 @@ if __name__ == "__main__":
             plt = plot_multi_grouped_results(data_sets_names, data_real_rmse, data_random_rmse, 'Real RMSE',
                                              'Random RMSE', 'RMSE',
                                              title)
-            plt.savefig(os.path.join("..", "Microbiome_Intervention", "plots",
+            plt.savefig(os.path.join("..", "Microbiome_Intervention", plots_folder,
                                      title.replace("\n", "_").replace(" ", "_") + ".svg")
                         , bbox_inches='tight', format='svg')
             plt.show()
 
-    """
+
     # paper results vs. us(tax=5)
-
+    """
     data_our_rhos = []
-    data_paper_rhos = [0.3, 0.3, 0.3, 0.3, 0.3]  # fillllllllllllllllllllllllllllllllllllllllllllllllllllllll
-    for algo in ["ard regression"]:  # , "random forest"
-        for data in data_sets_names:
-            df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=5", "best_models_conclusion.csv"))
-            df = df.set_index("algorithm")
-            data_our_rhos.append(df.loc[algo + " - real"]["rhos mean"])
+    data_paper_auc = [0.93, 0.85, 0, 0, 0, 0]  # fillllllllllllllllllllllllllllllllllllllllllllllllllllllll
+    data_paper_rmse = [0.56, 0.85, 0, 0, 0, 0]  # fillllllllllllllllllllllllllllllllllllllllllllllllllllllll
+    for algo in ["ard regression"]:
+        for tax in ["6"]:
+            for data in data_sets_names:
+                if data in ['MDSINE_data_cdiff', 'MDSINE_data_diet']:
+                    df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=7",
+                                                  best_models_conclusion_file_name))
+                else:
+                    df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=" + str(tax),
+                                                  best_models_conclusion_file_name))
+                df = df.set_index("algorithm")
+                data_our_rhos.append(df.loc[algo + " - real"]["auc"])
 
-        title = 'Rhos by data set compered to previous results\n' + algo + ' algorithm\n'
-        plt = plot_multi_grouped_results(data_sets_names, data_our_rhos, data_paper_rhos, 'Our', 'Them', 'Rhos',
-                                   title)
-        plt.savefig(os.path.join("..", "Microbiome_Intervention", "plots",
-                                 title.replace("\n", "_").replace(" ", "_") + ".svg")
-                    , bbox_inches='tight', format='svg')
-        plt.show()
+            title = 'AUC by data set compered to previous results\n' + algo + ' algorithm\n' + 'taxonomy level ' + tax
+            plt = plot_multi_grouped_results(data_sets_names, data_our_rhos, data_paper_auc, 'Our', 'Them', 'AUC',
+                                       title)
+            plt.savefig(os.path.join("..", "Microbiome_Intervention", plots_folder,
+                                     title.replace("\n", "_").replace(" ", "_") + ".svg")
+                        , bbox_inches='tight', format='svg')
+            plt.show()
+    """
+    data_sets_names = ['MDSINE_data_cdiff_AUC', 'MDSINE_data_cdiff_RMSE']
+    data_paper_results = [0.93, 0.56]  # AUC, RMSE
+    data_our_results = [0.79284, 0.04134]
+    for algo in ["ard regression"]:
+        for tax in ["7"]:
+            for data in ['MDSINE_data_cdiff']:
+                df = pd.read_csv(os.path.join("..", "Microbiome_Intervention", data, "tax=" + str(tax),
+                                                  best_models_conclusion_file_name))
+                df = df.set_index("algorithm")
+                data_our_results.append(df.loc[algo + " - real"]["auc"])
+                data_our_results.append(df.loc[algo + " - real"]["rmse mean"])
 
-"""
+            title = 'AUC and RMSE by data set compered to MDSINE results\n' + algo + ' algorithm\n' + 'taxonomy level ' + tax
+            plt = plot_multi_grouped_results(data_sets_names, data_our_results, data_paper_results, 'Our', 'Them', 'SCORE',
+                                             title)
+            plt.savefig(os.path.join("..", "Microbiome_Intervention", plots_folder,
+                                     title.replace("\n", "_").replace(" ", "_") + ".svg")
+                        , bbox_inches='tight', format='svg')
+            plt.show()

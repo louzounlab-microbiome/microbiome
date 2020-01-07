@@ -2,7 +2,7 @@ import pickle
 from Microbiome_Intervention import TimeSerieDataLoader
 from Microbiome_Intervention.create_learning_data_from_data_set import create_data_for_signal_bacteria_model_learning
 from Microbiome_Intervention.create_learning_data_from_data_set import create_data_for_markob_model_learning
-from Microbiome_Intervention.naive_prediction_of_natural_dynamics import preform_learning
+from Microbiome_Intervention.naive_prediction_of_natural_dynamics import preform_reggression_learning
 from Microbiome_Intervention.significant_bacteria import check_if_bacteria_correlation_is_significant, \
     get_significant_beta_from_file
 from infra_functions.load_merge_otu_mf import OtuMfHandler
@@ -33,7 +33,7 @@ class DigiulioDataLoader(TimeSerieDataLoader):
                                                  preform_taxnomy_group=True)
         self._preproccessed_data = preproccessed_data
 
-        bacteria = preproccessed_data.columns
+        bacteria = list(preproccessed_data.columns)
         with open(os.path.join(tax, "bacteria.txt"), "w") as file:
             for b in bacteria:
                 file.write(b + '\n')
@@ -85,7 +85,7 @@ class DigiulioDataLoader(TimeSerieDataLoader):
 
         # create all models for each bacterium to predict its change, through the
         # previous general state (all bacteria values)
-        preform_learning(tax, list(bacteria), X_y_files_path)
+        preform_reggression_learning(tax, list(bacteria), X_y_files_path)
 
 
 if __name__ == "__main__":

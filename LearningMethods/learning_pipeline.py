@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 from LearningMethods.abstract_data_set import AbstractDataLoader
 from LearningMethods.nn import nn_main
-from Plot import draw_rhos_calculation_figure
+from Plot.plot_rho import draw_rhos_calculation_figure
 from Plot.plot_3D_pca import plot_data_3d, plot_data_2d, PCA_t_test
 from Plot.plot_auc import roc_auc, calc_auc_on_joined_results, multi_class_roc_auc
 from Plot.plot_coef import create_coeff_plots_by_alogorithm, \
@@ -316,12 +316,13 @@ def learn(title, data_loader, allow_printing, calculate_rhos, SVM, XGBOOST, NN, 
             print("\n------------------------------")
             names = data_loader.get_confusin_matrix_names()
             # binary = len(names) == 2
-            confusion_matrix_average, confusion_matrix_acc = edit_confusion_matrix(title, confusion_matrixes, data_loader,
+            confusion_matrix_average, confusion_matrix_acc = edit_confusion_matrix(confusion_matrixes,
                                                                             "SVM", names, BINARY=BINARY)
             if BINARY:
                 _, _, _, svm_roc_auc = roc_auc(svm_y_test_from_all_iter.astype(int), svm_y_score_from_all_iter,
                                                visualize=True, graph_title='SVM\n' + task_name.capitalize() +
-                                                                           " AUC on all iterations", save=True, folder=clf_folder_name)
+                                                                           " AUC on all iterations", save=True,
+                                               folder=clf_folder_name)
                 res_path = os.path.join(clf_folder_name, str(round(svm_roc_auc, 5)))
             else:
                 svm_roc_auc = 0

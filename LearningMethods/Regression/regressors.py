@@ -6,7 +6,7 @@ from sklearn import svm
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression, Ridge, ARDRegression, LogisticRegression, BayesianRidge
 from sklearn.metrics import mean_squared_error, f1_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, LeaveOneOut
 from sklearn.tree import DecisionTreeRegressor
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -18,29 +18,33 @@ from LearningMethods.general_functions import shorten_bact_names, shorten_single
 # main learning loop - same for all basic algorithms
 def learning_cross_val_loop(clf, cross_validation, X, y, test_size):
     # Split the data set
-    X_trains, X_tests, y_trains, y_tests, des_tree_coefs = [], [], [], [], []
-    y_test_from_all_iter, y_score_from_all_iter = np.array([]), np.array([])
-    y_pred_from_all_iter, class_report_from_all_iter = np.array([]), np.array([])
-    train_errors, test_errors, y_train_preds, \
-    y_test_preds = [], [], [], []
+    y_test_from_all_iter = np.array([])
+    train_errors, test_errors, y_train_preds, y_test_preds, des_tree_coefs = [], [], [], [], []
 
-    for i in range(cross_validation):
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, shuffle=True)
-        X_trains.append(X_train)
-        X_tests.append(X_test)
-        y_trains.append(y_train)
-        y_tests.append(y_test)
+    # devide to train and test-
+    X_trains, X_tests, y_trains, y_tests = [], [], [], []
+    if type(cross_validation) == int:
+        for n in range(cross_validation):
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, shuffle=True)
+            X_trains.append(X_train)
+            X_tests.append(X_test)
+            y_trains.append(y_trains)
+            y_tests.append(y_tests)
+    elif cross_validation == "loo":  # hold-one-subject-out cross-validation
+        loo = LeaveOneOut()
+        for train_index, test_index in loo.split(X):
+            X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
+            X_trains.append(X_train)
+            X_tests.append(X_test)
+            y_trains.append(y_trains)
+            y_tests.append(y_tests)
 
-    for iter_num in range(cross_validation):
+    for X_train, X_test, y_train, y_test in zip(X_trains, X_tests, y_trains, y_tests):
         # FIT
-        clf.fit(X_trains[iter_num], y_trains[iter_num])
+        clf.fit(X_train, y_train)
         # GET RESULTS
-        y_pred = clf.predict(X_tests[iter_num])
+        y_pred = clf.predict(X_test)
         y_test_preds.append(y_pred)
-
-        # SAVE y_test AND y_score
-        y_test_from_all_iter = np.append(y_test_from_all_iter, y_tests[iter_num])
-        y_pred_from_all_iter = np.append(y_pred_from_all_iter, list(y_pred))
 
     return y_tests, y_test_preds
 
@@ -58,50 +62,6 @@ def calc_corr_on_joined_results(cross_validation, y_tests, y_test_preds):
     mixed_rho, mixed_pvalues, mixed_rmse = calc_evaluation_on_mix_predictions(all_test_pred_tags, all_test_real_tags)
 
     return test_rho, test_p_value, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse
-
-
-# not working
-def get_significant_bacteria_for_model_using_b(b_1, bacteria, task_num, reg_type, significant_bacteria_all_models_df, tax):
-    # the most significant b values are those in the edges
-    model_bact = shorten_single_bact_name(bacteria[task_num])
-    upper_bound = np.percentile(b_1, 95)
-    lower_bound = np.percentile(b_1, 5)
-    df = pd.DataFrame(columns=["bacteria", "beta value"])
-    df["bacteria"] = bacteria
-    df["beta value"] = b_1
-    df.sort_values(by=["beta value"])
-
-    short_feature_names, bacterias = shorten_bact_names(bacteria)
-    significant_bacteria_and_rhos = []
-
-    for i, bact in enumerate(bacterias):
-        if b_1[i] < lower_bound or b_1[i] > upper_bound:  # significant
-            significant_bacteria_and_rhos.append([bact, b_1[i]])
-
-    for couple in significant_bacteria_and_rhos:
-        significant_bacteria_all_models_df.loc[len(significant_bacteria_all_models_df)] = [task_num, couple[0], couple[1]]
-
-    left_padding = 0.4
-    fig, ax = plt.subplots()
-    y_pos = np.arange(len(significant_bacteria_and_rhos))
-    c = [s[1] for s in significant_bacteria_and_rhos]
-    coeff_color = []
-    for x in c:
-        if x >= 0:
-            coeff_color.append('green')
-        else:
-            coeff_color.append('red')
-    ax.barh(y_pos, c, color=coeff_color)
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels(short_feature_names)
-    plt.yticks(fontsize=10)
-    plt.title("Bacteria Number " + str(task_num) + " Model" + "\n" + model_bact +
-              "\nSignificant Bacteria According to " + reg_type + " Regression Coefficients")
-    ax.set_xlabel("Coeff value")
-    fig.subplots_adjust(left=left_padding)
-    # plt.show()
-    plt.savefig(os.path.join(tax, "bacteria_number_" + str(task_num) + "_model_bacteria_correlation.svg"),
-                bbox_inches='tight', format='svg')
 
 
 def calc_evaluation_on_mix_predictions(y_pred, y_test):
@@ -133,7 +93,7 @@ def calc_spearmanr_from_regressor(reg, X_test, y_test):
     # check if the predictions are random
     mixed_rho, mixed_pvalues, mixed_rmse = calc_evaluation_on_mix_predictions(y_pred, y_test)
 
-    return rho, p_val, b_1, mixed_rho, mixed_pvalues, rmse, mixed_rmse
+    return rho, p_val, b_1, mixed_rho, mixed_pvalues, rmse, mixed_rmse, y_pred
 
 
 # -------- many kind of regressors implementations --------
@@ -188,11 +148,3 @@ def calc_bayesian_ridge_regression(X_train, X_test, y_train, y_test):
     reg = BayesianRidge().fit(X_train, y_train)
     reg.score(X_train, y_train)
     return calc_spearmanr_from_regressor(reg, X_test, y_test)
-
-
-# -------- start grid searching the right params for each data set --------
-def calc_ard_regression_with_params(X_train, X_test, y_train, y_test, alpha):
-    reg = ARDRegression().fit(X_train, y_train)
-    reg.score(X_train, y_train)
-    return calc_spearmanr_from_regressor(reg, X_test, y_test)
-

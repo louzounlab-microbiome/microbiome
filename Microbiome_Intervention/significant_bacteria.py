@@ -65,6 +65,22 @@ def get_significant_beta_from_file(df_path, algo, significant_bacteria, folder, 
                               "Changing bacteria", folder)
 
 
+def plot_auc_of_bact_network(all_train_rhos_path, all_test_rhos_path, test_important_bacteria_path, algo, folder, plot_hist=True):
+    all_train_rhos_df = pd.read_csv(all_train_rhos_path)
+    all_test_rhos_df = pd.read_csv(all_test_rhos_path)
+    test_important_bacteria_df = pd.read_csv(test_important_bacteria_path)
+    full_name_becteria_list = all_train_rhos_df.index
+    becteria_list = [shorten_single_bact_name(bact) for bact in all_train_rhos_df.index]
+    # turn df value to 0/1 :
+    # test -> according to b > mean -+ 2 * std
+    # train -> according to continuous predictor
+    test_binary_rhos_df = pd.DataFrame(index=full_name_becteria_list, columns=full_name_becteria_list)
+    test_binary_rhos_df.fillna(0)
+    sign_bact_tuple = [(b1, b2) for b1, b2 in zip(test_important_bacteria_df["MODEL BACTERIA"], test_important_bacteria_df["SIGNIFICANT BACTERIA"])]
+    for b1, b2 in sign_bact_tuple:
+        test_binary_rhos_df.loc[b1, b2] = 1
+
+
 if __name__ == "__main__":
     for data_set in ["Diet_study", "Bifidobacterium_bifidum", "VitamineA"]:  # "Diet_study", "Bifidobacterium_bifidum",
         for tax_level in ["tax=4", "tax=5"]:
@@ -73,6 +89,10 @@ if __name__ == "__main__":
                 results_df_path = os.path.join(data_set, tax_level, "all_times_all_bacteria_all_models_results_df.csv")
                 significant_bacteria = check_if_bacteria_correlation_is_significant(results_df_path, algo)
                 get_significant_beta_from_file(results_df_path, algo, significant_bacteria, folder)
+                all_train_rhos_path = os.path.join(folder, "all_train_bacteria_rhos_" + algo.replace(" ", "_") + ".csv")
+                all_test_rhos_path = os.path.join(folder, "all_test_bacteria_rhos_" + algo.replace(" ", "_") + ".csv")
+                important_bacteria_path = os.path.join(folder, "important_bacteria_" + algo.replace(" ", "_") + ".csv")
+                plot_auc_of_bact_network(all_train_rhos_path, all_test_rhos_path, important_bacteria_path)
 
 
 

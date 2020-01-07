@@ -97,7 +97,7 @@ def PCA_t_test(group_1, group_2, title="t_test", save=False, folder=None):
     result = []
     statistic = []
     pvalue = []
-    for dim in range(5):
+    for dim in range(3):
         a = [g[dim] for g in group_1]
         b = [g[dim] for g in group_2]
         result.append(stats.ttest_ind(a, b))
@@ -116,6 +116,7 @@ def PCA_t_test(group_1, group_2, title="t_test", save=False, folder=None):
                         round(res[1], 5)) + "\n")
 
     return result
+
 
 if __name__ == "__main__":
     PCA_t_test()

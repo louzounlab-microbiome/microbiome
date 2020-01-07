@@ -25,10 +25,11 @@ def print_confusion_matrix(confusion_matrix, class_names, acc, algorithm, title,
     # plt.show()
     plt.savefig(os.path.join(folder, title + "_" + algorithm + "_confusion_matrix_heat_map_" + ac + ".svg"),
                 bbox_inches='tight', format='svg')
+    plt.close()
     return fig
 
 
-def edit_confusion_matrix(title, confusion_matrixes, data_loader, algo, names, BINARY=False):
+def edit_confusion_matrix(confusion_matrixes, algo, names, BINARY=False):
     if BINARY:
         if algo == "NN":
             c = confusion_matrixes.tolist()

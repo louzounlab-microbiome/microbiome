@@ -1,0 +1,46 @@
+{
+  "hid_dim_0": {
+    "_type": "quniform",
+    "_value": [ 20, 120, 10 ]
+  },
+  "hid_dim_1": {
+    "_type": "quniform",
+    "_value": [ 5, 30, 5 ]
+  },
+  "reg": {
+    "_type": "uniform",
+    "_value": [ 0, 1 ]
+  },
+  "lr": {
+    "_type": "choice",
+    "_value": [ 0.001, 0.01, 0.1 ]
+  },
+  "test_size": {
+    "_type": "choice",
+    "_value": [ 0.2, 0.15, 0.1 ]
+  },
+  "batch_size": {
+    "_type": "choice",
+    "_value": [ 4, 8, 16]
+  },
+  "shuffle": {
+    "_type": "choice",
+    "_value": [ 0, 1 ]
+  },
+  "num_workers": {
+    "_type": "choice",
+    "_value": [ 4 ]
+  },
+  "epochs": {
+    "_type": "quniform",
+    "_value": [ 100, 300, 50 ]
+  },
+  "optimizer": {
+    "_type": "choice",
+    "_value": [ "SGD"]
+  },
+  "loss": {
+    "_type": "choice",
+    "_value": [ "BCE", "MSE" ]
+  }
+}

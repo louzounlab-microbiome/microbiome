@@ -128,7 +128,8 @@ def multi_class_roc_auc(y_test, y_score, labels_names, graph_title='ROC Curve', 
 
 
 def calc_auc_on_joined_results(Cross_validation, y_trains, y_train_preds, y_tests, y_test_preds):
-    all_y_train = []
+    all_y_train = np.array(y_trains).flatten()
+    all_y_train
     for i in range(Cross_validation):
         all_y_train = all_y_train + y_trains[i]
 
@@ -167,4 +168,33 @@ def calc_auc_on_joined_results(Cross_validation, y_trains, y_train_preds, y_test
 
     return all_y_train, all_predictions_train, all_test_real_tags, all_test_pred_tags,\
            train_auc, test_auc, train_rho, test_rho
+
+
+def calc_auc_on_flat_results(all_y_train, all_scores_train, all_test_real_tags, all_test_score_tags):
+    try:
+        test_auc = metrics.roc_auc_score(all_test_real_tags, all_test_score_tags)
+        test_rho, p_value = stats.spearmanr(all_test_real_tags, all_test_score_tags)
+
+        train_auc = metrics.roc_auc_score(all_y_train, all_scores_train)
+        train_rho, pval_train = stats.spearmanr(all_y_train, all_scores_train)
+        print("summary-----------------------")
+        print("test_auc: " + str(test_auc))
+        print("test_rho: " + str(test_rho))
+        print("train_auc: " + str(train_auc))
+        print("train_rho: " + str(train_rho))
+    except ValueError:
+        # Compute ROC curve and ROC area for each class
+        print("train classification_report")
+        train_auc = metrics.classification_report(all_y_train, all_scores_train)
+        for row in train_auc.split("\n"):
+            print(row)
+        print("test classification_report")
+        test_auc = metrics.classification_report(all_test_real_tags, all_test_score_tags)
+        for row in test_auc.split("\n"):
+            print(row)
+
+        train_rho, pval_train = stats.spearmanr(all_y_train, all_scores_train)
+        test_rho, p_value = stats.spearmanr(all_test_real_tags, all_test_score_tags)
+
+    return train_auc, test_auc, train_rho, test_rho
 
