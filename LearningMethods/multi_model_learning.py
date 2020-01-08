@@ -1,14 +1,19 @@
 import os
-
-from sklearn.model_selection import train_test_split
-
-from LearningMethods.svm_learning_model import SVMLearningModel
-from LearningMethods.xgb_learning_model import XGBLearningModel
-
 import pandas as pd
 import numpy as np
+import nni
+from sklearn.model_selection import train_test_split
+from LearningMethods.svm_learning_model import SVMLearningModel
+from LearningMethods.xgb_learning_model import XGBLearningModel
+from Plot import pickle
+from LearningMethods.nn_models import *
+from LearningMethods.nn_learning_model import nn_main
 
-from Plot import draw_X_y_rhos_calculation_figure, PCA_t_test, plot_data_3d, plot_data_2d, pickle
+
+models_nn = {'relu_b':nn_2hl_relu_b_model, 'tanh_b':nn_2hl_tanh_b_model,
+             'leaky_b':nn_2hl_leaky_b_model, 'sigmoid_b':nn_2hl_sigmoid_b_model,
+             'relu_mul':nn_2hl_relu_mul_model, 'tanh_mul':nn_2hl_tanh_mul_model,
+             'leaky_mul':nn_2hl_leaky_mul_model, 'sigmoid_mul':nn_2hl_sigmoid_mul_model}
 
 
 def read_otu_and_mapping_files(otu_path, mapping_path):
@@ -50,32 +55,40 @@ def main(folder, otu_path, mapping_path, pca_path, dict):
     if dict["SVM"]:
         svm_model = SVMLearningModel()
         svm_model.fit(pd.DataFrame(X), pd.Series(y), X_trains, X_tests, y_trains, y_tests, dict["SVM_params"], weights,
-                      pca_obj, bacteria, task_name_folder=dict["FOLDER_TITLE"] + dict["TAX_LEVEL"], project_folder=folder)
+                      bacteria, task_name_folder=dict["FOLDER_TITLE"] + dict["TAX_LEVEL"], project_folder=folder, pca_obj=pca_obj)
     if dict["XGB"]:
         xgb_model = XGBLearningModel()
-        xgb_model.fit(pd.DataFrame(X), pd.Series(y), X_trains, X_tests, y_trains, y_tests, dict["SVM_params"], weights,
-                      pca_obj, bacteria, task_name_folder="sderot_anxiety_tax_level"+dict["TAX_LEVEL"])
-
+        xgb_model.fit(pd.DataFrame(X), pd.Series(y), X_trains, X_tests, y_trains, y_tests, dict["XGB_params"], bacteria,
+                      task_name_folder=dict["FOLDER_TITLE"] + dict["TAX_LEVEL"], project_folder=folder, pca_obj=pca_obj)
     if dict["NN"]:
-        # nn_model = NNLearningModel()
-        # nn_model.fit(X, y, dict["NN_params"])
-        pass
+        Net = models_nn[dict['NN_params']["model"]]
+        _, _ = nn_main(X, y, dict['NN_params'], dict["TASK_TITLE"], Net, plot=True)
+    if dict["NNI"]:
+        params = nni.get_next_parameter()
+        Net = models_nn[params["model"]]
+        auc, acc = nn_main(X, y, params, dict["TASK_TITLE"], Net, plot=True)
+        if dict["NNI_params"]["result_type"] == "acc":
+            nni.report_final_result(acc)
+        if dict["NNI_params"]["result_type"] == "auc":
+            nni.report_final_result(auc)
+        else:
+            raise Exception
 
     os.chdir('..')
 
 
 if __name__ == "__main__":
     folder = 'sderot_anxiety' # the name of the project folder
-    otu_path = os.path.join('..', folder, 'OTU_merged_prognostic_PTSD_task_tax_level_6_pca_2.csv')
-    mapping_path = os.path.join('..', folder, 'Tag_file_prognostic_PTSD_task_tax_level_6_pca_2.csv')
-    pca_path = os.path.join('..', folder, 'Pca_obj_prognostic_PTSD_task_tax_level_6_pca_2.pkl')
+    otu_path = os.path.join('..', folder, 'OTU_merged_PTST_task.csv')
+    mapping_path = os.path.join('..', folder, 'Tag_file_PTST_task.csv')
+    pca_path = os.path.join('..', folder, 'Pca_obj_PTST_task.pkl')
     k_fold = 17
     test_size = 0.2
     names = ["no anxiety", "anxiety"]
     # get params dictionary from file / create it here
     dict = {"TASK_TITLE": "sderot_anxiety",  # the name of the task for plots titles...
             "FOLDER_TITLE": folder,  # creates the folder for the task we want to do, save results in it
-            "TAX_LEVEL": str(6),
+            "TAX_LEVEL": str(5),
             "CLASSES_NAMES": names,
             "SVM": True,
             "SVM_params": {'kernel': ['linear'],
@@ -89,12 +102,37 @@ if __name__ == "__main__":
                            },
             # if single option for each param -> single run, otherwise -> grid search.
             "XGB": True,
-            "XGB_params": {},  # if single option for each param -> single run, otherwise -> grid search.
+            "XGB_params": {'learning_rate': [0.1],
+                           'objective': ['binary:logistic'],
+                           'n_estimators': [1000],
+                           'max_depth': [7],
+                           'min_child_weight': [1],
+                           'gamma': [1],
+                           "create_coeff_plots": True,
+                           "CLASSES_NAMES": names,
+                           "K_FOLD": k_fold,
+                            "TEST_SIZE": test_size,
+                           "TASK_TITLE": "sderot_anxiety"
+                           },  # if single option for each param -> single run, otherwise -> grid search.
             "NN": True,
-            "NN_params": {},  # if single option for each param -> single run, otherwise -> grid search.
-            "NNI": True,
-            "NNI_params": {},
-
+            "NN_params": {
+                        "hid_dim_0": 120,
+                        "hid_dim_1": 160,
+                        "reg": 0.68,
+                        "lr": 0.001,
+                        "test_size": 0.1,
+                        "batch_size": 32,
+                        "shuffle": 1,
+                        "num_workers": 4,
+                        "epochs": 150,
+                        "optimizer": 'SGD',
+                        "loss": 'MSE',
+                        "model": 'tanh_b'
+            },  # if single option for each param -> single run, otherwise -> grid search.
+            "NNI": False,
+            "NNI_params": {
+                        "result_type": 'auc'
+            },
             # enter to model params?  might want to change for different models..
             "K_FOLD": k_fold,
             "TEST_SIZE": test_size,

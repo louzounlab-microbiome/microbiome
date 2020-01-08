@@ -1,4 +1,0 @@
-,no anxiety,anxiety
-no anxiety,0.28,0.40470588235294114
-anxiety,0.07529411764705882,0.24
-acc,0.52,

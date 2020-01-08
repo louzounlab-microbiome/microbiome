@@ -57,7 +57,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         elif preform_taxnomy_group == 'pca_anna':
             print('PCA')
             as_data_frame, map_file = distance_learning(perform_distance=True, level=taxnomy_level,
-                                                        preprocessed_data=as_data_frame, mapping_file=map_file)
+                                                        preproccessed_data=as_data_frame, mapping_file=map_file)
         as_data_frame = as_data_frame.T
         # here the samples are columns
     else:

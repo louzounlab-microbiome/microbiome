@@ -1,13 +1,10 @@
 from sklearn.metrics import roc_curve, auc
-
 from LearningMethods.abstract_learning_model import AbstractLearningModel
 import pandas as pd
 import numpy as np
 import os
 from Plot import create_coeff_plots_by_alogorithm, make_class_coef_plots_from_multiclass_model_binary_sub_models
 from infra_functions import convert_pca_back_orig
-
-
 
 
 class SimpleLearningModel(AbstractLearningModel):
@@ -19,7 +16,7 @@ class SimpleLearningModel(AbstractLearningModel):
         super().__init__()
 
     def get_model_coeff(self, clf, pca_obj, pca_flag, binary_flag):
-        pass  # implement for each simple model according to it structure...
+        raise NotImplemented  # implement for each simple model according to it structure...
 
     def calc_bacteria_coeff_average(self, num_of_classes, pca_obj, bacteria_names, clf, coefs_list, bacteria_coeff_average):
         BINARY = True if num_of_classes == 2 else False

@@ -1,21 +1,14 @@
 from pathlib import Path
-
 from sklearn import svm
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-
 from LearningMethods.simple_learning_model import SimpleLearningModel
-
 import os
 import pandas as pd
 import numpy as np
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
-
-from Plot import roc_auc, multi_class_roc_auc, calc_auc_on_joined_results, edit_confusion_matrix, \
-    print_confusion_matrix, create_coeff_plots_by_alogorithm, \
-    make_class_coef_plots_from_multiclass_model_binary_sub_models, calc_auc_on_flat_results
-from infra_functions import convert_pca_back_orig
-
+from Plot import roc_auc, multi_class_roc_auc, edit_confusion_matrix, \
+    print_confusion_matrix, calc_auc_on_flat_results
 
 
 class SVMLearningModel(SimpleLearningModel):
@@ -50,7 +43,7 @@ class SVMLearningModel(SimpleLearningModel):
             coefficients = [c_[:pca_obj.n_components] for c_ in c]
         return coefficients
 
-    def fit(self, X, y, X_train_ids, X_test_ids, y_train_ids, y_test_ids, params, weights, pca_obj, bacteria, task_name_folder, project_folder):
+    def fit(self, X, y, X_train_ids, X_test_ids, y_train_ids, y_test_ids, params, weights, bacteria, task_name_folder, project_folder, pca_obj=None):
         if not os.path.exists(os.path.join("..", project_folder, task_name_folder, "SVM")):
             os.makedirs(os.path.join("..", project_folder, task_name_folder, "SVM"))
         os.chdir(os.path.join(os.path.abspath(os.path.curdir), "..", project_folder, task_name_folder, "SVM"))
@@ -168,9 +161,9 @@ class SVMLearningModel(SimpleLearningModel):
 
             all_svm_results.loc[len(all_svm_results)] = [clf.kernel, clf.C, clf.gamma, svm_train_roc_auc,
                                                          np.mean(train_accuracies), svm_roc_auc,
-                                                         np.mean(test_accuracies),
-                                                         precision_score(all_test_real_tags.astype(int), all_test_pred_tags,  average='micro'),
-                                                         recall_score(all_test_real_tags.astype(int),  all_test_pred_tags, average='micro')]
+                                                             np.mean(test_accuracies),
+                                                             precision_score(all_test_real_tags.astype(int), all_test_pred_tags,  average='micro'),
+                                                             recall_score(all_test_real_tags.astype(int),  all_test_pred_tags, average='micro')]
             if BINARY:
                 all_svm_results = all_svm_results.sort_values(by=['TEST-AUC'], ascending=False)
             else:

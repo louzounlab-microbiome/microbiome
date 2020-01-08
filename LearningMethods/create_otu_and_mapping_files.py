@@ -43,25 +43,17 @@ class CreateOtuAndMappingFiles(object):
         df.to_csv(otu_path)
         tag_path = os.path.join(folder, 'Tag_file_' + str(task_name) + '.csv')
         self.tags_df.to_csv(tag_path)
-        pca_path = os.path.join(folder, "Pca_obj_" + str(task_name) + '.pkl')
-        pickle.dump(self.pca_ocj, open(pca_path, "wb"))
+        if self.pca_ocj:
+            pca_path = os.path.join(folder, "Pca_obj_" + str(task_name) + '.pkl')
+            pickle.dump(self.pca_ocj, open(pca_path, "wb"))
+        else:
+            pca_path = "No pca created"
         with open(os.path.join(folder, "bacteria_tax_level_" + str(tax) + ".txt"), "w") as bact_file:
             for col in self.bacteria:
                 bact_file.write(col + "\n")
         return otu_path, tag_path, pca_path
 
     def preprocess(self, preprocess_params, visualize):
-        '''
-            taxnomy_level = int(dict_params['taxonomy_level'])
-            preform_taxnomy_group= dict_params['taxnomy_group']
-            eps_for_zeros= float(dict_params['epsilon'])
-            preform_norm = dict_params['normalization']
-            preform_z_scoring = dict_params['z_scoring']
-            relative_z =  dict_params['norm_after_rel']
-            std_to_delete= float(dict_params['std_to_delete'])
-            pca_flag =  dict_params['pca']
-            pca_comp = int(dict_params['pca_comp'])
-        '''
         print('preprocess...')
         self.otu_features_df, self.otu_features_df_b_pca,  self.pca_ocj, self.bacteria = \
             preprocess_data(self.otu_features_df, preprocess_params, self.tags_df, visualize_data=visualize)

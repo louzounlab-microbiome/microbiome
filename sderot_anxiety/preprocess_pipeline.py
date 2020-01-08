@@ -5,6 +5,7 @@ sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from LearningMethods.create_otu_and_mapping_files import CreateOtuAndMappingFiles
 from LearningMethods.multi_model_learning import main
 
+
 def main_pipeline():
     main_task = 'prognostic_PTSD_task_tax_level_'
     bactria_as_feature_file = '../sderot_anxiety/PTSD_data.csv'
@@ -29,7 +30,7 @@ def main_pipeline():
                 otu_path, mapping_path, pca_path = mapping_file.csv_to_learn(task, os.getcwd(), tax)
 
                 # run svm learning
-                folder = 'sderot_anxiety/'
+                folder = 'sderot_anxiety'
                 k_fold = 17
                 test_size = 0.2
                 names = ["no anxiety", "anxiety"]
@@ -49,14 +50,38 @@ def main_pipeline():
                                          "TASK_TITLE": task
                                          },
                           # if single option for each param -> single run, otherwise -> grid search.
-                          "XGB": False,
-                          "XGB_params": {},
-                          # if single option for each param -> single run, otherwise -> grid search.
-                          "NN": False,
-                          "NN_params": {},  # if single option for each param -> single run, otherwise -> grid search.
+                          "XGB": True,
+                          "XGB_params": {'learning_rate': [0.1],
+                                           'objective': ['binary:logistic'],
+                                           'n_estimators': [1000],
+                                           'max_depth': [7],
+                                           'min_child_weight': [1],
+                                           'gamma': [1],
+                                           "create_coeff_plots": True,
+                                           "CLASSES_NAMES": names,
+                                           "K_FOLD": k_fold,
+                                            "TEST_SIZE": test_size,
+                                           "TASK_TITLE": "sderot_anxiety"
+                                        },  # if single option for each param -> single run, otherwise -> grid search.
+                          "NN": True,
+                          "NN_params": {
+                                        "hid_dim_0": 120,
+                                        "hid_dim_1": 160,
+                                        "reg": 0.68,
+                                        "lr": 0.001,
+                                        "test_size": 0.1,
+                                        "batch_size": 32,
+                                        "shuffle": 1,
+                                        "num_workers": 4,
+                                        "epochs": 150,
+                                        "optimizer": 'SGD',
+                                        "loss": 'MSE',
+                                        "model": 'tanh_b'
+                                       },  # if single option for each param -> single run, otherwise -> grid search.
                           "NNI": False,
-                          "NNI_params": {},
-
+                          "NNI_params": {
+                                        "result_type": 'auc'
+                                        },
                           # enter to model params?  might want to change for different models..
                           "K_FOLD": k_fold,
                           "TEST_SIZE": test_size,
