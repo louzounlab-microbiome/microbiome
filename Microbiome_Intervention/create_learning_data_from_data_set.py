@@ -130,7 +130,8 @@ def create_data_as_time_serie_for_signal_bacteria_model_learning(OtuMf, tax, bac
                 else:
                     Y.append([row[bact_num]])
             X, Y = remove_none_in_X_y(X, Y)  # need to remove Nones??  ', '.join(mylist)
-            df.loc[(len(df))] = [','.join(map(str, X)).replace("\n", "").replace("  ", " "), ','.join(map(str, Y))]
+            Y = [y[0] for y in Y]
+            df.loc[(len(df))] = [';'.join(map(str, X)).replace("\n", "").replace("   ", " ").replace("  ", " "), ';'.join(map(str, Y))]
         file_name = "time_serie_X_y_for_bacteria_number_" + str(bact_num) + ".csv"
         df.to_csv(os.path.join(tax, file_name), index=False)
         df_paths_list.append(file_name)
@@ -260,35 +261,44 @@ def get_X_y_from_file_path(tax, path):
 def get_time_serie_X_y_from_file_path(tax, path):
     df = pd.read_csv(os.path.join(tax, path))
     X = []
-    for s_x in df['X']:
-        X_for_all_times = s_x.split(",")
-        # for item in X_for_all_times, keep time data separate from other time points
-        for x in X_for_all_times:
+    for sample in df['X']:
+        sample_X = []
+        X_t_0_n = sample.split(";")  # split to X0, X1... Xn
+        # for X_i in X_t_0_n, keep time data separate from other time points
+        for smaple_i, x in enumerate(X_t_0_n):
+            # print(str(smaple_i) + "!")
+            t = 1
             values = []
-            s = x.split(" ")
-            for val in s:
-                val = val.strip("\n").strip("[]") #  .strip("[")
+            Xt_0_to_m = x.split(" ")  # split to values in Xi
+            for val in Xt_0_to_m:
+                val = val.strip("\n").strip("[]")
                 try:
                     val = float(val)
                     values.append(val)
+                    # print(str(t) + ") " + str(val))
+                    t += 1
                 except ValueError:
-                    print(val)
-            X.append(values)
+                    pass
+            sample_X.append(values)
+        X.append(sample_X)
+
+    Y = []
+    for sample in df['y']:
+        sample_y = []
+        y_t_0_n = sample.split(";")  # split to y0, y1... yn
+        for smaple_i, y in enumerate(y_t_0_n):
+            val = y.strip("[]")
+            try:
+                val = float(val)
+                sample_y.append(val)
+            except ValueError:
+                pass
+        Y.append(sample_y)
 
     X = np.array(X)
-    Y = df['y']
-    y_list = []
-    for val in Y:
-        Y = Y[0].split(",")
-        val = val.strip("[]")
-        try:
-            val = float(val)
-            y_list.append(val)
-        except ValueError:
-            print("len(val) < 0")
-    y = np.array(y_list)
+    Y = np.array(Y)
     name = path.split(".")[0]
-    return X, y, name
+    return X, Y, name
 
 
 def get_hidden_measurements_train_and_test_X_y_from_file_path(tax, path, time_point_to_hide):

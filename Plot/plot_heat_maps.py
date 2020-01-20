@@ -1,3 +1,4 @@
+import os
 from os.path import join
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -13,11 +14,15 @@ def plot_heat_map_from_df(data, title, x_label, y_label, folder, pos_neg=True):
     # values_range = max(abs(data.astype(float).min().min()), data.astype(float).max().max())
     ax = sns.heatmap(data.astype(float), cmap='RdBu', ax=ax, vmin=-1, vmax=1)
   else:
-    ax = sns.heatmap(data.astype(float), cmap='Blues', ax=ax)
+    ax = sns.heatmap(data.astype(float), cmap='Blues', ax=ax, vmin=0, vmax=1)
 
   plt.title(title, fontsize=font_size + 5)
   plt.xlabel(x_label)
   plt.ylabel(y_label)
+
+  if not os.path.exists(folder):
+    os.makedirs(folder)
+
   plt.savefig(join(folder, title.replace(" ", "_").replace("\n", "_") + ".svg"), bbox_inches='tight', format='svg')
   plt.show()
 

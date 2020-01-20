@@ -1,0 +1,41 @@
+authorName: Oved_Nagar
+experimentName: GridSearch_bunary_model
+trialConcurrency: 4   # max GPUs to use simultaneously.
+maxExecDuration: 160h
+maxTrialNum: 10000
+#choice: local, remote, pai
+trainingServicePlatform: remote
+searchSpacePath: search_space.json
+#choice: true, false
+useAnnotation: false
+tuner:
+  #choice: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner
+  #SMAC (SMAC should be installed through nnictl)
+  builtinTunerName: GridSearch
+  # classArgs:
+    # choice: maximize, minimize
+    # optimize_mode: maximize
+trial:
+  command: python hyper_parameter_tuning.py
+  codeDir: .
+  gpuNum: 1
+#machineList:
+#    # dsigpu02
+#  - ip: 192.168.2.4
+#    username: nagarov
+#    passwd: Oved2602
+#  - ip: 192.168.2.4
+#    username: nagarov
+#    passwd: Oved2602
+#    #port can be skip if using default ssh port 22
+##    port: 22
+##  - ip: 192.168.2.16
+##    username: nagarov
+##    passwd: Oved2602
+#    #port can be skip if using default ssh port 22
+##    port: 22
+#    # dgx02
+##  - ip: 192.168.2.17
+##    username: nagarov
+##    passwd: Oved2602
+##    port: 22

@@ -1,0 +1,6 @@
+dim 1
+statistic=-1.00784 pvalue=0.31545
+dim 2
+statistic=-1.76699 pvalue=0.07963
+dim 3
+statistic=-1.37204 pvalue=0.17247

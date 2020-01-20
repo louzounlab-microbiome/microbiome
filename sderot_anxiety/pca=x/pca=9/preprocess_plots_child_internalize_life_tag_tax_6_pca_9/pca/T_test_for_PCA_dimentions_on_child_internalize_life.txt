@@ -1,0 +1,6 @@
+dim 1
+statistic=nan pvalue=nan
+dim 2
+statistic=nan pvalue=nan
+dim 3
+statistic=nan pvalue=nan

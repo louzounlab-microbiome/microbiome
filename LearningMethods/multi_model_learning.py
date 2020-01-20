@@ -8,7 +8,7 @@ from LearningMethods.xgb_learning_model import XGBLearningModel
 from Plot import pickle
 from LearningMethods.nn_models import *
 from LearningMethods.nn_learning_model import nn_main
-
+from collections import Counter
 
 models_nn = {'relu_b':nn_2hl_relu_b_model, 'tanh_b':nn_2hl_tanh_b_model,
              'leaky_b':nn_2hl_leaky_b_model, 'sigmoid_b':nn_2hl_sigmoid_b_model,
@@ -18,9 +18,22 @@ models_nn = {'relu_b':nn_2hl_relu_b_model, 'tanh_b':nn_2hl_tanh_b_model,
 
 def read_otu_and_mapping_files(otu_path, mapping_path):
     otu_file = pd.read_csv(otu_path)
+    otu_file = otu_file.set_index("ID")
     mapping_file = pd.read_csv(mapping_path)
-    X = otu_file.set_index("ID").values
-    y = mapping_file["Tag"]
+    mapping_file = mapping_file.set_index("ID")
+
+
+    otu_ids = otu_file.index
+    map_ids = mapping_file.index
+    mutual_ids = [id for id in otu_ids if id in map_ids]
+    X = otu_file.loc[mutual_ids]
+    y_ = mapping_file.loc[mutual_ids]
+
+    n = [i for i, item in zip(mapping_file.index, mapping_file["Tag"]) if pd.isna(item)]
+    X = X.drop(n).values
+    y = y_.drop(n)["Tag"].astype(int)
+
+    print(Counter(y))
     return np.array(X), np.array(y)
 
 
@@ -32,12 +45,12 @@ def get_weights(y):
     return weights_map
 
 
-def main(folder, otu_path, mapping_path, pca_path, dict):
+def multi_model_learning_main(folder, otu_path, mapping_path, pca_path, dict):
     # step 1: get data from files
     X, y = read_otu_and_mapping_files(otu_path, mapping_path)
     pca_obj = pickle.load(open(pca_path, "rb"))
     weights = get_weights(y)
-    with open(os.path.join("..", folder, "bacteria_tax_level_" + str(dict["TAX_LEVEL"]) + ".txt"), "r") as f:
+    with open(os.path.join(folder, "bacteria_" + dict["TASK_TITLE"] + "_task_tax_level_" + str(dict["TAX_LEVEL"]) + ".txt"), "r") as f:
         bacteria = f.readlines()
         bacteria = [b.strip("\n") for b in bacteria]
 
@@ -52,14 +65,15 @@ def main(folder, otu_path, mapping_path, pca_path, dict):
         y_tests.append(y_test.index)
 
     # step 3: create models according to parameters
+    # send the place to change dir to relative to current path
     if dict["SVM"]:
         svm_model = SVMLearningModel()
         svm_model.fit(pd.DataFrame(X), pd.Series(y), X_trains, X_tests, y_trains, y_tests, dict["SVM_params"], weights,
-                      bacteria, task_name_folder=dict["FOLDER_TITLE"] + dict["TAX_LEVEL"], project_folder=folder, pca_obj=pca_obj)
+                      bacteria, task_name_title=dict["TASK_TITLE"], relative_path_to_save_results=folder, pca_obj=pca_obj)
     if dict["XGB"]:
         xgb_model = XGBLearningModel()
         xgb_model.fit(pd.DataFrame(X), pd.Series(y), X_trains, X_tests, y_trains, y_tests, dict["XGB_params"], bacteria,
-                      task_name_folder=dict["FOLDER_TITLE"] + dict["TAX_LEVEL"], project_folder=folder, pca_obj=pca_obj)
+                      task_name_title=dict["TASK_TITLE"], relative_path_to_save_results=folder, pca_obj=pca_obj)
     if dict["NN"]:
         Net = models_nn[dict['NN_params']["model"]]
         _, _ = nn_main(X, y, dict['NN_params'], dict["TASK_TITLE"], Net, plot=True)
@@ -78,17 +92,20 @@ def main(folder, otu_path, mapping_path, pca_path, dict):
 
 
 if __name__ == "__main__":
-    folder = 'sderot_anxiety' # the name of the project folder
-    otu_path = os.path.join('..', folder, 'OTU_merged_PTST_task.csv')
-    mapping_path = os.path.join('..', folder, 'Tag_file_PTST_task.csv')
-    pca_path = os.path.join('..', folder, 'Pca_obj_PTST_task.pkl')
+    folder = os.path.join("sderot_anxiety", 'ptsd_5_tax_5_csv_files')  # the name of the project folder
+
+    project_folder_and_task = os.path.join('..', folder)  # adjust acorrding to runing folder
+    otu_path = os.path.join(project_folder_and_task, 'OTU_merged_PTST_task.csv')
+    mapping_path = os.path.join(project_folder_and_task, 'Tag_file_PTST_task.csv')
+    pca_path = os.path.join('project_folder_and_task', 'Pca_obj_PTST_task.pkl')
+    tax = str(5)
     k_fold = 17
     test_size = 0.2
     names = ["no anxiety", "anxiety"]
     # get params dictionary from file / create it here
-    dict = {"TASK_TITLE": "sderot_anxiety",  # the name of the task for plots titles...
-            "FOLDER_TITLE": folder,  # creates the folder for the task we want to do, save results in it
-            "TAX_LEVEL": str(5),
+    dict = {"TASK_TITLE": "PTSD time 5",  # the name of the task for plots titles...
+            "FOLDER_TITLE": project_folder_and_task,  # creates the folder for the task we want to do, save results in it
+            "TAX_LEVEL": tax,
             "CLASSES_NAMES": names,
             "SVM": True,
             "SVM_params": {'kernel': ['linear'],
@@ -111,7 +128,7 @@ if __name__ == "__main__":
                            "create_coeff_plots": True,
                            "CLASSES_NAMES": names,
                            "K_FOLD": k_fold,
-                            "TEST_SIZE": test_size,
+                           "TEST_SIZE": test_size,
                            "TASK_TITLE": "sderot_anxiety"
                            },  # if single option for each param -> single run, otherwise -> grid search.
             "NN": True,
@@ -138,4 +155,4 @@ if __name__ == "__main__":
             "TEST_SIZE": test_size,
             #  ...... add whatever
             }
-    main(folder, otu_path, mapping_path, pca_path, dict)
+    multi_model_learning_main(folder, otu_path, mapping_path, pca_path, dict)

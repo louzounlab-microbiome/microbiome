@@ -1,0 +1,6 @@
+dim 1
+statistic=1.7052 pvalue=0.09308
+dim 2
+statistic=nan pvalue=nan
+dim 3
+statistic=-1.7052 pvalue=0.09308

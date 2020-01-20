@@ -5,11 +5,13 @@ import pandas as pd
 import numpy as np
 from sklearn import preprocessing
 import seaborn as sns
+
+from LearningMethods import shorten_single_bact_name
 from anna.microbiome.distance_learning_func import distance_learning
 from infra_functions.general import apply_pca
 
 
-def preprocess_data(data, dict_params, map_file, visualize_data=False):
+def preprocess_data(data, dict_params, map_file, tag_name, visualize_data=False):
     taxnomy_level = int(dict_params['taxonomy_level'])
     preform_taxnomy_group = dict_params['taxnomy_group']
     eps_for_zeros = float(dict_params['epsilon'])
@@ -24,7 +26,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
     as_data_frame = pd.DataFrame(data.T).apply(pd.to_numeric, errors='ignore').copy()
 
     if visualize_data:
-        folder = "preprocess_plots"
+        folder = "preprocess_plots_" + tag_name + "_tax_" + str(taxnomy_level) + "_pca_" + str(pca)
         if not os.path.exists(folder):
             os.mkdir(folder)
         plt.figure('Preprocess')
@@ -69,6 +71,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
     if visualize_data:
         data_frame_flatten = as_data_frame.values.flatten()
         indexes_of_non_zeros = data_frame_flatten != 0
+        as_data_frame.columns = [shorten_single_bact_name(b) for b in as_data_frame.columns]
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - Before', [323, 324])
         samples_density = as_data_frame.apply(np.sum, axis=1)
         plt.figure('Density of samples')
@@ -81,6 +84,8 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         as_data_frame = log_normalization(as_data_frame, eps_for_zeros)
 
         # delete column with var give
+        if "taxonomy" in as_data_frame.index:
+            as_data_frame = as_data_frame.drop(["taxonomy"])
         as_data_frame = drop_low_var(as_data_frame.T, var_th_delete)
 
         if visualize_data:
@@ -110,6 +115,28 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         plt.savefig(os.path.join(folder, "preprocess.svg"), bbox_inches='tight', format='svg')
 
     if visualize_data:
+        """
+        ids = as_data_frame.index 
+        m_ids = [i for i in ids if i.endswith("M")]
+        c_ids = [i for i in ids if i.endswith("C")]
+        ordered_ids = c_ids + m_ids
+        as_data_frame.reindex(ordered_ids)
+        
+        edf = pd.read_csv("expose_or_control_tag.csv")
+        edf = edf.set_index("ID")
+        expose = edf[edf["Tag"] == 0]
+
+        not_expose = edf[edf["Tag"] == 1]
+
+        m_ids = [i for i in ids if i in expose.index]
+        c_ids = [i for i in ids if i in not_expose.index]
+        ordered_ids = c_ids + m_ids
+        [i for i in as_data_frame.index if i not in ordered_ids]
+        ['A0726741FM']
+        ordered_ids += ['A0726741FM']
+        as_data_frame.reindex(ordered_ids)
+
+        """
         plt.figure('standart heatmap')
         sns.heatmap(as_data_frame, cmap="Blues")
         plt.title('Heatmap after standartization and taxonomy group level ' + str(taxnomy_level))
@@ -142,6 +169,9 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
 
 def visualize_preproccess(as_data_frame, indexes_of_non_zeros, name, subplot_idx):
     plt.subplot(subplot_idx[0])
+    if "taxonomy" in as_data_frame.columns:
+        as_data_frame = as_data_frame.drop(columns=["taxonomy"])
+        indexes_of_non_zeros = as_data_frame.values.flatten() != 0
     data_frame_flatten = as_data_frame.values.flatten()
     plot_preprocess_stage(data_frame_flatten, name)
     result = data_frame_flatten[indexes_of_non_zeros]
@@ -150,7 +180,7 @@ def visualize_preproccess(as_data_frame, indexes_of_non_zeros, name, subplot_idx
 
 
 def plot_preprocess_stage(result, name):
-    plt.hist(result, 1000, facecolor='green', alpha=0.75)
+    plt.hist(result.astype(int), 1000, facecolor='green', alpha=0.75)
     plt.title('Distribution ' + name + ' preprocess')
     plt.xlabel('BINS')
     plt.ylabel('Count')

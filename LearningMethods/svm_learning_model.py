@@ -21,7 +21,7 @@ class SVMLearningModel(SimpleLearningModel):
         for kernel in params['kernel']:
             for gamma in params['gamma']:
                 for C in params['C']:
-                    clf = svm.SVC(kernel=kernel, C=C, gamma=gamma, class_weight=weights)  # class_weight='balanced')
+                    clf = svm.SVC(kernel=kernel, C=C, gamma=gamma, class_weight='balanced')  # class_weight='balanced')
                     optional_classifiers.append(clf)
 
         return optional_classifiers
@@ -43,10 +43,10 @@ class SVMLearningModel(SimpleLearningModel):
             coefficients = [c_[:pca_obj.n_components] for c_ in c]
         return coefficients
 
-    def fit(self, X, y, X_train_ids, X_test_ids, y_train_ids, y_test_ids, params, weights, bacteria, task_name_folder, project_folder, pca_obj=None):
-        if not os.path.exists(os.path.join("..", project_folder, task_name_folder, "SVM")):
-            os.makedirs(os.path.join("..", project_folder, task_name_folder, "SVM"))
-        os.chdir(os.path.join(os.path.abspath(os.path.curdir), "..", project_folder, task_name_folder, "SVM"))
+    def fit(self, X, y, X_train_ids, X_test_ids, y_train_ids, y_test_ids, params, weights, bacteria, task_name_title, relative_path_to_save_results, pca_obj=None):
+        if not os.path.exists(os.path.join(relative_path_to_save_results, "SVM")):
+            os.makedirs(os.path.join(relative_path_to_save_results, "SVM"))
+        os.chdir(os.path.join(os.path.abspath(os.path.curdir), relative_path_to_save_results, "SVM"))
         print("SVM...")
 
         # update each classifier results in a mutual file
@@ -129,8 +129,9 @@ class SVMLearningModel(SimpleLearningModel):
                                                                             "SVM", names, BINARY=BINARY)
             if BINARY:
                 _, _, _, svm_roc_auc = roc_auc(all_test_real_tags.astype(int), y_test_scores,
-                                               visualize=True, graph_title='SVM\n' + task_name_folder.capitalize() +
-                                                                           " AUC on all iterations", save=True, folder=clf_folder_name)
+                                               visualize=True, graph_title='SVM\n' + task_name_title.capitalize() +
+                                                                           " AUC on all iterations", save=True,
+                                               folder=clf_folder_name)
                 res_path = os.path.join(clf_folder_name, str(round(svm_roc_auc, 5)))
             else:
                 svm_roc_auc = 0
@@ -143,18 +144,18 @@ class SVMLearningModel(SimpleLearningModel):
                 self.plot_bacteria_coeff_average(bacteria_coeff_average, len(set(y)), params["TASK_TITLE"], clf_folder_name,
                                             bacteria, params["K_FOLD"], "SVM", res_path, BINARY, names)
 
-            print_confusion_matrix(confusion_matrix_average, names, confusion_matrix_acc, "SVM", task_name_folder, res_path)
+            print_confusion_matrix(confusion_matrix_average, names, confusion_matrix_acc, "SVM", task_name_title, res_path)
 
             if BINARY:
                 _, _, _, svm_train_roc_auc = roc_auc(all_y_train, y_train_scores, visualize=False, graph_title="train auc", save=False, folder=res_path)
             else:
                 svm_train_roc_auc = 0
                 multi_class_roc_auc(all_y_train.astype(int), y_train_scores, names,
-                                    graph_title='SVM\n' + task_name_folder.capitalize() + " AUC on all iterations",
+                                    graph_title='SVM\n' + task_name_title.capitalize() + " AUC on all iterations",
                                     save=True, folder=res_path)
 
             # ----------------------------------------! SAVE RESULTS -------------------------------------
-            self.save_results(task_name_folder, train_auc, test_auc, train_rho, test_rho, confusion_matrix_average,
+            self.save_results(task_name_title, train_auc, test_auc, train_rho, test_rho, confusion_matrix_average,
                          confusion_matrix_acc,
                          train_accuracies, test_accuracies, svm_y_score_from_all_iter, svm_y_pred_from_all_iter,
                          svm_y_test_from_all_iter, "SVM", res_path)

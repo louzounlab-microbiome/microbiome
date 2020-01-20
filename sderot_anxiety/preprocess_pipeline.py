@@ -1,6 +1,5 @@
 import sys
 import os
-import math
 sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from LearningMethods.create_otu_and_mapping_files import CreateOtuAndMappingFiles
 from LearningMethods.multi_model_learning import main

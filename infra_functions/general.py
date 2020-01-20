@@ -58,6 +58,7 @@ def apply_pca(data, n_components=15, visualize=False):
         plt.show()
     return pd.DataFrame(data_components).set_index(data.index), pca, str_to_print
 
+
 def set_size(w,h, ax=None):
     """ w, h: width, height in inches """
     if not ax: ax = plt.gca()

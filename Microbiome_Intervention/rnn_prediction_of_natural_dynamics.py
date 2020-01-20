@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 import pandas as pd
+
+from LearningMethods.rnn import run_RNN
 from Microbiome_Intervention.create_learning_data_from_data_set import get_adapted_X_y_for_wanted_learning_task
 import torch
 import torch.nn as nn
@@ -48,7 +50,7 @@ def preform_time_serie_learning(tax, task, X_y_files_list_path):
 
 
 def predict_interaction_network_structure_RNN(X_serie, y_serie, name, i, bact, bacteria):
-    pass
+    run_RNN(X_serie, y_serie, name, bact)
 
 
 if __name__ == "__main__":

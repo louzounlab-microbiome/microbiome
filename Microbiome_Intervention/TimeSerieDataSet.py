@@ -63,7 +63,7 @@ class TimeSerieDataLoader:
             preform_reggression_learning(self.load_and_save_path, bacteria, task, X_y_files_path, cross_validation, test_size)
         if run_rnn:
             X_y_files_path = pickle.load(open(os.path.join(self.load_and_save_path, self.time_serie_X_y_files_pkl_path), "rb"))
-            preform_time_serie_learning(self.load_and_save_path, bacteria, X_y_files_path, cross_validation, test_size)
+            preform_time_serie_learning(self.load_and_save_path, bacteria, X_y_files_path)
         if run_lstm:
             X_y_files_path = pickle.load(open(os.path.join(self.load_and_save_path, self.time_serie_X_y_files_pkl_path), "rb"))
-            preform_time_serie_learning(self.load_and_save_path, bacteria, X_y_files_path, cross_validation, test_size)
+            preform_time_serie_learning(self.load_and_save_path, bacteria, X_y_files_path)

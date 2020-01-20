@@ -1,0 +1,1 @@
+line0: config, line1: acc_train, line2: auc_train, line3: loss_train, line4: acc_dev, line5: auc_dev, line6: loss_dev

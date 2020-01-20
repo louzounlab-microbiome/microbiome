@@ -18,6 +18,8 @@ def pop_idx(idx, objects_to_remove_idx_from):
 
 def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, taxnomy_level, num_of_mixtures=10,
                                  ids_list=None, save_folder=None):
+    import matplotlib.pyplot as plt
+
     # calc ro for x=all samples values for each bacteria and y=all samples tags
     features_by_bacteria = []
     if ids_list:
@@ -218,6 +220,8 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
                 file.write(str(s[1]) + "," + str(s[0]) + "\n")
 
     # draw the distribution of real rhos vs. mixed rhos
+    import matplotlib.pyplot as plt
+    plt.figure()
     [count, bins] = np.histogram(mixed_rhos, 50)
     # divide by 'num_of_mixtures' fo avoid high number of occurrences due to multiple runs for each mixture
     plt.bar(bins[:-1], count/num_of_mixtures, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="mixed tags",

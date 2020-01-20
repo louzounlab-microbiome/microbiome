@@ -1,0 +1,20 @@
+-----------------------------------------------------------------------
+
+    "alphabet":{"_type":"choice","_value":[7]},
+    "states":{"_type":"choice","_value":[18]},
+    "embed_dim":{"_type":"choice","_value":[8, 12]},
+    "lstm_layers":{"_type":"choice","_value":[1, 2]},
+    "lstm_dropout":{"_type":"choice","_value":[0, 0.2, 0.5]},
+    "lstm_out":{"_type":"choice","_value":[50, 76]},
+    "batch_size":{"_type":"choice","_value":[32, 64]},
+    "optimizer":{"_type":"choice","_value":["ADAM", "SGD"]},
+    "learning_rate":{"_type":"choice","_value":[1e-4]},
+    "regularization":{"_type":"choice","_value":[1e-5, 1e-4, 0]},
+    "epochs":{"_type":"choice","_value":[200]}
+
+
+-----------------------------------------------------------------------   
+dsiGPU-06
+The experiment id is gf49jSYR
+The Web UI urls are: http://127.0.0.1:8090   http://192.168.2.9:8090   http://172.17.0.1:8090   http://192.168.122.1:8090
+-----------------------------------------------------------------------
