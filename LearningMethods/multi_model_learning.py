@@ -10,17 +10,19 @@ from LearningMethods.nn_models import *
 from LearningMethods.nn_learning_model import nn_main
 from collections import Counter
 
-models_nn = {'relu_b':nn_2hl_relu_b_model, 'tanh_b':nn_2hl_tanh_b_model,
-             'leaky_b':nn_2hl_leaky_b_model, 'sigmoid_b':nn_2hl_sigmoid_b_model,
-             'relu_mul':nn_2hl_relu_mul_model, 'tanh_mul':nn_2hl_tanh_mul_model,
-             'leaky_mul':nn_2hl_leaky_mul_model, 'sigmoid_mul':nn_2hl_sigmoid_mul_model}
+models_nn = {'relu_b': nn_2hl_relu_b_model, 'tanh_b': nn_2hl_tanh_b_model,
+             'leaky_b': nn_2hl_leaky_b_model, 'sigmoid_b': nn_2hl_sigmoid_b_model,
+             'relu_mul': nn_2hl_relu_mul_model, 'tanh_mul': nn_2hl_tanh_mul_model,
+             'leaky_mul': nn_2hl_leaky_mul_model, 'sigmoid_mul': nn_2hl_sigmoid_mul_model}
 
 
 def read_otu_and_mapping_files(otu_path, mapping_path):
     otu_file = pd.read_csv(otu_path)
-    otu_file = otu_file.set_index("ID")
+    id_col = otu_file.columns[0]
+    otu_file = otu_file.set_index(id_col)
     mapping_file = pd.read_csv(mapping_path)
-    mapping_file = mapping_file.set_index("ID")
+    id_col = mapping_file.columns[0]
+    mapping_file = mapping_file.set_index(id_col)
 
 
     otu_ids = otu_file.index
@@ -29,7 +31,7 @@ def read_otu_and_mapping_files(otu_path, mapping_path):
     X = otu_file.loc[mutual_ids]
     y_ = mapping_file.loc[mutual_ids]
 
-    n = [i for i, item in zip(mapping_file.index, mapping_file["Tag"]) if pd.isna(item)]
+    n = [i for i, item in zip(y_.index, y_["Tag"]) if pd.isna(item)]
     X = X.drop(n).values
     y = y_.drop(n)["Tag"].astype(int)
 

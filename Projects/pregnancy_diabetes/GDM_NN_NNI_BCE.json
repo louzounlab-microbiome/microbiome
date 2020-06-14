@@ -1,0 +1,34 @@
+{
+  "model":{
+    "_type": "choice",
+    "_value": [ "relu1_b", "tanh1_b", "leaky1_b" ]
+  },
+  "hid_dim_0": {
+    "_type": "quniform",
+    "_value": [ 5, 15, 2 ]
+  },
+  "reg": {
+    "_type": "uniform",
+    "_value": [ 0, 0.001]
+  },
+  "lr": {
+    "_type": "uniform",
+    "_value": [ 0.0001, 0.01 ]
+  },
+  "batch_size": {
+    "_type": "choice",
+    "_value": [ 4, 8, 16]
+  },
+  "shuffle": {
+    "_type": "choice",
+    "_value": [ 0, 1 ]
+  },
+  "epochs": {
+    "_type": "quniform",
+    "_value": [ 20, 200, 30 ]
+  },
+  "optimizer": {
+    "_type": "choice",
+    "_value": ["Adam"]
+  }
+}

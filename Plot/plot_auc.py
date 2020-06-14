@@ -6,7 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 
-
 def roc_auc(y_test, y_score, visualize=False, graph_title='ROC Curve', save=False, folder=None, fontsize=17):
     fpr, tpr, thresholds = roc_curve(np.array(y_test), np.array(y_score))
     roc_auc = auc(fpr, tpr)
@@ -41,9 +40,45 @@ def roc_auc(y_test, y_score, visualize=False, graph_title='ROC Curve', save=Fals
     return fpr, tpr, thresholds, roc_auc
 
 
+def plot_roc_auc(y_test, y_score, visualize=False, graph_title='ROC Curve', save=False, folder=None, fontsize=17):
+    fpr, tpr, thresholds = roc_curve(np.array(y_test), np.array(y_score))
+    roc_auc = auc(fpr, tpr)
+    print('ROC AUC = {:7}'.format(roc_auc))
+    if visualize:
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        ax.plot(fpr, tpr, color='red',
+             label='ROC curve (area = %0.3f)' % roc_auc)
+        plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.title(f'{graph_title}\nroc={round(roc_auc, 3)}', fontsize=fontsize)
+        plt.legend(loc="lower right")
+        plt.xlabel('Specificity', fontsize=fontsize)
+        plt.ylabel('Sensitivity', fontsize=fontsize)
+        #plt.show()
+
+        if save:
+            if folder:
+                if not os.path.exists(folder):
+                    os.makedirs(folder)
+                #res_path = os.path.join(folder, str(round(roc_auc, 5)))
+                #os.mkdir(res_path)
+                #  plt.savefig(os.path.join(res_path, graph_title.replace(" ", "_").replace("\n", "_") + "_" +
+                #                                          str(round(roc_auc, 3)) + ".svg"), bbox_inches='tight', format='svg')
+                plt.savefig(os.path.join(folder, graph_title.replace(" ", "_").replace("\n", "_") + "_" +
+                                         str(round(roc_auc, 3)) + ".svg"), bbox_inches='tight', format='svg')
+            else:
+                plt.savefig(graph_title.replace(" ", "_").replace("\n", "_") + "_" + str(round(roc_auc, 3)) + ".svg",
+                bbox_inches='tight', format='svg')
+            plt.show()
+    plt.close()
+    return fpr, tpr, thresholds, roc_auc
+
+
 # y_test and y_score should be np array type
 def multi_class_roc_auc(y_test, y_score, labels_names, graph_title='ROC Curve', save=False, folder=None, fontsize=17):
-    n_classes = len(set(y_test))
+    n_classes = len(np.unique(np.array(y_test)))
     lw = 2
     # Compute macro-average ROC curve and ROC area and ROC curve and ROC area for each class
     fpr = dict()

@@ -1,0 +1,65 @@
+Network type,Model,Dataset,Test size,K fold,AUC,Time
+coefficients,linear regression,GDM,0.3,20,0.2826996423,02/06/2020 13:12:57
+coefficients,ridge regression,GDM,0.3,20,0.5316372814,02/06/2020 13:16:04
+coefficients,ard regression,GDM,0.3,20,0.5851029483,02/06/2020 13:29:04
+coefficients,lasso regression,GDM,0.3,20,0.5267081066,02/06/2020 13:32:04
+coefficients,bayesian ridge regression,GDM,0.3,20,0.6120277595,02/06/2020 13:35:45
+coefficients,svr regression,GDM,0.3,20,0.6258570491,02/06/2020 13:38:45
+coefficients,linear regression,VitamineA,0.3,20,0.4280651366,02/06/2020 13:11:01
+coefficients,ridge regression,VitamineA,0.3,20,0.5288718773,02/06/2020 13:14:11
+coefficients,ard regression,VitamineA,0.3,20,0.614356854,02/06/2020 13:20:47
+coefficients,lasso regression,VitamineA,0.3,20,0.5133728039,02/06/2020 13:30:19
+coefficients,bayesian ridge regression,VitamineA,0.3,20,0.5920786674,02/06/2020 13:33:33
+coefficients,svr regression,VitamineA,0.3,20,0.6128167884000001,02/06/2020 13:37:14
+coefficients,linear regression,Allergy,0.3,20,0.7911017939,03/06/2020 14:36:40
+coefficients,ridge regression,Allergy,0.3,20,0.5845297831,03/06/2020 14:37:46
+coefficients,ard regression,Allergy,0.3,20,0.668788103,03/06/2020 14:48:54
+coefficients,lasso regression,Allergy,0.3,20,0.6008641748,03/06/2020 14:49:59
+coefficients,bayesian ridge regression,Allergy,0.3,20,0.5916823319,03/06/2020 14:51:20
+coefficients,svr regression,Allergy,0.3,20,0.5699754708,03/06/2020 14:52:38
+coefficients,linear regression,Simulations 1,0.3,20,0.9395894131,03/06/2020 17:07:00
+coefficients,ridge regression,Simulations 1,0.3,20,0.9583967726,03/06/2020 17:07:53
+coefficients,ard regression,Simulations 1,0.3,20,0.9534351317,03/06/2020 17:12:05
+coefficients,lasso regression,Simulations 1,0.3,20,0.9150914435,03/06/2020 17:12:57
+coefficients,bayesian ridge regression,Simulations 1,0.3,20,0.9493398909,03/06/2020 17:13:58
+coefficients,svr regression,Simulations 1,0.3,20,0.9137849168,03/06/2020 17:15:34
+positive change,ard regression,VitamineA,0.3,1,0.6067190155258777,07/06/2020 11:06:45
+negative change,ard regression,VitamineA,0.3,1,0.6067190155258777,07/06/2020 11:06:45
+positive change,ard regression,VitamineA,0.3,1,0.5918561237210106,07/06/2020 12:29:05
+negative change,ard regression,VitamineA,0.3,1,0.5918561237210106,07/06/2020 12:29:05
+positive change,ard regression,VitamineA,0.3,1,0.6014695449478058,07/06/2020 13:08:40
+negative change,ard regression,VitamineA,0.3,1,0.6014695449478058,07/06/2020 13:08:40
+positive change,lasso regression,VitamineA,0.3,1,0.5124692669360693,07/06/2020 13:16:01
+negative change,lasso regression,VitamineA,0.3,1,0.5124692669360693,07/06/2020 13:16:01
+positive change,linear regression,VitamineA,0.3,1,0.4353715142868706,07/06/2020 13:23:05
+negative change,linear regression,VitamineA,0.3,1,0.4353715142868706,07/06/2020 13:23:05
+positive change,ridge regression,VitamineA,0.3,1,0.6689150558126872,07/06/2020 13:29:38
+negative change,ridge regression,VitamineA,0.3,1,0.6689150558126872,07/06/2020 13:29:38
+positive change,bayesian ridge regression,VitamineA,0.3,1,0.7256559372464159,07/06/2020 13:38:23
+negative change,bayesian ridge regression,VitamineA,0.3,1,0.7256559372464159,07/06/2020 13:38:23
+positive change,svr regression,VitamineA,0.3,1,0.9694305424049776,07/06/2020 13:46:42
+negative change,svr regression,VitamineA,0.3,1,0.9694305424049776,07/06/2020 13:46:42
+positive change,decision tree regression,VitamineA,0.3,1,0.5118925984144341,07/06/2020 13:54:10
+negative change,decision tree regression,VitamineA,0.3,1,0.5210787998906506,07/06/2020 13:54:10
+positive change,random forest regression,VitamineA,0.3,1,0.7001037859302378,07/06/2020 14:49:39
+negative change,random forest regression,VitamineA,0.3,1,0.6485718153512928,07/06/2020 14:49:39
+positive change,ard regression,GDM,0.3,1,0.5613142931904712,07/06/2020 16:25:42
+negative change,ard regression,GDM,0.3,1,0.5613142931904712,07/06/2020 16:25:42
+positive change,lasso regression,GDM,0.3,1,0.6005370975550713,07/06/2020 16:38:21
+negative change,lasso regression,GDM,0.3,1,0.6005370975550713,07/06/2020 16:38:21
+positive change,linear regression,GDM,0.3,1,0.2279925104319269,07/06/2020 16:50:54
+negative change,linear regression,GDM,0.3,1,0.2279925104319269,07/06/2020 16:50:54
+positive change,ridge regression,GDM,0.3,1,0.6151747629786148,07/06/2020 17:02:47
+negative change,ridge regression,GDM,0.3,1,0.6151747629786148,07/06/2020 17:02:47
+positive change,svr regression,GDM,0.3,1,0.8124547670039141,07/06/2020 17:30:54
+negative change,svr regression,GDM,0.3,1,0.8124547670039141,07/06/2020 17:30:54
+positive change,decision tree regression,GDM,0.3,1,0.4790686684092188,07/06/2020 17:42:11
+negative change,decision tree regression,GDM,0.3,1,0.4758921241678015,07/06/2020 17:42:11
+positive change,random forest regression,GDM,0.3,1,0.8559590543504754,07/06/2020 19:36:24
+negative change,random forest regression,GDM,0.3,1,0.7964565223278359,07/06/2020 19:36:24
+positive change,linear regression,Allergy,0.3,1,0.9156883438395184,08/06/2020 06:36:34
+negative change,linear regression,Allergy,0.3,1,0.9156883438395184,08/06/2020 06:36:34
+positive change,ridge regression,Allergy,0.3,1,0.5468233588457903,08/06/2020 06:54:27
+negative change,ridge regression,Allergy,0.3,1,0.5468233588457903,08/06/2020 06:54:28
+positive change,bayesian ridge regression,Allergy,0.3,1,0.45580866320026836,08/06/2020 07:16:56
+negative change,bayesian ridge regression,Allergy,0.3,1,0.45580866320026836,08/06/2020 07:16:57

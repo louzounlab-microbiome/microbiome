@@ -1,7 +1,0 @@
-antibiotics = Incomplete recovery and individualized responses...
-diets = Diet rapidly and reproducibly alters the human gut microbiome
-HostLifeStyle = Host life style affects human microbiota
-IBS = Instability of the faecal microbiota in IBS
-kwashiorkor = Gut microbiomes for malawian twins pairs
-LEA = The Long-Term Stability of the human gut microbiota
-MPHM = Moving pictures of the human microbiome

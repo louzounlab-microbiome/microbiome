@@ -1,0 +1,10 @@
+{
+"STRUCTURE": { "_type": "choice", "_value": ["001L100H", "001L200H", "001L300H","002L100H050H", "002L200H100H"]},
+"TRAIN_TEST_SPLIT": {"_type": "choice", "_value": [0.7]},
+"BATCH_SIZE": {"_type": "choice", "_value": [4, 8, 16, 32, 64, 128]},
+"EPOCHS": { "_type": "choice", "_value": [100, 200]},
+"LEARNING_RATE": { "_type": "choice", "_value": [1e-2, 1e-3]},
+"OPTIMIZER": { "_type": "choice", "_value": ["Adam"]},
+"REGULARIZATION": { "_type": "choice", "_value": [0.1, 0.01, 0.001, 0.0001, 0]},
+"DROPOUT": { "_type": "choice", "_value": [0.2, 0.1, 0.01, 0.001, 0]}
+}

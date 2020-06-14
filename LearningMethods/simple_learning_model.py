@@ -4,7 +4,17 @@ import pandas as pd
 import numpy as np
 import os
 from Plot import create_coeff_plots_by_alogorithm, make_class_coef_plots_from_multiclass_model_binary_sub_models
-from infra_functions import convert_pca_back_orig
+
+
+def convert_pca_back_orig(pca_components, w, original_names=None, visualize=False, title='Bacteria Coeff', ylabel='Bacteria', xlabel='Coeff Value'):
+    coeff = np.dot(w, pca_components)
+    if original_names is None:
+        object_to_return = pd.DataFrame({'Coefficients': coeff})
+    else:
+        object_to_return = pd.DataFrame(
+        {'Taxonome': original_names,
+         'Coefficients': coeff
+         })
 
 
 class SimpleLearningModel(AbstractLearningModel):

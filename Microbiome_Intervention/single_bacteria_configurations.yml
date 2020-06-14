@@ -1,0 +1,19 @@
+authorName: DafnaMagid
+experimentName: Dafna NNI GDM
+trialConcurrency: 4
+maxExecDuration: 300h
+maxTrialNum: 99999
+trainingServicePlatform: local
+searchSpacePath: single_bacteria_params.json
+useAnnotation: false
+tuner:
+  builtinTunerName: TPE
+  classArgs:
+    optimize_mode: minimize
+trial:
+  command: python single_bacteria_nni_runner.py
+  codeDir: .
+  gpuNum: 1
+localConfig:
+  maxTrialNumPerGpu: 1
+  useActiveGpu: true

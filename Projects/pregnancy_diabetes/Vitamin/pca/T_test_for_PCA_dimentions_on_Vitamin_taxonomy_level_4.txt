@@ -1,0 +1,2 @@
+dim 1
+statistic=-0.99969 pvalue=0.31854

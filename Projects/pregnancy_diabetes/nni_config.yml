@@ -1,0 +1,26 @@
+authorName: Yoel
+experimentName: Yoel Ensemble NNI GDM
+trialConcurrency: 8
+maxExecDuration: 4h
+maxTrialNum: 2000
+trainingServicePlatform: local
+
+# The path to Search Space
+#searchSpacePath: search_space2.json
+searchSpacePath: ensemble_nni_prams.json
+useAnnotation: false
+tuner:
+#  builtinTunerName: GridSearch
+  builtinTunerName: TPE
+  classArgs:
+    #choice: maximize, minimize
+    optimize_mode: maximize
+# The path and the running command of trial
+trial:
+  command: python XGBOOST_NNI.py
+  codeDir: .
+  gpuNum: 0
+localConfig:
+  # gpuIndices: 1,2
+  maxTrialNumPerGpu: 1
+  useActiveGpu: false

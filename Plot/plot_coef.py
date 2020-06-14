@@ -19,7 +19,7 @@ def shorten_bact_names(bacterias):
     short_bacterias_names = []
     for f in bacterias:
         i = 1
-        while len(f.split(";")[-i]) < 5 or f.split(";")[-i] in ['Unassigned', 'NA']:  # meaningless name
+        while len(f.split(";")[-i]) < 3 or f.split(";")[-i] in ['Unassigned', 'NA']:  # meaningless name
             i += 1
             if i > len(f.split(";")):
                 i -= 1

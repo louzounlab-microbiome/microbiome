@@ -1,0 +1,114 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 750px;
+            background-color: #FFFFFF;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#EE831E", "font": {"color": "black"}, "group": "k__Bacteria", "id": 2, "label": "k__Bacteria", "shape": "dot", "value": 100}, {"color": "#91F01E", "font": {"color": "black"}, "group": "p__Actinobacteria", "id": 4, "label": "f__Actinomycetaceae", "shape": "triangle", "value": 100}, {"color": "#91F01E", "font": {"color": "black"}, "group": "p__Actinobacteria", "id": 5, "label": "f__Corynebacteriaceae", "shape": "triangle", "value": 100}, {"color": "#91F01E", "font": {"color": "black"}, "group": "p__Actinobacteria", "id": 6, "label": "f__Micrococcaceae", "shape": "triangle", "value": 100}, {"color": "#91F01E", "font": {"color": "black"}, "group": "p__Actinobacteria", "id": 8, "label": "f__Coriobacteriaceae", "shape": "triangle", "value": 100}, {"color": "#1EF08D", "font": {"color": "black"}, "group": "p__Bacteroidetes", "id": 9, "label": "p__Bacteroidetes", "shape": "triangleDown", "value": 100}, {"color": "#1EF08D", "font": {"color": "black"}, "group": "p__Bacteroidetes", "id": 16, "label": "f__S24-7", "shape": "triangleDown", "value": 100}, {"color": "#1E4EF0", "font": {"color": "black"}, "group": "p__Cyanobacteria", "id": 24, "label": "o__YS2", "shape": "dot", "value": 100}, {"color": "#1E4EF0", "font": {"color": "black"}, "group": "p__Cyanobacteria", "id": 25, "label": "o__Streptophyta", "shape": "dot", "value": 100}, {"color": "#671EF0", "font": {"color": "black"}, "group": "p__Deferribacteres", "id": 26, "label": "f__Deferribacteraceae", "shape": "star", "value": 100}, {"color": "#F01EE6", "font": {"color": "black"}, "group": "p__Fibrobacteres", "id": 27, "label": "f__Fibrobacteraceae", "shape": "triangle", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 28, "label": "o__Bacillales", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 31, "label": "f__Planococcaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 32, "label": "f__Staphylococcaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 33, "label": "f__Gemellaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 34, "label": "o__Lactobacillales", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 35, "label": "f__Aerococcaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 36, "label": "f__Carnobacteriaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 39, "label": "f__Leuconostocaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 42, "label": "o__Clostridiales", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 46, "label": "f__Dehalobacteriaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 47, "label": "f__EtOH8", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 50, "label": "f__Peptococcaceae", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 56, "label": "f__[Tissierellaceae]", "shape": "triangleDown", "value": 100}, {"color": "#F01E5A", "font": {"color": "black"}, "group": "p__Firmicutes", "id": 57, "label": "o__SHA-98", "shape": "triangleDown", "value": 100}, {"color": "#773326", "font": {"color": "black"}, "group": "p__Fusobacteria", "id": 59, "label": "f__Fusobacteriaceae", "shape": "diamond", "value": 100}, {"color": "#773326", "font": {"color": "black"}, "group": "p__Fusobacteria", "id": 60, "label": "f__Leptotrichiaceae", "shape": "diamond", "value": 100}, {"color": "#787A6E", "font": {"color": "black"}, "group": "p__Lentisphaerae", "id": 62, "label": "f__Victivallaceae", "shape": "star", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 66, "label": "o__RF32", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 67, "label": "f__Rhodobacteraceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 68, "label": "f__Acetobacteraceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 70, "label": "f__mitochondria", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 72, "label": "f__Burkholderiaceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 73, "label": "f__Comamonadaceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 74, "label": "f__Oxalobacteraceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 75, "label": "f__Neisseriaceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 78, "label": "f__Desulfovibrionaceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 79, "label": "f__Campylobacteraceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 81, "label": "f__Succinivibrionaceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 86, "label": "o__Pasteurellales", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 87, "label": "f__Pasteurellaceae", "shape": "triangle", "value": 100}, {"color": "#040404", "font": {"color": "black"}, "group": "p__Proteobacteria", "id": 89, "label": "f__Pseudomonadaceae", "shape": "triangle", "value": 100}, {"color": "#ECBFD7", "font": {"color": "black"}, "group": "p__Tenericutes", "id": 99, "label": "f__Anaeroplasmataceae", "shape": "triangle", "value": 100}, {"color": "#ECBFD7", "font": {"color": "black"}, "group": "p__Tenericutes", "id": 100, "label": "f__Mycoplasmataceae", "shape": "triangle", "value": 100}, {"color": "#ECBFD7", "font": {"color": "black"}, "group": "p__Tenericutes", "id": 102, "label": "o__ML615J-28", "shape": "triangle", "value": 100}, {"color": "#0400FF", "font": {"color": "black"}, "group": "p__Verrucomicrobia", "id": 104, "label": "f__[Cerasicoccaceae]", "shape": "triangleDown", "value": 100}]);
+        edges = new vis.DataSet([{"arrows": "to", "color": "#3E89C0", "from": 78, "to": 34}, {"arrows": "to", "color": "#FFF933", "from": 89, "to": 27}, {"arrows": "to", "color": "#FF4233", "from": 67, "to": 68}, {"arrows": "to", "color": "#48C03E", "from": 70, "to": 25}, {"arrows": "to", "color": "#3E89C0", "from": 59, "to": 39}, {"arrows": "to", "color": "#FFF933", "from": 56, "to": 34}, {"arrows": "to", "color": "#FF4233", "from": 42, "to": 68}, {"arrows": "to", "color": "#48C03E", "from": 89, "to": 62}, {"arrows": "to", "color": "#FF4233", "from": 6, "to": 70}, {"arrows": "to", "color": "#48C03E", "from": 57, "to": 72}, {"arrows": "to", "color": "#3E89C0", "from": 57, "to": 72}, {"arrows": "to", "color": "#FFF933", "from": 33, "to": 26}, {"arrows": "to", "color": "#3E89C0", "from": 46, "to": 100}, {"arrows": "to", "color": "#FFF933", "from": 102, "to": 100}, {"arrows": "to", "color": "#FF4233", "from": 75, "to": 74}, {"arrows": "to", "color": "#48C03E", "from": 33, "to": 32}, {"arrows": "to", "color": "#3E89C0", "from": 99, "to": 31}, {"arrows": "to", "color": "#FFF933", "from": 25, "to": 50}, {"arrows": "to", "color": "#3E89C0", "from": 39, "to": 27}, {"arrows": "to", "color": "#FFF933", "from": 62, "to": 27}, {"arrows": "to", "color": "#FF4233", "from": 27, "to": 59}, {"arrows": "to", "color": "#48C03E", "from": 73, "to": 81}, {"arrows": "to", "color": "#FF4233", "from": 42, "to": 100}, {"arrows": "to", "color": "#48C03E", "from": 25, "to": 26}, {"arrows": "to", "color": "#3E89C0", "from": 16, "to": 32}, {"arrows": "to", "color": "#FFF933", "from": 66, "to": 32}, {"arrows": "to", "color": "#3E89C0", "from": 28, "to": 57}, {"arrows": "to", "color": "#FFF933", "from": 9, "to": 28}, {"arrows": "to", "color": "#3E89C0", "from": 78, "to": 34}, {"arrows": "to", "color": "#FFF933", "from": 87, "to": 6}, {"arrows": "to", "color": "#FF4233", "from": 59, "to": 39}, {"arrows": "to", "color": "#48C03E", "from": 50, "to": 70}, {"arrows": "to", "color": "#3E89C0", "from": 16, "to": 32}, {"arrows": "to", "color": "#FFF933", "from": 70, "to": 26}, {"arrows": "to", "color": "#3E89C0", "from": 75, "to": 74}, {"arrows": "to", "color": "#FFF933", "from": 5, "to": 26}, {"arrows": "to", "color": "#3E89C0", "from": 62, "to": 104}, {"arrows": "to", "color": "#FFF933", "from": 28, "to": 2}, {"arrows": "to", "color": "#3E89C0", "from": 79, "to": 31}, {"arrows": "to", "color": "#FFF933", "from": 4, "to": 28}, {"arrows": "to", "color": "#3E89C0", "from": 25, "to": 70}, {"arrows": "to", "color": "#FFF933", "from": 70, "to": 26}, {"arrows": "to", "color": "#FF4233", "from": 73, "to": 81}, {"arrows": "to", "color": "#48C03E", "from": 27, "to": 33}, {"arrows": "to", "color": "#FF4233", "from": 5, "to": 26}, {"arrows": "to", "color": "#48C03E", "from": 25, "to": 50}, {"arrows": "to", "color": "#3E89C0", "from": 42, "to": 100}, {"arrows": "to", "color": "#FFF933", "from": 70, "to": 28}, {"arrows": "to", "color": "#3E89C0", "from": 27, "to": 33}, {"arrows": "to", "color": "#FFF933", "from": 28, "to": 2}, {"arrows": "to", "color": "#3E89C0", "from": 70, "to": 28}, {"arrows": "to", "color": "#FFF933", "from": 70, "to": 25}, {"arrows": "to", "color": "#FF4233", "from": 39, "to": 31}, {"arrows": "to", "color": "#48C03E", "from": 6, "to": 70}, {"arrows": "to", "color": "#FF4233", "from": 89, "to": 62}, {"arrows": "to", "color": "#48C03E", "from": 102, "to": 104}, {"arrows": "to", "color": "#3E89C0", "from": 2, "to": 73}, {"arrows": "to", "color": "#FFF933", "from": 102, "to": 100}, {"arrows": "to", "color": "#3E89C0", "from": 102, "to": 104}, {"arrows": "to", "color": "#FFF933", "from": 26, "to": 99}, {"arrows": "to", "color": "#FF4233", "from": 27, "to": 59}, {"arrows": "to", "color": "#48C03E", "from": 33, "to": 32}, {"arrows": "to", "color": "#FF4233", "from": 89, "to": 27}, {"arrows": "to", "color": "#48C03E", "from": 2, "to": 73}, {"arrows": "to", "color": "#3E89C0", "from": 75, "to": 86}, {"arrows": "to", "color": "#FFF933", "from": 39, "to": 27}, {"arrows": "to", "color": "#3E89C0", "from": 24, "to": 86}, {"arrows": "to", "color": "#FFF933", "from": 62, "to": 60}, {"arrows": "to", "color": "#FF4233", "from": 87, "to": 6}, {"arrows": "to", "color": "#48C03E", "from": 56, "to": 34}, {"arrows": "to", "color": "#3E89C0", "from": 9, "to": 28}, {"arrows": "to", "color": "#FFF933", "from": 42, "to": 68}, {"arrows": "to", "color": "#3E89C0", "from": 4, "to": 28}, {"arrows": "to", "color": "#FFF933", "from": 47, "to": 81}, {"arrows": "to", "color": "#3E89C0", "from": 5, "to": 31}, {"arrows": "to", "color": "#FFF933", "from": 57, "to": 33}, {"arrows": "to", "color": "#3E89C0", "from": 5, "to": 31}, {"arrows": "to", "color": "#FFF933", "from": 33, "to": 59}, {"arrows": "to", "color": "#3E89C0", "from": 46, "to": 100}, {"arrows": "to", "color": "#FFF933", "from": 4, "to": 57}, {"arrows": "to", "color": "#FF4233", "from": 47, "to": 73}, {"arrows": "to", "color": "#48C03E", "from": 42, "to": 102}, {"arrows": "to", "color": "#3E89C0", "from": 47, "to": 81}, {"arrows": "to", "color": "#FFF933", "from": 75, "to": 86}, {"arrows": "to", "color": "#FF4233", "from": 62, "to": 104}, {"arrows": "to", "color": "#48C03E", "from": 26, "to": 99}, {"arrows": "to", "color": "#FF4233", "from": 42, "to": 32}, {"arrows": "to", "color": "#48C03E", "from": 28, "to": 57}, {"arrows": "to", "color": "#3E89C0", "from": 57, "to": 104}, {"arrows": "to", "color": "#FFF933", "from": 75, "to": 25}, {"arrows": "to", "color": "#3E89C0", "from": 79, "to": 31}, {"arrows": "to", "color": "#FFF933", "from": 99, "to": 31}, {"arrows": "to", "color": "#3E89C0", "from": 66, "to": 32}, {"arrows": "to", "color": "#FFF933", "from": 33, "to": 59}, {"arrows": "to", "color": "#FF4233", "from": 50, "to": 70}, {"arrows": "to", "color": "#48C03E", "from": 33, "to": 26}, {"arrows": "to", "color": "#3E89C0", "from": 8, "to": 57}, {"arrows": "to", "color": "#FFF933", "from": 42, "to": 102}, {"arrows": "to", "color": "#FF4233", "from": 62, "to": 27}, {"arrows": "to", "color": "#48C03E", "from": 57, "to": 104}, {"arrows": "to", "color": "#FF4233", "from": 8, "to": 57}, {"arrows": "to", "color": "#48C03E", "from": 39, "to": 31}, {"arrows": "to", "color": "#3E89C0", "from": 24, "to": 86}, {"arrows": "to", "color": "#FFF933", "from": 75, "to": 25}, {"arrows": "to", "color": "#FF4233", "from": 47, "to": 73}, {"arrows": "to", "color": "#48C03E", "from": 28, "to": 9}, {"arrows": "to", "color": "#3E89C0", "from": 42, "to": 32}, {"arrows": "to", "color": "#FFF933", "from": 4, "to": 57}, {"arrows": "to", "color": "#3E89C0", "from": 25, "to": 70}, {"arrows": "to", "color": "#FFF933", "from": 28, "to": 9}, {"arrows": "to", "color": "#FF4233", "from": 25, "to": 26}, {"arrows": "to", "color": "#48C03E", "from": 35, "to": 36}, {"arrows": "to", "color": "#FF4233", "from": 35, "to": 36}, {"arrows": "to", "color": "#48C03E", "from": 67, "to": 68}, {"arrows": "to", "color": "#3E89C0", "from": 62, "to": 60}, {"arrows": "to", "color": "#FFF933", "from": 57, "to": 33}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.08,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

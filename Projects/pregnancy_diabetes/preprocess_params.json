@@ -1,0 +1,22 @@
+{
+  "taxonomy level":{
+    "_type": "choice",
+    "_value": [4, 5, 6]
+  },
+  "taxonomy union": {
+    "_type": "choice",
+    "_value": [ "mean", "sum", "pca_anna" ]
+  },
+  "normalization": {
+    "_type": "choice",
+    "_value": [ "log", "relative"]
+  },
+  "z_score": {
+    "_type": "choice",
+    "_value": [ "row", "col", "both", "No" ]
+  },
+  "norm_after_rel": {
+    "_type": "choice",
+    "_value": [ "z_after_relative", "No"]
+  }
+}

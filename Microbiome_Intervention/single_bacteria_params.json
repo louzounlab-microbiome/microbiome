@@ -1,0 +1,12 @@
+{
+"HID_DIM": { "_type": "choice", "_value": [30, 40, 50, 60, 70]},
+"TRAIN_TEST_SPLIT": {"_type": "quniform", "_value": [0.7, 0.9, 0.05]},
+"LOSS": {"_type": "choice", "_value": ["custom_rmse_for_missing_values"]},
+"BATCH_SIZE": {"_type": "choice", "_value": [4, 8, 16, 32, 64, 128]},
+"EPOCHS": { "_type": "quniform", "_value": [ 50, 250, 50 ]},
+"LEARNING_RATE": { "_type": "choice", "_value": [ 1e-1, 1e-2, 1e-3, 1e-4, 1e-5]},
+"OPTIMIZER": { "_type": "choice", "_value": ["Adam", "SGD", "Adagrad"]},
+"REGULARIZATION": { "_type": "choice", "_value": [0, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5]},
+"DROPOUT": { "_type": "choice", "_value": [0, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5]},
+"EARLY_STOP": { "_type": "choice", "_value": [0, 1]}
+}

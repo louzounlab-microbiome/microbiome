@@ -1,3 +1,0 @@
-algorithm,rhos mean,rhos median,rhos std,p value mean,rmse mean,rmse median,rmse std,auc
-ard regression - real,0.3079,0.3451,0.19652,0.10921,0.04774,0.03519,0.04214,0.69109
-ard regression - random,-0.00904,-0.00751,0.03792,0.49472,0.07396,0.0653,0.0601

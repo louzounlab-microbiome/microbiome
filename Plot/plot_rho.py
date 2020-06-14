@@ -6,6 +6,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
 
 
 def pop_idx(idx, objects_to_remove_idx_from):
@@ -14,6 +15,13 @@ def pop_idx(idx, objects_to_remove_idx_from):
         for i in idx:
             obj.pop(i)
     return objects_to_remove_idx_from
+
+
+def shuffle(df, n=1, axis=0):
+    df = df.copy()
+    for _ in range(n):
+        df.apply(np.random.shuffle, axis=axis)
+    return df
 
 
 def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, taxnomy_level, num_of_mixtures=10,
@@ -34,8 +42,9 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
 
     # remove samples with nan as their tag
     not_nan_idxs = [i for i, y_ in enumerate(y) if str(y_) != "nan"]
+    y = [y_ for i, y_ in enumerate(y) if i in not_nan_idxs]
     X = X.iloc[not_nan_idxs]
-    y = [y_ for x_, y_ in zip(X, y) if str(y_) != "nan"]
+
 
 
     mixed_y_list = []
@@ -98,9 +107,10 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     if save_folder:
         with open(join(save_folder, "significant_bacteria_" + title + "_taxnomy_level_" + str(taxnomy_level)
                                     + "_.csv"), "w") as file:
+            file.write("rho,bact\n")
             for s in significant_bacteria_and_rhos:
                 file.write(str(s[1]) + "," + str(s[0]) + "\n")
-
+                # דפנההה מה קורה?? איך עובר היום?
     # draw the distribution of real rhos vs. mixed rhos
     # old plots
     [count, bins] = np.histogram(mixed_rhos, 50)
@@ -282,11 +292,6 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
     plt.close()
 
 
-def shuffle(df, n=1, axis=0):
-    df = df.copy()
-    for _ in range(n):
-        df.apply(np.random.shuffle, axis=axis)
-    return df
 
 
 def draw_dynamics_rhos_calculation_figure(preproccessed_data, title, tri_to_tri, num_of_mixtures=10, save_folder=None,
@@ -402,3 +407,62 @@ def draw_dynamics_rhos_calculation_figure(preproccessed_data, title, tri_to_tri,
             plt.savefig(join(save_folder, "pos_neg_correlation_at_" + title + ".png"))
         plt.close()
 
+
+def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False):
+    bact_df = bact_df.drop("taxonomy")
+
+    otu_ids = bact_df.index
+    tag_ids = tag_df.index
+    mutual_ids = [id for id in otu_ids if id in tag_ids]
+    bact_df = bact_df.loc[mutual_ids]
+    tag_df = tag_df.loc[mutual_ids]
+    y = tag_df["Tag"]
+
+
+    # calc pca
+    n = min(100, min(len(bact_df.index), len(bact_df.columns)))
+    pca = PCA(n_components=n)
+    pca.fit(bact_df)
+    data_components = pca.fit_transform(bact_df)
+    components_df = pd.DataFrame(data_components)
+
+    real_rhos = []
+    for com in components_df.columns:
+        f = components_df[com]
+        rho, pvalue = spearmanr(f, y, axis=None)
+        real_rhos.append(rho)
+
+    # draw rhos
+    left_padding = 0.4
+    fig, ax = plt.subplots()
+    x_pos = np.arange(len(components_df.columns))
+    coeff_color = []
+    for x in real_rhos:
+        if x >= 0:
+            coeff_color.append('green')
+        else:
+            coeff_color.append('red')
+    ax.bar(x_pos, real_rhos, color=coeff_color)
+    ax.set_ylim(-1, 1)
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(range(1, len(components_df.columns + 1)))
+    plt.xticks(fontsize=8)
+    plt.title("Correlation between each component and the label\n" + task_name + " task")
+    ax.set_xlabel("spearman correlation")
+    # plt.show()
+    fig.subplots_adjust(left=left_padding)
+    if save_folder:
+        title = "Correlation between each component and the label" + task_name + "task"
+        plt.savefig(join(save_folder, title.replace(" ", "_")
+                          + ".svg"), bbox_inches='tight', format='svg')
+    plt.close()
+
+
+if __name__ == "__main__":
+    components_df = pd.read_csv("Allergy_OTU.csv")
+    components_df = components_df.set_index("ID")
+    tag_df = pd.read_csv("Allergy_Tag.csv")
+    tag_df = tag_df.set_index("ID")
+    task_name = "healthy vs. sick"
+    save_folder = "corr"
+    draw_component_rhos_calculation_figure(components_df, tag_df, task_name=task_name, save_folder=save_folder)

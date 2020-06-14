@@ -2,9 +2,12 @@ import pickle
 import sys
 import os
 import numpy as np
+
+from infra_functions.load_merge_otu_mf import OtuMfHandler
+from infra_functions.preprocess_grid import preprocess_data, draw_component_rhos_calculation_figure
+
 sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pandas as pd
-from infra_functions.preprocess_grid import preprocess_data
 from Plot import draw_X_y_rhos_calculation_figure, PCA_t_test, plot_data_3d, plot_data_2d
 
 
@@ -34,7 +37,7 @@ class CreateOtuAndMappingFiles(object):
             os.mkdir(folder)
         tag_ids = list(self.tags_df.index)
         otu_ids = list(self.otu_features_df_b_pca.index)
-        mutual_ids = [id for id in tag_ids if id in otu_ids]
+        mutual_ids = list(set(tag_ids).intersection(set(otu_ids)))
         # ids_to_drop = list(set(self.otu_features_df.index.values) - set(self.tags_df.index.values))
         # use only the samples the correspond to the tag file
         self.otu_features_df = self.otu_features_df.loc[mutual_ids]
@@ -56,21 +59,36 @@ class CreateOtuAndMappingFiles(object):
                 bact_file.write(col + "\n")
         return otu_path, tag_path, pca_path
 
-    def preprocess(self, preprocess_params, visualize):
+    def preprocess(self, preprocess_params, visualize, folder="preprocess_plots"):
         print('preprocess...')
-        self.otu_features_df, self.otu_features_df_b_pca,  self.pca_ocj, self.bacteria = \
-            preprocess_data(self.otu_features_df, preprocess_params, self.tags_df, self.tag_name, visualize_data=visualize)
+        self.otu_features_df, self.otu_features_df_b_pca, self.pca_ocj, self.bacteria, self.pca = \
+            preprocess_data(self.otu_features_df, preprocess_params, self.tags_df, folder, visualize_data=visualize)
+        if int(preprocess_params['pca'][0]) == 0:
+            self.otu_features_df = self.otu_features_df_b_pca
 
     def rhos_and_pca_calculation(self, task, tax, pca, rhos_folder, pca_folder):
         # -------- rhos calculation --------
         tag_ids = list(self.tags_df.index)
-        otu_ids = list(self.otu_features_df_b_pca.index)
-        mutual_ids = [id for id in tag_ids if id in otu_ids]
-        X = self.otu_features_df_b_pca.loc[mutual_ids]
+        otu_ids = list(self.otu_features_df.index)
+        mutual_ids = list(set(tag_ids).intersection(set(otu_ids)))
+        X = self.otu_features_df.loc[mutual_ids]
         y = np.array(list(self.tags_df.loc[mutual_ids]["Tag"])).astype(int)
 
         if not os.path.exists(rhos_folder):
             os.makedirs(rhos_folder)
+
+        bacterias = X.columns
+        bacterias_to_dump = []
+        for i, bact in enumerate(bacterias):
+            f = X[bact]
+            num_of_different_values = set(f)
+            if len(num_of_different_values) < 2:
+                bacterias_to_dump.append(bact)
+        print("number of bacterias to dump after intersection: " + str(len(bacterias_to_dump)))
+        print("percent of bacterias to dump after intersection: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
+        X = X.drop(columns=bacterias_to_dump)
+        self.otu_features_df = X
+
         draw_X_y_rhos_calculation_figure(X, y, task, tax, save_folder=rhos_folder)
 
         # -------- PCA visualizations --------
@@ -85,26 +103,44 @@ class CreateOtuAndMappingFiles(object):
 
 
 if __name__ == "__main__":
-    task = 'prognostic_PTSD_task'
-    bactria_as_feature_file = '../sderot_anxiety/PTSD_data.csv'
-    samples_data_file = '../sderot_anxiety/PTSD_tag.csv'
-    rhos_folder = os.path.join('..', 'sderot_anxiety', 'rhos')
-    pca_folder = os.path.join('..', 'sderot_anxiety', 'pca')
-
     # parameters for preprocess
     tax = 5
-    preprocess_prms = {'taxonomy_level': tax, 'taxnomy_group': 'mean', 'epsilon': 0.1, 'normalization': 'log',
-                       'z_scoring': 'row', 'norm_after_rel': '', 'std_to_delete': 0, 'pca': 2}
+    preprocess_prms = {'taxonomy_level': tax, 'taxnomy_group': 'sub PCA', 'epsilon': 0.1, 'normalization': 'log',
+                       'z_scoring': 'row', 'norm_after_rel': '', 'std_to_delete': 0, 'pca': (0, 'PCA')}
+    """
+
+    bactria_as_feature_file = '../Microbiome_Intervention/VitamineA/ok16_va_otu_table.csv'
+    samples_data_file = '../Microbiome_Intervention/VitamineA/metadata_ok16_va.csv'
+    from infra_functions.preprocess import preprocess_data
+
+    SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+    OtuMf = OtuMfHandler(os.path.join(SCRIPT_DIR, bactria_as_feature_file),
+                         os.path.join(SCRIPT_DIR, samples_data_file),
+                         from_QIIME=False, id_col='#OTU ID', taxonomy_col='Taxonomy')
+
+    preproccessed_data = preprocess_data(OtuMf.otu_file, visualize_data=False, taxnomy_level=5,
+                                         taxonomy_col='Taxonomy',
+                                         preform_taxnomy_group=True)
+
+    """
+    bactria_as_feature_file = "../Datasets/GDM/stool_otu_T.csv"
+    samples_data_file = '../Datasets/GDM/GDM_tables_stool_no_dups.csv'
+
+    # f = pd.read_csv(bactria_as_feature_file)
+    # m = pd.read_csv(samples_data_file)
+
 
     mapping_file = CreateOtuAndMappingFiles(bactria_as_feature_file, samples_data_file)
-    mapping_file.preprocess(preprocess_params=preprocess_prms, visualize=True)
-    mapping_file.rhos_and_pca_calculation(task, preprocess_prms['taxonomy_level'], preprocess_prms['pca'],
-                                          rhos_folder, pca_folder)
+    mapping_file.preprocess(preprocess_params=preprocess_prms, visualize=False)
+    otu_path, tag_path, pca_path = mapping_file.csv_to_learn('GDM_task', '../Data_creator/GDM/',
+                                                             tax=tax, pca_n=mapping_file.pca)
+    print(otu_path)
 
-    otu_path, tag_path, pca_path = mapping_file.csv_to_learn('PTST_task', os.path.join('..', 'sderot_anxiety'), tax=tax)
+    bactria_as_feature_file = '../Datasets/VitamineA/ok16_va_otu_table.csv'
+    samples_data_file = '../Datasets/VitamineA/metadata_ok16_va.csv'
+    mapping_file = CreateOtuAndMappingFiles(bactria_as_feature_file, samples_data_file)
+    mapping_file.preprocess(preprocess_params=preprocess_prms, visualize=False)
+    otu_path, tag_path, pca_path = mapping_file.csv_to_learn('VitamineA_task', '../Data_creator/VitamineA/',
+                                                             tax=tax, pca_n=mapping_file.pca)
 
     print(otu_path)
-    print(tag_path)
-    print(pca_path)
-
-

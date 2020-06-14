@@ -1,0 +1,7 @@
+Taxonomy level,taxonomy group,normalization 1,normalization 2,Dim Red,TRAIN-AUC,TEST-AUC
+six,sub PCA,log,No,None,0.9683066361556064,0.721235294117647
+six,sub PCA,log,col,None,1.0,0.7368235294117647
+six,sub PCA,log,both,None,1.0,0.7163529411764706
+six,sub PCA,relative,No,None,0.7716742944317315,0.6943529411764706
+six,sub PCA,relative,z_after_relative,None,1.0,0.6597647058823529
+six,sub PCA,log,col,None,1.0,0.7371176470588234

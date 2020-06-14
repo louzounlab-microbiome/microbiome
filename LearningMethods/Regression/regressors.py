@@ -1,65 +1,37 @@
-import os
 import random
 import numpy as np
 from scipy.stats import stats, spearmanr
-from sklearn import svm
+from sklearn import svm, linear_model
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression, Ridge, ARDRegression, LogisticRegression, BayesianRidge
 from sklearn.metrics import mean_squared_error, f1_score
-from sklearn.model_selection import train_test_split, LeaveOneOut
 from sklearn.tree import DecisionTreeRegressor
-import pandas as pd
-import matplotlib.pyplot as plt
-from LearningMethods.general_functions import shorten_bact_names, shorten_single_bact_name
 
+svr_default_params = {'kernel': 'linear', 'gamma': 'auto', 'C': 0.01}
+
+decision_tree_default_params = {"max_features": 2, "min_samples_split": 4,
+                                "n_estimators": 50, "min_samples_leaf": 2}
+
+random_forest_default_params ={"max_depth": 5, "min_samples_split": 4,
+                                "n_estimators": 50, "min_samples_leaf": 2}
 
 # -------- general learning functions --------
 
 # main learning loop - same for all basic algorithms
-def learning_cross_val_loop(clf, cross_validation, X, y, test_size):
+def learning_cross_val_loop(clf, X_train, X_test, y_train, y_test):
     # Split the data set
-    y_test_from_all_iter = np.array([])
     train_errors, test_errors, y_train_preds, y_test_preds, des_tree_coefs = [], [], [], [], []
-
-    # devide to train and test-
-    X_trains, X_tests, y_trains, y_tests = [], [], [], []
-    if type(cross_validation) == int:
-        for n in range(cross_validation):
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, shuffle=True)
-            X_trains.append(X_train)
-            X_tests.append(X_test)
-            y_trains.append(y_trains)
-            y_tests.append(y_tests)
-    elif cross_validation == "loo":  # hold-one-subject-out cross-validation
-        loo = LeaveOneOut()
-        for train_index, test_index in loo.split(X):
-            X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
-            X_trains.append(X_train)
-            X_tests.append(X_test)
-            y_trains.append(y_trains)
-            y_tests.append(y_tests)
-
-    for X_train, X_test, y_train, y_test in zip(X_trains, X_tests, y_trains, y_tests):
-        # FIT
-        clf.fit(X_train, y_train)
-        # GET RESULTS
-        y_pred = clf.predict(X_test)
-        y_test_preds.append(y_pred)
-
-    return y_tests, y_test_preds
+    # FIT
+    clf.fit(X_train, y_train)
+    # GET RESULTS
+    y_pred = clf.predict(X_test)
+    return y_test, y_pred
 
 
-def calc_corr_on_joined_results(cross_validation, y_tests, y_test_preds):
-    all_y_train, all_predictions_train, all_test_real_tags, all_test_pred_tags = [], [], [], []
-
-    for i in range(cross_validation):
-        all_test_real_tags = all_test_real_tags + list(y_tests[i])
-        all_test_pred_tags = all_test_pred_tags + list(y_test_preds[i])
-    all_test_pred_tags = np.array(all_test_pred_tags)
-    test_rho, test_p_value = stats.spearmanr(all_test_real_tags, all_test_pred_tags)
-    test_rmse = mean_squared_error(all_test_real_tags, all_test_pred_tags)
-
-    mixed_rho, mixed_pvalues, mixed_rmse = calc_evaluation_on_mix_predictions(all_test_pred_tags, all_test_real_tags)
+def calc_corr_on_joined_results(y_test, y_pred):
+    test_rho, test_p_value = stats.spearmanr(y_test, y_pred)
+    test_rmse = mean_squared_error(y_test, y_pred)
+    mixed_rho, mixed_pvalues, mixed_rmse = calc_evaluation_on_mix_predictions(y_test, y_pred)
 
     return test_rho, test_p_value, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse
 
@@ -115,36 +87,43 @@ def calc_ard_regression(X_train, X_test, y_train, y_test):
     return calc_spearmanr_from_regressor(reg, X_test, y_test)
 
 
-def svr_regression(X, y, params, test_size, cross_validation):
-    clf = svm.SVR(C=params['C'], kernel=params['kernel'], gamma=params['gamma'])
-    y_tests, y_test_preds = learning_cross_val_loop(clf, cross_validation, X, y, test_size)
-    b_1 = clf.coef_
-    rho, pvalue, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse = calc_corr_on_joined_results(cross_validation, y_tests, y_test_preds)
-    return rho, pvalue, b_1, mixed_rho, mixed_pvalues
-
-
-def decision_tree_regressor(X, y, params, test_size=0.2, cross_validation=5):
-    clf = DecisionTreeRegressor(max_features=params["max_features"], min_samples_split=params["min_samples_split"],
-                                min_samples_leaf=params["min_samples_leaf"])
-
-    y_tests, y_test_preds = learning_cross_val_loop(clf, cross_validation, X, y, test_size)
-
-    rho, pvalue, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse = calc_corr_on_joined_results(cross_validation, y_tests, y_test_preds)
-    return rho, pvalue, " ", mixed_rho, mixed_pvalues, test_rmse, mixed_rmse
-
-
-def random_forest_regressor(X, y, params, test_size=0.2, cross_validation=5):
-
-    clf = RandomForestRegressor(n_estimators=params["n_estimators"], max_depth=params["max_depth"],
-                                min_samples_split=params["min_samples_split"], min_samples_leaf=params["min_samples_leaf"])
-
-    y_tests, y_test_preds = learning_cross_val_loop(clf, cross_validation, X, y, test_size)
-
-    rho, pvalue, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse = calc_corr_on_joined_results(cross_validation, y_tests, y_test_preds)
-    return rho, pvalue, " ", mixed_rho, mixed_pvalues, test_rmse, mixed_rmse
+def calc_lasso_regression(X_train, X_test, y_train, y_test):
+    reg = linear_model.Lasso(alpha=0.01).fit(X_train, y_train)
+    reg.score(X_train, y_train)
+    return calc_spearmanr_from_regressor(reg, X_test, y_test)
 
 
 def calc_bayesian_ridge_regression(X_train, X_test, y_train, y_test):
     reg = BayesianRidge().fit(X_train, y_train)
     reg.score(X_train, y_train)
     return calc_spearmanr_from_regressor(reg, X_test, y_test)
+
+
+def svr_regression(X_train, X_test, y_train, y_test, params=svr_default_params):
+    clf = svm.SVR(C=params['C'], kernel=params['kernel'], gamma=params['gamma'])
+    y_test, y_test_pred = learning_cross_val_loop(clf, X_train, X_test, y_train, y_test)
+    b_1 = clf.coef_[0]
+    rho, pvalue, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse = calc_corr_on_joined_results(y_test, y_test_pred)
+    return rho, pvalue, b_1, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse, y_test_pred
+
+
+def decision_tree_regressor(X_train, X_test, y_train, y_test, params=decision_tree_default_params):
+    clf = DecisionTreeRegressor(max_features=params["max_features"], min_samples_split=params["min_samples_split"],
+                                min_samples_leaf=params["min_samples_leaf"])
+
+    y_test, y_test_pred = learning_cross_val_loop(clf, X_train, X_test, y_train, y_test)
+
+    rho, pvalue, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse = calc_corr_on_joined_results(y_test, y_test_pred)
+    return rho, pvalue, "    ", mixed_rho, mixed_pvalues, test_rmse, mixed_rmse, y_test_pred
+
+
+def random_forest_regressor(X_train, X_test, y_train, y_test, params=random_forest_default_params):
+
+    clf = RandomForestRegressor(n_estimators=params["n_estimators"], max_depth=params["max_depth"],
+                                min_samples_split=params["min_samples_split"], min_samples_leaf=params["min_samples_leaf"])
+
+    y_test, y_test_pred = learning_cross_val_loop(clf, X_train, X_test, y_train, y_test)
+
+    rho, pvalue, mixed_rho, mixed_pvalues, test_rmse, mixed_rmse = calc_corr_on_joined_results(y_test, y_test_pred)
+    return rho, pvalue, "    ", mixed_rho, mixed_pvalues, test_rmse, mixed_rmse, y_test_pred
+

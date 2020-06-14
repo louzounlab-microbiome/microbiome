@@ -1,0 +1,30 @@
+{
+  "estimators": {
+    "_type": "quniform",
+    "_value": [ 120, 300, 20 ]
+  },
+  "lr": {
+    "_type": "uniform",
+    "_value": [ 0.01, 0.5]
+  },
+  "max_depth": {
+    "_type": "quniform",
+    "_value": [ 2, 10, 1 ]
+  },
+  "gamma": {
+    "_type": "uniform",
+    "_value": [ 0.1, 5 ]
+  },
+  "lambda": {
+    "_type": "uniform",
+    "_value": [ 0.5, 5 ]
+  },
+  "alpha": {
+    "_type": "uniform",
+    "_value": [ 0.1, 5 ]
+  },
+  "min_child_weight": {
+    "_type": "quniform",
+    "_value": [ 1, 10, 1 ]
+  }
+}

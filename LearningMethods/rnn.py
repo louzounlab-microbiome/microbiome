@@ -1,3 +1,4 @@
+import os
 from random import shuffle
 from sys import stdout
 
@@ -8,7 +9,7 @@ from matplotlib.pyplot import figure
 from sklearn import metrics
 from torch.nn import Module, LSTM, Linear
 from torch.utils.data import DataLoader, Dataset
-from torch.optim import Adam
+from torch.optim import Adam, SGD, adagrad
 from torch.nn.functional import mse_loss
 from bokeh.io import output_file, save
 from bokeh.plotting import figure, show
@@ -20,35 +21,52 @@ LOSS_PLOT = "loss"
 ACCURACY_PLOT = "accuracy"
 AUC_PLOT = "ROC-AUC"
 
+NUMBER_OF_BACTERIA = 0
+NUMBER_OF_TIME_POINTS = 0
+NUMBER_OF_SAMPLES = 0
 
-NUMBER_OF_BACTERIA = 23
-NUMBER_OF_TIME_POINTS = 25
+
+# loss_name_to_function_map = {"custom_rmse_for_missing_value": custom_rmse_for_missing_values}
+
+optimizer_name_to_function_map = {"Adam": Adam, "SGD": SGD, "Adagrad": adagrad}
+
+
+def custom_rmse_for_missing_values(input, target, missing_values):
+    # which option us better? torch.mean => average loss or torch.sum => total loss
+    print(target.shape)
+    print(input.shape)
+    return torch.mean(torch.norm(torch.mul(torch.sub(target, input), missing_values.float()), dim=1))
+
 
 class ActivatorParams:
-    def __init__(self):
-        self.TRAIN_TEST_SPLIT = 0.8
-        self.LOSS = mse_loss
-        self.BATCH_SIZE = 2
-        self.GPU = False
-        self.EPOCHS = 50
+    def __init__(self, TRAIN_TEST_SPLIT=0.8, LOSS="custom_rmse_for_missing_value", BATCH_SIZE=100,
+                 GPU=False, EPOCHS=50, EARLY_STOP=0):
+
+        self.TRAIN_TEST_SPLIT = TRAIN_TEST_SPLIT
+        self.LOSS = custom_rmse_for_missing_values
+        self.BATCH_SIZE = BATCH_SIZE
+        self.GPU = GPU
+        self.EPOCHS = EPOCHS
+        self.EARLY_STOP = EARLY_STOP
 
 
 class ModuleParams:
-    def __init__(self, lstm_out_dim=NUMBER_OF_BACTERIA, lstm_layers=1, lstm_dropout=0.5):
+    def __init__(self, lstm_out_dim=NUMBER_OF_BACTERIA, LSTM_LAYER_NUM=1, DROPOUT=0, LEARNING_RATE=1e-3,
+                 OPTIMIZER="Adam", REGULARIZATION=1e-4):
         self.SEQUENCE_PARAMS = SequenceParams(out_dim=lstm_out_dim,
-                                                     lstm_layers=lstm_layers,
-                                                     lstm_dropout=lstm_dropout)
+                                                     LSTM_LAYER_NUM=LSTM_LAYER_NUM,
+                                                     DROPOUT=DROPOUT)
         self.LINEAR_PARAMS = MLPParams(in_dim=NUMBER_OF_TIME_POINTS, )
-        self.LEARNING_RATE = 1e-3
-        self.OPTIMIZER = Adam
-        self.REGULARIZATION = 1e-4
+        self.LEARNING_RATE = LEARNING_RATE
+        self.OPTIMIZER = optimizer_name_to_function_map[OPTIMIZER]
+        self.REGULARIZATION = REGULARIZATION
 
 
 class SequenceParams:
-    def __init__(self, out_dim, lstm_layers, lstm_dropout):
+    def __init__(self, out_dim, LSTM_LAYER_NUM, DROPOUT):
         self.LSTM_hidden_dim = out_dim
-        self.LSTM_layers = lstm_layers
-        self.LSTM_dropout = lstm_dropout
+        self.LSTM_layers = LSTM_LAYER_NUM
+        self.LSTM_dropout = DROPOUT
 
 
 class MLPParams:
@@ -62,7 +80,7 @@ class MicrobiomeModule(Module):
         super(MicrobiomeModule, self).__init__()
         # useful info in forward function
         self._sequence_lstm = SequenceModule(params.SEQUENCE_PARAMS)
-        self._mlp = MLPModule(params.LINEAR_PARAMS)
+        # self._mlp = MLPModule(params.LINEAR_PARAMS)
         self.optimizer = self.set_optimizer(params.LEARNING_RATE, params.OPTIMIZER, params.REGULARIZATION)
 
     def set_optimizer(self, lr, opt, l2_reg):
@@ -83,7 +101,9 @@ class SequenceModule(Module):
     def forward(self, x):
         # 3 layers LSTM
         output_seq, _ = self._lstm(x.float())
-        return output_seq.transpose(1, 2)
+        print(self._lstm)
+        print(output_seq.shape)
+        return output_seq   # for single bacteria model .transpose(1, 2)
 
 
 class MLPModule(Module):
@@ -98,12 +118,13 @@ class MLPModule(Module):
 
 
 class MicrobiomeDataset(Dataset):
-    def __init__(self, X, y):
+    def __init__(self, X, y, missing_values):
         self._X = X
         self._y = y
+        self._missing_values = missing_values
 
     def __getitem__(self, index):
-        return self._X[index], self._y[index]
+        return self._X[index], self._y[index], self._missing_values[index]
 
     def __len__(self):
         return len(self._X)
@@ -114,6 +135,7 @@ VALIDATE_JOB = "VALIDATE"
 LOSS_PLOT = "loss"
 ACCURACY_PLOT = "accuracy"
 AUC_PLOT = "ROC-AUC"
+
 
 def split_microbiome_dataset(dataset: MicrobiomeDataset, split_list):
     """
@@ -128,18 +150,23 @@ def split_microbiome_dataset(dataset: MicrobiomeDataset, split_list):
     # split the data itself
     new_data_X = [[] for _ in range(len(split_list))]
     new_data_y = [[] for _ in range(len(split_list))]
+    new_data_missing_values = [[] for _ in range(len(split_list))]
     for sub_data_idx, (start, end) in enumerate(zip([0] + split_list[:-1], split_list)):
         for i in range(start, end):
-            X, y = dataset.__getitem__(shuffled_idx[i])
+            X, y, missing_values = dataset.__getitem__(shuffled_idx[i])
             new_data_X[sub_data_idx].append(np.array(X))
             new_data_y[sub_data_idx].append(np.array(y))
+            new_data_missing_values[sub_data_idx].append(np.array(missing_values))
     # create sub sets
     # new_data_X = np.array(new_data_X)
     # new_data_y = np.array(new_data_y)
     sub_datasets = []
     for i in range(len(new_data_X)):
-        sub_datasets.append(MicrobiomeDataset(np.array(new_data_X[i]), np.array(new_data_y[i])))
+        sub_datasets.append(MicrobiomeDataset(np.array(new_data_X[i]),
+                                              np.array(new_data_y[i]),
+                                              np.array(new_data_missing_values[i])))
     return sub_datasets
+
 
 class Activator:
     def __init__(self, model: MicrobiomeModule, params: ActivatorParams, data: MicrobiomeDataset, splitter):
@@ -148,6 +175,7 @@ class Activator:
         self._epochs = params.EPOCHS
         self._batch_size = params.BATCH_SIZE
         self._loss_func = params.LOSS
+        self._early_stop = params.EARLY_STOP
         self._load_data(data, params.TRAIN_TEST_SPLIT, params.BATCH_SIZE, splitter)
         self._init_loss_and_acc_vec()
         self._init_print_att()
@@ -241,8 +269,8 @@ class Activator:
         print("")
 
     # plot loss / accuracy graph
-    def plot_line(self, job=LOSS_PLOT):
-        p = figure(plot_width=600, plot_height=250, title="Rand_FST - Dataset " + job,
+    def plot_line(self, title, folder, job=LOSS_PLOT):
+        p = figure(plot_width=600, plot_height=250, title=title + " " + job,
                    x_axis_label="epochs", y_axis_label=job)
         color1, color2 = ("orange", "red") if job == LOSS_PLOT else ("green", "blue")
 
@@ -259,9 +287,9 @@ class Activator:
         """
 
         x_axis = list(range(len(y_axis_dev)))
-        p.line(x_axis, y_axis_train, line_color=color1, legend="train")
-        p.line(x_axis, y_axis_dev, line_color=color2, legend="dev")
-        output_file(job + "_fig.html")
+        p.line(x_axis, y_axis_train, line_color=color1, legend_label="train")
+        p.line(x_axis, y_axis_dev, line_color=color2, legend_label="dev")
+        output_file(os.path.join(folder, title + " " + job + "_fig.html"))
         save(p)
         show(p)
     """
@@ -340,19 +368,19 @@ class Activator:
         return x, l
 
     # train a model, input is the enum of the model type
-    def train(self, show_plot=True, apply_nni=False, validate_rate=10, early_stop=False):
+    def train(self, show_plot=True, apply_nni=False, validate_rate=10):
         self._init_loss_and_acc_vec()
         # calc number of iteration in current epoch
         len_data = len(self._train_loader)
         for epoch_num in range(self._epochs):
             # calc number of iteration in current epoch
-            for batch_index, (sequence, label) in enumerate(self._train_loader):
+            for batch_index, (sequence, label, missing_values) in enumerate(self._train_loader):
                 # sequence, label = self._to_gpu(sequence, label)
                 # print progress
                 self._model.train()
 
                 output = self._model(sequence)                  # calc output of current model on the current batch
-                loss = self._loss_func(output.squeeze(dim=1), label.float())  # calculate loss
+                loss = self._loss_func(output.squeeze(dim=1), label.float(), missing_values)  # calculate loss
                 loss.backward()                                 # back propagation
                 self._model.optimizer.step()                    # update weights
                 self._model.zero_grad()                         # zero gradients
@@ -375,7 +403,7 @@ class Activator:
                     self._validate(self._train_valid_loader, job=TRAIN_JOB)
                     self._print_info(jobs=[TRAIN_JOB, DEV_JOB])
 
-            if early_stop and epoch_num > 30 and self._print_dev_loss > np.max(self._loss_vec_dev[-30:]):
+            if self._early_stop and epoch_num > 30 and self._print_dev_loss > np.max(self._loss_vec_dev[-30:]):
                 break
 
         # report final results
@@ -398,13 +426,14 @@ class Activator:
         self._model.eval()
         # calc number of iteration in current epoch
         len_data = len(data_loader)
-        for batch_index, (sequence, label) in enumerate(data_loader):
+        for batch_index, (sequence, label, missing_values) in enumerate(data_loader):
             sequence, label = self._to_gpu(sequence, label)
             # print progress
             self._print_progress(batch_index, len_data, job=VALIDATE_JOB)
             output = self._model(sequence)
             # calculate total loss
-            loss_count += self._loss_func(output.squeeze(dim=1), label.float())
+            loss_count += self._loss_func(output.squeeze(dim=1), label.float(), missing_values)  # calculate loss
+
             true_labels += label.tolist()
             pred += output.squeeze().tolist()
 
@@ -417,17 +446,19 @@ class Activator:
         """
         return loss
 
-def run_experiment(X, y):
+
+def run_experiment(X, y, missing_values, name, folder):
+    score = open(os.path.join(folder, name + "_score.csv"), "wt")
     for k in range(1, 21):
         k *= 10
-        score = open("score.csv", "wt")
-        microbiome_dataset = MicrobiomeDataset(X, y)
+        microbiome_dataset = MicrobiomeDataset(X, y, missing_values)
         split_list = [0.8, 0.2]
 
-        activator_params = ActivatorParams()
 
+        activator_params = ActivatorParams()
         activator = Activator(MicrobiomeModule(ModuleParams(lstm_out_dim=NUMBER_OF_BACTERIA)),
                                     activator_params, microbiome_dataset, split_microbiome_dataset)
+
         activator.train(validate_rate=10)
 
         score.write(str(k) + ",train_loss," + ",".join([str(v) for v in activator.loss_train_vec]) + "\n")
@@ -436,18 +467,62 @@ def run_experiment(X, y):
         score.write(str(k) + ",dev_loss," + ",".join([str(v) for v in activator.loss_dev_vec]) + "\n")
         # score.write(str(k) + "dev_acc," + ",".join([str(v) for v in activator.accuracy_dev_vec]) + "\n")
         # score.write(str(k) + "dev_auc," + ",".join([str(v) for v in activator.auc_dev_vec]) + "\n")
+
+    activator.plot_line(name, folder)
+    score.close()
+    activator.plot_line(name, folder)
+
+
+def run_nni_experiment(X, y, missing_values, params, name, folder):
+    # for k in range(1, 21):
+    #     k *= 10
+    global NUMBER_OF_SAMPLES
+    global NUMBER_OF_TIME_POINTS
+    global NUMBER_OF_BACTERIA
+    NUMBER_OF_SAMPLES = X.shape[0]
+    NUMBER_OF_TIME_POINTS = X.shape[1]
+    NUMBER_OF_BACTERIA = X.shape[2]
+
+    score = open(os.path.join(folder, "NNI", name + "_score.csv"), "wt")
+    microbiome_dataset = MicrobiomeDataset(X, y, missing_values)
+    activator_params = ActivatorParams(TRAIN_TEST_SPLIT=params["TRAIN_TEST_SPLIT"],
+                                       LOSS=params["LOSS"],
+                                       BATCH_SIZE=params["BATCH_SIZE"],
+                                       GPU=False,
+                                       EPOCHS=params["EPOCHS"],
+                                       EARLY_STOP=params["EARLY_STOP"])
+
+    activator = Activator(MicrobiomeModule(ModuleParams(lstm_out_dim=NUMBER_OF_BACTERIA,
+                                                        LSTM_LAYER_NUM=params["LSTM_LAYER_NUM"],
+                                                        DROPOUT=params["DROPOUT"],
+                                                        LEARNING_RATE=params["LEARNING_RATE"],
+                                                        OPTIMIZER=params["OPTIMIZER"],
+                                                        REGULARIZATION=params["REGULARIZATION"])),
+                          activator_params, microbiome_dataset, split_microbiome_dataset)
+
+    activator.train(validate_rate=1)
+
+    score.write("train_loss," + ",".join([str(v) for v in activator.loss_train_vec]) + "\n")
+    score.write("dev_loss," + ",".join([str(v) for v in activator.loss_dev_vec]) + "\n")
+    activator.plot_line(name, os.path.join(folder, "NNI"))
     score.close()
 
+    return activator.loss_dev_vec[-1]
 
-def run_RNN(X, y, name, bact):
-    print(name + " : " + bact)
-    NUMBER_OF_BACTERIA = X.shape[2]
+
+def run_RNN(X, y, missing_values, name, folder):
+    print(name)
+    global NUMBER_OF_SAMPLES
+    global NUMBER_OF_TIME_POINTS
+    global NUMBER_OF_BACTERIA
+    NUMBER_OF_SAMPLES = X.shape[0]
     NUMBER_OF_TIME_POINTS = X.shape[1]
-    run_experiment(X, y)
+    NUMBER_OF_BACTERIA = X.shape[2]
+    run_experiment(X, y, missing_values, name, folder)
 
 
 
-
+    """
     _ds = MicrobiomeDataset(X, y)
     _dl = DataLoader(dataset=_ds, batch_size=2)
     _binary_module = MicrobiomeModule(ModuleParams(lstm_out_dim=NUMBER_OF_BACTERIA))
@@ -460,3 +535,4 @@ def run_RNN(X, y, name, bact):
 
     print("average mse: " + str(np.mean(mse_list)))
 
+    """

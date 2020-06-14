@@ -1,0 +1,50 @@
+{
+  "model": {
+    "_type": "choice",
+    "_value": ["sigmoid_b"]
+  },
+  "hid_dim_0": {
+    "_type": "quniform",
+    "_value": [ 5, 50, 5 ]
+  },
+  "hid_dim_1": {
+    "_type": "quniform",
+    "_value": [ 2, 10, 1 ]
+  },
+  "reg": {
+    "_type": "uniform",
+    "_value": [ 0, 1 ]
+  },
+  "lr": {
+    "_type": "uniform",
+    "_value": [ 0.001, 0.2 ]
+  },
+  "test_size": {
+    "_type": "choice",
+    "_value": [ 0.2]
+  },  
+  "batch_size": {
+    "_type": "choice",
+    "_value": [ 4, 8, 16]
+  },
+  "shuffle": {
+    "_type": "choice",
+    "_value": [ 0, 1 ]
+  },
+  "num_workers": {
+    "_type": "choice",
+    "_value": [ 4 ]
+  },
+  "epochs": {
+    "_type": "quniform",
+    "_value": [ 50, 200, 50 ]
+  },
+  "optimizer": {
+    "_type": "choice",
+    "_value": [ "SGD", "Adam"]
+  },
+  "loss": {
+    "_type": "choice",
+    "_value": ["BCE" ]
+  }
+}

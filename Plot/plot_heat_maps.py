@@ -24,6 +24,7 @@ def plot_heat_map_from_df(data, title, x_label, y_label, folder, pos_neg=True):
     os.makedirs(folder)
 
   plt.savefig(join(folder, title.replace(" ", "_").replace("\n", "_") + ".svg"), bbox_inches='tight', format='svg')
+  plt.savefig(join(folder, title.replace(" ", "_").replace("\n", "_") + ".png"))
   plt.show()
 
 
@@ -45,4 +46,4 @@ def plot_cluster_heat_map_from_df(data, title, x_label, y_label, folder, pos_neg
   plt.xlabel(x_label)
   plt.ylabel(y_label)
   plt.savefig(join(folder, title.replace(" ", "_").replace("\n", "_") + ".svg"), bbox_inches='tight', format='svg')
-  plt.show()
+  # plt.show()

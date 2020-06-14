@@ -1,8 +1,0 @@
-*~
-*.pyc
-*.pickle
-*.out
-*.err
-build
-dist
-mitre.egg-info

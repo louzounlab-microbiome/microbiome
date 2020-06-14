@@ -1,0 +1,50 @@
+{
+  "model": {
+    "_type": "choice",
+    "_value": [ "leaky_b", "sigmoid_b", "tanh_b", "relu_b" ]
+  },
+  "hid_dim_0": {
+    "_type": "quniform",
+    "_value": [ 80, 150, 10 ]
+  },
+  "hid_dim_1": {
+    "_type": "quniform",
+    "_value": [ 10, 60, 10 ]
+  },
+  "reg": {
+    "_type": "uniform",
+    "_value": [ 0, 1 ]
+  },
+  "lr": {
+    "_type": "uniform",
+    "_value": [ 0.001, 0.2 ]
+  },
+  "test_size": {
+    "_type": "choice",
+    "_value": [ 0.2]
+  },  
+  "batch_size": {
+    "_type": "choice",
+    "_value": [ 4, 8, 16, 32, 64 ]
+  },
+  "shuffle": {
+    "_type": "choice",
+    "_value": [ 0, 1 ]
+  },
+  "num_workers": {
+    "_type": "choice",
+    "_value": [ 4 ]
+  },
+  "epochs": {
+    "_type": "quniform",
+    "_value": [ 100, 300, 50 ]
+  },
+  "optimizer": {
+    "_type": "choice",
+    "_value": [ "SGD", "Adam"]
+  },
+  "loss": {
+    "_type": "choice",
+    "_value": ["MSE" ]
+  }
+}
