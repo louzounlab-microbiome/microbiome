@@ -6,6 +6,8 @@ import numpy as np
 from sklearn import preprocessing
 import seaborn as sns
 from collections import Counter
+
+from Plot import draw_component_rhos_calculation_figure
 from Preprocess.distance_learning_func import distance_learning
 from sklearn.decomposition import PCA
 from sklearn.decomposition import FastICA
@@ -120,26 +122,27 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - After', [325, 326])
         plt.subplots_adjust(hspace=0.5, wspace=0.5)
         plt.savefig(os.path.join(folder, "preprocess.svg"), bbox_inches='tight', format='svg')
-    if visualize_data:
-        plt.figure('standart heatmap')
-        sns.heatmap(as_data_frame, cmap="Blues")
-        plt.title('Heatmap after standartization and taxonomy group level ' + str(taxnomy_level))
-        plt.savefig(os.path.join(folder, "standart_heatmap.png"))
+        plt.clf()
+        plt.figure('standard heatmap')
+        sns.heatmap(as_data_frame, cmap="Blues",cbar=False,xticklabels=False,yticklabels=False)
+        plt.title('Heatmap after standardization and taxonomy group level ' + str(taxnomy_level))
+        plt.savefig(os.path.join(folder, "standard_heatmap.png"))
+        plt.clf()
         corr_method = 'pearson'
         # if smaples on both axis needed, specify the vmin, vmax and mathod
         plt.figure('correlation heatmap patient')
-        sns.heatmap(as_data_frame.T.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1)
+        sns.heatmap(as_data_frame.T.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1,xticklabels=False,yticklabels=False)
         plt.title(corr_method + ' correlation patient with taxonomy level ' + str(taxnomy_level))
         # plt.savefig(os.path.join(folder, "correlation_heatmap_patient.svg"), bbox_inches='tight', format='svg')
         plt.savefig(os.path.join(folder, "correlation_heatmap_patient.png"))
+        plt.clf()
 
         plt.figure('correlation heatmap bacteria')
-        sns.heatmap(as_data_frame.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1)
+        sns.heatmap(as_data_frame.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1,xticklabels=False,yticklabels=False)
         plt.title(corr_method + ' correlation bacteria with taxonomy level ' + str(taxnomy_level))
         # plt.savefig(os.path.join(folder, "correlation_heatmap_bacteria.svg"), bbox_inches='tight', format='svg')
         plt.savefig(os.path.join(folder, "correlation_heatmap_bacteria.png"))
         #plt.show()
-        plt.close()
         plt.clf()
 
     as_data_frame_b_pca = as_data_frame.copy()
@@ -172,11 +175,14 @@ def visualize_preproccess(as_data_frame, indexes_of_non_zeros, name, subplot_idx
     plot_preprocess_stage(result, name + ' without zeros')
 
 
-def plot_preprocess_stage(result, name):
+def plot_preprocess_stage(result, name, use_title=False,use_axis=True):
     plt.hist(result, 1000, facecolor='green', alpha=0.75)
-    plt.title('Distribution ' + name + ' preprocess')
-    plt.xlabel('BINS')
-    plt.ylabel('Count')
+    if use_axis:
+        plt.title('Distribution ' + name + ' preprocess')
+    if use_axis:
+        plt.xlabel('BINS')
+        plt.ylabel('Count')
+    plt.tight_layout()
 
 
 def row_normalization(as_data_frame):

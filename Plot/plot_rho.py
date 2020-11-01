@@ -445,8 +445,6 @@ def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis
     ax.bar(x_pos, real_rhos, color=coeff_color)
     ax.set_ylim(-1, 1)
     ax.set_xticks(x_pos)
-    ax.set_xticklabels(range(1, len(components_df.columns + 1)))
-    plt.xticks(fontsize=8)
     plt.title("Correlation between each component and the label\n" + task_name + " task")
     ax.set_xlabel("spearman correlation")
     # plt.show()
