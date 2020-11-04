@@ -17,17 +17,56 @@ def pop_idx(idx, objects_to_remove_idx_from):
     return objects_to_remove_idx_from
 
 
-def shuffle(df, n=1, axis=0):
-    df = df.copy()
-    for _ in range(n):
-        df.apply(np.random.shuffle, axis=axis)
-    return df
+def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False):
+    otu_ids = bact_df.index
+    tag_ids = tag_df.index
+    mutual_ids = [id for id in otu_ids if id in tag_ids]
+    bact_df = bact_df.loc[mutual_ids]
+    tag_df = tag_df.loc[mutual_ids]
+    y = tag_df["Tag"]
 
+
+    # calc pca
+    n = min(100, min(len(bact_df.index), len(bact_df.columns)))
+    pca = PCA(n_components=n)
+    pca.fit(bact_df)
+    data_components = pca.fit_transform(bact_df)
+    components_df = pd.DataFrame(data_components)
+
+    real_rhos = []
+    for com in components_df.columns:
+        f = components_df[com]
+        rho, pvalue = spearmanr(f, y, axis=None)
+        real_rhos.append(rho)
+
+    # draw rhos
+    left_padding = 0.4
+    fig, ax = plt.subplots()
+    x_pos = np.arange(len(components_df.columns))
+    coeff_color = []
+    for x in real_rhos:
+        if x >= 0:
+            coeff_color.append('green')
+        else:
+            coeff_color.append('red')
+    ax.bar(x_pos, real_rhos, color=coeff_color)
+    ax.set_ylim(-1, 1)
+    ax.set_xticks(x_pos)
+    empty_string_labels = [''] * len(x_pos)
+    ax.set_xticklabels(empty_string_labels)
+    plt.xticks(fontsize=8)
+    plt.title("Correlation between each component and the label\n" + task_name + " task")
+    ax.set_xlabel("spearman correlation")
+    # plt.show()
+    fig.subplots_adjust(left=left_padding)
+    if save_folder:
+        title = "Correlation between each component and the label" + task_name + "task"
+        plt.savefig(join(save_folder, title.replace(" ", "_")
+                          + ".svg"), bbox_inches='tight', format='svg')
+    plt.close()
 
 def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, taxnomy_level, num_of_mixtures=10,
                                  ids_list=None, save_folder=None):
-    import matplotlib.pyplot as plt
-
     # calc ro for x=all samples values for each bacteria and y=all samples tags
     features_by_bacteria = []
     if ids_list:
@@ -42,9 +81,8 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
 
     # remove samples with nan as their tag
     not_nan_idxs = [i for i, y_ in enumerate(y) if str(y_) != "nan"]
-    y = [y_ for i, y_ in enumerate(y) if i in not_nan_idxs]
     X = X.iloc[not_nan_idxs]
-
+    y = [y_ for x_, y_ in zip(X, y) if str(y_) != "nan"]
 
 
     mixed_y_list = []
@@ -107,10 +145,9 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     if save_folder:
         with open(join(save_folder, "significant_bacteria_" + title + "_taxnomy_level_" + str(taxnomy_level)
                                     + "_.csv"), "w") as file:
-            file.write("rho,bact\n")
             for s in significant_bacteria_and_rhos:
                 file.write(str(s[1]) + "," + str(s[0]) + "\n")
-                # דפנההה מה קורה?? איך עובר היום?
+
     # draw the distribution of real rhos vs. mixed rhos
     # old plots
     [count, bins] = np.histogram(mixed_rhos, 50)
@@ -191,26 +228,26 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
 
     for i, bact in enumerate(bacterias):
         f = X[bact]
-        num_of_different_values = set(f)
-        if len(num_of_different_values) < 2:
-            bacterias_to_dump.append(bact)
-        else:
-            features_by_bacteria.append(f)
-            used_bacterias.append(bact)
+        #num_of_different_values = set(f)
+        #if len(num_of_different_values) < 2:
+        #    bacterias_to_dump.append(bact)
+        #else:
+        features_by_bacteria.append(f)
+        used_bacterias.append(bact)
 
-            rho, pvalue = spearmanr(f, y, axis=None)
-            if str(rho) == "nan":
-                print(bact)
-            real_rhos.append(rho)
-            real_pvalues.append(pvalue)
+        rho, pvalue = spearmanr(f, y, axis=None)
+        if str(rho) == "nan":
+            print(bact)
+        real_rhos.append(rho)
+        real_pvalues.append(pvalue)
 
-            for mix_y in mixed_y_list:
-                rho_, pvalue_ = spearmanr(f, mix_y, axis=None)
-                mixed_rhos.append(rho_)
-                mixed_pvalues.append(pvalue_)
+        for mix_y in mixed_y_list:
+            rho_, pvalue_ = spearmanr(f, mix_y, axis=None)
+            mixed_rhos.append(rho_)
+            mixed_pvalues.append(pvalue_)
 
-    print("number of bacterias to dump: " + str(len(bacterias_to_dump)))
-    print("percent of bacterias to dump: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
+    #print("number of bacterias to dump: " + str(len(bacterias_to_dump)))
+    #print("percent of bacterias to dump: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
 
     # we want to take those who are located on the sides of most (center 98%) of the mixed tags entries
     # there for the bound isn't fixed, and is dependent on the distribution of the mixed tags
@@ -230,8 +267,6 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
                 file.write(str(s[1]) + "," + str(s[0]) + "\n")
 
     # draw the distribution of real rhos vs. mixed rhos
-    import matplotlib.pyplot as plt
-    plt.figure()
     [count, bins] = np.histogram(mixed_rhos, 50)
     # divide by 'num_of_mixtures' fo avoid high number of occurrences due to multiple runs for each mixture
     plt.bar(bins[:-1], count/num_of_mixtures, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="mixed tags",
@@ -244,7 +279,7 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
     plt.legend()
     if save_folder:
         plt.savefig(join(save_folder, "Real_tags_vs_Mixed_tags_at_" + title.replace(" ", "_")
-                         + "_taxnomy_level_" + str(taxnomy_level) + ".svg"), bbox_inches='tight', format='svg')
+                         + "_taxnomy_level_" + str(taxnomy_level) + ".png"), bbox_inches='tight', format='png')
     plt.close()
 
     # positive negative figures
@@ -288,10 +323,15 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
     fig.subplots_adjust(left=left_padding)
     if save_folder:
         plt.savefig(join(save_folder, "pos_neg_correlation_at_" + title.replace(" ", "_")
-                         + "_taxnomy_level_" + str(taxnomy_level) + ".svg"), bbox_inches='tight', format='svg')
+                         + "_taxnomy_level_" + str(taxnomy_level) + ".png"), bbox_inches='tight', format='png')
     plt.close()
 
 
+def shuffle(df, n=1, axis=0):
+    df = df.copy()
+    for _ in range(n):
+        df.apply(np.random.shuffle, axis=axis)
+    return df
 
 
 def draw_dynamics_rhos_calculation_figure(preproccessed_data, title, tri_to_tri, num_of_mixtures=10, save_folder=None,
@@ -406,61 +446,3 @@ def draw_dynamics_rhos_calculation_figure(preproccessed_data, title, tri_to_tri,
         if save_folder:
             plt.savefig(join(save_folder, "pos_neg_correlation_at_" + title + ".png"))
         plt.close()
-
-
-def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False):
-    bact_df = bact_df.drop("taxonomy")
-
-    otu_ids = bact_df.index
-    tag_ids = tag_df.index
-    mutual_ids = [id for id in otu_ids if id in tag_ids]
-    bact_df = bact_df.loc[mutual_ids]
-    tag_df = tag_df.loc[mutual_ids]
-    y = tag_df["Tag"]
-
-
-    # calc pca
-    n = min(100, min(len(bact_df.index), len(bact_df.columns)))
-    pca = PCA(n_components=n)
-    pca.fit(bact_df)
-    data_components = pca.fit_transform(bact_df)
-    components_df = pd.DataFrame(data_components)
-
-    real_rhos = []
-    for com in components_df.columns:
-        f = components_df[com]
-        rho, pvalue = spearmanr(f, y, axis=None)
-        real_rhos.append(rho)
-
-    # draw rhos
-    left_padding = 0.4
-    fig, ax = plt.subplots()
-    x_pos = np.arange(len(components_df.columns))
-    coeff_color = []
-    for x in real_rhos:
-        if x >= 0:
-            coeff_color.append('green')
-        else:
-            coeff_color.append('red')
-    ax.bar(x_pos, real_rhos, color=coeff_color)
-    ax.set_ylim(-1, 1)
-    ax.set_xticks(x_pos)
-    plt.title("Correlation between each component and the label\n" + task_name + " task")
-    ax.set_xlabel("spearman correlation")
-    # plt.show()
-    fig.subplots_adjust(left=left_padding)
-    if save_folder:
-        title = "Correlation between each component and the label" + task_name + "task"
-        plt.savefig(join(save_folder, title.replace(" ", "_")
-                          + ".svg"), bbox_inches='tight', format='svg')
-    plt.close()
-
-
-if __name__ == "__main__":
-    components_df = pd.read_csv("Allergy_OTU.csv")
-    components_df = components_df.set_index("ID")
-    tag_df = pd.read_csv("Allergy_Tag.csv")
-    tag_df = tag_df.set_index("ID")
-    task_name = "healthy vs. sick"
-    save_folder = "corr"
-    draw_component_rhos_calculation_figure(components_df, tag_df, task_name=task_name, save_folder=save_folder)

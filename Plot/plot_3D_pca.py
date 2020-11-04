@@ -93,11 +93,11 @@ def plot_data_2d(X_all, y, data_name, save=False, folder=None):
 
 
 def PCA_t_test(group_1, group_2, title="t_test", save=False, folder=None):
-    # loop each dimention
+    # loop each dimension
     result = []
     statistic = []
     pvalue = []
-    for dim in range(3):
+    for dim in range(len(group_1[0])):
         a = [g[dim] for g in group_1]
         b = [g[dim] for g in group_2]
         result.append(stats.ttest_ind(a, b))
@@ -120,4 +120,3 @@ def PCA_t_test(group_1, group_2, title="t_test", save=False, folder=None):
 
 if __name__ == "__main__":
     PCA_t_test()
-

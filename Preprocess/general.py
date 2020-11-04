@@ -45,7 +45,7 @@ def apply_pca(data, n_components=15, visualize=False):
 
     str_to_print += str("\nTotal explained variance: " + str(pca.explained_variance_ratio_.sum()))
 
-    # print(str_to_print)
+    print(str_to_print)
     if visualize:
         plt.figure()
         plt.plot(pca.explained_variance_ratio_.cumsum())
@@ -87,8 +87,7 @@ def draw_horizontal_bar_chart(data, names=None, title=None, ylabel=None, xlabel=
     # set_size(5, 5, ax)
     plt.show()
 
-def convert_pca_back_orig(pca_components, w, original_names=None, visualize=False, title='Bacteria Coeff',
-                          ylabel='Bacteria', xlabel='Coeff Value'):
+def convert_pca_back_orig(pca_components, w, original_names=None, visualize=False, title='Bacteria Coeff', ylabel='Bacteria', xlabel='Coeff Value'):
     coeff = np.dot(w, pca_components)
     if original_names is None:
         object_to_return = pd.DataFrame({'Coefficients': coeff})

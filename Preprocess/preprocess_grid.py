@@ -7,11 +7,10 @@ from sklearn import preprocessing
 import seaborn as sns
 from collections import Counter
 
-from Plot import draw_component_rhos_calculation_figure
+from Plot.plot_rho import draw_component_rhos_calculation_figure
 from Preprocess.distance_learning_func import distance_learning
 from sklearn.decomposition import PCA
 from sklearn.decomposition import FastICA
-
 
 
 def preprocess_data(data, dict_params, map_file, visualize_data=False):
@@ -26,16 +25,16 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
 
     taxonomy_col = 'taxonomy'
 
-    as_data_frame = pd.DataFrame(data.T).apply(pd.to_numeric, errors='ignore').copy()
+    as_data_frame = pd.DataFrame(data.T).apply(pd.to_numeric, errors='ignore').copy()  # data frame of OTUs
 
-    #fill all taxonomy level with default values
+    # fill all taxonomy level with default values
     as_data_frame = fill_taxonomy(as_data_frame, tax_col=taxonomy_col)
 
-    if visualize_data:
-        folder = "preprocess_plots"
+    if visualize_data:  # prepare folder for visualization
+        folder = "static"
         if not os.path.exists(folder):
             os.mkdir(folder)
-        plt.figure('Preprocess')
+        plt.figure('Preprocess')  # make preprocessing figure
         data_frame_for_vis = as_data_frame.copy()
         try:
             data_frame_for_vis = data_frame_for_vis.drop(taxonomy_col, axis=1)
@@ -68,7 +67,11 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         elif preform_taxnomy_group == 'sub PCA':
             print('PCA')
             as_data_frame = as_data_frame.groupby(as_data_frame[taxonomy_col]).mean()
-    
+            # as_data_frame = as_data_frame.T
+            # as_data_frame.columns = as_data_frame.iloc[[-1]].values[0]
+            # as_data_frame, _ = distance_learning(perform_distance=True, level=taxnomy_level, preproccessed_data=as_data_frame.iloc[:-1], mapping_file=map_file).T
+            # as_data_frame_b_pca = as_data_frame
+
         as_data_frame = as_data_frame.T
         # here the samples are columns
     else:
@@ -76,7 +79,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
             as_data_frame = as_data_frame.drop(taxonomy_col, axis=1).T
         except:
             pass
-    
+
     if visualize_data:
         data_frame_flatten = as_data_frame.values.flatten()
         indexes_of_non_zeros = data_frame_flatten != 0
@@ -86,7 +89,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         samples_density.hist(bins=100)
         plt.title(f'Density of samples')
         plt.savefig(os.path.join(folder, "density_of_samples.svg"), bbox_inches='tight', format='svg')
-    
+
     # drop bacterias with single values
     as_data_frame = drop_rare_bacteria(as_data_frame)
 
@@ -95,7 +98,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         as_data_frame = log_normalization(as_data_frame, eps_for_zeros)
 
         # delete column with var give
-        #as_data_frame = drop_low_var(as_data_frame.T, var_th_delete)
+        # as_data_frame = drop_low_var(as_data_frame.T, var_th_delete)
 
         if visualize_data:
             # plot histogrm of variance
@@ -114,7 +117,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         as_data_frame = row_normalization(as_data_frame)
         if relative_z == "z_after_relative":
             as_data_frame = z_score(as_data_frame, 'col')
-    
+
     if visualize_data:
         data_frame_flatten = as_data_frame.values.flatten()
         indexes_of_non_zeros = data_frame_flatten != 0
@@ -122,47 +125,45 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - After', [325, 326])
         plt.subplots_adjust(hspace=0.5, wspace=0.5)
         plt.savefig(os.path.join(folder, "preprocess.svg"), bbox_inches='tight', format='svg')
-        plt.clf()
-        plt.figure('standard heatmap')
-        sns.heatmap(as_data_frame, cmap="Blues",cbar=False,xticklabels=False,yticklabels=False)
-        plt.title('Heatmap after standardization and taxonomy group level ' + str(taxnomy_level))
-        plt.savefig(os.path.join(folder, "standard_heatmap.png"))
-        plt.clf()
+    if visualize_data:
+        plt.figure('standart heatmap')
+        sns.heatmap(as_data_frame, cmap="Blues", xticklabels=False, yticklabels=False)
+        plt.title('Heatmap after standartization and taxonomy group level ' + str(taxnomy_level))
+        plt.savefig(os.path.join(folder, "standart_heatmap.png"))
         corr_method = 'pearson'
         # if smaples on both axis needed, specify the vmin, vmax and mathod
         plt.figure('correlation heatmap patient')
-        sns.heatmap(as_data_frame.T.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1,xticklabels=False,yticklabels=False)
+        sns.heatmap(as_data_frame.T.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1, xticklabels=False, yticklabels=False)
         plt.title(corr_method + ' correlation patient with taxonomy level ' + str(taxnomy_level))
         # plt.savefig(os.path.join(folder, "correlation_heatmap_patient.svg"), bbox_inches='tight', format='svg')
         plt.savefig(os.path.join(folder, "correlation_heatmap_patient.png"))
-        plt.clf()
 
         plt.figure('correlation heatmap bacteria')
-        sns.heatmap(as_data_frame.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1,xticklabels=False,yticklabels=False)
+        sns.heatmap(as_data_frame.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1, xticklabels=False,yticklabels=False)
         plt.title(corr_method + ' correlation bacteria with taxonomy level ' + str(taxnomy_level))
         # plt.savefig(os.path.join(folder, "correlation_heatmap_bacteria.svg"), bbox_inches='tight', format='svg')
         plt.savefig(os.path.join(folder, "correlation_heatmap_bacteria.png"))
-        #plt.show()
+        # plt.show()
+        plt.close()
         plt.clf()
 
     as_data_frame_b_pca = as_data_frame.copy()
     bacteria = as_data_frame.columns
-    
+
     if preform_taxnomy_group == 'sub PCA':
-        as_data_frame, _ = distance_learning(perform_distance=True, level=taxnomy_level, preproccessed_data=as_data_frame, mapping_file=map_file)
-        as_data_frame_b_pca = as_data_frame 
-    
+        as_data_frame, _ = distance_learning(perform_distance=True, level=taxnomy_level,
+                                             preproccessed_data=as_data_frame, mapping_file=map_file)
+        as_data_frame_b_pca = as_data_frame
+
     if visualize_data:
         draw_component_rhos_calculation_figure(as_data_frame, map_file, save_folder=folder)
-    
+
     if pca[0] != 0:
-        print('perform' + pca[1] +' ...')
-        as_data_frame, pca_obj, pca = apply_pca(as_data_frame, n_components =pca[0], dim_red_type = pca[1])
+        print('perform ' + pca[1] + ' ...')
+        as_data_frame, pca_obj, pca = apply_pca(as_data_frame, n_components=pca[0], dim_red_type=pca[1])
     else:
         pca_obj = None
-    
-    #as_data_frame.to_csv('test.csv')
-    
+
     return as_data_frame, as_data_frame_b_pca, pca_obj, bacteria, pca
 
 
@@ -175,14 +176,13 @@ def visualize_preproccess(as_data_frame, indexes_of_non_zeros, name, subplot_idx
     plot_preprocess_stage(result, name + ' without zeros')
 
 
-def plot_preprocess_stage(result, name, use_title=False,use_axis=True):
+def plot_preprocess_stage(result, name,write_title=False,write_axis=True):
     plt.hist(result, 1000, facecolor='green', alpha=0.75)
-    if use_axis:
+    if write_title:
         plt.title('Distribution ' + name + ' preprocess')
-    if use_axis:
+    if write_axis:
         plt.xlabel('BINS')
         plt.ylabel('Count')
-    plt.tight_layout()
 
 
 def row_normalization(as_data_frame):
@@ -203,19 +203,20 @@ def log_normalization(as_data_frame, eps_for_zeros):
 
 def z_score(as_data_frame, preform_z_scoring):
     if preform_z_scoring == 'row':
-        print('perform z-core on samples...')
+        print('perform z-score on samples...')
         # z-score on columns
         as_data_frame[:] = preprocessing.scale(as_data_frame, axis=1)
     elif preform_z_scoring == 'col':
-        print('perform z-core on features...')
+        print('perform z-score on features...')
         # z-score on rows
         as_data_frame[:] = preprocessing.scale(as_data_frame, axis=0)
     elif preform_z_scoring == 'both':
-        print('perform z-core on samples and features...')
+        print('perform z-score on samples and features...')
         as_data_frame[:] = preprocessing.scale(as_data_frame, axis=1)
         as_data_frame[:] = preprocessing.scale(as_data_frame, axis=0)
-       
+
     return as_data_frame
+
 
 def drop_bacteria(as_data_frame):
     bacterias = as_data_frame.columns
@@ -225,17 +226,19 @@ def drop_bacteria(as_data_frame):
         num_of_different_values = set(f)
         if len(num_of_different_values) < 2:
             bacterias_to_dump.append(bact)
-    if len(bacterias_to_dump) != 0: 
+    if len(bacterias_to_dump) != 0:
         print("number of bacterias to dump before intersection: " + str(len(bacterias_to_dump)))
-        print("percent of bacterias to dump before intersection: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
+        print("percent of bacterias to dump before intersection: " + str(
+            len(bacterias_to_dump) / len(bacterias) * 100) + "%")
     else:
         print("No bacteria with single value")
     return as_data_frame.drop(columns=bacterias_to_dump)
-    
+
+
 def drop_rare_bacteria(as_data_frame):
     bact_to_num_of_non_zeros_values_map = {}
     bacteria = as_data_frame.columns
-    num_of_samples = len(as_data_frame.index) -1 
+    num_of_samples = len(as_data_frame.index) - 1
     for bact in bacteria:
         values = as_data_frame[bact]
         count_map = Counter(values)
@@ -251,19 +254,20 @@ def drop_rare_bacteria(as_data_frame):
     for key, val in bact_to_num_of_non_zeros_values_map.items():
         if val < 5:
             rare_bacteria.append(key)
-    as_data_frame.drop(columns = rare_bacteria, inplace=True)
+    as_data_frame.drop(columns=rare_bacteria, inplace=True)
     print(str(len(rare_bacteria)) + " bacteria with less then 5 non-zero value: ")
     return as_data_frame
 
 
-def apply_pca(data, n_components=15, dim_red_type = 'PCA', visualize=False):
+def apply_pca(data, n_components=15, dim_red_type='PCA', visualize=False):
     if n_components == -1:
         pca = PCA(n_components=min(len(data.index), len(data.columns)))
         pca.fit(data)
         data_components = pca.fit_transform(data)
-        for accu_var, (i, component) in zip(pca.explained_variance_ratio_.cumsum(), enumerate(pca.explained_variance_ratio_)):
+        for accu_var, (i, component) in zip(pca.explained_variance_ratio_.cumsum(),
+                                            enumerate(pca.explained_variance_ratio_)):
             if accu_var > 0.7:
-                components = i+1
+                components = i + 1
                 break
     else:
         components = n_components
@@ -271,28 +275,32 @@ def apply_pca(data, n_components=15, dim_red_type = 'PCA', visualize=False):
         pca = PCA(n_components=components)
         pca.fit(data)
         data_components = pca.fit_transform(data)
-    
+
         str_to_print = str("Explained variance per component: \n" +
-              '\n'.join(['Component ' + str(i) + ': ' +
-                         str(component) + ', Accumalative variance: ' + str(accu_var) for accu_var, (i, component) in zip(pca.explained_variance_ratio_.cumsum(), enumerate(pca.explained_variance_ratio_))]))
-    
+                           '\n'.join(['Component ' + str(i) + ': ' +
+                                      str(component) + ', Accumalative variance: ' + str(accu_var) for
+                                      accu_var, (i, component) in zip(pca.explained_variance_ratio_.cumsum(),
+                                                                      enumerate(pca.explained_variance_ratio_))]))
+
         str_to_print += str("\nTotal explained variance: " + str(pca.explained_variance_ratio_.sum()))
-    
+
         print(str_to_print)
         if visualize:
             plt.figure()
             plt.plot(pca.explained_variance_ratio_.cumsum())
-            plt.bar(np.arange(0,components), height=pca.explained_variance_ratio_)
-            plt.title(f'PCA - Explained variance using {n_components} components: {pca.explained_variance_ratio_.sum()}')
+            plt.bar(np.arange(0, components), height=pca.explained_variance_ratio_)
+            plt.title(
+                f'PCA - Explained variance using {n_components} components: {pca.explained_variance_ratio_.sum()}')
             plt.xlabel('PCA #')
-            plt.xticks(list(range(0,components)), list(range(1,components+1)))
-    
+            plt.xticks(list(range(0, components)), list(range(1, components + 1)))
+
             plt.ylabel('Explained Variance')
             plt.show()
     else:
         pca = FastICA(n_components=components)
         data_components = pca.fit_transform(data)
     return pd.DataFrame(data_components).set_index(data.index), pca, components
+
 
 def fill_taxonomy(as_data_frame, tax_col):
     df_tax = as_data_frame[tax_col].str.split(';', expand=True)
@@ -304,7 +312,7 @@ def fill_taxonomy(as_data_frame, tax_col):
     df_tax[1] = df_tax[1].fillna('p__')
     df_tax[0] = df_tax[0].fillna('s__')
 
-    as_data_frame[tax_col] = df_tax[0] + ';' + df_tax[1] + ';' + df_tax[2] + ';' + df_tax[3] + ';' + df_tax[4] + ';' + df_tax[5] + ';' + df_tax[6]
+    as_data_frame[tax_col] = df_tax[0] + ';' + df_tax[1] + ';' + df_tax[2] + ';' + df_tax[3] + ';' + df_tax[4] + ';' + \
+                             df_tax[5] + ';' + df_tax[6]
 
     return as_data_frame
-    
