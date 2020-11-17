@@ -26,7 +26,7 @@ class CreateOtuAndMappingFiles(object):
         self.ids = self.tags_df.index.tolist()
         self.ids.append('taxonomy')
         print('read otu file...')
-        self.otu_features_df = pd.read_csv(self.otu_path).drop('Unnamed: 0', axis=1)
+        self.otu_features_df = pd.read_csv(self.otu_path).drop('Unnamed: 0', axis=1,errors='ignore')
         self.otu_features_df = self.otu_features_df.set_index('ID')
         self.otu_features_df.index = self.otu_features_df.index.astype(str)
         self.pca_ocj = None

@@ -17,7 +17,7 @@ def pop_idx(idx, objects_to_remove_idx_from):
     return objects_to_remove_idx_from
 
 
-def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False):
+def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False,figsize=(6.4, 4.8)):
     otu_ids = bact_df.index
     tag_ids = tag_df.index
     mutual_ids = [id for id in otu_ids if id in tag_ids]
@@ -41,7 +41,7 @@ def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis
 
     # draw rhos
     left_padding = 0.4
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=figsize)
     x_pos = np.arange(len(components_df.columns))
     coeff_color = []
     for x in real_rhos:
@@ -56,7 +56,7 @@ def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis
     ax.set_xticklabels(empty_string_labels)
     plt.xticks(fontsize=8)
     plt.title("Correlation between each component and the label\n" + task_name + " task")
-    ax.set_xlabel("spearman correlation")
+    ax.set_xlabel("Spearman correlation")
     # plt.show()
     fig.subplots_adjust(left=left_padding)
     if save_folder:

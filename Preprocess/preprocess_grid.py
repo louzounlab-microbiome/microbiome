@@ -86,7 +86,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         visualize_preproccess(as_data_frame, indexes_of_non_zeros, 'After-Taxonomy - Before', [323, 324])
         samples_density = as_data_frame.apply(np.sum, axis=1)
         plt.figure('Density of samples')
-        samples_density.hist(bins=100)
+        samples_density.hist(bins=100, facecolor='Blue')
         plt.title(f'Density of samples')
         plt.savefig(os.path.join(folder, "density_of_samples.svg"), bbox_inches='tight', format='svg')
 
@@ -104,7 +104,7 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
             # plot histogrm of variance
             samples_variance = as_data_frame.apply(np.var, axis=1)
             plt.figure('Variance of samples')
-            samples_variance.hist(bins=100)
+            samples_variance.hist(bins=100, facecolor='Blue')
             plt.title(
                 f'Histogram of samples variance before z-scoring\nmean={samples_variance.values.mean()},'
                 f' std={samples_variance.values.std()}')
@@ -126,21 +126,24 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         plt.subplots_adjust(hspace=0.5, wspace=0.5)
         plt.savefig(os.path.join(folder, "preprocess.svg"), bbox_inches='tight', format='svg')
     if visualize_data:
-        plt.figure('standart heatmap')
+        plt.figure('standard heatmap')
         sns.heatmap(as_data_frame, cmap="Blues", xticklabels=False, yticklabels=False)
-        plt.title('Heatmap after standartization and taxonomy group level ' + str(taxnomy_level))
-        plt.savefig(os.path.join(folder, "standart_heatmap.png"))
+        plt.title('Heatmap after standardization and taxonomy group level ' + str(taxnomy_level))
+        plt.savefig(os.path.join(folder, "standard_heatmap.png"))
         corr_method = 'pearson'
-        # if smaples on both axis needed, specify the vmin, vmax and mathod
+        corr_name = 'Pearson'
+        # if samples on both axis needed, specify the vmin, vmax and mathod
         plt.figure('correlation heatmap patient')
-        sns.heatmap(as_data_frame.T.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1, xticklabels=False, yticklabels=False)
-        plt.title(corr_method + ' correlation patient with taxonomy level ' + str(taxnomy_level))
+        sns.heatmap(as_data_frame.T.corr(method=corr_method), cmap='Blues', vmin=-1, vmax=1, xticklabels=False,
+                    yticklabels=False)
+        plt.title(corr_name + ' correlation patient with taxonomy level ' + str(taxnomy_level))
         # plt.savefig(os.path.join(folder, "correlation_heatmap_patient.svg"), bbox_inches='tight', format='svg')
         plt.savefig(os.path.join(folder, "correlation_heatmap_patient.png"))
 
         plt.figure('correlation heatmap bacteria')
-        sns.heatmap(as_data_frame.corr(method=corr_method), cmap='RdBu', vmin=-1, vmax=1, xticklabels=False,yticklabels=False)
-        plt.title(corr_method + ' correlation bacteria with taxonomy level ' + str(taxnomy_level))
+        sns.heatmap(as_data_frame.corr(method=corr_method), cmap='Blues', vmin=-1, vmax=1, xticklabels=False,
+                    yticklabels=False)
+        plt.title(corr_name + ' correlation bacteria with taxonomy level ' + str(taxnomy_level))
         # plt.savefig(os.path.join(folder, "correlation_heatmap_bacteria.svg"), bbox_inches='tight', format='svg')
         plt.savefig(os.path.join(folder, "correlation_heatmap_bacteria.png"))
         # plt.show()
@@ -176,8 +179,8 @@ def visualize_preproccess(as_data_frame, indexes_of_non_zeros, name, subplot_idx
     plot_preprocess_stage(result, name + ' without zeros')
 
 
-def plot_preprocess_stage(result, name,write_title=False,write_axis=True):
-    plt.hist(result, 1000, facecolor='green', alpha=0.75)
+def plot_preprocess_stage(result, name, write_title=False, write_axis=True):
+    plt.hist(result, 1000, facecolor='Blue', alpha=0.75)
     if write_title:
         plt.title('Distribution ' + name + ' preprocess')
     if write_axis:
