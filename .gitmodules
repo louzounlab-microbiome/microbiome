@@ -1,4 +1,1 @@
-[submodule "integration_tools"]
-	path = integration_tools
-	url = https://github.com/sharon200102/integration_tools
-	ignore = dirty
+
