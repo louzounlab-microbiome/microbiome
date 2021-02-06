@@ -17,14 +17,14 @@ def pop_idx(idx, objects_to_remove_idx_from):
     return objects_to_remove_idx_from
 
 
-def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False,figsize=(6.4, 4.8)):
+def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis", save_folder=False,
+                                           figsize=(6.4, 4.8)):
     otu_ids = bact_df.index
     tag_ids = tag_df.index
     mutual_ids = [id for id in otu_ids if id in tag_ids]
     bact_df = bact_df.loc[mutual_ids]
     tag_df = tag_df.loc[mutual_ids]
     y = tag_df["Tag"]
-
 
     # calc pca
     n = min(100, min(len(bact_df.index), len(bact_df.columns)))
@@ -62,13 +62,16 @@ def draw_component_rhos_calculation_figure(bact_df, tag_df, task_name="prognosis
     if save_folder:
         title = "Correlation between each component and the label" + task_name + "task"
         plt.savefig(join(save_folder, title.replace(" ", "_")
-                          + ".svg"), bbox_inches='tight', format='svg')
+                         + ".svg"), bbox_inches='tight', format='svg')
     plt.close()
 
+
 def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title, taxnomy_level, num_of_mixtures=10,
+                                 percentile=1,
                                  ids_list=None, save_folder=None):
     # calc ro for x=all samples values for each bacteria and y=all samples tags
     features_by_bacteria = []
+    fig, (corr_ax, hist_ax) = plt.subplots(nrows=2, ncols=1)
     if ids_list:
         ids_list = [i for i in ids_list if i in preproccessed_data.index]
         X = preproccessed_data.loc[ids_list]
@@ -83,7 +86,6 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     not_nan_idxs = [i for i, y_ in enumerate(y) if str(y_) != "nan"]
     X = X.iloc[not_nan_idxs]
     y = [y_ for x_, y_ in zip(X, y) if str(y_) != "nan"]
-
 
     mixed_y_list = []
     for num in range(num_of_mixtures):  # run a couple time to avoid accidental results
@@ -120,7 +122,7 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
                 mixed_pvalues.append(pvalue_)
 
     print("number of bacterias to dump: " + str(len(bacterias_to_dump)))
-    print("percent of bacterias to dump: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
+    print("percent of bacterias to dump: " + str(len(bacterias_to_dump) / len(bacterias) * 100) + "%")
 
     # we want to take those who are located on the sides of most (center 98%) of the mixed tags entries
     # there for the bound isn't fixed, and is dependent on the distribution of the mixed tags
@@ -133,8 +135,8 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     mix_rho_range = mix_max_rho - mix_min_rho
 
     # new method - all the items out of the mix range + 1% from the edge of the mix
-    upper_bound = np.percentile(mixed_rhos, 99)
-    lower_bound = np.percentile(mixed_rhos, 1)
+    upper_bound = np.percentile(mixed_rhos, 100 - percentile)
+    lower_bound = np.percentile(mixed_rhos, percentile)
 
     significant_bacteria_and_rhos = []
     for i, bact in enumerate(used_bacterias):
@@ -152,22 +154,18 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
     # old plots
     [count, bins] = np.histogram(mixed_rhos, 50)
     # divide by 'num_of_mixtures' fo avoid high number of occurrences due to multiple runs for each mixture
-    plt.bar(bins[:-1], count/num_of_mixtures, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="mixed tags",
-            color="#d95f0e")
+    hist_ax.bar(bins[:-1], count / num_of_mixtures, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="Mixed tags",
+                color="#d95f0e")
     [count, bins2] = np.histogram(real_rhos, 50)
-    plt.bar(bins2[:-1], count, width=0.8 * (bins[1] - bins[0]), alpha=0.8, label="real tags", color="#43a2ca")
+    hist_ax.bar(bins2[:-1], count, width=0.8 * (bins[1] - bins[0]), alpha=0.8, label="Real tags", color="#43a2ca")
     # plt.hist(real_rhos, rwidth=0.6, bins=50, label="real tags", color="#43a2ca" )
     # plt.hist(mixed_rhos, rwidth=0.9, bins=50, alpha=0.5, label="mixed tags", color="#d95f0e")
-    plt.title("Real tags vs. Mixed tags at " + title.replace("_", " "))
-    plt.xlabel('Rho value')
-    plt.ylabel('Number of bacteria')
-    plt.legend()
+    hist_ax.set_title("Real tags vs. Mixed tags at " + title.replace("_", " "))
+    hist_ax.set_xlabel('Rho value')
+    hist_ax.set_ylabel('Number of bacteria')
+    hist_ax.legend()
     # print("Real tags_vs_Mixed_tags_at_" + title + "_combined.png")
     # plt.show()
-    if save_folder:
-        plt.savefig(join(save_folder, "Real_tags_vs_Mixed_tags_at_" + title.replace(" ", "_")
-                         + "_taxnomy_level_" + str(taxnomy_level) + ".svg"), bbox_inches='tight', format='svg')
-    plt.close()
 
     # positive negative figures
     bacterias = [s[0] for s in significant_bacteria_and_rhos]
@@ -190,10 +188,10 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
             k_bact_idx.append(i)
 
     if k_bact_idx:
-        [short_bacterias_names, real_rhos, bacterias] = pop_idx(k_bact_idx, [short_bacterias_names, real_rhos, bacterias])
+        [short_bacterias_names, real_rhos, bacterias] = pop_idx(k_bact_idx,
+                                                                [short_bacterias_names, real_rhos, bacterias])
 
     left_padding = 0.4
-    fig, ax = plt.subplots()
     y_pos = np.arange(len(bacterias))
     coeff_color = []
     for x in real_rhos:
@@ -201,21 +199,23 @@ def draw_rhos_calculation_figure(id_to_binary_tag_map, preproccessed_data, title
             coeff_color.append('green')
         else:
             coeff_color.append('red')
-    ax.barh(y_pos, real_rhos, color=coeff_color)
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels(short_bacterias_names)
-    plt.yticks(fontsize=10)
-    plt.title(title.replace("_", " "))
-    ax.set_xlabel("Coeff value")
+    corr_ax.barh(y_pos, real_rhos, color=coeff_color)
+    corr_ax.set_yticks(y_pos)
+    corr_ax.set_yticklabels(short_bacterias_names)
+    corr_ax.tick_params(axis='y', which='major', labelsize=10)
+    corr_ax.set_title(title.replace("_", " "))
+    corr_ax.set_xlabel("Coeff value")
     fig.subplots_adjust(left=left_padding)
+    fig.tight_layout()
     if save_folder:
-        plt.savefig(join(save_folder, "pos_neg_correlation_at_" + title.replace(" ", "_")
-                         + "_taxnomy_level_" + str(taxnomy_level) + ".svg"), bbox_inches='tight', format='svg')
+        fig.savefig(join(save_folder, "Correlation_plot_at_" + title.replace(" ", "_")
+                         + "_taxnomy_level_" + str(taxnomy_level) + ".svg"), bbox_inches='tight')
+
     plt.close()
 
 
 def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
-                                            num_of_mixtures=10, save_folder="rhos"):
+                                     num_of_mixtures=10, save_folder="rhos"):
     features_by_bacteria, mixed_y_list = [], []
     # run a couple of times to avoid accidental results
     for num in range(num_of_mixtures):
@@ -228,10 +228,10 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
 
     for i, bact in enumerate(bacterias):
         f = X[bact]
-        #num_of_different_values = set(f)
-        #if len(num_of_different_values) < 2:
+        # num_of_different_values = set(f)
+        # if len(num_of_different_values) < 2:
         #    bacterias_to_dump.append(bact)
-        #else:
+        # else:
         features_by_bacteria.append(f)
         used_bacterias.append(bact)
 
@@ -246,8 +246,8 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
             mixed_rhos.append(rho_)
             mixed_pvalues.append(pvalue_)
 
-    #print("number of bacterias to dump: " + str(len(bacterias_to_dump)))
-    #print("percent of bacterias to dump: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
+    # print("number of bacterias to dump: " + str(len(bacterias_to_dump)))
+    # print("percent of bacterias to dump: " + str(len(bacterias_to_dump)/len(bacterias) * 100) + "%")
 
     # we want to take those who are located on the sides of most (center 98%) of the mixed tags entries
     # there for the bound isn't fixed, and is dependent on the distribution of the mixed tags
@@ -269,7 +269,7 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
     # draw the distribution of real rhos vs. mixed rhos
     [count, bins] = np.histogram(mixed_rhos, 50)
     # divide by 'num_of_mixtures' fo avoid high number of occurrences due to multiple runs for each mixture
-    plt.bar(bins[:-1], count/num_of_mixtures, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="mixed tags",
+    plt.bar(bins[:-1], count / num_of_mixtures, width=0.8 * (bins[1] - bins[0]), alpha=0.5, label="mixed tags",
             color="#d95f0e")
     [count, bins2] = np.histogram(real_rhos, 50)
     plt.bar(bins2[:-1], count, width=0.8 * (bins[1] - bins[0]), alpha=0.8, label="real tags", color="#43a2ca")
@@ -303,7 +303,8 @@ def draw_X_y_rhos_calculation_figure(X, y, title, taxnomy_level,
             k_bact_idx.append(i)
 
     if k_bact_idx:
-        [short_bacterias_names, real_rhos, bacterias] = pop_idx(k_bact_idx, [short_bacterias_names, real_rhos, bacterias])
+        [short_bacterias_names, real_rhos, bacterias] = pop_idx(k_bact_idx,
+                                                                [short_bacterias_names, real_rhos, bacterias])
 
     left_padding = 0.4
     fig, ax = plt.subplots()
@@ -399,10 +400,11 @@ def draw_dynamics_rhos_calculation_figure(preproccessed_data, title, tri_to_tri,
     out_of_bound_idx_and_corr_score.sort(key=lambda s: s[3])
     pickle.dump(out_of_bound_idx_and_corr_score, open(os.path.join(save_folder, "out_of_bound_corr_idx_" + tri_to_tri +
                                                                    '_' + type + '_' + health + ".pkl"), "wb"))
-    with open(join(save_folder, "out_of_bound_corr_idx_" + tri_to_tri + '_' + type + '_' + health + ".csv"), "w") as file:
+    with open(join(save_folder, "out_of_bound_corr_idx_" + tri_to_tri + '_' + type + '_' + health + ".csv"),
+              "w") as file:
         file.write("bacteria_1,bacteria_2,rho_score,rho\n")
         for entry in out_of_bound_idx_and_corr_score:
-           file.write(entry[0] + "," + entry[1] + "," + str(round(entry[2], 3)) + "," + str(round(entry[3], 3)) + "\n")
+            file.write(entry[0] + "," + entry[1] + "," + str(round(entry[2], 3)) + "," + str(round(entry[3], 3)) + "\n")
 
     # positive negative figures
     bacterias_0 = [s[0] for s in out_of_bound_idx_and_corr_score]
