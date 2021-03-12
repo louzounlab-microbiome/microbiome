@@ -13,8 +13,9 @@ def ztest(series1 :pd.Series ,series2: pd.Series):
     return  numerator/denominator
 
 latent_representation = pd.read_csv(Path('../data/exported_data/latent_representation_data/latent_representation.csv'),index_col=0)
+latent_representation=latent_representation.set_index('id1').drop('id0',axis=1)
 
-kde_ax = latent_representation.iloc[:,:5].plot.kde()
+kde_ax = latent_representation.plot.kde()
 kde_ax.set_title('KDE of all features')
 plt.show()
 

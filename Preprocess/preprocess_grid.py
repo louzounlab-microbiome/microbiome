@@ -13,13 +13,15 @@ from sklearn.decomposition import PCA
 from sklearn.decomposition import FastICA
 
 
-def preprocess_data(data, dict_params, map_file, visualize_data=False):
+def preprocess_data(data, dict_params:dict, map_file, visualize_data=False):
     taxnomy_level = int(dict_params['taxonomy_level'])
     preform_taxnomy_group = dict_params['taxnomy_group']
     eps_for_zeros = float(dict_params['epsilon'])
     preform_norm = dict_params['normalization']
     preform_z_scoring = dict_params['z_scoring']
     relative_z = dict_params['norm_after_rel']
+    correlation_removal_threshold = dict_params.get('correlation_threshold',None)
+    rare_bacteria_threshold = dict_params.get('rare_bacteria_threshold',None)
     var_th_delete = float(dict_params['std_to_delete'])
     pca = dict_params['pca']
 
@@ -80,6 +82,10 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         except:
             pass
 
+    # remove highly correlated bacteria
+    if correlation_removal_threshold is not None:
+        as_data_frame = dropHighCorr(as_data_frame,correlation_removal_threshold)
+
     if visualize_data:
         data_frame_flatten = as_data_frame.values.flatten()
         indexes_of_non_zeros = data_frame_flatten != 0
@@ -91,7 +97,8 @@ def preprocess_data(data, dict_params, map_file, visualize_data=False):
         plt.savefig(os.path.join(folder, "density_of_samples.svg"), bbox_inches='tight', format='svg')
 
     # drop bacterias with single values
-    as_data_frame = drop_rare_bacteria(as_data_frame)
+    if rare_bacteria_threshold is not None:
+        as_data_frame = drop_rare_bacteria(as_data_frame,rare_bacteria_threshold)
 
     if preform_norm == 'log':
         print('Perform log normalization...')
@@ -237,8 +244,18 @@ def drop_bacteria(as_data_frame):
         print("No bacteria with single value")
     return as_data_frame.drop(columns=bacterias_to_dump)
 
+def dropHighCorr(data, threshold):
+    corr = data.corr()
+    df_not_correlated = ~(corr.mask(np.tril(np.ones([len(corr)] * 2, dtype=bool))).abs() > threshold).any()
+    un_corr_idx = df_not_correlated.loc[df_not_correlated[df_not_correlated.index] == True].index
+    df_out = data[un_corr_idx]
+    number_of_bacteria_dropped = len(data.columns) - len(df_out.columns)
+    print('{} bacteria were dropped due to high correlation with other columns'.format(number_of_bacteria_dropped))
+    return df_out
 
-def drop_rare_bacteria(as_data_frame):
+
+
+def drop_rare_bacteria(as_data_frame,threshold):
     bact_to_num_of_non_zeros_values_map = {}
     bacteria = as_data_frame.columns
     num_of_samples = len(as_data_frame.index) - 1
@@ -255,10 +272,10 @@ def drop_rare_bacteria(as_data_frame):
 
     rare_bacteria = []
     for key, val in bact_to_num_of_non_zeros_values_map.items():
-        if val < 5:
+        if val < threshold:
             rare_bacteria.append(key)
     as_data_frame.drop(columns=rare_bacteria, inplace=True)
-    print(str(len(rare_bacteria)) + " bacteria with less then 5 non-zero value: ")
+    print("{} bacteria with less then {} non-zero value: ".format(len(rare_bacteria),threshold))
     return as_data_frame
 
 

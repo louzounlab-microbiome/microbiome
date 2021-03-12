@@ -11,7 +11,7 @@ from os.path import join
             Parameters:
             dataframe - An ordinary DataFrame that its columns will be plotted.
             folder - A  String that represents the name of the folder where the plot will be stored (creates one if the folder doesn't exist) 
-            color - Series of discrete values which will be used to color each and every plot (Defult None).
+            separator - Series of discrete values which will be used to color each and every plot (Defult None).
             Title - String title for the plot (Default Generic title).
             labels_dict - A dictionary which maps every discrete color value into a string, for more informal legend (Default None).   
             figure size -  A tuple represents the plot figure size (default generic size).
@@ -22,21 +22,30 @@ from os.path import join
 """
 
 
-def relationship_between_features(dataframe, folder, color=None, title="Relationship_between_features",title_size=30,
-                                  labels_dict=None, figure_size=(18, 18),axis_labels_size=15,legend_size=15, **kwargs):
+def relationship_between_features(dataframe, folder, separator=None, title="Relationship_between_features", title_size=30,
+                                  labels_dict=None, color_dict = None, figure_size=(18, 18), axis_labels_size=15, legend_size=15, **kwargs):
     number_of_columns = dataframe.shape[1]
     fig, axes = plt.subplots(number_of_columns, number_of_columns, squeeze=False, figsize=figure_size)
-    if color is not None:
-        groups = dataframe.groupby(color)
+    if separator is not None:
+        groups = dataframe.groupby(separator)
     # Iterate through all n chose two subgroups where n is the number of columns.
 
     for row, col in list(itertools.combinations(list(range(0, number_of_columns)), 2)):
-        if color is not None:
+        if separator is not None:
             for name, group in groups:
                 if labels_dict is not None:
-                    axes[row][col].scatter(group.iloc[:, row], group.iloc[:, col], label=labels_dict[name], **kwargs)
+                    if color_dict is not None:
+                        color = color_dict[name]
+                        axes[row][col].scatter(group.iloc[:, row], group.iloc[:, col],color=color,label=labels_dict[name], **kwargs)
+                    else:
+                        axes[row][col].scatter(group.iloc[:, row], group.iloc[:, col],label=labels_dict[name], **kwargs)
+
                 else:
-                    axes[row][col].scatter(group.iloc[:, row], group.iloc[:, col], label=name, **kwargs)
+                    if color_dict is not None:
+                        color = color_dict[name]
+                        axes[row][col].scatter(group.iloc[:, row], group.iloc[:, col],color = color,label=name, **kwargs)
+                    else:
+                        axes[row][col].scatter(group.iloc[:, row], group.iloc[:, col], label=name, **kwargs)
 
         else:
             axes[row][col].scatter(dataframe.iloc[:, row], dataframe.iloc[:, col], **kwargs)

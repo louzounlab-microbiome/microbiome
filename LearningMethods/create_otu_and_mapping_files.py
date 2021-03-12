@@ -26,7 +26,7 @@ class CreateOtuAndMappingFiles(object):
         self.ids = self.tags_df.index.tolist()
         self.ids.append('taxonomy')
         print('read otu file...')
-        self.otu_features_df = pd.read_csv(self.otu_path).drop('Unnamed: 0', axis=1,errors='ignore')
+        self.otu_features_df = pd.read_csv(self.otu_path).drop('Unnamed: 0', axis=1, errors='ignore')
         self.otu_features_df = self.otu_features_df.set_index('ID')
         self.otu_features_df.index = self.otu_features_df.index.astype(str)
         self.pca_ocj = None
@@ -125,7 +125,7 @@ class CreateOtuAndMappingFiles(object):
         self.extra_features_df = merged_table.drop(['Tag'], axis=1).copy()
         self.tags_df = merged_table[['Tag']].copy()
 
-    def conditional_identification(self, dic):
+    def conditional_identification(self, dic, not_flag=False):
         """
         Written by Sharon Komissarov.
         The function facilitate in removing undesired rows by filtering them out.
@@ -135,22 +135,30 @@ class CreateOtuAndMappingFiles(object):
         dic={'Group':'normal'}
         if you would like to keep only the normal rows and their saliva samples, dic should look as follows:
         dic={'Group':'normal','body_site':'saliva'}
+        # Please notice that the function only modifies the mapping table and the tag!.
         """
-        mask = pd.DataFrame([self.extra_features_df[key] == val for key, val in dic.items()]).T.all(axis=1)
+        if not not_flag:
+            mask = pd.DataFrame([self.extra_features_df[key] == val for key, val in dic.items()]).T.all(axis=1)
+        else:
+            mask = ~pd.DataFrame([self.extra_features_df[key] == val for key, val in dic.items()]).T.all(axis=1)
+
         merged_table = pd.merge(self.extra_features_df[mask].copy(), self.tags_df, left_index=True, right_index=True,
                                 how='left')
+
         self.extra_features_df = merged_table.drop(['Tag'], axis=1).copy()
         self.tags_df = merged_table[['Tag']].copy()
 
     def to_correspond(self, **kwargs):
-        taxonomy=self.otu_features_df.loc['taxonomy'].copy()
-        full_mapping_table = pd.merge(self.extra_features_df, self.tags_df, left_index=True, right_index=True,
-                                      how='left')
+        """Currently the function can only be used before the preprocess"""
+
+        taxonomy = self.otu_features_df.iloc[-1].copy()
+        full_mapping_table = pd.merge(self.extra_features_df, self.tags_df, left_index=True, right_index=True, )
         merged_table = pd.merge(full_mapping_table, self.otu_features_df, **kwargs)
         self.tags_df = merged_table[['Tag']].copy()
-        self.otu_features_df=merged_table[self.otu_features_df.columns].copy()
-        self.otu_features_df=self.otu_features_df.append(taxonomy)
-        self.extra_features_df=merged_table[self.extra_features_df.columns].copy()
+        self.otu_features_df = merged_table[self.otu_features_df.columns].copy()
+        self.otu_features_df = self.otu_features_df.append(taxonomy)
+        self.extra_features_df = merged_table[self.extra_features_df.columns].copy()
+
 
 
 if __name__ == "__main__":

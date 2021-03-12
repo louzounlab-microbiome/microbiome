@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import configparser
 from sklearn.svm import SVC
 import xgboost as xgb
+import math
 
 """
 The purpose of this file is to compare between the  performances of the different projections in a classification 
@@ -15,12 +16,12 @@ The model and its parameters are extracted from a configuration file called conf
 The script plots the performance of each projection for all models based on the evaluation fn inserted.
 """
 
-data_paths_list = [Path('../../data/exported_data/data_for_learning/otu_dataset.csv'),
-                   Path('../../data/exported_data/data_for_learning/metabolomics_dataset.csv'),
-                   Path('../../data/exported_data/data_for_learning/latent_representation_dataset.csv')]
-tag_paths_list = [Path('../../data/exported_data/data_for_learning/otu_tag.csv'),
-                  Path('../../data/exported_data/data_for_learning/metabolomics_tag.csv'),
-                  Path('../../data/exported_data/data_for_learning/latent_representation_tag.csv')]
+data_paths_list = [Path('../../data/exported_data/data_for_learning/GAN_integration/otu_dataset.csv'),
+                   Path('../../data/exported_data/data_for_learning/GAN_integration/metabolomics_dataset.csv'),
+                   Path('../../data/exported_data/data_for_learning/GAN_integration/latent_representation_dataset.csv')]
+tag_paths_list = [Path('../../data/exported_data/data_for_learning/GAN_integration/otu_tag.csv'),
+                  Path('../../data/exported_data/data_for_learning/GAN_integration/metabolomics_tag.csv'),
+                  Path('../../data/exported_data/data_for_learning/GAN_integration/latent_representation_tag.csv')]
 
 legend_list = ['Otu', 'metabolomics', 'Latent representation']
 
@@ -37,10 +38,11 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 # If SVM model is requested
 if 'SVM' in config:
+    model_name ='SVM'
     svm_dict = dict(config['SVM'])
     # the script provides the user the possibility to create multiple svm's with different C parameter
-    start, end, jump = map(lambda x: int(x), svm_dict['c'].split(','))
-    iterator = list(map(lambda x: x / 10, list(range(start, end, jump))))
+    start, end, factor = list(map(lambda x: float(x), svm_dict['c'].split(',')))
+    iterator = [start*factor**i for i in range(0,int(math.log((end/start),factor)+1))]
     iterator_name = 'C'
     # create the parameters dictionary for the svm constructor.
     param_dict_list = [
@@ -51,6 +53,7 @@ if 'SVM' in config:
 # If KNN model is requested
 
 elif 'KNN' in config:
+    model_name = 'KNN'
     knn_dict = dict(config['KNN'])
     # the script provides the user the possibility to create multiple svm's with different n_neighbors parameter
     start, end, jump = map(lambda x: int(x), knn_dict['n_neighbors'].split(','))
@@ -66,6 +69,7 @@ elif 'KNN' in config:
 # If XGBOOST model is requested
 
 elif 'XGBOOST' in config:
+    model_name = 'XGBOOST'
     xgboost_dict = dict(config['XGBOOST'])
     # create the parameters dictionary for the XGBOOST constructor.
 
@@ -77,7 +81,7 @@ elif 'XGBOOST' in config:
 cv = 5
 validation_results = []
 best_models_results = []
-evaluation_methods = ['roc_auc', 'accuracy']
+evaluation_methods = ['accuracy', 'f1']
 fig, axes = plt.subplots(ncols=len(evaluation_methods))
 # iterate over all projections
 for dataset, label, legend in zip(data_sets_list, tag_list, legend_list):
@@ -91,31 +95,12 @@ for dataset, label, legend in zip(data_sets_list, tag_list, legend_list):
 # Plot the results of the projections, each evaluation in a separate ax.
     for i, ax in enumerate(axes):
         specific_evaluation_to_all_models = [validation_evaluations[i] for validation_evaluations in validation_results]
-        ax.plot(range(len(model_list)), specific_evaluation_to_all_models, label=legend, marker='.', markersize=10)
+        ax.plot(iterator, specific_evaluation_to_all_models, label=legend, marker='.', markersize=10)
     validation_results = []
 # Set the titles and labels to each ax.
 for ax, evaluation_method in zip(axes, evaluation_methods):
     ax.set_xlabel(iterator_name,fontsize=15)
     ax.set_ylabel(evaluation_method,fontsize=15)
-    ax.set_title('{evaluation} results of KNN with {cv} fold cross validation'.format(evaluation=evaluation_method,cv=cv),fontsize=15)
+    ax.set_title('{evaluation} results of {model} with {cv} fold cross validation'.format(evaluation=evaluation_method,model=model_name,cv=cv),fontsize=15)
     ax.legend(fontsize=15)
 plt.show()
-
-"""
-    for model in model_list:
-        cv_results = cross_validate(model, dataset, label, cv=cv, scoring=evaluation_method)
-        validation_results.append(cv_results['test_score'].mean())
-    best_result = max(validation_results)
-    best_models_results.append(best_result)
-    plt.plot(iterator,validation_results, label=legend,marker='.', markersize=10)
-    plt.xlabel(iterator_name)
-    plt.ylabel(evaluation_method)
-    plt.title('Accuracy results of KNN with {cv} fold cross validation'.format(cv=cv))
-    print('\n The best result achieved on {legend} is {result} {method} \n'.format(legend=legend, result=best_result,
-                                                                                method=evaluation_method))
-    validation_results = []
-"""
-# results_df = pd.DataFrame(data=best_models_results, index=legend_list)
-
-# save the best results for each projection.
-# results_df.to_csv('learning_models_results.csv',header=['roc_auc'])
