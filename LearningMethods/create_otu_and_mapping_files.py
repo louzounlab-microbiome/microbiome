@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from Preprocess.preprocess_grid import preprocess_data
 from Plot.plot_rho import draw_X_y_rhos_calculation_figure
-from Plot.plot_3D_pca import PCA_t_test, plot_data_3d, plot_data_2d
+from Plot.plot_3D import PCA_t_test, plot_data_3d, plot_data_2d
 
 
 class CreateOtuAndMappingFiles(object):
@@ -149,10 +149,14 @@ class CreateOtuAndMappingFiles(object):
         self.tags_df = merged_table[['Tag']].copy()
 
     def to_correspond(self, **kwargs):
-        """Currently the function can only be used before the preprocess"""
+
+        """Written by Sharon Komissarov.
+            the function merges and separate the otu, mapping table and tag in order to make them correspond.
+            kwargs are controlling the merging additional attributes.
+            Currently the function can only be used before the preprocess"""
 
         taxonomy = self.otu_features_df.iloc[-1].copy()
-        full_mapping_table = pd.merge(self.extra_features_df, self.tags_df, left_index=True, right_index=True, )
+        full_mapping_table = pd.merge(self.extra_features_df, self.tags_df, left_index=True, right_index=True)
         merged_table = pd.merge(full_mapping_table, self.otu_features_df, **kwargs)
         self.tags_df = merged_table[['Tag']].copy()
         self.otu_features_df = merged_table[self.otu_features_df.columns].copy()

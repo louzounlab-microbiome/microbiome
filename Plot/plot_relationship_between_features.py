@@ -22,8 +22,8 @@ from os.path import join
 """
 
 
-def relationship_between_features(dataframe, folder, separator=None, title="Relationship_between_features", title_size=30,
-                                  labels_dict=None, color_dict = None, figure_size=(18, 18), axis_labels_size=15, legend_size=15, **kwargs):
+def relationship_between_features(dataframe, folder, separator=None, title="Relationship between features", title_size=30,
+                                  labels_dict=None, color_dict = None, figure_size=(18, 18), axis_labels_size=15, legend_size=25, **kwargs):
     number_of_columns = dataframe.shape[1]
     fig, axes = plt.subplots(number_of_columns, number_of_columns, squeeze=False, figsize=figure_size)
     if separator is not None:
@@ -59,9 +59,9 @@ def relationship_between_features(dataframe, folder, separator=None, title="Rela
 
     # Set a main title and save the figure.
     handles, labels = axes[row][col].get_legend_handles_labels()
-    fig.legend(handles, labels,fontsize=legend_size)
+    fig.legend(handles, labels,fontsize=legend_size,loc = "upper left")
     fig.suptitle(title,size= title_size)
-    plt.tight_layout()
+    fig.tight_layout()
     fig.subplots_adjust(top=0.95)
 
     if not os.path.exists(folder):

@@ -43,6 +43,7 @@ class progress_in_time_of_column_attribute_mean(object):
         self.new_plot = self.fig.add_subplot(111)
         self.margin = kwargs.get('margin', 0.006)
         self.fontsize = kwargs.get('fontsize', 7)
+        self.labels_dict = kwargs.get('labels_dict',None)
 
     """The function factorizes the dataframe into a list, in the list every component is mapped to a binary tuple.
         both arguments are lists that consist the means in all time points, each one for a different group.
@@ -120,6 +121,8 @@ class progress_in_time_of_column_attribute_mean(object):
             else:
                 for group, attribute_val, line_style in zip(component, sorted(self.attribute_series.unique()),
                                                             self.line_styles):
+                    if self.labels_dict is not None:
+                        attribute_val = self.labels_dict[attribute_val]
                     self.new_plot.plot(sorted(self.time_series.unique()), group, color=color, marker=marker,
                                        linestyle=line_style, label="{0} {1}".format(component_name, attribute_val))
 
@@ -133,7 +136,7 @@ class progress_in_time_of_column_attribute_mean(object):
             for asterisks, color in zip(self.asterisk_matrix[col], self.colors):
                 total_margin += self.margin
                 if asterisks is not None:
-                    self.new_plot.annotate(asterisks, (float(col), bottom_lim - total_margin), color=color)
+                    self.new_plot.annotate(asterisks, (col, bottom_lim - total_margin), color=color)
         self.new_plot.set_ylim(bottom=bottom_lim - total_margin, top=top_lim + total_margin)
 
     def plot(self):

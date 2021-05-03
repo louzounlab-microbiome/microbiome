@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-def plot_positive_negative_bars(ax: plt.Axes, values: pd.Series, positive_color='red', negative_color='green'):
+def plot_positive_negative_bars(ax: plt.Axes, values: pd.Series, positive_color='green', negative_color='red'):
     sorted_values = values.sort_values()
     y_position = np.arange(len(sorted_values))
     positive_values = sorted_values.apply(lambda x: x if x >= 0 else 0)
