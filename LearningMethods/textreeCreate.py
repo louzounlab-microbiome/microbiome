@@ -105,4 +105,3 @@ def create_final_graph(tempGraph, valdict, zeroflag):
     return graph
 
 
-create_tax_tree(pickle.load(open("series.p", "rb")))

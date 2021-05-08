@@ -34,6 +34,3 @@ def draw_tree(graph):
     plt.draw()
     plt.savefig("taxtree.png")
 
-
-graph = create_tax_tree(pickle.load(open("series.p", "rb")))
-draw_tree(graph)
