@@ -9,8 +9,9 @@ from matplotlib.pyplot import Axes
 
 class CorrelationFramework:
     def __init__(self, x: pd.DataFrame, y: pd.Series, **kwargs):
-        self.x = x
-        self.y = y
+        self.x = x.copy()
+        self.y = y.copy()
+
         self.sc = SignificantCorrelation(self.x, self.y, **kwargs)
         self.correlation_tree = create_tax_tree(self.sc.get_real_correlations())
         self.plot = _CorrelationPlotter(self.sc, self.correlation_tree)
@@ -24,8 +25,12 @@ class _CorrelationPlotter:
     def plot_graph(self):
         draw_tree(self.correlation_tree)
 
-    def plot_positive_negative_bars(self, ax: Axes, percentile, **kwargs):
+    def plot_positive_negative_bars(self, ax: Axes, percentile, last_taxonomic_levels_to_keep=2, **kwargs):
         significant_bacteria = self.significant_correlation.get_most_significant_coefficients(percentile=percentile)
+        if last_taxonomic_levels_to_keep is not None:
+            significant_bacteria.index = list(
+                map(lambda otu: ';'.join(str(otu).split(';')[-last_taxonomic_levels_to_keep:]),
+                    significant_bacteria.index))
         return PP.plot_positive_negative_bars(ax, significant_bacteria, **kwargs)
 
     def plot_real_and_shuffled_hist(self, ax: Axes, **kwargs):
