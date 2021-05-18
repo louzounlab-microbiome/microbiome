@@ -5,7 +5,7 @@ from LearningMethods.utilis import set_default_parameters
 
 
 def plot_positive_negative_bars(ax: plt.Axes, values: pd.Series, positive_dict: dict = None,
-                                negative_dict: dict = None,title = 'Significant Spearman Correlation'):
+                                negative_dict: dict = None,title = 'Significant Spearman Correlation',x_label = 'Spearman Correlation'):
     if positive_dict is None:
         positive_dict = {}
     if negative_dict is None:
@@ -26,4 +26,5 @@ def plot_positive_negative_bars(ax: plt.Axes, values: pd.Series, positive_dict: 
     ax.set_yticks(y_position)
     ax.set_yticklabels(sorted_values.index)
     ax.set_title(title)
+    ax.set_xlabel(x_label)
     return ax

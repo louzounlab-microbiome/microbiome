@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 from LearningMethods.utilis import set_default_parameters
 
+
 def plot_real_and_shuffled_hist(ax: plt.Axes, real_values, shuffled_values, real_hist_dict=None,
-                                shuffled_hist_dict=None,title = 'Histogram of real and shuffled spearman correlation'):
+                                shuffled_hist_dict=None, title='Histogram of real and shuffled spearman correlation',
+                                x_label='Spearman Correlation'):
     if real_hist_dict is None:
         real_hist_dict = {}
     if shuffled_hist_dict is None:
@@ -17,8 +19,7 @@ def plot_real_and_shuffled_hist(ax: plt.Axes, real_values, shuffled_values, real
     ax.hist(real_values, **real_hist_dict)
     ax.hist(shuffled_values, **shuffled_hist_dict)
     ax.set_title(title)
+    ax.set_xlabel(x_label)
 
     ax.legend()
     return ax
-
-
