@@ -7,7 +7,6 @@ from sklearn import preprocessing
 import seaborn as sns
 from collections import Counter
 
-from Plot.plot_rho import draw_component_rhos_calculation_figure
 from Preprocess.distance_learning_func import distance_learning
 from sklearn.decomposition import PCA
 from sklearn.decomposition import FastICA

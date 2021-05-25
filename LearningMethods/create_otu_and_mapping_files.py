@@ -152,7 +152,7 @@ class CreateOtuAndMappingFiles(object):
             the function merges and separate the otu, mapping table and tag in order to make them correspond.
             kwargs are controlling the merging additional attributes.
             Currently the function can only be used before the preprocess"""
-
+        otu_columns_len, mapping_table_columns_len = self.otu_features_df.shape[1],self.extra_features_df.shape[1]
         taxonomy = self.otu_features_df.iloc[-1].copy()
         full_mapping_table = pd.merge(self.extra_features_df, self.tags_df, left_index=True, right_index=True)
         merged_table = pd.merge(full_mapping_table, self.otu_features_df, **kwargs)
@@ -160,6 +160,8 @@ class CreateOtuAndMappingFiles(object):
         self.otu_features_df = merged_table[self.otu_features_df.columns].copy()
         self.otu_features_df = self.otu_features_df.append(taxonomy)
         self.extra_features_df = merged_table[self.extra_features_df.columns].copy()
+        assert otu_columns_len == self.otu_features_df.shape[1] and \
+               mapping_table_columns_len == self.extra_features_df.shape[1]
 
 
 
