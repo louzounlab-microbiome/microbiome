@@ -3,7 +3,7 @@ antibiotics/אנטיביוטיקה .docx
 *.pyc
 .idea/
 *_multi_grid_*/
-
+venv/
 GVHD_BAR/GridSearch_*
 subject_test_100_processes_mse_false/l2=0.001^dropout=0.5^factor=10^epochs=10^number_iterations=5^number_layers=2^neurons_per_layer=20/y_train_values.npy
 subject_test_100_processes_mse_false/l2=0.001^dropout=0.5^factor=10^epochs=10^number_iterations=5^number_layers=2^neurons_per_layer=20/y_train_predicted_values.npy

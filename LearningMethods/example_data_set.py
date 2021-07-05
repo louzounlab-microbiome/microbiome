@@ -10,7 +10,16 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 n_components = 20
 
-
+class learning_model(nn.Module):
+  def __init__(self,structure_list,out_size):
+    super(learning_model,self).__init__()
+    self.linears=nn.ModuleList([nn.Linear(structure_list[i],structure_list[i+1]) for i in range(0,len(structure_list)-1)])
+    self.out=nn.Linear(structure_list[-1], out_size)
+  def forward(self,input):
+    for layer in self.linears:
+      input=F.tanh(layer(input))
+    output=self.out(input)
+    return output
 class ExampleDataLoader(AbstractDataLoader):
     """
     Fill _read_file function according to specific data set in order to achieve mutual behavior
