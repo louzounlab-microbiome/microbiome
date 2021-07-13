@@ -58,23 +58,26 @@ class LearningDataSet(pl.LightningDataModule):
         self.transform = transform
 
     def setup(self, stage: str = None):
-
+        if stage == 'fit':
         # train and validate only according to the patients with both fields.
-        if self.group_id is None:
-            train_and_validation_size = int(self.train_test_ratio * len(self.data))
-            test_size = len(self.data) - train_and_validation_size
-            train_validation_data, self.test_data = torch.utils.data.random_split(self.data,
-                                                                              [train_and_validation_size, test_size])
-        else:
-            gss = GroupShuffleSplit(n_splits=1, train_size=self.train_test_ratio)
-            train_validation_idx, test_idx = next(gss.split(self.data, groups=self.group_id))
-            train_validation_data = torch.utils.data.Subset(self.data,train_validation_idx)
-            self.test_data = torch.utils.data.Subset(self.data,test_idx)
+            if self.group_id is None:
+                train_and_validation_size = int(self.train_test_ratio * len(self.data))
+                test_size = len(self.data) - train_and_validation_size
+                train_validation_data, self.test_data = torch.utils.data.random_split(self.data,
+                                                                                  [train_and_validation_size, test_size])
+            else:
+                gss = GroupShuffleSplit(n_splits=1, train_size=self.train_test_ratio)
+                train_validation_idx, test_idx = next(gss.split(self.data, groups=self.group_id))
+                train_validation_data = torch.utils.data.Subset(self.data,train_validation_idx)
+                self.test_data = torch.utils.data.Subset(self.data,test_idx)
 
-        train_size = int(self.train_validation_ratio * len(train_validation_data))
-        validation_size = len(train_validation_data) - train_size
-        self.train_data, self.validation_data = torch.utils.data.random_split(train_validation_data,
-                                                                              [train_size, validation_size])
+            train_size = int(self.train_validation_ratio * len(train_validation_data))
+            validation_size = len(train_validation_data) - train_size
+            self.train_data, self.validation_data = torch.utils.data.random_split(train_validation_data,
+                                                                                  [train_size, validation_size])
+        else:
+            pass
+
     @staticmethod
     def add_model_specific_args(parent_parser):
         parser = parent_parser.add_argument_group("LearningDataSet")

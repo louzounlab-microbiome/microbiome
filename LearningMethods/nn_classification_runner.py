@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     trainer = pl.Trainer.from_argparse_args(args, callbacks=callbacks, logger=logger)
     trainer.fit(model=model, datamodule=dm)
-    trainer.test(model=model, datamodule=dm)
+    trainer.test()
     if args.save_test is not None:
         test_df = data_df.iloc[dm.test_data.indices]
         test_df = test_df.assign(pred=model.test_predictions, label=tag_series.iloc[dm.test_data.indices])

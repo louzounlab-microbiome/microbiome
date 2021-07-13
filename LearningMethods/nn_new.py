@@ -144,6 +144,7 @@ if __name__ == '__main__':
         if command_line_arguments == '\n':
             break
         else:
+            command_line_arguments.strip('\n')
             cross_validation_test_dict_list = []
             for k in range(args.cross_validation):
                 # execute a trail using the command line arguments inserted.
