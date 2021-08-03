@@ -14,7 +14,7 @@ def _dict_mean(dict_list):
     return mean_dict
 # Global variables which translate the names into the corresponding functions and objects
 activation_fn_dict = {'tanh': nn.Tanh, 'relu': nn.ReLU, 'sigmoid': nn.Sigmoid,
-                      'leaky relu': nn.LeakyReLU}
+                      'leaky relu': nn.LeakyReLU,'elu':nn.ELU}
 optimizers_dict = {'adam': optim.Adam, 'Adadelta': optim.Adadelta, 'Adagrad': optim.Adagrad}
 
 
@@ -140,15 +140,19 @@ if __name__ == '__main__':
     arguments_file = open(args.arguments_file, 'r')
     command_line_argument_list = arguments_file.readlines()
     # Read the commands line by line
-    for command_line_arguments in command_line_argument_list:
-        if command_line_arguments == '\n':
+    for command_line_arguments_str in command_line_argument_list:
+        if command_line_arguments_str == '\n':
             break
         else:
-            command_line_arguments.strip('\n')
+            # strip thw whole command
+            command_line_arguments_str.strip('\n')
+            # strip each argument in the command
+            command_line_arguments = list(map(lambda x: x.strip('\n'), command_line_arguments_str.split(' ')))
             cross_validation_test_dict_list = []
             for k in range(args.cross_validation):
                 # execute a trail using the command line arguments inserted.
-                output = check_output(['python3', 'nn_classification_runner.py','--seed',str(k)] + command_line_arguments.split(' '), stdin=None,
+
+                output = check_output(['python3', 'nn_classification_runner.py','-t',str(k)] + command_line_arguments, stdin=None,
                                       cwd=args.cwd).decode("utf-8")
 
                 # The next two lines are an ugly way to extract the test results out of the output
@@ -170,3 +174,4 @@ if __name__ == '__main__':
     plt.show()
 
 # --arguments_file /home/sharon200102/Documents/second_degree/Research/microbiome_projects/microbiome/Projects/GDM/experiment1/code/learning_code/config.txt -n GAN_results Saliva_results Stool_results
+# -a /home/sharon200102/Documents/second_degree/Research/microbiome_projects/microbiome/Projects/BGU_fatty_liver/Code/learning_code/complete_samples_config.txt -n VAE_complete_samples metabolomics microbiome -cv 20

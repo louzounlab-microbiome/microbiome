@@ -14,7 +14,6 @@ import random
 
 
 
-torch.manual_seed(1)
 if __name__ == '__main__':
     """ This script aims to construct a neural network according to the architecture inserted
     and to classify the data."""
@@ -28,6 +27,8 @@ if __name__ == '__main__':
     parser.add_argument('--group_id_path', '-g', help='If the train test split should consider an external division',
                         default=None)
     parser.add_argument('--seed','-s', default=None,type=int)
+    parser.add_argument('--trail_id','-t', default=None,type=str)
+
 
     # Add data and model specific args
     parser = LearningDataSet.add_model_specific_args(parser)
@@ -53,7 +54,8 @@ if __name__ == '__main__':
 
     monitor = 'val_loss'
     logs_path = os.path.join(args.results_path, args.project_name, 'LOGS')
-    checkpoint_path = os.path.join(args.results_path, args.project_name, 'CHECKPOINTS')
+    checkpoint_path = os.path.join(args.results_path, args.project_name, 'CHECKPOINTS') if args.trail_id is None else \
+        os.path.join(args.results_path, args.project_name,'CHECKPOINTS',args.trail_id)
     # Init the models with the args inserted
 
     data_df = pd.read_csv(args.data_path, index_col=0)
@@ -70,7 +72,7 @@ if __name__ == '__main__':
 
     trainer = pl.Trainer.from_argparse_args(args, callbacks=callbacks, logger=logger)
     trainer.fit(model=model, datamodule=dm)
-    trainer.test()
+    result = trainer.test()
     if args.save_test is not None:
         test_df = data_df.iloc[dm.test_data.indices]
         test_df = test_df.assign(pred=model.test_predictions, label=tag_series.iloc[dm.test_data.indices])
