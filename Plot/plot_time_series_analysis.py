@@ -26,10 +26,10 @@ Optional Arguments:
 
 
 class progress_in_time_of_column_attribute_mean(object):
-    def __init__(self, dataframe, time_series, attribute_series=None, **kwargs):
+    def __init__(self, dataframe:pd.DataFrame, time_series:pd.Series, attribute_series=None, **kwargs):
 
         self.dataframe = dataframe
-        self.time_series = time_series
+        self.time_series = time_series.apply(str)
         self.attribute_series = attribute_series
         self._pvalues_matrix = None if attribute_series is None else self._create_p_values_matrix()
         self._component_mean = self._component_factorization()
@@ -56,7 +56,7 @@ class progress_in_time_of_column_attribute_mean(object):
         component_mean_second_group = []
         for col in self.dataframe.columns:
             relevant_feature = self.dataframe[col]
-            for time_point in sorted(self.time_series.unique()):
+            for time_point in sorted(self.time_series.unique(),key=int):
                 relevant_feature_in_specific_time = relevant_feature[self.time_series == time_point]
                 if self.attribute_series is None:
                     component_mean_first_group.append(relevant_feature_in_specific_time.mean())
@@ -83,10 +83,10 @@ class progress_in_time_of_column_attribute_mean(object):
 
     def _create_p_values_matrix(self):
         pvalues_matrix = pd.DataFrame(0.0, index=self.dataframe.columns,
-                                      columns=list(map(lambda x: str(x), sorted(self.time_series.unique()))))
+                                      columns=list(map(lambda x: str(x), sorted(self.time_series.unique(),key=int))))
         for col in self.dataframe.columns:
             relevant_feature = self.dataframe[col]
-            for time_point in sorted(self.time_series.unique()):
+            for time_point in sorted(self.time_series.unique(),key=int):
                 relevant_feature_in_specific_time = relevant_feature[self.time_series == time_point]
                 attribute_first_group = relevant_feature_in_specific_time[
                     self.attribute_series == sorted(self.attribute_series.unique())[0]]
@@ -116,14 +116,14 @@ class progress_in_time_of_column_attribute_mean(object):
                                                             self.markers):
             if self.attribute_series is None:
                 for group, line_style in zip(component, self.line_styles):
-                    self.new_plot.plot(sorted(self.time_series.unique()), group, color=color, marker=marker,
+                    self.new_plot.plot(sorted(self.time_series.unique(),key=int), group, color=color, marker=marker,
                                        linestyle=line_style, label=component_name)
             else:
                 for group, attribute_val, line_style in zip(component, sorted(self.attribute_series.unique()),
                                                             self.line_styles):
                     if self.labels_dict is not None:
                         attribute_val = self.labels_dict[attribute_val]
-                    self.new_plot.plot(sorted(self.time_series.unique()), group, color=color, marker=marker,
+                    self.new_plot.plot(sorted(self.time_series.unique(),key=int), group, color=color, marker=marker,
                                        linestyle=line_style, label="{0} {1}".format(component_name, attribute_val))
 
     """Adds the ttest p-value asterisks to the plot"""

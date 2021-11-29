@@ -7,7 +7,7 @@ def pop_idx(idx, objects_to_remove_idx_from):
     return objects_to_remove_idx_from
 
 
-def shorten_bact_names(bacterias):
+def shorten_bact_names(bacterias:list):
     # extract the last meaningful name - long multi level names to the lowest level definition
     short_bacterias_names = []
     for f in bacterias:
@@ -21,7 +21,7 @@ def shorten_bact_names(bacterias):
     # remove "k_bacteria" and "Unassigned" samples - irrelevant
     k_bact_idx = []
     for i, bact in enumerate(short_bacterias_names):
-        if bact == 'k__Bacteria' or bact == 'Unassigned':
+        if bact == 'Unassigned':
             k_bact_idx.append(i)
 
     if k_bact_idx:
@@ -39,3 +39,9 @@ def shorten_single_bact_name(bacteria):
             i -= 1
             break
     return bacteria.split(";")[-i].strip(" ")
+
+def _dict_mean(dict_list):
+    mean_dict = {}
+    for key in dict_list[0].keys():
+        mean_dict[key] = sum(d[key] for d in dict_list) / len(dict_list)
+    return mean_dict

@@ -24,7 +24,9 @@ def plot_positive_negative_bars(ax: plt.Axes, values: pd.Series, positive_dict: 
     ax.barh(y_position, negative_values, **negative_dict)
 
     ax.set_yticks(y_position)
-    ax.set_yticklabels(sorted_values.index)
-    ax.set_title(title)
-    ax.set_xlabel(x_label)
+    ax.set_yticklabels(sorted_values.index,size =14)
+    if title is not None:
+        ax.set_title(title)
+    if x_label is not None:
+        ax.set_xlabel(x_label)
     return ax

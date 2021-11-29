@@ -11,8 +11,10 @@ parser.add_argument('--CRC_only', '--c',
 
 args = parser.parse_args()
 crc_only_flag = args.crc_only_flag
+# The data time domain varies from 0-5 but doesn't include tp 4, therefore, tp 5 will be treated as tp 4
+old_target_time_point = 5
+new_target_time = 4
 
-target_time_point = 5
 otu_path = Path('../data/original_data/otu.txt')
 mapping_table_path = Path('../data/original_data/mapping_table.csv')
 taxonomy_path = Path('../data/original_data/taxonomy.tsv')
@@ -24,7 +26,9 @@ otu_table = pd.merge(otu_table, taxonomy, right_index=True, left_index=True)
 
 # rename columns before preprocess
 otu_table.rename({'Taxon': 'taxonomy'}, inplace=True, axis=1)
-
+# replace tp 5 to tp 4
+mapping_table['TimePointNum'] = mapping_table['TimePointNum'].replace(old_target_time_point,new_target_time)
+mapping_table['TimePoint'] = mapping_table['TimePointNum'].apply(lambda x: '{}{}'.format('T',str(x)))
 otu_table = otu_table.transpose()
 otu_table.rename_axis('ID', inplace=True)
 
@@ -34,17 +38,25 @@ if crc_only_flag:
 
 tag_list = []
 # Find the number of tumors for each mouse based on it's sample in tp 5
-for idx, cage, mice, exp in zip(mapping_table.index, mapping_table['CageNum'], mapping_table['MiceNum'],
-                                mapping_table['Experiment']):
+for idx, cage, mice, exp,group in zip(mapping_table.index, mapping_table['CageNum'], mapping_table['MiceNum'],
+                                mapping_table['Experiment'],mapping_table['Group']):
 
-    dic = {'CageNum': cage, 'MiceNum': mice, 'Experiment': exp, 'TimePointNum': target_time_point}
+    dic = {'CageNum': cage, 'MiceNum': mice, 'Experiment': exp, 'TimePointNum': new_target_time}
     relevant_row = conditional_identification(mapping_table, dic)
     if relevant_row.empty:
-        pass
+        # If the mouse is Normal we already know it has zero tumors.
+        if group == 'NORMAL':
+            tag_list.append((idx, 0))
+        else: 
+            pass
     else:
         item = relevant_row['tumor_load'].iloc[0]
         if np.isnan(item):
-            pass
+            # If the mouse is Normal we already know it has zero tumors.
+            if group == 'NORMAL':
+                tag_list.append((idx, 0))
+            else:
+                pass
         else:
             tag_list.append((idx, item))
 

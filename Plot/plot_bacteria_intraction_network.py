@@ -5,7 +5,7 @@ import matplotlib.colors as plt_clr
 import matplotlib.lines as mlines
 from pylab import *
 import os
-from LearningMethods import shorten_single_bact_name
+from LearningMethods.general_functions import shorten_single_bact_name
 
 
 def rgbA_colors_generator():

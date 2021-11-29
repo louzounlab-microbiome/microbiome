@@ -83,7 +83,7 @@ class LearningDataSet(pl.LightningDataModule):
         parser = parent_parser.add_argument_group("LearningDataSet")
         parser.add_argument('--train_test_ratio', type=float,default = 0.8)
         parser.add_argument('--train_validation_ratio', type=float,default = 0.8)
-        parser.add_argument('--train_batch_size', type=int, default= 10)
+        parser.add_argument('--train_batch_size', type=int, default= 16)
         parser.add_argument('--validation_batch_size',type=int, default= 10)
 
 

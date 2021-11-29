@@ -31,7 +31,9 @@ preprocess_prms = {'taxonomy_level': tax, 'taxnomy_group': 'mean', 'epsilon': 1,
                    'z_scoring': 'row', 'norm_after_rel': '', 'std_to_delete': 0, 'pca': (5, 'PCA'),
                    'correlation_threshold': 0.8,'rare_bacteria_threshold':1}
 otumf.preprocess(preprocess_prms,visualize=False)
-otumf.otu_features_df.to_csv()
+otumf.otu_features_df.columns = list(map(lambda x: '{} {}'.format('Component' , str(x)),otumf.otu_features_df.columns))
+otumf.otu_features_df.to_csv(decomposition_path)
+
 
 with open(otumf_path,'wb') as otumf_file:
     pickle.dump(otumf,otumf_file)

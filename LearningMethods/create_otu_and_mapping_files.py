@@ -5,21 +5,24 @@ import numpy as np
 # sys.path.insert(1, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pandas as pd
 from Preprocess.preprocess_grid import preprocess_data
-
+from pathlib import Path
 
 class CreateOtuAndMappingFiles(object):
     # get two relative path of csv files
-    def __init__(self, otu_file_path, tags_file_path):
+    def __init__(self, otu_file_path, tags_file_path,group_col_name = None):
         self.otu_path = otu_file_path
         self.tags_path = tags_file_path
         print('read tag file...')
         mapping_table = pd.read_csv(self.tags_path)
-        self.extra_features_df = mapping_table.drop(['Tag'], axis=1).copy()
-        self.tags_df = mapping_table[['ID', 'Tag']].copy()
-        # set index as ID
-        self.tags_df = self.tags_df.set_index('ID')
+        if 'Tag' not in mapping_table.columns:
+            raise ('A column named tag must appear in the extra features table')
+
+        self.extra_features_df = mapping_table.set_index('ID').copy()
+        self.tags_df = self.extra_features_df['Tag'].to_frame().copy()
         self.tags_df.index = self.tags_df.index.astype(str)
-        self.extra_features_df = self.extra_features_df.set_index('ID')
+        self.extra_features_df.drop(['Tag'],axis=1,inplace=True)
+        self.group_col_name = group_col_name
+
         # subset of ids according to the tags data frame
         self.ids = self.tags_df.index.tolist()
         self.ids.append('taxonomy')
@@ -29,30 +32,23 @@ class CreateOtuAndMappingFiles(object):
         self.otu_features_df.index = self.otu_features_df.index.astype(str)
         self.pca_ocj = None
         self.pca_comp = None
+        self.preprocess_flag = False
 
-    def csv_to_learn(self, task_name, folder, tax):
-        tag_ids = list(self.tags_df.index)
-        otu_ids = list(self.otu_features_df_b_pca.index)
-        mutual_ids = list(set(tag_ids).intersection(set(otu_ids)))
-        # use only the samples the correspond to the tag file
-        self.otu_features_df = self.otu_features_df.loc[mutual_ids]
-        self.tags_df = self.tags_df.loc[mutual_ids]
-        # concat with extra features by index
-        df = self.otu_features_df.join(self.extra_features_df)
-        # create a new csv file
-        otu_path = os.path.join(folder, 'OTU_merged_' + str(task_name) + '.csv')
-        df.to_csv(otu_path)
-        tag_path = os.path.join(folder, 'Tag_file_' + str(task_name) + '.csv')
-        self.tags_df.to_csv(tag_path)
-        if self.pca_ocj:
-            pca_path = os.path.join(folder, "Pca_obj_" + str(task_name) + '.pkl')
-            pickle.dump(self.pca_ocj, open(pca_path, "wb"))
-        else:
-            pca_path = "No pca created"
-        with open(os.path.join(folder, "bacteria_tax_level_" + str(tax) + ".txt"), "w") as bact_file:
-            for col in self.bacteria:
-                bact_file.write(str(col) + "\n")
-        return otu_path, tag_path, pca_path
+    def export_to_learning_files(self,results_folder,otu_name = 'otu_dataset.csv',tag_name= 'tag.csv'
+                                 , group_name = 'group.csv',to_correspond = False, to_correspond_kwargs = None):
+        if to_correspond_kwargs is None:
+            to_correspond_kwargs = {}
+
+        if to_correspond:
+            self.to_correspond(**to_correspond_kwargs)
+
+        self.otu_features_df.to_csv(Path(results_folder).joinpath(otu_name))
+        self.tags_df['Tag'].to_csv(Path(results_folder).joinpath(tag_name))
+        if self.group_col_name is not None:
+            self.extra_features_df[self.group_col_name].to_csv(Path(results_folder).joinpath(group_name))
+
+
+
 
     def preprocess(self, preprocess_params, visualize):
         # print('preprocess...')
@@ -64,42 +60,7 @@ class CreateOtuAndMappingFiles(object):
         if int(preprocess_params['pca'][0]) == 0:
             self.otu_features_df = self.otu_features_df_b_pca
 
-    def rhos_and_pca_calculation(self, task, tax, pca, rhos_folder, pca_folder):
-        # -------- rhos calculation --------
-        tag_ids = list(self.tags_df.index)
-        otu_ids = list(self.otu_features_df.index)
-        mutual_ids = list(set(tag_ids).intersection(set(otu_ids)))
-        X = self.otu_features_df.loc[mutual_ids]
-        y = np.array(list(self.tags_df.loc[mutual_ids]["Tag"])).astype(int)
-
-        if not os.path.exists(rhos_folder):
-            os.makedirs(rhos_folder)
-
-        bacterias = X.columns
-        bacterias_to_dump = []
-        for i, bact in enumerate(bacterias):
-            f = X[bact]
-            num_of_different_values = set(f)
-            if len(num_of_different_values) < 2:
-                bacterias_to_dump.append(bact)
-        print("number of bacterias to dump after intersection: " + str(len(bacterias_to_dump)))
-        print("percent of bacterias to dump after intersection: " + str(
-            len(bacterias_to_dump) / len(bacterias) * 100) + "%")
-        X = X.drop(columns=bacterias_to_dump)
-        self.otu_features_df = X
-
-        draw_X_y_rhos_calculation_figure(X, y, task, tax, save_folder=rhos_folder)
-
-        # -------- PCA visualizations --------
-        if not os.path.exists(pca_folder):
-            os.makedirs(pca_folder)
-        PCA_t_test(group_1=[x for x, y in zip(X.values, y) if y == 0],
-                   group_2=[x for x, y in zip(X.values, y) if y == 1],
-                   title="T test for PCA dimentions on " + task, save=True, folder=pca_folder)
-        if pca >= 2:
-            plot_data_2d(X.values, y, data_name=task.capitalize(), save=True, folder=pca_folder)
-            if pca >= 3:
-                plot_data_3d(X.values, y, data_name=task.capitalize(), save=True, folder=pca_folder)
+        self.preprocess_flag = True
 
     def remove_duplicates(self, keys, filtering_fn=None):
         """
@@ -123,7 +84,7 @@ class CreateOtuAndMappingFiles(object):
         self.extra_features_df = merged_table.drop(['Tag'], axis=1).copy()
         self.tags_df = merged_table[['Tag']].copy()
 
-    def conditional_identification(self, dic, not_flag=False):
+    def conditional_identification(self, dic, not_flag=False,to_correspond = False,to_correspond_kwargs = None):
         """
         Written by Sharon Komissarov.
         The function facilitate in removing undesired rows by filtering them out.
@@ -135,16 +96,21 @@ class CreateOtuAndMappingFiles(object):
         dic={'Group':'normal','body_site':'saliva'}
         # Please notice that the function only modifies the mapping table and the tag!.
         """
+        if to_correspond_kwargs is None:
+            to_correspond_kwargs = {}
         if not not_flag:
             mask = pd.DataFrame([self.extra_features_df[key] == val for key, val in dic.items()]).T.all(axis=1)
         else:
             mask = ~pd.DataFrame([self.extra_features_df[key] == val for key, val in dic.items()]).T.all(axis=1)
 
+
         merged_table = pd.merge(self.extra_features_df[mask].copy(), self.tags_df, left_index=True, right_index=True,
                                 how='left')
 
-        self.extra_features_df = merged_table.drop(['Tag'], axis=1).copy()
-        self.tags_df = merged_table[['Tag']].copy()
+        self.tags_df = merged_table['Tag'].to_frame()
+        self.extra_features_df = merged_table.drop(['Tag'], axis=1,errors='ignore').copy()
+        if to_correspond:
+            self.to_correspond(**to_correspond_kwargs)
 
     def to_correspond(self, **kwargs):
 
@@ -152,14 +118,28 @@ class CreateOtuAndMappingFiles(object):
             the function merges and separate the otu, mapping table and tag in order to make them correspond.
             kwargs are controlling the merging additional attributes.
             Currently the function can only be used before the preprocess"""
-        otu_columns_len, mapping_table_columns_len = self.otu_features_df.shape[1],self.extra_features_df.shape[1]
-        taxonomy = self.otu_features_df.iloc[-1].copy()
-        full_mapping_table = pd.merge(self.extra_features_df, self.tags_df, left_index=True, right_index=True)
+        otu_columns_len, mapping_table_columns_len = self.otu_features_df.shape[1], self.extra_features_df.shape[1]
+
+        if not self.preprocess_flag:
+            taxonomy = self.otu_features_df.iloc[-1].copy()
+
+        else:
+            taxonomy = None
+
+
+
+        full_mapping_table = pd.merge(self.extra_features_df,self.tags_df,left_index=True,right_index=True)
+
+
         merged_table = pd.merge(full_mapping_table, self.otu_features_df, **kwargs)
-        self.tags_df = merged_table[['Tag']].copy()
+
+        self.tags_df = merged_table['Tag'].to_frame().copy()
         self.otu_features_df = merged_table[self.otu_features_df.columns].copy()
-        self.otu_features_df = self.otu_features_df.append(taxonomy)
+        if taxonomy is not None:
+            self.otu_features_df = self.otu_features_df.append(taxonomy)
+
         self.extra_features_df = merged_table[self.extra_features_df.columns].copy()
+
         assert otu_columns_len == self.otu_features_df.shape[1] and \
                mapping_table_columns_len == self.extra_features_df.shape[1]
 
